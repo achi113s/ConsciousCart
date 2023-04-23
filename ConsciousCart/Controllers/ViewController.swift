@@ -15,8 +15,10 @@ class ViewController: UIViewController {
         super.loadView()
         
         loginButton = UIButton(type: .system)
+        loginButton.configuration = .gray()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Login", for: .normal)
+        loginButton.addTarget(self, action: #selector(segueToLoginView), for: .touchUpInside)
         view.addSubview(loginButton)
         
         registerButton = UIButton(type: .system)
@@ -38,6 +40,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @objc func segueToLoginView(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Login") as? LoginViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44296B4829F488370030FF3D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4729F488370030FF3D /* LoginViewController.swift */; };
+		44296B4A29F489890030FF3D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4929F489890030FF3D /* RegistrationViewController.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
 		4497E39F29F358BC0029451E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44296B4729F488370030FF3D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		44296B4929F489890030FF3D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E39A29F358BC0029451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4497E39C29F358BC0029451E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				4497E39E29F358BC0029451E /* ViewController.swift */,
+				44296B4729F488370030FF3D /* LoginViewController.swift */,
+				44296B4929F489890030FF3D /* RegistrationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,8 +317,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4497E39F29F358BC0029451E /* ViewController.swift in Sources */,
+				44296B4829F488370030FF3D /* LoginViewController.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
+				44296B4A29F489890030FF3D /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

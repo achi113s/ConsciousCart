@@ -24,6 +24,38 @@
             </objects>
             <point key="canvasLocation" x="770.2290076335878" y="3.5211267605633805"/>
         </scene>
+        <!--Registration View Controller-->
+        <scene sceneID="Hhr-gb-oXL">
+            <objects>
+                <viewController id="KUe-On-v5Q" customClass="RegistrationViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VVM-1y-GuN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="DD0-RS-JgP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nBY-2c-pHK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbR-N9-aVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671" y="361"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="EZi-7u-dON">
+            <objects>
+                <viewController storyboardIdentifier="Login" id="vEM-jj-oki" customClass="LoginViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0fU-4N-SpT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="IaX-im-Iy1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="27X-v2-TCb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DG2-km-7ie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671" y="-338"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ena-TC-hBK">
             <objects>
