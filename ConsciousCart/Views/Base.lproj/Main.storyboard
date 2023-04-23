@@ -27,7 +27,7 @@
         <!--Registration View Controller-->
         <scene sceneID="Hhr-gb-oXL">
             <objects>
-                <viewController id="KUe-On-v5Q" customClass="RegistrationViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationView" id="KUe-On-v5Q" customClass="RegistrationViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VVM-1y-GuN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
         <!--Login View Controller-->
         <scene sceneID="EZi-7u-dON">
             <objects>
-                <viewController storyboardIdentifier="Login" id="vEM-jj-oki" customClass="LoginViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="vEM-jj-oki" customClass="LoginViewController" customModule="ConsciousCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0fU-4N-SpT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

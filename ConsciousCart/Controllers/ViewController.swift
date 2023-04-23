@@ -18,12 +18,13 @@ class ViewController: UIViewController {
         loginButton.configuration = .gray()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Login", for: .normal)
-        loginButton.addTarget(self, action: #selector(segueToLoginView), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(goToLoginView), for: .touchUpInside)
         view.addSubview(loginButton)
         
         registerButton = UIButton(type: .system)
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.setTitle("Register", for: .normal)
+        registerButton.addTarget(self, action: #selector(goToRegistrationView), for: .touchUpInside)
         view.addSubview(registerButton)
         
         NSLayoutConstraint.activate([
@@ -40,8 +41,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    @objc func segueToLoginView(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Login") as? LoginViewController {
+    @objc func goToLoginView(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "LoginView") as? LoginViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    @objc func goToRegistrationView(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "RegistrationView") as? RegistrationViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
