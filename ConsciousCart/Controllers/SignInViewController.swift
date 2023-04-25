@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     var signInLabel: UILabel!
     var emailField: UITextField!
     var passwordField: UITextField!
-    var signInButton: UIButton!
-    var forgotPasswordButton: UIButton!
+    var signInButton: CCNormalButton!
+    var forgotPasswordButton: CCNormalButton!
     
     override func loadView() {
         super.loadView()
@@ -21,7 +22,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         signInLabel = UILabel()
         signInLabel.translatesAutoresizingMaskIntoConstraints = false
         signInLabel.text = "Sign In"
-//        view.addSubview(signInLabel)
+        signInLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        view.addSubview(signInLabel)
         
         emailField = UITextField()
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -30,8 +32,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         emailField.delegate = self
         emailField.autocorrectionType = .no
         emailField.borderStyle = .roundedRect
-        
-//        view.addSubview(emailField)
+        view.addSubview(emailField)
         
         passwordField = UITextField()
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -39,44 +40,38 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         passwordField.autocorrectionType = .no
         passwordField.isSecureTextEntry = true
         passwordField.delegate = self
-//        view.addSubview(passwordField)
+        view.addSubview(passwordField)
         
-        signInButton = UIButton(type: .system)
+        signInButton = CCNormalButton()
+        signInButton.setTitle("Sign In", for: .normal)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(signInButton)
+        signInButton.addTarget(self, action: #selector(signInUser), for: .touchUpInside)
+        view.addSubview(signInButton)
         
-        forgotPasswordButton = UIButton(type: .system)
+        forgotPasswordButton = CCNormalButton()
+        forgotPasswordButton.setTitle("Forgot Password", for: .normal)
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(forgotPasswordButton)
-        
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.spacing = 15
-        stackView.distribution = .fillProportionally
-        stackView.addArrangedSubview(signInLabel)
-        stackView.addArrangedSubview(emailField)
-        stackView.addArrangedSubview(passwordField)
-        stackView.addArrangedSubview(signInButton)
-        stackView.addArrangedSubview(forgotPasswordButton)
-        view.addSubview(stackView)
+        view.addSubview(forgotPasswordButton)
     
         NSLayoutConstraint.activate([
-//            signInLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            forgotPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            forgotPasswordButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            stackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4)
+            signInLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+
+            emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 15),
+
+            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 15),
+            signInButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            forgotPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            forgotPasswordButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 15),
+            forgotPasswordButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -85,7 +80,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+    @objc func signInUser(_ sender: CCNormalButton) {
+        guard let email = emailField.text else { return }
+        guard let password = passwordField.text else { return }
         
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+            if let e = error {
+                print(e.localizedDescription)
+            } else {
+                print("Successfully logged in!")
+            }
+        }
     }
 }
