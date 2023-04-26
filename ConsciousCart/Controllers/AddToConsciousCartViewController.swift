@@ -14,6 +14,8 @@ class AddToConsciousCartViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        view.backgroundColor = .white
+        
         saveButton = ConsciousCartButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.setTitle("Save", for: .normal)
@@ -30,10 +32,9 @@ class AddToConsciousCartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = .black
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitAddView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
     }
     
     @objc func saveItem() {

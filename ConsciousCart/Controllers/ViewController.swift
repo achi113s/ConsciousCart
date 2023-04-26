@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        view.backgroundColor = .white
+        
         addToCCButton = ConsciousCartButton()
         addToCCButton.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
 //        addToCCButton.imageView?.contentMode = .scaleToFill
@@ -32,16 +34,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .black
-        title = "ConsciousCart"
+        navigationController?.navigationBar.tintColor = .white
+//        title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc func addToConsciousCart() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddToConsciousCartView") as? AddToConsciousCartViewController {
-            let modalController = UINavigationController(rootViewController: vc)
-            navigationController?.present(modalController, animated: true)
-        }
+        let vc = AddToConsciousCartViewController()
+        let modalController = UINavigationController(rootViewController: vc)
+        navigationController?.present(modalController, animated: true)
     }
 }
 

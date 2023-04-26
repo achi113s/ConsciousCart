@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ConsciousCartButton: UIButton {
+final class ConsciousCartButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureButton()
@@ -18,7 +18,7 @@ class ConsciousCartButton: UIButton {
         configureButton()
     }
     
-    override open var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.2) {
                 self.backgroundColor = self.isHighlighted ? UIColor(named: "GloomyPurple") : UIColor(named: "LightPurple")
