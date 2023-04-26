@@ -9,66 +9,39 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var logoLabel: UILabel!
-    
-    var loginButtonsStack: UIStackView!
-    var loginButton: CCNormalButton!
-    var registerButton: UIButton!
+    var addToCCButton: ConsciousCartButton!
 
     override func loadView() {
         super.loadView()
         
-        loginButton = CCNormalButton()
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.setTitle("Login", for: .normal)
-        loginButton.addTarget(self, action: #selector(goToLoginView), for: .touchUpInside)
-        view.addSubview(loginButton)
-        
-        registerButton = CCNormalButton()
-        registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.setTitle("Register", for: .normal)
-        registerButton.addTarget(self, action: #selector(goToRegistrationView), for: .touchUpInside)
-        view.addSubview(registerButton)
-        
-        logoLabel = UILabel()
-        logoLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoLabel.text = "ConsciousCart"
-        logoLabel.font = UIFont.systemFont(ofSize: 48)
-        view.addSubview(logoLabel)
+        addToCCButton = ConsciousCartButton()
+        addToCCButton.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
+//        addToCCButton.imageView?.contentMode = .scaleToFill
+        addToCCButton.layer.cornerRadius = 35
+        addToCCButton.translatesAutoresizingMaskIntoConstraints = false
+        addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
+        view.addSubview(addToCCButton)
         
         NSLayoutConstraint.activate([
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -70),
-            registerButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            registerButton.heightAnchor.constraint(equalToConstant: 50),
-
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.centerYAnchor.constraint(equalTo: registerButton.centerYAnchor, constant: -65),
-            loginButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            logoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -60),
+            addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90),
+            addToCCButton.widthAnchor.constraint(equalToConstant: 70),
+            addToCCButton.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.tintColor = .black
-    }
-
-    @objc func goToLoginView(_ sender: CCNormalButton) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "LoginView") as? SignInViewController {
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        title = "ConsciousCart"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    @objc func goToRegistrationView(_ sender: CCNormalButton) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "RegistrationView") as? RegistrationViewController {
-            navigationController?.pushViewController(vc, animated: true)
+    @objc func addToConsciousCart() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddToConsciousCartView") as? AddToConsciousCartViewController {
+            let modalController = UINavigationController(rootViewController: vc)
+            navigationController?.present(modalController, animated: true)
         }
     }
-
 }
 

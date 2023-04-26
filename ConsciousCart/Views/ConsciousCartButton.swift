@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CCNormalButton: UIButton {
+class ConsciousCartButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureButton()
@@ -18,17 +18,30 @@ final class CCNormalButton: UIButton {
         configureButton()
     }
     
+    override open var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.2) {
+                self.backgroundColor = self.isHighlighted ? UIColor(named: "GloomyPurple") : UIColor(named: "LightPurple")
+                self.transform = self.isHighlighted ? CGAffineTransform(translationX: 0, y: 3) : CGAffineTransform.identity
+                self.layer.shadowOffset = self.isHighlighted ? CGSize(width: 0.0, height: 0) : CGSize(width: 0.0, height: 3.0)
+            }
+        }
+    }
+    
     func configureButton() {
-        backgroundColor = UIColor(named: "MyYellow")
+        backgroundColor = UIColor(named: "LightPurple")
         tintColor = .black
         self.setTitleColor(.black, for: .normal)
+        
+        isHighlighted = false
+        
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 25
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 1
         layer.shadowRadius = 0
-        layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
     }
     
     func shakeAnimation() {

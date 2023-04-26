@@ -6,15 +6,14 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     var signInLabel: UILabel!
     var emailField: UITextField!
     var passwordField: UITextField!
-    var signInButton: CCNormalButton!
-    var forgotPasswordButton: CCNormalButton!
+    var signInButton: ConsciousCartButton!
+    var forgotPasswordButton: ConsciousCartButton!
     
     override func loadView() {
         super.loadView()
@@ -42,13 +41,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
         view.addSubview(passwordField)
         
-        signInButton = CCNormalButton()
+        signInButton = ConsciousCartButton()
         signInButton.setTitle("Sign In", for: .normal)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.addTarget(self, action: #selector(signInUser), for: .touchUpInside)
         view.addSubview(signInButton)
         
-        forgotPasswordButton = CCNormalButton()
+        forgotPasswordButton = ConsciousCartButton()
         forgotPasswordButton.setTitle("Forgot Password", for: .normal)
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(forgotPasswordButton)
@@ -80,17 +79,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
-    @objc func signInUser(_ sender: CCNormalButton) {
+    @objc func signInUser(_ sender: ConsciousCartButton) {
         guard let email = emailField.text else { return }
         guard let password = passwordField.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
-            if let e = error {
-                print(e.localizedDescription)
-            } else {
-                print("Successfully logged in!")
-            }
-        }
+//        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+//          guard let strongSelf = self else { return }
+//            if let e = error {
+//                print(e.localizedDescription)
+//            } else {
+//                print("Successfully logged in!")
+//            }
+//        }
     }
 }
