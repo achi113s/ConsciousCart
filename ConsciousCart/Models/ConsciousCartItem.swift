@@ -10,7 +10,15 @@ import UIKit
 
 struct ConsciousCartItem: Identifiable {
     var id: UUID = UUID()
+    
     let dateCreated: Date = Date.now
-    let name: String = ""
-    let price: Double = 0
+    let waitTime: TimeInterval
+    var remindDate: Date {
+        dateCreated.addingTimeInterval(waitTime)
+    }
+    
+    var name: String
+    var price: Double
+    var description: String
+    var reasonNeeded: String
 }

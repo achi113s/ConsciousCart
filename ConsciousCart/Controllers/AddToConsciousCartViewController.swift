@@ -29,12 +29,19 @@ class AddToConsciousCartViewController: UIViewController {
         uploadImageButton = ImageUploadButton()
         uploadImageButton.translatesAutoresizingMaskIntoConstraints = false
         uploadImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
-        view.addSubview(uploadImageButton)
+//        view.addSubview(uploadImageButton)
         
         scanBarcodeButton = ScanBarcodeButton()
         scanBarcodeButton.translatesAutoresizingMaskIntoConstraints = false
         scanBarcodeButton.addTarget(self, action: #selector(scanBarcode), for: .touchUpInside)
-        view.addSubview(scanBarcodeButton)
+//        view.addSubview(scanBarcodeButton)
+        
+        let uploadButtonsStack = UIStackView(arrangedSubviews: [uploadImageButton, scanBarcodeButton])
+        uploadButtonsStack.translatesAutoresizingMaskIntoConstraints = false
+        uploadButtonsStack.axis = .horizontal
+        uploadButtonsStack.spacing = 15
+        uploadButtonsStack.distribution = .fillEqually
+        view.addSubview(uploadButtonsStack)
         
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -42,15 +49,20 @@ class AddToConsciousCartViewController: UIViewController {
             saveButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             
-            uploadImageButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            uploadImageButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            uploadImageButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
-            uploadImageButton.heightAnchor.constraint(equalTo: uploadImageButton.widthAnchor),
+            uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5)
             
-            scanBarcodeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            scanBarcodeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            scanBarcodeButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
-            scanBarcodeButton.heightAnchor.constraint(equalTo: scanBarcodeButton.widthAnchor)
+//            uploadImageButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+//            uploadImageButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+//            uploadImageButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+//            uploadImageButton.heightAnchor.constraint(equalTo: uploadImageButton.widthAnchor),
+//
+//            scanBarcodeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+//            scanBarcodeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+//            scanBarcodeButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+//            scanBarcodeButton.heightAnchor.constraint(equalTo: scanBarcodeButton.widthAnchor)
         ])
     }
     
