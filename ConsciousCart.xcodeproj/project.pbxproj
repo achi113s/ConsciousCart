@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */; };
+		442018A429FB812700AD9812 /* ScanBarcodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442018A329FB812700AD9812 /* ScanBarcodeButton.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		44296B5129F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		44296B5229F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */; };
+		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
 		444A774829FA059800EBF1E8 /* MyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A774729FA059800EBF1E8 /* MyChart.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
-		4497E39F29F358BC0029451E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* ViewController.swift */; };
+		4497E39F29F358BC0029451E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* MainViewController.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
 		4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3B129F358BD0029451E /* ConsciousCartTests.swift */; };
 		4497E3BC29F358BD0029451E /* ConsciousCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */; };
 		4497E3BE29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */; };
+		44D0829929FAF6EE00311F22 /* ImageUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,13 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartItem.swift; sourceTree = "<group>"; };
+		442018A329FB812700AD9812 /* ScanBarcodeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanBarcodeButton.swift; sourceTree = "<group>"; };
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToConsciousCartViewController.swift; sourceTree = "<group>"; };
+		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		444A774729FA059800EBF1E8 /* MyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChart.swift; sourceTree = "<group>"; };
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E39A29F358BC0029451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4497E39C29F358BC0029451E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4497E39E29F358BC0029451E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4497E39E29F358BC0029451E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4497E3A329F358BC0029451E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4497E3A629F358BC0029451E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +62,7 @@
 		4497E3B729F358BD0029451E /* ConsciousCartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITests.swift; sourceTree = "<group>"; };
 		4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 		4497E3D929F35B040029451E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,6 +155,8 @@
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
 				444A774729FA059800EBF1E8 /* MyChart.swift */,
+				44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */,
+				442018A329FB812700AD9812 /* ScanBarcodeButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,8 +164,9 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4497E39E29F358BC0029451E /* ViewController.swift */,
+				4497E39E29F358BC0029451E /* MainViewController.swift */,
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
+				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,11 +305,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4497E39F29F358BC0029451E /* ViewController.swift in Sources */,
+				4497E39F29F358BC0029451E /* MainViewController.swift in Sources */,
+				442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
+				442018A429FB812700AD9812 /* ScanBarcodeButton.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
+				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				444A774829FA059800EBF1E8 /* MyChart.swift in Sources */,
+				44D0829929FAF6EE00311F22 /* ImageUploadButton.swift in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

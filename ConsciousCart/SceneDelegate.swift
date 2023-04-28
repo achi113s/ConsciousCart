@@ -22,11 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createMainVC() -> UINavigationController {
-        let mainVC = ViewController()
+        let mainVC = MainViewController()
         mainVC.title = "ConsciousCart"
-        mainVC.tabBarItem = UITabBarItem(title: "My Cart", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart"))
+        mainVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "cart.circle"), selectedImage: UIImage(systemName: "cart.circle.fill"))
         
         return UINavigationController(rootViewController: mainVC)
+    }
+    
+    func createProfileVC() -> UINavigationController {
+        let profileVC = ProfileViewController()
+        profileVC.title = "My Profile"
+        profileVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
+        
+        return UINavigationController(rootViewController: profileVC)
     }
     
     func createTabBar() -> UITabBarController {
@@ -34,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .black
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = .systemGray5
-        tabBar.viewControllers = [createMainVC()]
+        tabBar.viewControllers = [createMainVC(), createProfileVC()]
         
         return tabBar
     }

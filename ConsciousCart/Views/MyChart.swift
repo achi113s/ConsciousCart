@@ -12,7 +12,7 @@ import Foundation
 struct Item: Identifiable {
     var id = UUID()
     let type: String
-    let value: Double
+    let value: Int
 }
 
 struct MyChart: View {
@@ -45,6 +45,17 @@ struct MyChart: View {
                     )
                     .foregroundStyle(Color.purple.gradient)
                 }
+                .chartYAxis {
+                    AxisMarks(position: .trailing, values: .automatic) { value in
+                        AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1))
+                        AxisValueLabel() {
+                            if let intValue = value.as(Int.self) {
+                                Text(intValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
+                            }
+                        }
+                    }
+                }
+                .padding()
                 .frame(height: 200)
             }
         }

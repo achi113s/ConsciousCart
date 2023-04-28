@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     var addToCCButton: ConsciousCartButton!
     var chartLabel: UILabel!
@@ -49,7 +49,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .white
-        //        title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -67,8 +66,8 @@ class ViewController: UIViewController {
             hostView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(hostView)
             NSLayoutConstraint.activate([
-                hostView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-                hostView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+                hostView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                hostView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
                 hostView.topAnchor.constraint(equalTo: chartLabel.bottomAnchor),
                 hostView.heightAnchor.constraint(equalToConstant: 210)
             ])
