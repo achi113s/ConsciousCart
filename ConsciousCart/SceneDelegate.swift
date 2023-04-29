@@ -24,7 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createMainVC() -> UINavigationController {
         let mainVC = MainViewController()
         mainVC.title = "ConsciousCart"
-        mainVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "cart.circle"), selectedImage: UIImage(systemName: "cart.circle.fill"))
+    
+        let cartFontSize: CGFloat = 32
+        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
+        
+        mainVC.tabBarItem = UITabBarItem()
+        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle", withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
         
         return UINavigationController(rootViewController: mainVC)
     }
@@ -32,7 +37,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createProfileVC() -> UINavigationController {
         let profileVC = ProfileViewController()
         profileVC.title = "My Profile"
-        profileVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
+        
+        let profileFontSize: CGFloat = 32
+        let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
+        
+        profileVC.tabBarItem = UITabBarItem()
+        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle", withConfiguration: sizeConfig)
         
         return UINavigationController(rootViewController: profileVC)
     }
@@ -77,4 +87,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
