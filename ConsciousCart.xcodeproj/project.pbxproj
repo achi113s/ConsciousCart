@@ -494,6 +494,7 @@
 				INFOPLIST_FILE = ConsciousCart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConsciousCart;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow us to use the camera to scan a barcode.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -524,6 +525,7 @@
 				INFOPLIST_FILE = ConsciousCart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConsciousCart;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow us to use the camera to scan a barcode.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

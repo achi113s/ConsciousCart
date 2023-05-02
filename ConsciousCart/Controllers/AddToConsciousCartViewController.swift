@@ -11,7 +11,7 @@ class AddToConsciousCartViewController: UIViewController {
     
     var saveButton: ConsciousCartButton!
     var uploadImageButton: ImageUploadButton!
-    var scanBarcodeButton: ScanBarcodeButton!
+    var scanBarcodeButton: ConsciousCartButton!
     
     override func loadView() {
         super.loadView()
@@ -31,7 +31,9 @@ class AddToConsciousCartViewController: UIViewController {
         uploadImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
 //        view.addSubview(uploadImageButton)
         
-        scanBarcodeButton = ScanBarcodeButton()
+        scanBarcodeButton = ConsciousCartButton()
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
+        scanBarcodeButton.setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: largeConfig), for: .normal)
         scanBarcodeButton.translatesAutoresizingMaskIntoConstraints = false
         scanBarcodeButton.addTarget(self, action: #selector(scanBarcode), for: .touchUpInside)
 //        view.addSubview(scanBarcodeButton)
@@ -87,6 +89,7 @@ class AddToConsciousCartViewController: UIViewController {
     }
     
     @objc func scanBarcode() {
-        print("touched image upload")
+        let scanBarcodeVC = ScannerViewController()
+        navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
 }

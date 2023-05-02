@@ -23,6 +23,7 @@ final class ScanBarcodeButton: UIButton {
     func configureButton() {
         setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: largeConfig), for: .normal)
         
+        
         tintColor = .black
         layer.borderWidth = 2
         layer.borderColor = UIColor.black.cgColor
