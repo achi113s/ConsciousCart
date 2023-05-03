@@ -7,10 +7,13 @@
 
 import AVFoundation
 import UIKit
+import RiveRuntime
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var checkmark_animation: CheckmarkAnimationViewController!
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +54,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
         
-        captureSession.startRunning()
+        let previewView = UIView(frame: view.frame)
+        view.addSubview(previewView)
+        
+        previewView.layer.addSublayer(previewLayer)
+        
+        // show animation
+        checkmark_animation = CheckmarkAnimationViewController()
+//        checkmark_animation.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//        checkmark_animation.view.backgroundColor = .red
+        view.addSubview(checkmark_animation.view)
+        
+        
+        startRunningCaptureSession()
+        
+//        Task.detached(priority: .userInitiated) { [weak self] in
+//            await self?.captureSession.startRunning()
+//        }
     }
     
     func failed() {
@@ -63,11 +81,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession = nil
     }
     
+    func startRunningCaptureSession() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.captureSession.startRunning()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
+            startRunningCaptureSession()
         }
     }
     
@@ -89,10 +113,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             found(code: stringValue)
         }
         
-        dismiss(animated: true)
+        timer = Timer.scheduledTimer(timeInterval: 2.2, target: self, selector: #selector(dismissAfterTime), userInfo: nil, repeats: false)
+//        dismiss(animated: true)
+    }
+    
+    @objc func dismissAfterTime() {
+        timer?.invalidate()
+        navigationController?.popViewController(animated: true)
+//        dismiss(animated: true)
     }
     
     func found(code: String) {
+        checkmark_animation.viewModel.play()
         print(code)
     }
     

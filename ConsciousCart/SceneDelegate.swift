@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
         
         profileVC.tabBarItem = UITabBarItem()
-        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle", withConfiguration: sizeConfig)
+        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle", withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: profileFontSize / 1.3)
         
         return UINavigationController(rootViewController: profileVC)
     }
