@@ -31,6 +31,7 @@
 		4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3B129F358BD0029451E /* ConsciousCartTests.swift */; };
 		4497E3BC29F358BD0029451E /* ConsciousCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */; };
 		4497E3BE29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */; };
+		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
 		44D0829929FAF6EE00311F22 /* ImageUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		4497E3B729F358BD0029451E /* ConsciousCartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITests.swift; sourceTree = "<group>"; };
 		4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeAPIManager.swift; sourceTree = "<group>"; };
 		44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */,
+				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				442018A429FB812700AD9812 /* ScanBarcodeButton.swift in Sources */,
+				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,

@@ -53,5 +53,5 @@ playground.xcworkspace
 
 iOSInjectionProject/
 
-# Firebase
-GoogleService-Info.plist
+# Secrets
+Secrets.swift
