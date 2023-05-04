@@ -24,6 +24,8 @@ final class ImageUploadButton: UIButton {
         setImage(UIImage(systemName: "photo.circle", withConfiguration: largeConfig), for: .normal)
         setImage(UIImage(systemName: "photo.circle.fill", withConfiguration: largeConfig), for: .highlighted)
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
         tintColor = .black
         layer.borderWidth = 2
         layer.borderColor = UIColor.black.cgColor

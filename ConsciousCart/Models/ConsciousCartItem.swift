@@ -19,6 +19,5 @@ struct ConsciousCartItem: Identifiable {
     
     var name: String
     var price: Double
-    var description: String
     var reasonNeeded: String
 }

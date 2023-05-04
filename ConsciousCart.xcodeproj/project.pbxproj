@@ -34,6 +34,7 @@
 		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
 		44AACCD92A0345FC0053334C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD82A0345FC0053334C /* Secrets.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
+		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
 		44D0829929FAF6EE00311F22 /* ImageUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeAPIManager.swift; sourceTree = "<group>"; };
 		44AACCD82A0345FC0053334C /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
+		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
 		44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				444A774729FA059800EBF1E8 /* MyChart.swift */,
 				44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */,
 				442018A329FB812700AD9812 /* ScanBarcodeButton.swift */,
+				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				4497E39F29F358BC0029451E /* MainViewController.swift in Sources */,
 				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */,

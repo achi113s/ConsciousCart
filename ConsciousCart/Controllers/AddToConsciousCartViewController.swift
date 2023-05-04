@@ -13,6 +13,11 @@ class AddToConsciousCartViewController: UIViewController {
     var uploadImageButton: ImageUploadButton!
     var scanBarcodeButton: ConsciousCartButton!
     
+    var itemNameTextField: ConsciousCartTextField!
+    var itemPriceTextField: ConsciousCartTextField!
+    var itemReasonNeededTextField: ConsciousCartTextField!
+//    var itemWaitTime: UIPickerView!
+    
     override func loadView() {
         super.loadView()
         
@@ -21,22 +26,17 @@ class AddToConsciousCartViewController: UIViewController {
         view.backgroundColor = .white
         
         saveButton = ConsciousCartButton()
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.setTitle("Save", for: .normal)
         saveButton.addTarget(self, action: #selector(saveItem), for: .touchUpInside)
         view.addSubview(saveButton)
         
         uploadImageButton = ImageUploadButton()
-        uploadImageButton.translatesAutoresizingMaskIntoConstraints = false
         uploadImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
-//        view.addSubview(uploadImageButton)
         
         scanBarcodeButton = ConsciousCartButton()
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
         scanBarcodeButton.setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: largeConfig), for: .normal)
-        scanBarcodeButton.translatesAutoresizingMaskIntoConstraints = false
         scanBarcodeButton.addTarget(self, action: #selector(scanBarcode), for: .touchUpInside)
-//        view.addSubview(scanBarcodeButton)
         
         let uploadButtonsStack = UIStackView(arrangedSubviews: [uploadImageButton, scanBarcodeButton])
         uploadButtonsStack.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +44,26 @@ class AddToConsciousCartViewController: UIViewController {
         uploadButtonsStack.spacing = 15
         uploadButtonsStack.distribution = .fillEqually
         view.addSubview(uploadButtonsStack)
+        
+        itemNameTextField = ConsciousCartTextField()
+        itemNameTextField.delegate = self
+        
+        itemPriceTextField = ConsciousCartTextField()
+        itemPriceTextField.delegate = self
+        itemPriceTextField.keyboardType = .decimalPad
+        
+        itemReasonNeededTextField = ConsciousCartTextField()
+        itemReasonNeededTextField.delegate = self
+        
+//        itemWaitTime = UIPickerView()
+        
+        let textInputStack = UIStackView(arrangedSubviews: [itemNameTextField, itemPriceTextField, itemReasonNeededTextField])
+        textInputStack.translatesAutoresizingMaskIntoConstraints = false
+        textInputStack.axis = .vertical
+        textInputStack.spacing = 15
+        textInputStack.distribution = .equalSpacing
+        
+        view.addSubview(textInputStack)
         
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -54,17 +74,12 @@ class AddToConsciousCartViewController: UIViewController {
             uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5)
+            uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
             
-//            uploadImageButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            uploadImageButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            uploadImageButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
-//            uploadImageButton.heightAnchor.constraint(equalTo: uploadImageButton.widthAnchor),
-//
-//            scanBarcodeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            scanBarcodeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-//            scanBarcodeButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
-//            scanBarcodeButton.heightAnchor.constraint(equalTo: scanBarcodeButton.widthAnchor)
+            textInputStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 15),
+            textInputStack.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: 0),
+            textInputStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textInputStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8)
         ])
     }
     
@@ -93,3 +108,13 @@ class AddToConsciousCartViewController: UIViewController {
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
 }
+
+extension AddToConsciousCartViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+}
+
+//extension AddToConsciousCartViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+//    picker
+//}

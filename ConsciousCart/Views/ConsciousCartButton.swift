@@ -33,6 +33,8 @@ final class ConsciousCartButton: UIButton {
         tintColor = .black
         self.setTitleColor(.black, for: .normal)
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
         isHighlighted = false
         
         layer.borderWidth = 1
