@@ -11,7 +11,9 @@ ConsciousCart is an iOS app that enables users to take control of their impulse 
 
 When an impulse purchase's specified date arrives, the user will receive a notification asking if they still want to or did already purchase the item. If they don't, the price of the item gets added to their total Money Saved score (good). If they bought the item, the price gets added to their Impulse Spent score (bad).
 
-Current Mockup:
+Current Mockup (May 4, 2023):
+
+![Mockup](https://github.com/achi113s/ConsciousCart/blob/main/ReadmeResources/concsciouscart_mockup_720p.gif)
 
 
 
