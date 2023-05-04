@@ -10,16 +10,22 @@ import UIKit
 import RiveRuntime
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var checkmark_animation: CheckmarkAnimationViewController!
     var timer: Timer?
+    
+    var barcodeAPIManager = BarcodeAPIManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .white
+        
+        barcodeAPIManager.delegate = self
+        
         captureSession = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -45,7 +51,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
+            metadataOutput.metadataObjectTypes = [.ean8, .ean13]
         } else {
             failed()
             return
@@ -60,18 +66,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         previewView.layer.addSublayer(previewLayer)
         
-        // show animation
         checkmark_animation = CheckmarkAnimationViewController()
-//        checkmark_animation.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-//        checkmark_animation.view.backgroundColor = .red
         view.addSubview(checkmark_animation.view)
         
-        
         startRunningCaptureSession()
-        
-//        Task.detached(priority: .userInitiated) { [weak self] in
-//            await self?.captureSession.startRunning()
-//        }
     }
     
     func failed() {
@@ -114,18 +112,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         
         timer = Timer.scheduledTimer(timeInterval: 2.2, target: self, selector: #selector(dismissAfterTime), userInfo: nil, repeats: false)
-//        dismiss(animated: true)
     }
     
     @objc func dismissAfterTime() {
         timer?.invalidate()
         navigationController?.popViewController(animated: true)
-//        dismiss(animated: true)
     }
     
     func found(code: String) {
         checkmark_animation.viewModel.play()
         print(code)
+        barcodeAPIManager.fetchBarcodeInfo(for: code)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -134,5 +131,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+}
+
+extension ScannerViewController: BarcodeAPIManagerDelegate {
+    func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
+        print(barcodeInfo)
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error.localizedDescription)
     }
 }
