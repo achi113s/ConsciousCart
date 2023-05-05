@@ -15,6 +15,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var previewLayer: AVCaptureVideoPreviewLayer!
     var checkmark_animation: CheckmarkAnimationViewController!
     var timer: Timer?
+    var spinner: UIActivityIndicatorView!
     
     var barcodeAPIManager = BarcodeAPIManager()
     
@@ -69,11 +70,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         checkmark_animation = CheckmarkAnimationViewController()
         view.addSubview(checkmark_animation.view)
         
+        spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.center = view.center
+        spinner.hidesWhenStopped = true
+        view.addSubview(spinner)
+        
         startRunningCaptureSession()
     }
     
     func failed() {
-        let ac = UIAlertController(title: "Scanning Not Supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        let message = """
+            Your device does not support scanning a code
+            from an item. Please use a device with a camera.
+        """
+        let ac = UIAlertController(title: "Scanning Not Supported", message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
         captureSession = nil
@@ -110,8 +121,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
-        
-        timer = Timer.scheduledTimer(timeInterval: 2.2, target: self, selector: #selector(dismissAfterTime), userInfo: nil, repeats: false)
     }
     
     @objc func dismissAfterTime() {
@@ -120,9 +129,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func found(code: String) {
-        checkmark_animation.viewModel.play()
-        print(code)
-        barcodeAPIManager.fetchBarcodeInfo(for: code)
+        spinner.startAnimating()
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            self?.barcodeAPIManager.fetchBarcodeInfo(for: code)
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -136,6 +146,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
 extension ScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
+        DispatchQueue.main.async { [weak self] in
+            if let count = self?.navigationController?.viewControllers.count {
+                if let addToConsciousCartViewController = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController {
+                    addToConsciousCartViewController.itemNameTextField.text = barcodeInfo.itemAttributes.title
+                    
+                    self?.spinner.stopAnimating()
+                    self?.checkmark_animation.viewModel.play()
+                    self?.timer = Timer.scheduledTimer(timeInterval: 2.2, target: self!, selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
+                }
+            }
+        }
+            
         print(barcodeInfo)
     }
     

@@ -76,19 +76,28 @@ class AddToConsciousCartViewController: UIViewController {
             uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
             
+            itemNameTextField.heightAnchor.constraint(equalToConstant: 31),
+            
             textInputStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 15),
             textInputStack.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: 0),
             textInputStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textInputStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8)
         ])
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.tintColor = .black
     }
     
     @objc func saveItem() {
