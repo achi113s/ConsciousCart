@@ -148,12 +148,13 @@ extension ScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
         DispatchQueue.main.async { [weak self] in
             if let count = self?.navigationController?.viewControllers.count {
-                if let addToConsciousCartViewController = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController {
-                    addToConsciousCartViewController.itemNameTextField.text = barcodeInfo.itemAttributes.title
+                if let prevView = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController {
+                    prevView.itemNameTextField.text = barcodeInfo.itemAttributes.title
                     
                     self?.spinner.stopAnimating()
                     self?.checkmark_animation.viewModel.play()
-                    self?.timer = Timer.scheduledTimer(timeInterval: 2.2, target: self!, selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
+                    self?.timer = Timer.scheduledTimer(timeInterval: 2.1, target: self!,
+                                                       selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
                 }
             }
         }

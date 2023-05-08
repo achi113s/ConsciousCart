@@ -112,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4450EED12A088A6A00D8C680 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		44595EDA2A01FE6200D0AC48 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +153,8 @@
 			children = (
 				4497E39A29F358BC0029451E /* AppDelegate.swift */,
 				4497E39C29F358BC0029451E /* SceneDelegate.swift */,
+				44AACCD82A0345FC0053334C /* Secrets.swift */,
+				4450EED12A088A6A00D8C680 /* Managers */,
 				4497E3D929F35B040029451E /* Models */,
 				4497E3DA29F35B090029451E /* Views */,
 				4497E3DB29F35B150029451E /* Controllers */,
@@ -176,8 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */,
-				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
-				44AACCD82A0345FC0053334C /* Secrets.swift */,
 				44AACCDA2A0346260053334C /* BarcodeInfo.swift */,
 			);
 			path = Models;

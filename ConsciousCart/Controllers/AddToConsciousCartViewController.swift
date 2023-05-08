@@ -16,6 +16,7 @@ class AddToConsciousCartViewController: UIViewController {
     var itemNameTextField: ConsciousCartTextField!
     var itemPriceTextField: ConsciousCartTextField!
     var itemReasonNeededTextField: ConsciousCartTextField!
+    var activeTextField: UITextField?
 //    var itemWaitTime: UIPickerView!
     
     override func loadView() {
@@ -23,6 +24,25 @@ class AddToConsciousCartViewController: UIViewController {
         
         title = "New Impulse"
         
+        loadElementsAndLayout()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    //MARK: - Add Elements and Layout Code
+    
+    func loadElementsAndLayout() {
         view.backgroundColor = .white
         
         saveButton = ConsciousCartButton()
@@ -46,24 +66,30 @@ class AddToConsciousCartViewController: UIViewController {
         view.addSubview(uploadButtonsStack)
         
         itemNameTextField = ConsciousCartTextField()
+        itemNameTextField.placeholder = "Item Name"
         itemNameTextField.delegate = self
+        view.addSubview(itemNameTextField)
         
         itemPriceTextField = ConsciousCartTextField()
+        itemPriceTextField.placeholder = "Price"
         itemPriceTextField.delegate = self
         itemPriceTextField.keyboardType = .decimalPad
+        view.addSubview(itemPriceTextField)
         
         itemReasonNeededTextField = ConsciousCartTextField()
+        itemReasonNeededTextField.placeholder = "Reason Needed"
         itemReasonNeededTextField.delegate = self
+        view.addSubview(itemReasonNeededTextField)
         
 //        itemWaitTime = UIPickerView()
         
-        let textInputStack = UIStackView(arrangedSubviews: [itemNameTextField, itemPriceTextField, itemReasonNeededTextField])
-        textInputStack.translatesAutoresizingMaskIntoConstraints = false
-        textInputStack.axis = .vertical
-        textInputStack.spacing = 15
-        textInputStack.distribution = .equalSpacing
+//        let textInputStack = UIStackView(arrangedSubviews: [itemNameTextField, itemPriceTextField, itemReasonNeededTextField])
+//        textInputStack.translatesAutoresizingMaskIntoConstraints = false
+//        textInputStack.axis = .vertical
+//        textInputStack.spacing = 15
+//        textInputStack.distribution = .fillEqually
         
-        view.addSubview(textInputStack)
+//        view.addSubview(textInputStack)
         
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -77,27 +103,30 @@ class AddToConsciousCartViewController: UIViewController {
             uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
             
             itemNameTextField.heightAnchor.constraint(equalToConstant: 31),
+            itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemNameTextField.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 50),
+            itemNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            textInputStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 15),
-            textInputStack.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: 0),
-            textInputStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textInputStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8)
+            itemPriceTextField.heightAnchor.constraint(equalToConstant: 31),
+            itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemPriceTextField.topAnchor.constraint(equalTo: itemNameTextField.bottomAnchor, constant: 15),
+            itemPriceTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            itemReasonNeededTextField.heightAnchor.constraint(equalToConstant: 31),
+            itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemReasonNeededTextField.topAnchor.constraint(equalTo: itemPriceTextField.bottomAnchor, constant: 15),
+            itemReasonNeededTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            
+//            textInputStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 50),
+//            textInputStack.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -50),
+//            textInputStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            textInputStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8)
         ])
         
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
         navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.tintColor = .black
     }
     
     @objc func saveItem() {
@@ -116,14 +145,36 @@ class AddToConsciousCartViewController: UIViewController {
         let scanBarcodeVC = ScannerViewController()
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
-}
-
-extension AddToConsciousCartViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
         
+        if let activeTextField = activeTextField {
+            let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY
+            let topOfKeyboard = self.view.frame.height - keyboardSize.height
+            
+            if bottomOfTextField > topOfKeyboard {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
 }
 
-//extension AddToConsciousCartViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-//    picker
-//}
+//MARK: - UITextField Delegate Code
+
+extension AddToConsciousCartViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
+    }
+}
+
