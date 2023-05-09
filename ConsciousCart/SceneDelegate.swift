@@ -25,11 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainVC = MainViewController()
         mainVC.title = "ConsciousCart"
     
-        let cartFontSize: CGFloat = 32
-        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
+//        let cartFontSize: CGFloat = 32
+//        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
         
         mainVC.tabBarItem = UITabBarItem()
-        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle", withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
+        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle")
+//        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
+        mainVC.tabBarItem.title = "My Cart"
         
         return UINavigationController(rootViewController: mainVC)
     }
@@ -38,13 +40,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileVC = ProfileViewController()
         profileVC.title = "My Profile"
         
-        let profileFontSize: CGFloat = 32
-        let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
+//        let profileFontSize: CGFloat = 32
+//        let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
         
         profileVC.tabBarItem = UITabBarItem()
-        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle", withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: profileFontSize / 1.3)
+        profileVC.tabBarItem.image = UIImage(systemName: "person.circle")
+//        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: profileFontSize / 1.8)
+//        profileVC.tabBarItem.image = UIImage(named: "person.circle")
+        profileVC.tabBarItem.title = "Profile"
         
         return UINavigationController(rootViewController: profileVC)
+    }
+    
+    func createSettingsVC() -> UINavigationController {
+        //MARK: - temporarily put ProfileViewController here
+        let settingsVC = ProfileViewController()
+        settingsVC.title = "Settings"
+    
+//        let cartFontSize: CGFloat = 32
+//        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
+        
+        settingsVC.tabBarItem = UITabBarItem()
+        settingsVC.tabBarItem.image = UIImage(systemName: "gearshape")
+//        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
+        settingsVC.tabBarItem.title = "Settings"
+        
+        return UINavigationController(rootViewController: settingsVC)
     }
     
     func createTabBar() -> UITabBarController {
@@ -52,7 +73,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .black
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = .systemGray5
-        tabBar.viewControllers = [createMainVC(), createProfileVC()]
+        tabBar.viewControllers = [createMainVC(), createProfileVC(), createSettingsVC()]
         
         return tabBar
     }
