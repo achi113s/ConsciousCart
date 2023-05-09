@@ -37,6 +37,8 @@
 		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
 		44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */; };
 		44D0829929FAF6EE00311F22 /* ImageUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */; };
+		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
+		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
 		44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		44D0829829FAF6EE00311F22 /* ImageUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadButton.swift; sourceTree = "<group>"; };
+		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
+		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +162,7 @@
 				4497E3D929F35B040029451E /* Models */,
 				4497E3DA29F35B090029451E /* Views */,
 				4497E3DB29F35B150029451E /* Controllers */,
-				44595EDA2A01FE6200D0AC48 /* Animations */,
+				44D7291B2A0A9E4D0031A9EE /* Resources */,
 				4497E3A329F358BC0029451E /* Assets.xcassets */,
 				4497E3A829F358BC0029451E /* Info.plist */,
 			);
@@ -215,6 +219,24 @@
 				44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		44D7291A2A0A9E430031A9EE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */,
+				44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		44D7291B2A0A9E4D0031A9EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				44595EDA2A01FE6200D0AC48 /* Animations */,
+				44D7291A2A0A9E430031A9EE /* Fonts */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,8 +349,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */,
 				4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */,
 				44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */,
+				44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */,
 				4497E3A429F358BC0029451E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
