@@ -17,6 +17,8 @@ class AddToConsciousCartViewController: UIViewController {
     var itemPriceTextField: ConsciousCartTextField!
     var itemReasonNeededTextField: ConsciousCartTextField!
     var activeTextField: UITextField?
+    
+    var gradient: CAGradientLayer!
 //    var itemWaitTime: UIPickerView!
     
     override func loadView() {
@@ -80,6 +82,14 @@ class AddToConsciousCartViewController: UIViewController {
         itemReasonNeededTextField.placeholder = "Reason Needed"
         itemReasonNeededTextField.delegate = self
         view.addSubview(itemReasonNeededTextField)
+        
+        gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2)
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.7)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        gradient.colors = [UIColor.white.cgColor, UIColor(white: 1, alpha: 0).cgColor]
+        gradient.isHidden = true
+        view.layer.addSublayer(gradient)
         
 //        itemWaitTime = UIPickerView()
         
@@ -156,12 +166,18 @@ class AddToConsciousCartViewController: UIViewController {
             let topOfKeyboard = self.view.frame.height - keyboardSize.height
             
             if bottomOfTextField > topOfKeyboard {
-                self.view.frame.origin.y -= keyboardSize.height
+                UIView.animate(withDuration: 1.0) {
+                    self.gradient.isHidden = false
+                }
+                self.view.frame.origin.y -= (keyboardSize.height/2)
             }
         }
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
+        UIView.animate(withDuration: 1.0) {
+            self.gradient.isHidden = true
+        }
         self.view.frame.origin.y = 0
     }
 }
@@ -177,4 +193,3 @@ extension AddToConsciousCartViewController: UITextFieldDelegate {
         self.activeTextField = nil
     }
 }
-

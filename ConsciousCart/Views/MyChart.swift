@@ -43,7 +43,7 @@ struct MyChart: View {
                         x: .value("Month", item.type),
                         y: .value("Revenue", item.value)
                     )
-                    .foregroundStyle(Color("ExodusMoment"))
+                    .foregroundStyle(Color("ExodusFruit"))
                 }
                 .chartYAxis {
                     AxisMarks(position: .trailing, values: .automatic) { value in
