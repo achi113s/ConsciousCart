@@ -11,6 +11,8 @@ import RiveRuntime
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
+    //MARK: - View Properties
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var checkmark_animation: CheckmarkAnimationViewController!
@@ -27,6 +29,36 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         barcodeAPIManager.delegate = self
         
+        loadScannerView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (captureSession?.isRunning == false) {
+            startRunningCaptureSession()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    //MARK: - Scanner View Setup and Support Funcs
+    
+    func loadScannerView() {
         captureSession = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -96,22 +128,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (captureSession?.isRunning == false) {
-            startRunningCaptureSession()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
-        }
-    }
-    
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         captureSession.stopRunning()
         
@@ -123,11 +139,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    @objc func dismissAfterTime() {
-        timer?.invalidate()
-        navigationController?.popViewController(animated: true)
-    }
-    
     func found(code: String) {
         spinner.startAnimating()
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
@@ -135,14 +146,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    //MARK: - Selectors
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+    @objc func dismissAfterTime() {
+        timer?.invalidate()
+        navigationController?.popViewController(animated: true)
     }
 }
+
+//MARK: - BarcodeAPIManager Delegate Extension
 
 extension ScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
