@@ -22,8 +22,11 @@ class AddToConsciousCartViewController: UIViewController {
     var itemReasonNeededTextField: ConsciousCartTextField!
     var activeTextField: UITextField?
     
+    var itemRemindLabel: UILabel!
+    var itemRemindDate: UIDatePicker!
+    
     var gradient: CAGradientLayer!
-//    var itemWaitTime: UIPickerView!
+    var gradientView: UIView!
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
@@ -34,6 +37,8 @@ class AddToConsciousCartViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         setSubviewProperties()
         addSubviewsToView()
@@ -51,9 +56,6 @@ class AddToConsciousCartViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     //MARK: - Add Elements and Layout Constraints
@@ -90,14 +92,27 @@ class AddToConsciousCartViewController: UIViewController {
         itemReasonNeededTextField.placeholder = "Reason Needed"
         itemReasonNeededTextField.delegate = self
         
-        gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2)
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.7)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1)
-        gradient.colors = [UIColor.white.cgColor, UIColor(white: 1, alpha: 0).cgColor]
-        gradient.isHidden = true
+        itemRemindLabel = UILabel()
+        itemRemindLabel.text = "When should we remind you?"
+        itemRemindLabel.textAlignment = .center
+        itemRemindLabel.translatesAutoresizingMaskIntoConstraints = false
         
-//        itemWaitTime = UIPickerView()
+        itemRemindDate = UIDatePicker()
+        itemRemindDate.contentHorizontalAlignment = .center
+        itemRemindDate.date = Date.now.addingTimeInterval(TimeInterval(1209600))
+        itemRemindDate.minimumDate = Date.now
+        itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
+        
+        gradient = CAGradientLayer()
+        let gradientViewHiderHeight = navigationController?.navigationBar.frame.height ?? view.frame.height/8
+        gradient.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: gradientViewHiderHeight*2)
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.7)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.colors = [UIColor.white.cgColor, UIColor(white: 1.0, alpha: 0.0).cgColor]
+//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        gradientView = UIView(frame: gradient.frame)
+        gradientView.layer.addSublayer(gradient)
+        gradientView.alpha = 0.0
     }
     
     func addSubviewsToView() {
@@ -106,7 +121,9 @@ class AddToConsciousCartViewController: UIViewController {
         view.addSubview(itemNameTextField)
         view.addSubview(itemPriceTextField)
         view.addSubview(itemReasonNeededTextField)
-        view.layer.addSublayer(gradient)
+        view.addSubview(itemRemindLabel)
+        view.addSubview(itemRemindDate)
+        view.addSubview(gradientView)
     }
     
     func setLayoutConstraints() {
@@ -134,7 +151,17 @@ class AddToConsciousCartViewController: UIViewController {
             itemReasonNeededTextField.heightAnchor.constraint(equalToConstant: 31),
             itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             itemReasonNeededTextField.topAnchor.constraint(equalTo: itemPriceTextField.bottomAnchor, constant: 15),
-            itemReasonNeededTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            itemReasonNeededTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            itemRemindLabel.heightAnchor.constraint(equalToConstant: 31),
+            itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemRemindLabel.topAnchor.constraint(equalTo: itemReasonNeededTextField.bottomAnchor, constant: 15),
+            itemRemindLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            itemRemindDate.heightAnchor.constraint(equalToConstant: 31),
+            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemRemindDate.topAnchor.constraint(equalTo: itemRemindLabel.bottomAnchor, constant: 15),
+            itemRemindDate.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -167,18 +194,20 @@ class AddToConsciousCartViewController: UIViewController {
             let topOfKeyboard = self.view.frame.height - keyboardSize.height
             
             if bottomOfTextField > topOfKeyboard {
-                UIView.animate(withDuration: 1.0) {
-                    self.gradient.isHidden = false
+                UIView.animate(withDuration: 1.0) { [weak self] in
+                    self?.gradientView.alpha = 1.0
                 }
-                self.view.frame.origin.y -= (keyboardSize.height/2)
+                self.view.frame.origin.y -= keyboardSize.height
+                self.gradientView.frame.origin.y += keyboardSize.height
             }
         }
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
         self.view.frame.origin.y = 0
-        UIView.animate(withDuration: 2.0) {
-            self.gradient.isHidden = true
+        self.gradientView.frame.origin.y = 0
+        UIView.animate(withDuration: 1.0) { [weak self] in
+            self?.gradientView.alpha = 0.0
         }
     }
 }

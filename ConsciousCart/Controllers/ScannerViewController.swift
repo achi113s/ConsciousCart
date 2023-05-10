@@ -159,18 +159,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 extension ScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
         DispatchQueue.main.async { [weak self] in
-            if let count = self?.navigationController?.viewControllers.count {
-                if let prevView = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController {
-                    prevView.itemNameTextField.text = barcodeInfo.itemAttributes.title
-                    
-                    self?.spinner.stopAnimating()
-                    self?.checkmark_animation.viewModel.play()
-                    self?.timer = Timer.scheduledTimer(timeInterval: 2.1, target: self!,
-                                                       selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
-                }
-            }
-        }
+            guard let count = self?.navigationController?.viewControllers.count else { return }
+            guard let prevView = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController else { return }
+
+            prevView.itemNameTextField.text = barcodeInfo.itemAttributes.title
+            prevView.itemPriceTextField.text = barcodeInfo.Stores.first?.price ?? ""
             
+            self?.spinner.stopAnimating()
+            self?.checkmark_animation.viewModel.play()
+            self?.timer = Timer.scheduledTimer(timeInterval: 2.05, target: self!,
+                                               selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
+        }
+        
         print(barcodeInfo)
     }
     

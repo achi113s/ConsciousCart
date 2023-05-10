@@ -43,13 +43,13 @@ final class ConsciousCartTextField: UITextField {
     }
     
     func toolBar() -> UIToolbar{
-        let toolBar = UIToolbar(frame:CGRect(x:0, y:0, width:100, height:100))
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
         toolBar.translatesAutoresizingMaskIntoConstraints = false
         
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.barTintColor = UIColor.white
+        toolBar.barTintColor = UIColor.systemBackground
         
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onClickCancelButton))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
