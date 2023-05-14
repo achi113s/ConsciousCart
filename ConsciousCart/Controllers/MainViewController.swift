@@ -93,6 +93,7 @@ class MainViewController: UIViewController {
         let vc = AddToConsciousCartViewController()
         let modalController = UINavigationController(rootViewController: vc)
         navigationController?.present(modalController, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
