@@ -15,6 +15,11 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     private var saveButton: ConsciousCartButton!
     
     private var uploadImageButton: ConsciousCartButton!
+    
+    private var containerView: UIView!
+    private var imageView: UIImageView!
+    private var changeImageButton: UIButton!
+    
     private var scanBarcodeButton: ConsciousCartButton!
     private var uploadButtonsStack: UIStackView!
     
@@ -72,7 +77,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         }
     }
     
-    //MARK: - Add Elements and Layout Constraints
+    //MARK: - Add View Elements and Layout Constraints
     
     func setSubviewProperties() {
         saveButton = ConsciousCartButton()
@@ -82,6 +87,37 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         uploadImageButton = ConsciousCartButton()
         uploadImageButton.setImage(UIImage(systemName: "photo.circle", withConfiguration: largeConfig), for: .normal)
         uploadImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
+        
+//        containerView = ChangeImageContainerView()
+//        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.layer.cornerRadius = uploadImageButton.layer.cornerRadius
+        containerView.layer.borderWidth = uploadImageButton.layer.borderWidth
+        containerView.layer.borderColor = uploadImageButton.layer.borderColor
+
+        imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = uploadImageButton.layer.cornerRadius
+        imageView.layer.borderWidth = uploadImageButton.layer.borderWidth
+        imageView.layer.borderColor = uploadImageButton.layer.borderColor
+        imageView.layer.masksToBounds = true
+
+        changeImageButton = UIButton()
+        changeImageButton.translatesAutoresizingMaskIntoConstraints = false
+        changeImageButton.setTitle("Change Image", for: .normal)
+        changeImageButton.tintColor = .white
+        changeImageButton.backgroundColor = UIColor(white: 0.05, alpha: 0.8)
+        changeImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
+        changeImageButton.layer.cornerRadius = uploadImageButton.layer.cornerRadius
+        changeImageButton.layer.borderWidth = uploadImageButton.layer.borderWidth
+        changeImageButton.layer.borderColor = uploadImageButton.layer.borderColor
+        changeImageButton.layer.masksToBounds = true
+        
+        containerView.addSubview(imageView)
+        containerView.addSubview(changeImageButton)
         
         scanBarcodeButton = ConsciousCartButton()
         scanBarcodeButton.setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: largeConfig), for: .normal)
@@ -120,19 +156,12 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
         
-        inputItemsStack = UIStackView()
+        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemPriceTextField, itemReasonNeededTextField, itemRemindLabel, itemRemindDate])
         inputItemsStack.spacing = 15
         inputItemsStack.axis = .vertical
         inputItemsStack.alignment = .center
         inputItemsStack.distribution = .fill
         inputItemsStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        let arrangedSubviews = [itemNameTextField, itemPriceTextField, itemReasonNeededTextField, itemRemindLabel, itemRemindDate]
-        for subview in arrangedSubviews {
-            if let subview = subview {
-                inputItemsStack.addArrangedSubview(subview)
-            }
-        }
         
         //        gradient = CAGradientLayer()
         //        let gradientViewHiderHeight = navigationController?.navigationBar.frame.height ?? view.frame.height/8
@@ -160,30 +189,27 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
             
+            changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
+            changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            changeImageButton.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+
+            imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
+//
             itemNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            //            itemNameTextField.bottomAnchor.constraint(equalTo: itemPriceTextField.topAnchor, constant: -15),
-            //            itemNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //
+
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            //            itemPriceTextField.bottomAnchor.constraint(equalTo: itemReasonNeededTextField.topAnchor, constant: -15),
-            //            itemPriceTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //
+            
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            //            itemReasonNeededTextField.bottomAnchor.constraint(equalTo: itemRemindLabel.topAnchor, constant: -15),
-            //            itemReasonNeededTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //
+
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            //            itemRemindLabel.bottomAnchor.constraint(equalTo: itemRemindDate.topAnchor, constant: -15),
-            //            itemRemindLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //
+
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            //            itemRemindDate.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -60),
-            //            itemRemindDate.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             inputItemsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             inputItemsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -211,6 +237,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         let selectImageFromLibrary = UIAlertAction(title: "Choose from Library", style: .default) { [weak self] action in
             var pickerConfig = PHPickerConfiguration()
+            
             // Setting selectionLimit to 1 forces auto dismissal of the view immediately
             // upon image selection, so we'll set it
             // to 2 and then only import the first image later.
@@ -218,12 +245,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             pickerConfig.filter = .images
             pickerConfig.selection = .ordered
             
-            var phPickerController = PHPickerViewController(configuration: pickerConfig)
+            let phPickerController = PHPickerViewController(configuration: pickerConfig)
             phPickerController.delegate = self
             
-            DispatchQueue.main.async {
-                self?.present(phPickerController, animated: true)
-            }
+            self?.present(phPickerController, animated: true)
         }
         
         let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [weak self] action in
@@ -312,8 +337,34 @@ extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
 
 extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        print("sdfsdf")
+        // If we aren't changing the image in imageView and need to switch out
+        // the main button for the image/button combo...
+        if imageView.image == nil {
+            // Just removing from the arrangedSubview isn't enough
+            // to remove it from the view for some reason. Need to call
+            // removeFromSuperview too.
+            uploadButtonsStack.removeArrangedSubview(uploadImageButton)
+            uploadImageButton.removeFromSuperview()
+            
+            uploadButtonsStack.removeArrangedSubview(scanBarcodeButton)
+            scanBarcodeButton.removeFromSuperview()
+            
+            uploadButtonsStack.addArrangedSubview(containerView)
+            uploadButtonsStack.addArrangedSubview(scanBarcodeButton)
+        }   
+        
         dismiss(animated: true)
+        
+        // Add the selected image to the view.
+        guard let provider = results.first?.itemProvider else { return }
+        
+        if provider.canLoadObject(ofClass: UIImage.self) {
+            provider.loadObject(ofClass: UIImage.self) { image, _ in
+                DispatchQueue.main.async {
+                    self.imageView.image = image as? UIImage
+                }
+            }
+        }
     }
     
     
