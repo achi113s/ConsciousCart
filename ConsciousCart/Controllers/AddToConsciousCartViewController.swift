@@ -115,6 +115,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         changeImageButton.layer.borderWidth = uploadImageButton.layer.borderWidth
         changeImageButton.layer.borderColor = uploadImageButton.layer.borderColor
         changeImageButton.layer.masksToBounds = true
+        changeImageButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
         containerView.addSubview(imageView)
         containerView.addSubview(changeImageButton)
@@ -186,7 +187,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         NSLayoutConstraint.activate([
             uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
             
             changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
@@ -197,21 +198,21 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
 //
             itemNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
 
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
 
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
 
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            inputItemsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            inputItemsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             inputItemsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             inputItemsStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 30),
             
@@ -254,6 +255,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [weak self] action in
             let pickerVC = UIImagePickerController()
             pickerVC.sourceType = .camera
+            pickerVC.allowsEditing = true
             pickerVC.delegate = self
             self?.present(pickerVC, animated: true)
         }
@@ -328,8 +330,30 @@ extension AddToConsciousCartViewController: UITextFieldDelegate {
 
 extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("sdf")
+        // If we aren't changing the image in imageView and need to switch out
+        // the main button for the image/button combo...
+        if imageView.image == nil {
+            // Just removing from the arrangedSubview isn't enough
+            // to remove it from the view for some reason. Need to call
+            // removeFromSuperview too.
+            uploadButtonsStack.removeArrangedSubview(uploadImageButton)
+            uploadImageButton.removeFromSuperview()
+            
+            uploadButtonsStack.removeArrangedSubview(scanBarcodeButton)
+            scanBarcodeButton.removeFromSuperview()
+            
+            uploadButtonsStack.addArrangedSubview(containerView)
+            uploadButtonsStack.addArrangedSubview(scanBarcodeButton)
+        }
+        
         dismiss(animated: true)
+        
+        guard let image = info[.editedImage] as? UIImage else { return }
+        
+//        let imageName = UUID().uuidString
+        DispatchQueue.main.async {
+            self.imageView.image = image
+        }
     }
 }
 

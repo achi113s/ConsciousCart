@@ -15,6 +15,9 @@ class MainViewController: UIViewController {
     private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private var impulseTableView: UITableView!
+    private var addToCCButton: ConsciousCartButton!
+    
+    private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
     
     override func loadView() {
         super.loadView()
@@ -42,11 +45,16 @@ class MainViewController: UIViewController {
         impulseTableView.dataSource = self
         impulseTableView.delegate = self
         impulseTableView.backgroundColor = .systemBackground
-//        loadSwiftUIChart()
+        
+        addToCCButton = ConsciousCartButton()
+        addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
+        addToCCButton.layer.cornerRadius = 35
+        addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
     }
     
     func addSubviewsToView() {
         view.addSubview(impulseTableView)
+        view.addSubview(addToCCButton)
     }
     
     func setLayoutConstraints() {
@@ -54,36 +62,21 @@ class MainViewController: UIViewController {
             impulseTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             impulseTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             impulseTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            impulseTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
+            impulseTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            
+            addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            addToCCButton.widthAnchor.constraint(equalToConstant: 70),
+            addToCCButton.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
     
-//    func loadSwiftUIChart() {
-//        let chartView = SavingsChart()
-//        let hostingViewController = UIHostingController(rootView: chartView)
-//
-//        //        addChild(hostingViewController)
-//
-//        if let hostView = hostingViewController.view {
-//            hostView.translatesAutoresizingMaskIntoConstraints = false
-//
-////            view.addSubview(hostView)
-//
-//            //            hostView.layer.borderColor = UIColor.black.cgColor
-//            //            hostView.layer.borderWidth = 1
-//
-////            NSLayoutConstraint.activate([
-////                hostView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-////                hostView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-////                hostView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-////                hostView.heightAnchor.constraint(equalToConstant: 210)
-////            ])
-//
-//
-//            impulseTableView.tableHeaderView = hostView
-//            impulseTableView.sectionHeaderHeight = 210
-//        }
-//    }
+    @objc func addToConsciousCart() {
+        let vc = AddToConsciousCartViewController()
+        let modalController = UINavigationController(rootViewController: vc)
+        navigationController?.present(modalController, animated: true)
+        //        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: - UITableView Methods
@@ -111,7 +104,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let chartView = SavingsChart()
         let hostingViewController = UIHostingController(rootView: chartView)
-
+        
         addChild(hostingViewController)
         
         guard let hostView = hostingViewController.view else { return nil }
@@ -119,7 +112,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         return hostView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 220
     }

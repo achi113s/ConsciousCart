@@ -12,7 +12,15 @@ import Foundation
 struct Item: Identifiable {
     var id = UUID()
     let date: Date
-    let value: Int
+    let value: Double
+}
+
+enum SavingsChartTimeSpan: String, CaseIterable, Identifiable {
+    case threeMonths = "3M"
+    case sixMonths = "6M"
+    case oneYear = "1Y"
+    case allTime = "All"
+    var id: Self { self }
 }
 
 struct SavingsChart: View {
@@ -32,13 +40,19 @@ struct SavingsChart: View {
         Item(date: Date(timeIntervalSince1970: TimeInterval(3594827)), value: 900),
         Item(date: Date(timeIntervalSince1970: TimeInterval(3694827)), value: 1700),
         Item(date: Date(timeIntervalSince1970: TimeInterval(3794827)), value: 2700),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3894827)), value: 3400)
+        Item(date: Date(timeIntervalSince1970: TimeInterval(3894827)), value: 3400.23)
     ]
     
     @State private var buttonIsEnabled: Bool = true
+    @State private var selectedChartTimeSpan: SavingsChartTimeSpan = .allTime
+    
+    private var cumSum: Double {
+        return cumSumOverTimeSpan(selectedChartTimeSpan)
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
+            Text("Total: ") + Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
             Chart(items) { item in
                 LineMark(
                     x: .value("Month", item.date.formatted(date: .abbreviated, time: .omitted)),
@@ -58,40 +72,50 @@ struct SavingsChart: View {
             }
             .chartXAxis { }
             
-            HStack {
-                Button {
-                    buttonIsEnabled.toggle()
-                } label: {
-                    Text("1m")
-                        .foregroundColor(buttonIsEnabled ? .white : .black)
-                        .font(Font.system(size: 15))
+            Picker("", selection: $selectedChartTimeSpan) {
+                ForEach(SavingsChartTimeSpan.allCases) { range in
+                    Text(range.rawValue.capitalized)
                 }
-                .background(buttonIsEnabled ? Color("ExodusFruit") : .white)
-                .cornerRadius(3)
-                
-                Button {
-                    buttonIsEnabled.toggle()
-                } label: {
-                    Text("1m")
-                        .foregroundColor(buttonIsEnabled ? .white : .black)
-                        .font(Font.system(size: 15))
-                }
-                .background(buttonIsEnabled ? Color("ExodusFruit") : .white)
-                .cornerRadius(3)
-                
-                Button {
-                    buttonIsEnabled.toggle()
-                } label: {
-                    Text("1m")
-                        .foregroundColor(buttonIsEnabled ? .white : .black)
-                        .font(Font.system(size: 15))
-                }
-                .background(buttonIsEnabled ? Color("ExodusFruit") : .white)
-                .cornerRadius(3)
             }
+            .pickerStyle(.segmented)
+            .padding([.leading, .trailing, .top])
         }
         .padding()
         .frame(height: 200)
+    }
+    
+    func cumSumOverTimeSpan(_ timeSpan: SavingsChartTimeSpan) -> Double {
+        let oldestDate = oldestDateToShow(timeSpan)
+        
+        var itemsToSum = [Item]()
+        for item in items {
+            if item.date > oldestDate {
+                itemsToSum.append(item)
+            }
+        }
+        
+        let sum = itemsToSum.reduce(0.0) {
+            $0 + $1.value
+        }
+        
+        return sum
+    }
+    
+    func oldestDateToShow(_ timeSpan: SavingsChartTimeSpan) -> Date {
+        var oldestDate = Date.now
+        
+        switch timeSpan {
+        case .threeMonths:
+            oldestDate = Calendar.current.date(byAdding: .month, value: -3, to: Date.now)!
+        case .sixMonths:
+            oldestDate = Calendar.current.date(byAdding: .month, value: -6, to: Date.now)!
+        case .oneYear:
+            oldestDate = Calendar.current.date(byAdding: .year, value: -1, to: Date.now)!
+        case .allTime:
+            oldestDate = Date(timeIntervalSince1970: TimeInterval(0))
+        }
+        
+        return oldestDate
     }
 }
 
