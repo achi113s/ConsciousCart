@@ -19,7 +19,7 @@
 		4442221A2A11C4B700753F8D /* Impulse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222182A11C4B700753F8D /* Impulse+CoreDataProperties.swift */; };
 		4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */; };
 		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
-		444A774829FA059800EBF1E8 /* MyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A774729FA059800EBF1E8 /* MyChart.swift */; };
+		444A774829FA059800EBF1E8 /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A774729FA059800EBF1E8 /* SavingsChart.swift */; };
 		44595ED52A01FE4F00D0AC48 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44595ED42A01FE4F00D0AC48 /* RiveRuntime */; };
 		44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */; };
 		44595EDD2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */; };
@@ -27,9 +27,10 @@
 		44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEA2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEB2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
+		4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A0132A140BC4004C1349 /* MainViewController.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
-		4497E39F29F358BC0029451E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* MainViewController.swift */; };
+		4497E39F29F358BC0029451E /* MainViewController_Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* MainViewController_Old.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
 		4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3B129F358BD0029451E /* ConsciousCartTests.swift */; };
@@ -72,13 +73,14 @@
 		444222182A11C4B700753F8D /* Impulse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Impulse+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		444A774729FA059800EBF1E8 /* MyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChart.swift; sourceTree = "<group>"; };
+		444A774729FA059800EBF1E8 /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
 		44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkAnimationViewController.swift; sourceTree = "<group>"; };
 		44595EE82A02219C00D0AC48 /* checkmark.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark.riv; sourceTree = "<group>"; };
+		4496A0132A140BC4004C1349 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E39A29F358BC0029451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4497E39C29F358BC0029451E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4497E39E29F358BC0029451E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4497E39E29F358BC0029451E /* MainViewController_Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController_Old.swift; sourceTree = "<group>"; };
 		4497E3A329F358BC0029451E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4497E3A629F358BC0029451E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,7 +163,6 @@
 		4497E39929F358BC0029451E /* ConsciousCart */ = {
 			isa = PBXGroup;
 			children = (
-				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				4497E39A29F358BC0029451E /* AppDelegate.swift */,
 				4497E39C29F358BC0029451E /* SceneDelegate.swift */,
 				44AACCD82A0345FC0053334C /* Secrets.swift */,
@@ -196,6 +197,7 @@
 		4497E3D929F35B040029451E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				444222172A11C4B700753F8D /* Impulse+CoreDataClass.swift */,
 				444222182A11C4B700753F8D /* Impulse+CoreDataProperties.swift */,
 				442018A129FB7ED000AD9812 /* ConsciousCartItem.swift */,
@@ -211,7 +213,7 @@
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
 				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
-				444A774729FA059800EBF1E8 /* MyChart.swift */,
+				444A774729FA059800EBF1E8 /* SavingsChart.swift */,
 				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
 				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
 			);
@@ -221,7 +223,8 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4497E39E29F358BC0029451E /* MainViewController.swift */,
+				4497E39E29F358BC0029451E /* MainViewController_Old.swift */,
+				4496A0132A140BC4004C1349 /* MainViewController.swift */,
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */,
@@ -389,8 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
-				4497E39F29F358BC0029451E /* MainViewController.swift in Sources */,
+				4497E39F29F358BC0029451E /* MainViewController_Old.swift in Sources */,
 				4442221A2A11C4B700753F8D /* Impulse+CoreDataProperties.swift in Sources */,
 				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */,
@@ -406,7 +410,7 @@
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				444222192A11C4B700753F8D /* Impulse+CoreDataClass.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
-				444A774829FA059800EBF1E8 /* MyChart.swift in Sources */,
+				444A774829FA059800EBF1E8 /* SavingsChart.swift in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */,
 			);

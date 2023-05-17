@@ -11,11 +11,10 @@ import SwiftUI
 class MainViewController: UIViewController {
     
     //MARK: - Properties
+    private let impulses = [Impulse]()
+    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var addToCCButton: ConsciousCartButton!
-    var chartLabel: UILabel!
-    
-    let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+    private var impulseTableView: UITableView!
     
     override func loadView() {
         super.loadView()
@@ -34,66 +33,94 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    //MARK: - Add Elements and Layout Constraints
-
+    //MARK: - Add View Elements and Layout Constraints
+    
     func setSubviewProperties() {
-        addToCCButton = ConsciousCartButton()
-        addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
-        addToCCButton.layer.cornerRadius = 35
-        addToCCButton.translatesAutoresizingMaskIntoConstraints = false
-        addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
-        
-        chartLabel = UILabel()
-        chartLabel.translatesAutoresizingMaskIntoConstraints = false
-        chartLabel.text = "Total Amount Saved"
-        chartLabel.font = .systemFont(ofSize: 18)
+        impulseTableView = UITableView(frame: .zero, style: .grouped)
+        impulseTableView.translatesAutoresizingMaskIntoConstraints = false
+        impulseTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        impulseTableView.dataSource = self
+        impulseTableView.delegate = self
+        impulseTableView.backgroundColor = .systemBackground
+//        loadSwiftUIChart()
     }
     
     func addSubviewsToView() {
-        view.addSubview(addToCCButton)
-        view.addSubview(chartLabel)
-        loadSwiftUIChart()
+        view.addSubview(impulseTableView)
     }
-
+    
     func setLayoutConstraints() {
         NSLayoutConstraint.activate([
-            chartLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            chartLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            
-            addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-            addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            addToCCButton.widthAnchor.constraint(equalToConstant: 70),
-            addToCCButton.heightAnchor.constraint(equalToConstant: 70)
+            impulseTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            impulseTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            impulseTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            impulseTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
     }
     
-    func loadSwiftUIChart() {
-        let chartView = MyChart()
-        let hostingViewController = UIHostingController(rootView: chartView)
-        
-        addChild(hostingViewController)
-       
-        if let hostView = hostingViewController.view {
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            
-            view.addSubview(hostView)
-            
-            NSLayoutConstraint.activate([
-                hostView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                hostView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                hostView.topAnchor.constraint(equalTo: chartLabel.bottomAnchor),
-                hostView.heightAnchor.constraint(equalToConstant: 210)
-            ])
-        }
-    }
-    
-    //MARK: - Selectors
-    
-    @objc func addToConsciousCart() {
-        let vc = AddToConsciousCartViewController()
-        let modalController = UINavigationController(rootViewController: vc)
-        navigationController?.present(modalController, animated: true)
-//        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func loadSwiftUIChart() {
+//        let chartView = SavingsChart()
+//        let hostingViewController = UIHostingController(rootView: chartView)
+//
+//        //        addChild(hostingViewController)
+//
+//        if let hostView = hostingViewController.view {
+//            hostView.translatesAutoresizingMaskIntoConstraints = false
+//
+////            view.addSubview(hostView)
+//
+//            //            hostView.layer.borderColor = UIColor.black.cgColor
+//            //            hostView.layer.borderWidth = 1
+//
+////            NSLayoutConstraint.activate([
+////                hostView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+////                hostView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+////                hostView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+////                hostView.heightAnchor.constraint(equalToConstant: 210)
+////            ])
+//
+//
+//            impulseTableView.tableHeaderView = hostView
+//            impulseTableView.sectionHeaderHeight = 210
+//        }
+//    }
 }
 
+//MARK: - UITableView Methods
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        var config = cell.defaultContentConfiguration()
+        config.text = "Test \(indexPath.row)"
+        
+        cell.contentConfiguration = config
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected \(indexPath.row)")
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let chartView = SavingsChart()
+        let hostingViewController = UIHostingController(rootView: chartView)
+
+        addChild(hostingViewController)
+        
+        guard let hostView = hostingViewController.view else { return nil }
+        hostView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width-40, height: 200)
+        
+        return hostView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
+}
