@@ -31,9 +31,14 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Nunito-Regular", size: 10)!]
     }
     
     //MARK: - Add View Elements and Layout Constraints

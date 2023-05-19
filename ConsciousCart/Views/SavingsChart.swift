@@ -52,7 +52,8 @@ struct SavingsChart: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Total: ") + Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
+            Text("Total: ").font(Font.custom("Nunito-Regular", size: 25)) + Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
+                .font(Font.custom("Nunito-Regular", size: 25))
             Chart(items) { item in
                 LineMark(
                     x: .value("Month", item.date.formatted(date: .abbreviated, time: .omitted)),

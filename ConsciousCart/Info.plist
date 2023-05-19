@@ -10,7 +10,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Righteous-Regular</string>
+		<string>Righteous-Regular.ttf</string>
+		<string>Nunito-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
