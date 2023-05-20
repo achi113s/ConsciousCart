@@ -108,6 +108,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         changeImageButton = UIButton()
         changeImageButton.translatesAutoresizingMaskIntoConstraints = false
         changeImageButton.setTitle("Change Image", for: .normal)
+        changeImageButton.titleLabel?.font = UIFont(name: "Nunito-Regular", size: 17)
         changeImageButton.tintColor = .white
         changeImageButton.backgroundColor = UIColor(white: 0.05, alpha: 0.8)
         changeImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
@@ -148,6 +149,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         itemRemindLabel = UILabel()
         itemRemindLabel.text = "When should we remind you?"
+        itemRemindLabel.font = UIFont(name: "Nunito-Regular", size: 17)
         itemRemindLabel.textAlignment = .center
         itemRemindLabel.translatesAutoresizingMaskIntoConstraints = false
         

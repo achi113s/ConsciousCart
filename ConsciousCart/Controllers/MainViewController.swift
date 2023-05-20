@@ -31,14 +31,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }
 
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Nunito-Regular", size: 10)!]
     }
     
     //MARK: - Add View Elements and Layout Constraints
@@ -46,7 +41,8 @@ class MainViewController: UIViewController {
     func setSubviewProperties() {
         impulseTableView = UITableView(frame: .zero, style: .grouped)
         impulseTableView.translatesAutoresizingMaskIntoConstraints = false
-        impulseTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        impulseTableView.register(ImpulseTableViewCell.self, forCellReuseIdentifier: "cell")
+        impulseTableView.separatorStyle = .none
         impulseTableView.dataSource = self
         impulseTableView.delegate = self
         impulseTableView.backgroundColor = .systemBackground
@@ -84,26 +80,27 @@ class MainViewController: UIViewController {
     }
 }
 
-//MARK: - UITableView Methods
+//MARK: - UITableView Delegate, Data Source Methods
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        var config = cell.defaultContentConfiguration()
-        config.text = "Test \(indexPath.row)"
-        
-        cell.contentConfiguration = config
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ImpulseTableViewCell else {
+            fatalError("Could not load ImpulseTableViewCell")
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 10
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected \(indexPath.row)")
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

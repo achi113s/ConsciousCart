@@ -35,6 +35,8 @@ final class ConsciousCartTextField: UITextField {
         
         backgroundColor = .secondarySystemBackground
         
+        font = UIFont(name: "Nunito-Regular", size: 17)
+        
         self.layer.cornerRadius = 8
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1

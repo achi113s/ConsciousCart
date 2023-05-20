@@ -14,6 +14,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Nunito-Bold", size: 17)!]
+        let largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Nunito-Bold", size: 34)!]
+        UINavigationBar.appearance().titleTextAttributes = titleTextAttributes
+        UINavigationBar.appearance().largeTitleTextAttributes = largeTitleTextAttributes
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = createTabBar()
