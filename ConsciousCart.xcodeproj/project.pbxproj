@@ -27,6 +27,9 @@
 		44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEA2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEB2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
+		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
+		445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B22A187ABF0013ACB1 /* SettingsView.swift */; };
+		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A0132A140BC4004C1349 /* MainViewController.swift */; };
 		4496A0562A16895F004C1349 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496A0552A16895F004C1349 /* Nunito-Regular.ttf */; };
 		4496A0582A16896F004C1349 /* OFL_Nunito.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4496A0572A16896F004C1349 /* OFL_Nunito.txt */; };
@@ -35,7 +38,6 @@
 		4496A05E2A171CDC004C1349 /* ImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
-		4497E39F29F358BC0029451E /* MainViewController_Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39E29F358BC0029451E /* MainViewController_Old.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
 		4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3B129F358BD0029451E /* ConsciousCartTests.swift */; };
@@ -81,6 +83,9 @@
 		444A774729FA059800EBF1E8 /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
 		44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkAnimationViewController.swift; sourceTree = "<group>"; };
 		44595EE82A02219C00D0AC48 /* checkmark.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark.riv; sourceTree = "<group>"; };
+		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
+		445EF7B22A187ABF0013ACB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4496A0132A140BC4004C1349 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4496A0552A16895F004C1349 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		4496A0572A16896F004C1349 /* OFL_Nunito.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Nunito.txt; sourceTree = "<group>"; };
@@ -90,7 +95,6 @@
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E39A29F358BC0029451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4497E39C29F358BC0029451E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4497E39E29F358BC0029451E /* MainViewController_Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController_Old.swift; sourceTree = "<group>"; };
 		4497E3A329F358BC0029451E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4497E3A629F358BC0029451E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
 				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
 				4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */,
+				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,12 +240,13 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4497E39E29F358BC0029451E /* MainViewController_Old.swift */,
 				4496A0132A140BC4004C1349 /* MainViewController.swift */,
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */,
 				44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */,
+				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
+				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -412,17 +418,19 @@
 			files = (
 				4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
-				4497E39F29F358BC0029451E /* MainViewController_Old.swift in Sources */,
 				4442221A2A11C4B700753F8D /* Impulse+CoreDataProperties.swift in Sources */,
 				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				442018A229FB7ED000AD9812 /* ConsciousCartItem.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */,
+				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
+				445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */,
+				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,

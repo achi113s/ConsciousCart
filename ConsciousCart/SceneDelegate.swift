@@ -58,16 +58,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createSettingsVC() -> UINavigationController {
-        //MARK: - temporarily put ProfileViewController here
-        let settingsVC = ProfileViewController()
+        let settingsVC = SettingsViewController()
         settingsVC.title = "Settings"
-    
-//        let cartFontSize: CGFloat = 32
-//        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
         
         settingsVC.tabBarItem = UITabBarItem()
         settingsVC.tabBarItem.image = UIImage(systemName: "gearshape")
-//        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
         settingsVC.tabBarItem.title = "Settings"
         
         return UINavigationController(rootViewController: settingsVC)

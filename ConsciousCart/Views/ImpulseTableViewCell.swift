@@ -62,13 +62,14 @@ class ImpulseTableViewCell: UITableViewCell {
         addSubview(insetView)
         
         NSLayoutConstraint.activate([
-            insetView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            insetView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            insetView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
-            insetView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            insetView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            insetView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            insetView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            insetView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             
             itemNameLabel.leftAnchor.constraint(equalTo: insetView.leftAnchor, constant: 8),
             itemNameLabel.topAnchor.constraint(equalTo: insetView.topAnchor, constant: 8),
+            itemNameLabel.widthAnchor.constraint(equalTo: insetView.widthAnchor, multiplier: 0.5),
             
             remainingTimeLabel.leftAnchor.constraint(equalTo: insetView.leftAnchor, constant: 8),
             remainingTimeLabel.bottomAnchor.constraint(equalTo: insetView.bottomAnchor, constant: -8),

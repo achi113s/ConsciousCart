@@ -36,6 +36,12 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     //MARK: - Add View Elements and Layout Constraints
     
     func setSubviewProperties() {
@@ -97,6 +103,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let detailVC = ImpulseDetailViewController()
+        detailVC.title = "Impulse for Pokemon Cards"
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,12 +120,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         addChild(hostingViewController)
         
         guard let hostView = hostingViewController.view else { return nil }
-        hostView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width-40, height: 200)
+        hostView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width-40, height: 260)
         
         return hostView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 220
+        return 280
     }
 }

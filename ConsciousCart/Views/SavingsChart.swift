@@ -25,22 +25,21 @@ enum SavingsChartTimeSpan: String, CaseIterable, Identifiable {
 
 struct SavingsChart: View {
     @State private var items: [Item] = [
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2394827)), value: 100),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2494827)), value: 80),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2594827)), value: 120),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2694827)), value: 20),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2794827)), value: 55),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2894827)), value: 170),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(2994827)), value: 20),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3094827)), value: 10),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3194827)), value: 5),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3294827)), value: 1),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3394827)), value: 500),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3494827)), value: 800),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3594827)), value: 900),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3694827)), value: 1700),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3794827)), value: 2700),
-        Item(date: Date(timeIntervalSince1970: TimeInterval(3894827)), value: 3400.23)
+        Item(date: Date(timeIntervalSince1970: 1630574339), value: 80),
+        Item(date: Date(timeIntervalSince1970: 1671274339), value: 120),
+        Item(date: Date(timeIntervalSince1970: 1672274339), value: 20),
+        Item(date: Date(timeIntervalSince1970: 1673274339), value: 55),
+        Item(date: Date(timeIntervalSince1970: 1674274339), value: 170),
+        Item(date: Date(timeIntervalSince1970: 1675274339), value: 20),
+        Item(date: Date(timeIntervalSince1970: 1676274339), value: 10),
+        Item(date: Date(timeIntervalSince1970: 1677274339), value: 5),
+        Item(date: Date(timeIntervalSince1970: 1678274339), value: 1),
+        Item(date: Date(timeIntervalSince1970: 1679274339), value: 500),
+        Item(date: Date(timeIntervalSince1970: 1680274339), value: 800),
+        Item(date: Date(timeIntervalSince1970: 1681274339), value: 900),
+        Item(date: Date(timeIntervalSince1970: 1682274339), value: 1700),
+        Item(date: Date(timeIntervalSince1970: 1683274339), value: 2700),
+        Item(date: Date(timeIntervalSince1970: 1684544894), value: 3400.23)
     ]
     
     @State private var buttonIsEnabled: Bool = true
@@ -54,16 +53,17 @@ struct SavingsChart: View {
         VStack(alignment: .leading) {
             Text("Total: ").font(Font.custom("Nunito-Regular", size: 25)) + Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
                 .font(Font.custom("Nunito-Regular", size: 25))
-            Chart(items) { item in
+            
+            Chart(items.count != 0 ? items : [Item(date: Date.now, value: 0)]) { item in
                 LineMark(
-                    x: .value("Month", item.date.formatted(date: .abbreviated, time: .omitted)),
+                    x: .value("Month", item.date),
                     y: .value("Savings", item.value)
                 )
                 .foregroundStyle(Color("ExodusFruit"))
             }
             .chartYAxis {
                 AxisMarks(position: .trailing, values: .automatic) { value in
-                    AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1, dash: [5]))
+                    AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 0.5, dash: [2]))
                     AxisValueLabel() {
                         if let intValue = value.as(Int.self) {
                             Text(intValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
@@ -71,7 +71,9 @@ struct SavingsChart: View {
                     }
                 }
             }
-            .chartXAxis { }
+            .chartXScale(domain: oldestDateToShow(selectedChartTimeSpan)...Date())
+            .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+            .clipped()
             
             Picker("", selection: $selectedChartTimeSpan) {
                 ForEach(SavingsChartTimeSpan.allCases) { range in
@@ -79,27 +81,26 @@ struct SavingsChart: View {
                 }
             }
             .pickerStyle(.segmented)
-            .padding([.leading, .trailing, .top])
+            .padding([.leading, .trailing])
         }
-        .padding()
-        .frame(height: 200)
+        .padding([.bottom, .leading, .trailing])
+        .frame(height: 260)
     }
     
     func cumSumOverTimeSpan(_ timeSpan: SavingsChartTimeSpan) -> Double {
-        let oldestDate = oldestDateToShow(timeSpan)
-        
-        var itemsToSum = [Item]()
-        for item in items {
-            if item.date > oldestDate {
-                itemsToSum.append(item)
+        if timeSpan != .allTime {
+            let oldestDate = oldestDateToShow(timeSpan)
+            
+            var sum = 0.0
+            for item in items {
+                if item.date > oldestDate {
+                    sum += item.value
+                }
             }
+            return sum
+        } else {
+            return items.reduce(0.0) { $0 + $1.value }
         }
-        
-        let sum = itemsToSum.reduce(0.0) {
-            $0 + $1.value
-        }
-        
-        return sum
     }
     
     func oldestDateToShow(_ timeSpan: SavingsChartTimeSpan) -> Date {
@@ -113,7 +114,8 @@ struct SavingsChart: View {
         case .oneYear:
             oldestDate = Calendar.current.date(byAdding: .year, value: -1, to: Date.now)!
         case .allTime:
-            oldestDate = Date(timeIntervalSince1970: TimeInterval(0))
+            // this is really ugly
+            oldestDate = items.first?.date ?? Date(timeIntervalSince1970: 0)
         }
         
         return oldestDate
