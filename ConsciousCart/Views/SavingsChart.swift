@@ -51,9 +51,11 @@ struct SavingsChart: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Total: ").font(Font.custom("Nunito-Regular", size: 25)) + Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
-                .font(Font.custom("Nunito-Regular", size: 25))
-            
+            Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
+                .font(Font.custom("Nunito-Bold", size: 25))
+                .foregroundColor(cumSum > 0.0 ? .green : .red)
+            + Text(cumSum > 0.0 ? " Saved": " Spent").font(Font.custom("Nunito-Regular", size: 17))
+                .foregroundColor(cumSum > 0.0 ? .green : .red)
             Chart(items.count != 0 ? items : [Item(date: Date.now, value: 0)]) { item in
                 LineMark(
                     x: .value("Month", item.date),
@@ -75,7 +77,7 @@ struct SavingsChart: View {
             .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
             .clipped()
             
-            Picker("", selection: $selectedChartTimeSpan) {
+            Picker("", selection: $selectedChartTimeSpan.animation(.easeInOut)) {
                 ForEach(SavingsChartTimeSpan.allCases) { range in
                     Text(range.rawValue.capitalized)
                 }
@@ -92,10 +94,8 @@ struct SavingsChart: View {
             let oldestDate = oldestDateToShow(timeSpan)
             
             var sum = 0.0
-            for item in items {
-                if item.date > oldestDate {
-                    sum += item.value
-                }
+            for item in items where item.date > oldestDate {
+                sum += item.value
             }
             return sum
         } else {
@@ -121,6 +121,8 @@ struct SavingsChart: View {
         return oldestDate
     }
 }
+
+
 
 struct MyChart_Previews: PreviewProvider {
     static var previews: some View {

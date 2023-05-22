@@ -10,14 +10,15 @@ import SwiftUI
 
 class MainViewController: UIViewController {
     
-    //MARK: - Properties
-    private let impulses = [Impulse]()
-    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+    //MARK: - View UI Properties
     private var impulseTableView: UITableView!
     private var addToCCButton: ConsciousCartButton!
     
     private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+
+    //MARK: - View Data Properties
+    private let impulses = [Impulse]()
+    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func loadView() {
         super.loadView()
@@ -55,7 +56,7 @@ class MainViewController: UIViewController {
         
         addToCCButton = ConsciousCartButton()
         addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
-        addToCCButton.layer.cornerRadius = 35
+        addToCCButton.layer.cornerRadius = 33
         addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
     }
     
@@ -73,13 +74,16 @@ class MainViewController: UIViewController {
             
             addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            addToCCButton.widthAnchor.constraint(equalToConstant: 70),
-            addToCCButton.heightAnchor.constraint(equalToConstant: 70)
+            addToCCButton.widthAnchor.constraint(equalToConstant: 66),
+            addToCCButton.heightAnchor.constraint(equalToConstant: 66)
         ])
     }
     
     @objc func addToConsciousCart() {
         let vc = AddToConsciousCartViewController()
+        
+        vc.moc = self.moc
+        
         let modalController = UINavigationController(rootViewController: vc)
         navigationController?.present(modalController, animated: true)
         //        navigationController?.pushViewController(vc, animated: true)

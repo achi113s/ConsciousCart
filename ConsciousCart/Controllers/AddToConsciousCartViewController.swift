@@ -7,10 +7,11 @@
 
 import UIKit
 import PhotosUI
+import CoreData
 
 class AddToConsciousCartViewController: UIViewController, UINavigationControllerDelegate {
     
-    //MARK: - View Properties
+    //MARK: - View UI Properties
     
     private var saveButton: ConsciousCartButton!
     
@@ -37,6 +38,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //    var gradientView: UIView!
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
+    
+    //MARK: - View Data Properties
+    
+    var moc: NSManagedObjectContext?
     
     override func loadView() {
         super.loadView()
@@ -228,6 +233,18 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //MARK: - Selectors
     
     @objc func saveItem() {
+        guard let moc = moc else {
+            fatalError("The NSManagedObject context could not be unwrapped.")
+        }
+        
+        let newImpulse = Impulse(context: moc)
+        newImpulse.id = UUID()
+        newImpulse.dateCreated = Date.now
+        newImpulse.remindDate = itemRemindDate.date
+        newImpulse.name = itemNameTextField.text ?? "Unknown Name"
+        newImpulse.price = Double(itemPriceTextField.text ?? "0")!
+        newImpulse.reasonNeeded = itemReasonNeededTextField.text ?? "Unknown Reason"
+        
         dismiss(animated: true)
     }
     
