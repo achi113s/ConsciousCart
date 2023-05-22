@@ -50,12 +50,16 @@ struct SavingsChart: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(cumSum, format: .currency(code: Locale.current.currency?.identifier ?? "USD").precision(.fractionLength(0)))
-                .font(Font.custom("Nunito-Bold", size: 25))
-                .foregroundColor(cumSum > 0.0 ? .green : .red)
-            + Text(cumSum > 0.0 ? " Saved": " Spent").font(Font.custom("Nunito-Regular", size: 17))
-                .foregroundColor(cumSum > 0.0 ? .green : .red)
+        VStack(alignment: .leading, spacing: 5) {
+            HStack {
+                TextViewAnimatableNumber(number: cumSum)
+                    .font(Font.custom("Nunito-Bold", size: 25))
+                    .foregroundColor(cumSum > 0.0 ? .green : .red)
+                
+                Text(cumSum > 0.0 ? " Saved": " Spent").font(Font.custom("Nunito-Regular", size: 17))
+                    .foregroundColor(cumSum > 0.0 ? .green : .red)
+            }
+            
             Chart(items.count != 0 ? items : [Item(date: Date.now, value: 0)]) { item in
                 LineMark(
                     x: .value("Month", item.date),
@@ -122,7 +126,25 @@ struct SavingsChart: View {
     }
 }
 
-
+struct TextViewAnimatableNumber: View, Animatable {
+    var number: Double
+    
+    var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        return formatter
+    }()
+    
+    var animatableData: Double {
+        get { number }
+        set { number = newValue }
+    }
+    
+    var body: some View {
+        Text(formatter.string(for: number) ?? "")
+    }
+}
 
 struct MyChart_Previews: PreviewProvider {
     static var previews: some View {
