@@ -9,11 +9,12 @@ import UIKit
 
 class ImpulseDetailViewController: UIViewController {
     
+    var impulse: Impulse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
     }
@@ -22,17 +23,6 @@ class ImpulseDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = false
+        title = impulse?.name ?? "Impulse"
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

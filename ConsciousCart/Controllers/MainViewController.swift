@@ -7,23 +7,28 @@
 
 import UIKit
 import SwiftUI
+import CoreData
 
 class MainViewController: UIViewController {
     
     //MARK: - View UI Properties
-    private var impulseTableView: UITableView!
+    var impulseTableView: UITableView!
+    
     private var addToCCButton: ConsciousCartButton!
     
     private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
 
     //MARK: - View Data Properties
-    private let impulses = [Impulse]()
+    var impulses = [Impulse]()
+    
     private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func loadView() {
         super.loadView()
         
         view.backgroundColor = .systemBackground
+        
+        loadImpulses()
         
         setSubviewProperties()
         addSubviewsToView()
@@ -40,6 +45,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        impulseTableView.reloadData()
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -83,6 +89,7 @@ class MainViewController: UIViewController {
         let vc = AddToConsciousCartViewController()
         
         vc.moc = self.moc
+        vc.mainVC = self
         
         let modalController = UINavigationController(rootViewController: vc)
         navigationController?.present(modalController, animated: true)
@@ -98,18 +105,28 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Could not load ImpulseTableViewCell")
         }
         
+        let impulse = impulses[indexPath.row]
+        
+        cell.itemNameLabel.text = impulse.wrappedName
+        cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+        
+        let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+        cell.remainingTimeLabel.text = remainingTime.0
+        cell.remainingTimeLabel.textColor = remainingTime.1 == .aLongTime ? .black : .red
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return impulses.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let detailVC = ImpulseDetailViewController()
-        detailVC.title = "Impulse for Pokemon Cards"
+        detailVC.impulse = impulses[indexPath.row]
+        
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -131,5 +148,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 280
+    }
+    
+    func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
+        do {
+            impulses = try moc.fetch(request)
+        } catch {
+            print("Error fetching data from context, \(error)")
+        }
     }
 }

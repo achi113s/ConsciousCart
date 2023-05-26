@@ -31,6 +31,10 @@ extension Impulse {
     public var wrappedReasonNeeded: String {
         reasonNeeded ?? ""
     }
+    
+    public var wrappedRemindDate: Date {
+        remindDate ?? Date.now
+    }
 }
 
 extension Impulse : Identifiable {

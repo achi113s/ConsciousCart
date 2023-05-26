@@ -47,6 +47,7 @@
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
 		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
 		44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */; };
+		44D5F8E02A1BE16000B215E4 /* TextViewAnimatableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableNumber.swift */; };
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
 		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
 /* End PBXBuildFile section */
@@ -106,6 +107,7 @@
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
 		44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAnimatableNumber.swift; sourceTree = "<group>"; };
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +232,7 @@
 				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
 				4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */,
 				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
+				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableNumber.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */,
+				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableNumber.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4439631D2A193FF300A081B2 /* Impulse+CoreDataProperties.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,

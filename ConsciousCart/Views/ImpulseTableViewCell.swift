@@ -18,7 +18,11 @@ class ImpulseTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessoryType = .disclosureIndicator
+        
+//        accessoryType = .disclosureIndicator
+        let accessory = UIImageView(image: UIImage(systemName: "chevron.right"))
+        accessory.tintColor = .lightGray
+        accessoryView = accessory
         
         let labelFont = UIFont(name: "Nunito-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17)
         let priceFont = UIFont(name: "Nunito-Regular", size: 21) ?? UIFont.systemFont(ofSize: 21)
@@ -75,7 +79,7 @@ class ImpulseTableViewCell: UITableViewCell {
             remainingTimeLabel.bottomAnchor.constraint(equalTo: insetView.bottomAnchor, constant: -8),
             
             itemPriceLabel.rightAnchor.constraint(equalTo: insetView.rightAnchor, constant: -30),
-            itemPriceLabel.centerYAnchor.constraint(equalTo: insetView.centerYAnchor)
+            itemPriceLabel.centerYAnchor.constraint(equalTo: insetView.centerYAnchor),
         ])
     }
     

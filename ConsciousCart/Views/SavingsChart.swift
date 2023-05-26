@@ -80,6 +80,9 @@ struct SavingsChart: View {
             .chartXScale(domain: oldestDateToShow(selectedChartTimeSpan)...Date())
             .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
             .clipped()
+//            .chartPlotStyle { plotArea in
+//                plotArea.background(LinearGradient(gradient: Gradient(colors: cumSum > 0.0 ? [Color.green.opacity(0.1), Color.clear] : [Color.red, Color.clear]), startPoint: .bottom, endPoint: .top))
+//            }
             
             Picker("", selection: $selectedChartTimeSpan.animation(.easeInOut)) {
                 ForEach(SavingsChartTimeSpan.allCases) { range in
@@ -123,26 +126,6 @@ struct SavingsChart: View {
         }
         
         return oldestDate
-    }
-}
-
-struct TextViewAnimatableNumber: View, Animatable {
-    var number: Double
-    
-    var formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
-        return formatter
-    }()
-    
-    var animatableData: Double {
-        get { number }
-        set { number = newValue }
-    }
-    
-    var body: some View {
-        Text(formatter.string(for: number) ?? "")
     }
 }
 

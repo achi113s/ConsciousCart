@@ -42,6 +42,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //MARK: - View Data Properties
     
     var moc: NSManagedObjectContext?
+    var mainVC: MainViewController?
     
     override func loadView() {
         super.loadView()
@@ -244,6 +245,19 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         newImpulse.name = itemNameTextField.text ?? "Unknown Name"
         newImpulse.price = Double(itemPriceTextField.text ?? "0")!
         newImpulse.reasonNeeded = itemReasonNeededTextField.text ?? "Unknown Reason"
+        
+        do {
+            try moc.save()
+        } catch {
+            print("Could not save Item.")
+        }
+        
+        if let mainVC = mainVC {
+            mainVC.impulses.append(newImpulse)
+            mainVC.impulseTableView.reloadData()
+        } else {
+            print("Could not get mainVC")
+        }
         
         dismiss(animated: true)
     }

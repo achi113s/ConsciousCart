@@ -32,8 +32,10 @@ class Utils {
                 return ("⏳ \(day) Days Remaining", .aLongTime)
             } else if day > 1 {
                 return ("⏳ \(day) Days Remaining", .aMediumTime)
-            } else {
+            } else if day == 1 {
                 return ("⏳ \(day) Day Remaining", .aShortTime)
+            } else {
+                return ("⏳ \(day) Days Remaining", .aShortTime)
             }
         } else if let hour = remainingTime.hour {
             return hour == 1 ? ("⏳ \(hour) Hour Remaining", .aShortTime) : ("⏳ \(hour) Hours Remaining", .aShortTime)
