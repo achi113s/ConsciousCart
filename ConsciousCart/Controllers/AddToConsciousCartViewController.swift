@@ -363,28 +363,20 @@ extension AddToConsciousCartViewController: UITextFieldDelegate {
 
 extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // If we aren't changing the image in imageView and need to switch out
-        // the main button for the image/button combo...
-        if imageView.image == nil {
-            // Just removing from the arrangedSubview isn't enough
-            // to remove it from the view for some reason. Need to call
-            // removeFromSuperview too.
-            uploadButtonsStack.removeArrangedSubview(uploadImageButton)
-            uploadImageButton.removeFromSuperview()
-            
-            uploadButtonsStack.removeArrangedSubview(scanBarcodeButton)
-            scanBarcodeButton.removeFromSuperview()
-            
-            uploadButtonsStack.addArrangedSubview(containerView)
-            uploadButtonsStack.addArrangedSubview(scanBarcodeButton)
-        }
-        
         dismiss(animated: true)
         
         guard let image = info[.editedImage] as? UIImage else { return }
         
-//        let imageName = UUID().uuidString
         DispatchQueue.main.async {
+            self.uploadButtonsStack.removeArrangedSubview(self.uploadImageButton)
+            self.uploadImageButton.removeFromSuperview()
+            
+            self.uploadButtonsStack.removeArrangedSubview(self.scanBarcodeButton)
+            self.scanBarcodeButton.removeFromSuperview()
+            
+            self.uploadButtonsStack.addArrangedSubview(self.containerView)
+            self.uploadButtonsStack.addArrangedSubview(self.scanBarcodeButton)
+            
             self.imageView.image = image
         }
     }
@@ -394,22 +386,6 @@ extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
 
 extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        // If we aren't changing the image in imageView and need to switch out
-        // the main button for the image/button combo...
-        if imageView.image == nil {
-            // Just removing from the arrangedSubview isn't enough
-            // to remove it from the view for some reason. Need to call
-            // removeFromSuperview too.
-            uploadButtonsStack.removeArrangedSubview(uploadImageButton)
-            uploadImageButton.removeFromSuperview()
-            
-            uploadButtonsStack.removeArrangedSubview(scanBarcodeButton)
-            scanBarcodeButton.removeFromSuperview()
-            
-            uploadButtonsStack.addArrangedSubview(containerView)
-            uploadButtonsStack.addArrangedSubview(scanBarcodeButton)
-        }   
-        
         dismiss(animated: true)
         
         // Add the selected image to the view.
@@ -418,6 +394,15 @@ extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
         if provider.canLoadObject(ofClass: UIImage.self) {
             provider.loadObject(ofClass: UIImage.self) { image, _ in
                 DispatchQueue.main.async {
+                    self.uploadButtonsStack.removeArrangedSubview(self.uploadImageButton)
+                    self.uploadImageButton.removeFromSuperview()
+                    
+                    self.uploadButtonsStack.removeArrangedSubview(self.scanBarcodeButton)
+                    self.scanBarcodeButton.removeFromSuperview()
+                    
+                    self.uploadButtonsStack.addArrangedSubview(self.containerView)
+                    self.uploadButtonsStack.addArrangedSubview(self.scanBarcodeButton)
+                    
                     self.imageView.image = image as? UIImage
                 }
             }

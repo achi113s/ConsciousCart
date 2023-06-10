@@ -24,43 +24,48 @@ enum SavingsChartTimeSpan: String, CaseIterable, Identifiable {
 }
 
 struct SavingsChart: View {
-    @State private var items: [Item] = [
-        Item(date: Date(timeIntervalSince1970: 1630574339), value: 80),
-        Item(date: Date(timeIntervalSince1970: 1671274339), value: 120),
-        Item(date: Date(timeIntervalSince1970: 1672274339), value: 20),
-        Item(date: Date(timeIntervalSince1970: 1673274339), value: 55),
-        Item(date: Date(timeIntervalSince1970: 1674274339), value: 170),
-        Item(date: Date(timeIntervalSince1970: 1675274339), value: 20),
+    @State private var buttonIsEnabled: Bool = true
+    @State private var selectedChartTimeSpan: SavingsChartTimeSpan = .allTime
+    
+    private var totalSaved: Double {
+        return sumOverTimeSpan(timeSpan: selectedChartTimeSpan, items: items)
+    }
+    
+    private var totalSavedRollingSum: [Item] {
+        return rollingSum(items)
+    }
+    
+    private let items: [Item] = [
+        Item(date: Date(timeIntervalSince1970: 1630574339), value: -800),
+        Item(date: Date(timeIntervalSince1970: 1671274339), value: -120),
+        Item(date: Date(timeIntervalSince1970: 1672274339), value: -20),
+        Item(date: Date(timeIntervalSince1970: 1673274339), value: -55),
+        Item(date: Date(timeIntervalSince1970: 1674274339), value: -170),
+        Item(date: Date(timeIntervalSince1970: 1675274339), value: -20),
         Item(date: Date(timeIntervalSince1970: 1676274339), value: 10),
         Item(date: Date(timeIntervalSince1970: 1677274339), value: 5),
         Item(date: Date(timeIntervalSince1970: 1678274339), value: 1),
         Item(date: Date(timeIntervalSince1970: 1679274339), value: 500),
         Item(date: Date(timeIntervalSince1970: 1680274339), value: 800),
         Item(date: Date(timeIntervalSince1970: 1681274339), value: 900),
-        Item(date: Date(timeIntervalSince1970: 1682274339), value: 1700),
-        Item(date: Date(timeIntervalSince1970: 1683274339), value: 2700),
-        Item(date: Date(timeIntervalSince1970: 1684544894), value: 3400.23)
+        Item(date: Date(timeIntervalSince1970: 1682274339), value: -430),
+        Item(date: Date(timeIntervalSince1970: 1683274339), value: -700),
+        Item(date: Date(timeIntervalSince1970: 1684544894), value: -300.23)
     ]
-    
-    @State private var buttonIsEnabled: Bool = true
-    @State private var selectedChartTimeSpan: SavingsChartTimeSpan = .allTime
-    
-    private var cumSum: Double {
-        return cumSumOverTimeSpan(selectedChartTimeSpan)
-    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                TextViewAnimatableNumber(number: cumSum)
+                TextViewAnimatableNumber(number: totalSaved)
                     .font(Font.custom("Nunito-Bold", size: 25))
-                    .foregroundColor(cumSum > 0.0 ? .green : .red)
+                    .foregroundColor(totalSaved > 0.0 ? .green : .red)
                 
-                Text(cumSum > 0.0 ? " Saved": " Spent").font(Font.custom("Nunito-Regular", size: 17))
-                    .foregroundColor(cumSum > 0.0 ? .green : .red)
+                Text(" Saved")
+                    .font(Font.custom("Nunito-Regular", size: 17))
+                    .foregroundColor(totalSaved > 0.0 ? .green : .red)
             }
             
-            Chart(items.count != 0 ? items : [Item(date: Date.now, value: 0)]) { item in
+            Chart(totalSavedRollingSum.count != 0 ? totalSavedRollingSum : [Item(date: Date.now, value: 0)]) { item in
                 LineMark(
                     x: .value("Month", item.date),
                     y: .value("Savings", item.value)
@@ -80,9 +85,6 @@ struct SavingsChart: View {
             .chartXScale(domain: oldestDateToShow(selectedChartTimeSpan)...Date())
             .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
             .clipped()
-//            .chartPlotStyle { plotArea in
-//                plotArea.background(LinearGradient(gradient: Gradient(colors: cumSum > 0.0 ? [Color.green.opacity(0.1), Color.clear] : [Color.red, Color.clear]), startPoint: .bottom, endPoint: .top))
-//            }
             
             Picker("", selection: $selectedChartTimeSpan.animation(.easeInOut)) {
                 ForEach(SavingsChartTimeSpan.allCases) { range in
@@ -96,7 +98,7 @@ struct SavingsChart: View {
         .frame(height: 260)
     }
     
-    func cumSumOverTimeSpan(_ timeSpan: SavingsChartTimeSpan) -> Double {
+    func sumOverTimeSpan(timeSpan: SavingsChartTimeSpan, items: [Item]) -> Double {
         if timeSpan != .allTime {
             let oldestDate = oldestDateToShow(timeSpan)
             
@@ -108,6 +110,19 @@ struct SavingsChart: View {
         } else {
             return items.reduce(0.0) { $0 + $1.value }
         }
+    }
+    
+    func rollingSum(_ items: [Item]) -> [Item] {
+        var rollingSum = [Item]()
+        var sum = 0.0
+        
+        for item in items {
+            sum += item.value
+            let newItem = Item(date: item.date, value: sum)
+            rollingSum.append(newItem)
+        }
+        
+        return rollingSum
     }
     
     func oldestDateToShow(_ timeSpan: SavingsChartTimeSpan) -> Date {
