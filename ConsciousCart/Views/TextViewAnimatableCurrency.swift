@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextViewAnimatableNumber: View, Animatable {
+struct TextViewAnimatableCurrency: View, Animatable {
     var number: Double
     
     var formatter: NumberFormatter = {

@@ -56,7 +56,7 @@ struct SavingsChart: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                TextViewAnimatableNumber(number: totalSaved)
+                TextViewAnimatableCurrency(number: totalSaved)
                     .font(Font.custom("Nunito-Bold", size: 25))
                     .foregroundColor(totalSaved > 0.0 ? .green : .red)
                 
