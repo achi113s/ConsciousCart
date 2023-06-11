@@ -245,6 +245,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         newImpulse.name = itemNameTextField.text ?? "Unknown Name"
         newImpulse.price = Double(itemPriceTextField.text ?? "0")!
         newImpulse.reasonNeeded = itemReasonNeededTextField.text ?? "Unknown Reason"
+        newImpulse.completed = false
         
         do {
             try moc.save()

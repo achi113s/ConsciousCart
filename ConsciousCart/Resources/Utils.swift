@@ -50,4 +50,25 @@ class Utils {
         case aLongTime, aMediumTime, aShortTime
     }
     
+    static let chartTestItems: [Item] = [
+        Item(date: Date(timeIntervalSince1970: 1630574339), value: -800),
+        Item(date: Date(timeIntervalSince1970: 1671274339), value: -120),
+        Item(date: Date(timeIntervalSince1970: 1672274339), value: -20),
+        Item(date: Date(timeIntervalSince1970: 1673274339), value: -55),
+        Item(date: Date(timeIntervalSince1970: 1674274339), value: -170),
+        Item(date: Date(timeIntervalSince1970: 1675274339), value: -20),
+        Item(date: Date(timeIntervalSince1970: 1676274339), value: 10),
+        Item(date: Date(timeIntervalSince1970: 1677274339), value: 5),
+        Item(date: Date(timeIntervalSince1970: 1678274339), value: 1),
+        Item(date: Date(timeIntervalSince1970: 1679274339), value: 500),
+        Item(date: Date(timeIntervalSince1970: 1680274339), value: 800),
+        Item(date: Date(timeIntervalSince1970: 1681274339), value: 900),
+        Item(date: Date(timeIntervalSince1970: 1682274339), value: -430),
+        Item(date: Date(timeIntervalSince1970: 1683274339), value: -700),
+        Item(date: Date(timeIntervalSince1970: 1684544894), value: -300.23)
+    ]
+    
+//    static let chartTestImpulses: [Impulse] = [
+//        
+//    ]
 }

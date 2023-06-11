@@ -11,14 +11,11 @@
 		44296B5129F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		44296B5229F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */; };
-		4439631C2A193FF300A081B2 /* Impulse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4439631A2A193FF300A081B2 /* Impulse+CoreDataClass.swift */; };
-		4439631D2A193FF300A081B2 /* Impulse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4439631B2A193FF300A081B2 /* Impulse+CoreDataProperties.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222122A11C35800753F8D /* FileManager-DocumentsDirectory.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */; };
 		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
-		444A774829FA059800EBF1E8 /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A774729FA059800EBF1E8 /* SavingsChart.swift */; };
 		44595ED52A01FE4F00D0AC48 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44595ED42A01FE4F00D0AC48 /* RiveRuntime */; };
 		44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */; };
 		44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
@@ -33,6 +30,10 @@
 		4496A05A2A170F3E004C1349 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A0592A170F3E004C1349 /* Utils.swift */; };
 		4496A05C2A171014004C1349 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496A05B2A171014004C1349 /* Nunito-Bold.ttf */; };
 		4496A05E2A171CDC004C1349 /* ImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */; };
+		4497D8B72A34EFD700713730 /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8B62A34EFD700713730 /* SavingsChart.swift */; };
+		4497D8B92A35612100713730 /* OldSavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8B82A35612100713730 /* OldSavingsChart.swift */; };
+		4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */; };
+		4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
@@ -70,14 +71,11 @@
 /* Begin PBXFileReference section */
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToConsciousCartViewController.swift; sourceTree = "<group>"; };
-		4439631A2A193FF300A081B2 /* Impulse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Impulse+CoreDataClass.swift"; path = "ConsciousCart/Impulse+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		4439631B2A193FF300A081B2 /* Impulse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Impulse+CoreDataProperties.swift"; path = "ConsciousCart/Impulse+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222122A11C35800753F8D /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		444A774729FA059800EBF1E8 /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
 		44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkAnimationViewController.swift; sourceTree = "<group>"; };
 		44595EE82A02219C00D0AC48 /* checkmark.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark.riv; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +87,10 @@
 		4496A0592A170F3E004C1349 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4496A05B2A171014004C1349 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseTableViewCell.swift; sourceTree = "<group>"; };
+		4497D8B62A34EFD700713730 /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
+		4497D8B82A35612100713730 /* OldSavingsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSavingsChart.swift; sourceTree = "<group>"; };
+		4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Impulse+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Impulse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4497E39A29F358BC0029451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4497E39C29F358BC0029451E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,8 +220,8 @@
 		4497E3D929F35B040029451E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4439631A2A193FF300A081B2 /* Impulse+CoreDataClass.swift */,
-				4439631B2A193FF300A081B2 /* Impulse+CoreDataProperties.swift */,
+				4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */,
+				4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */,
 				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				44AACCDA2A0346260053334C /* BarcodeInfo.swift */,
 				444222122A11C35800753F8D /* FileManager-DocumentsDirectory.swift */,
@@ -233,12 +235,13 @@
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
 				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
-				444A774729FA059800EBF1E8 /* SavingsChart.swift */,
 				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
 				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
 				4496A05D2A171CDC004C1349 /* ImpulseTableViewCell.swift */,
 				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
+				4497D8B62A34EFD700713730 /* SavingsChart.swift */,
+				4497D8B82A35612100713730 /* OldSavingsChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,10 +426,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */,
-				4439631C2A193FF300A081B2 /* Impulse+CoreDataClass.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
+				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
@@ -434,17 +437,18 @@
 				445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
-				4439631D2A193FF300A081B2 /* Impulse+CoreDataProperties.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
+				4497D8B72A34EFD700713730 /* SavingsChart.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
+				4497D8B92A35612100713730 /* OldSavingsChart.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4496A05E2A171CDC004C1349 /* ImpulseTableViewCell.swift in Sources */,
+				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
-				444A774829FA059800EBF1E8 /* SavingsChart.swift in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */,
 			);

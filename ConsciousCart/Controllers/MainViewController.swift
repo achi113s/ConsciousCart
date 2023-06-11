@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
 
     //MARK: - View Data Properties
     var impulses = [Impulse]()
+    var completedImpulses = [Impulse]()
     
     private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -135,7 +136,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let chartView = SavingsChart()
+        let chartView = SavingsChart(impulses: completedImpulses)
         let hostingViewController = UIHostingController(rootView: chartView)
         
         addChild(hostingViewController)
@@ -152,7 +153,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
         do {
-            impulses = try moc.fetch(request)
+            request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
+            let allImpulses = try moc.fetch(request)
+            
+            impulses = allImpulses.filter { !$0.completed }
+            completedImpulses = allImpulses.filter { $0.completed }
         } catch {
             print("Error fetching data from context, \(error)")
         }

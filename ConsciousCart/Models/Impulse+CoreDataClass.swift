@@ -2,7 +2,7 @@
 //  Impulse+CoreDataClass.swift
 //  ConsciousCart
 //
-//  Created by Giorgio Latour on 5/20/23.
+//  Created by Giorgio Latour on 6/11/23.
 //
 //
 

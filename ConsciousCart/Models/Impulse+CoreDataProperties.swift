@@ -2,7 +2,7 @@
 //  Impulse+CoreDataProperties.swift
 //  ConsciousCart
 //
-//  Created by Giorgio Latour on 5/20/23.
+//  Created by Giorgio Latour on 6/11/23.
 //
 //
 
@@ -23,6 +23,9 @@ extension Impulse {
     @NSManaged public var price: Double
     @NSManaged public var reasonNeeded: String?
     @NSManaged public var remindDate: Date?
+    @NSManaged public var completed: Bool
+    @NSManaged public var dateCompleted: Date?
+    @NSManaged public var amountSaved: Double
 
     public var wrappedName: String {
         name ?? ""
@@ -34,6 +37,10 @@ extension Impulse {
     
     public var wrappedRemindDate: Date {
         remindDate ?? Date.now
+    }
+    
+    public var wrappedCompletedDate: Date {
+        dateCompleted ?? Date.now
     }
 }
 
