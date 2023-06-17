@@ -24,7 +24,6 @@ struct SavingsChart: View {
 
         return tmp
     }
-//    var items: [Item]
     
     private var maxDate: Date {
         var date: Date? = items.first?.date
@@ -39,7 +38,7 @@ struct SavingsChart: View {
     }
     
     private var savingsRollingSum: [Item] {
-        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain, items: items)
+        return rollingSumOverTimeDomain(timeDomain: .allTime, items: items)
     }
     
     private var totalSaved: Double {
@@ -105,7 +104,7 @@ struct SavingsChart: View {
                 }
             }
             
-            Picker("Time Domain", selection: $selectedChartTimeDomain.animation(.linear)) {
+            Picker("Time Domain", selection: $selectedChartTimeDomain.animation(.easeInOut)) {
                 ForEach(ChartTimeDomain.allCases) { domain in
                     Text(domain.rawValue)
                 }
