@@ -46,7 +46,7 @@ struct SavingsChart: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 TextViewAnimatableCurrency(number: totalSaved)
                     .font(Font.custom("Nunito-Bold", size: 25))
@@ -112,7 +112,6 @@ struct SavingsChart: View {
             .pickerStyle(.segmented)
             .padding([.leading, .trailing])
         }
-        .padding()
         .frame(height: 260)
     }
     

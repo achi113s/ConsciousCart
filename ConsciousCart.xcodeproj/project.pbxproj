@@ -25,6 +25,9 @@
 		445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B22A187ABF0013ACB1 /* SettingsView.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		448D940F2A3E48650035B34C /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D940E2A3E48650035B34C /* MainCollectionViewController.swift */; };
+		448D94112A3E94D60035B34C /* ImpulseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */; };
+		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
+		448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */; };
 		4496A0142A140BC4004C1349 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A0132A140BC4004C1349 /* MainViewController.swift */; };
 		4496A0562A16895F004C1349 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496A0552A16895F004C1349 /* Nunito-Regular.ttf */; };
 		4496A0582A16896F004C1349 /* OFL_Nunito.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4496A0572A16896F004C1349 /* OFL_Nunito.txt */; };
@@ -83,6 +86,9 @@
 		445EF7B22A187ABF0013ACB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		448D940E2A3E48650035B34C /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewCell.swift; sourceTree = "<group>"; };
+		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
+		448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		4496A0132A140BC4004C1349 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4496A0552A16895F004C1349 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		4496A0572A16896F004C1349 /* OFL_Nunito.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Nunito.txt; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
 				4497D8B62A34EFD700713730 /* SavingsChart.swift */,
 				4497D8B82A35612100713730 /* OldSavingsChart.swift */,
+				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 			children = (
 				4496A05B2A171014004C1349 /* Nunito-Bold.ttf */,
 				4496A0552A16895F004C1349 /* Nunito-Regular.ttf */,
+				448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */,
 				44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */,
 				44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */,
 				4496A0572A16896F004C1349 /* OFL_Nunito.txt */,
@@ -278,6 +286,7 @@
 			children = (
 				44AACCD82A0345FC0053334C /* Secrets.swift */,
 				4496A0592A170F3E004C1349 /* Utils.swift */,
+				448D94122A3EA1020035B34C /* CCFonts.swift */,
 				44595EDA2A01FE6200D0AC48 /* Animations */,
 				44D7291A2A0A9E430031A9EE /* Fonts */,
 			);
@@ -397,6 +406,7 @@
 				4496A0562A16895F004C1349 /* Nunito-Regular.ttf in Resources */,
 				44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */,
 				4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */,
+				448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */,
 				44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */,
 				4496A0582A16896F004C1349 /* OFL_Nunito.txt in Resources */,
 				44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */,
@@ -436,10 +446,12 @@
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */,
+				448D94112A3E94D60035B34C /* ImpulseCollectionViewCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
+				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */,

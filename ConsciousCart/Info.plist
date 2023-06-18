@@ -10,6 +10,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Nunito-SemiBold.ttf</string>
 		<string>Righteous-Regular.ttf</string>
 		<string>Nunito-Regular.ttf</string>
 		<string>Nunito-Bold.ttf</string>

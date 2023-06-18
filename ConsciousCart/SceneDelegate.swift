@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Nunito-Bold", size: 17)!]
-        let largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Nunito-Bold", size: 34)!]
+        let largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.ccFont(textStyle: .largeTitle)]
+//        UIFont(name: "Nunito-Bold", size: 34)!
         UINavigationBar.appearance().titleTextAttributes = titleTextAttributes
         UINavigationBar.appearance().largeTitleTextAttributes = largeTitleTextAttributes
         
@@ -26,16 +27,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
     
-    func createMainVC() -> UINavigationController {
-        let mainVC = MainViewController()
-        mainVC.title = "ConsciousCart"
+//    func createMainVC() -> UINavigationController {
+//        let mainVC = MainViewController()
+//        mainVC.title = "ConsciousCart"
+//
+////        let cartFontSize: CGFloat = 32
+////        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
+//
+//        mainVC.tabBarItem = UITabBarItem()
+//        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle")
+////        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
+//        mainVC.tabBarItem.title = "My Cart"
+//
+//        return UINavigationController(rootViewController: mainVC)
+//    }
     
-//        let cartFontSize: CGFloat = 32
-//        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
+    func createMainVC() -> UINavigationController {
+        let mainVC = MainCollectionViewController()
+        mainVC.title = "ConsciousCart"
         
         mainVC.tabBarItem = UITabBarItem()
         mainVC.tabBarItem.image = UIImage(systemName: "cart.circle")
-//        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
         mainVC.tabBarItem.title = "My Cart"
         
         return UINavigationController(rootViewController: mainVC)
