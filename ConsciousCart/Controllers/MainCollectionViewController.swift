@@ -13,9 +13,13 @@ import UIKit
 
 class MainCollectionViewController: UICollectionViewController {
     
+    private let impulsesTableViewDelegate = ImpulseTableViewDelegate()
+    
     static let categoryHeaderId = "categoryHeaderId"
     private let headerId = "headerId"
-    private let reuseIdentifier = "Cell"
+    
+    private let reuseIdentifier = "cell"
+    private let impulsesCollectionViewReuseIdentifier = "impulsesCollectionViewCell"
     
     var completedImpulses = [Impulse]()
     var impulses = [Impulse]()
@@ -31,7 +35,7 @@ class MainCollectionViewController: UICollectionViewController {
     }
     
     static func createLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { sectionNumber, collectionLayoutEnvironment in
+        return UICollectionViewCompositionalLayout { sectionNumber, _ in
             if sectionNumber == 0 {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
@@ -58,20 +62,17 @@ class MainCollectionViewController: UICollectionViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(150)
+                        heightDimension: .fractionalHeight(1)
                     )
                 )
-                
-                item.contentInsets.bottom = 16
                 
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(500)
+                        heightDimension: .fractionalHeight(1)
                     ),
                     subitems: [item]
                 )
-                
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
@@ -82,7 +83,7 @@ class MainCollectionViewController: UICollectionViewController {
                     .init(
                         layoutSize: .init(
                             widthDimension: .fractionalWidth(1),
-                            heightDimension: .absolute(50)
+                            heightDimension: .absolute(60)
                         ),
                         elementKind: categoryHeaderId,
                         alignment: .topLeading
@@ -108,6 +109,8 @@ class MainCollectionViewController: UICollectionViewController {
         
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        self.collectionView!.register(ImpulsesCollectionViewCell.self, forCellWithReuseIdentifier: impulsesCollectionViewReuseIdentifier)
         self.collectionView!.register(Header.self, forSupplementaryViewOfKind: MainCollectionViewController.categoryHeaderId, withReuseIdentifier: headerId)
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -122,14 +125,11 @@ class MainCollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        return 8
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 && indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseIdentifier,
                 for: indexPath
@@ -140,14 +140,26 @@ class MainCollectionViewController: UICollectionViewController {
             }
             
             return cell
+        } else if indexPath.section == 1 {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: impulsesCollectionViewReuseIdentifier,
+                for: indexPath
+            ) as! ImpulsesCollectionViewCell
+            
+            cell.impulsesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            cell.impulsesTableView.delegate = impulsesTableViewDelegate
+            cell.impulsesTableView.dataSource = impulsesTableViewDelegate
+            cell.impulsesTableView.reloadData()
+            
+            return cell
         } else {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseIdentifier,
                 for: indexPath
             )
-            
+
             cell.backgroundColor = .red
-            
+            print("normal red cell was loaded")
             return cell
         }
     }
@@ -173,37 +185,6 @@ class MainCollectionViewController: UICollectionViewController {
             print("Error fetching data from context, \(error)")
         }
     }
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
 }
 
 class Header: UICollectionReusableView {
@@ -224,6 +205,25 @@ class Header: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented.")
+    }
+}
+
+class ImpulsesCollectionViewCell: UICollectionViewCell {
+    var impulsesTableView = UITableView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(impulsesTableView)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        impulsesTableView.frame = bounds
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented.")
     }
 }

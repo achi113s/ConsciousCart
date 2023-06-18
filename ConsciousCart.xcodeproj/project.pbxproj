@@ -24,6 +24,7 @@
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B22A187ABF0013ACB1 /* SettingsView.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
+		446FE3A12A3F619300777BCD /* ImpulseTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FE3A02A3F619300777BCD /* ImpulseTableViewDelegate.swift */; };
 		448D940F2A3E48650035B34C /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D940E2A3E48650035B34C /* MainCollectionViewController.swift */; };
 		448D94112A3E94D60035B34C /* ImpulseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */; };
 		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
@@ -85,6 +86,7 @@
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B22A187ABF0013ACB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		446FE3A02A3F619300777BCD /* ImpulseTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseTableViewDelegate.swift; sourceTree = "<group>"; };
 		448D940E2A3E48650035B34C /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewCell.swift; sourceTree = "<group>"; };
 		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
 				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
 				448D940E2A3E48650035B34C /* MainCollectionViewController.swift */,
+				446FE3A02A3F619300777BCD /* ImpulseTableViewDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4496A05E2A171CDC004C1349 /* ImpulseTableViewCell.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
+				446FE3A12A3F619300777BCD /* ImpulseTableViewDelegate.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */,
