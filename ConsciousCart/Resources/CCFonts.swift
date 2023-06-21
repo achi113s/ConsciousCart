@@ -23,6 +23,14 @@ extension UIFont {
         return font
     }
     
+    static func ccFont(textStyle: CCTextStyle, fontSize: CGFloat) -> UIFont {
+        let fontName = UIFont.textStyleWeight(for: textStyle)
+        
+        let font = UIFont.customFont(name: fontName, size: fontSize)
+        
+        return font
+    }
+    
     private static func textStyleSize(for textStyle: CCTextStyle) -> CGFloat {
         switch textStyle {
         case .largeTitle:
@@ -49,16 +57,22 @@ extension UIFont {
             return 12
         case .caption2:
             return 12
+        case .bold:
+            return 17
+        case .regular:
+            return 17
+        case .semibold:
+            return 17
         }
     }
     
     private static func textStyleWeight(for textStyle: CCTextStyle) -> String {
         switch textStyle {
-        case .largeTitle, .title, .title2, .title3:
+        case .largeTitle, .title, .title2, .title3, .bold:
             return "Nunito-Bold"
-        case .body, .subheadline, .footnote, .caption:
+        case .body, .subheadline, .footnote, .caption, .regular:
             return "Nunito-Regular"
-        case .headline, .subheadline2, .footnote2, .caption2:
+        case .headline, .subheadline2, .footnote2, .caption2, .semibold:
             return "Nunito-SemiBold"
         }
     }
@@ -78,4 +92,7 @@ enum CCTextStyle {
     case footnote2
     case caption
     case caption2
+    case bold
+    case semibold
+    case regular
 }

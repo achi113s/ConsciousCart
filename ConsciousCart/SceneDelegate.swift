@@ -14,9 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Nunito-Bold", size: 17)!]
+        let titleTextAttributes = [NSAttributedString.Key.font: UIFont.ccFont(textStyle: .bold, fontSize: 17)]
         let largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.ccFont(textStyle: .largeTitle)]
-//        UIFont(name: "Nunito-Bold", size: 34)!
+
         UINavigationBar.appearance().titleTextAttributes = titleTextAttributes
         UINavigationBar.appearance().largeTitleTextAttributes = largeTitleTextAttributes
         
@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        return UINavigationController(rootViewController: mainVC)
 //    }
     
-    func createMainVC() -> UINavigationController {
+    func createMainCVC() -> UINavigationController {
         let mainVC = MainCollectionViewController()
         mainVC.title = "ConsciousCart"
         
@@ -85,7 +85,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .black
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = .systemGray5
-        tabBar.viewControllers = [createMainVC(), createProfileVC(), createSettingsVC()]
+        tabBar.viewControllers = [createMainCVC(), createProfileVC(), createSettingsVC()]
         
         return tabBar
     }

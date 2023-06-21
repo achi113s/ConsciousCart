@@ -42,7 +42,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //MARK: - View Data Properties
     
     var moc: NSManagedObjectContext?
-    var mainVC: MainViewController?
+    var mainCVC: MainCollectionViewController?
     
     override func loadView() {
         super.loadView()
@@ -253,9 +253,13 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             print("Could not save Item.")
         }
         
-        if let mainVC = mainVC {
-            mainVC.impulses.append(newImpulse)
-            mainVC.impulseTableView.reloadData()
+        if let mainCVC = mainCVC {
+            mainCVC.impulses.append(newImpulse)
+            
+            // The table view in the collection view needs to be reloaded to show the new addition.
+            mainCVC.impulsesTableViewCell?.impulsesTableView.reloadData()
+            mainCVC.collectionView.reloadData()
+            mainCVC.view.layoutIfNeeded()
         } else {
             print("Could not get mainVC")
         }

@@ -9,11 +9,12 @@ import CoreData
 import SwiftUI
 import UIKit
 
-
-
-class MainCollectionViewController: UICollectionViewController {
+class MainCollectionViewController: UIViewController {
     
-    private let impulsesTableViewDelegate = ImpulseTableViewDelegate()
+    private(set) var collectionView: UICollectionView!
+    
+    private var impulsesTableViewDelegate: ImpulseTableViewDelegate!
+    var impulsesTableViewCell: ImpulsesCollectionViewCell?
     
     static let categoryHeaderId = "categoryHeaderId"
     private let headerId = "headerId"
@@ -26,14 +27,99 @@ class MainCollectionViewController: UICollectionViewController {
    
     private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    init() {
-        super.init(collectionViewLayout: MainCollectionViewController.createLayout())
+    private let addToCCButton = ConsciousCartButton()
+    private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadImpulses()
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        setSubviewProperties()
+        addSubviewsToView()
+        setupLayoutConstraints()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    func setSubviewProperties() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: MainCollectionViewController.createLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        // Register cell classes
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(ImpulsesCollectionViewCell.self, forCellWithReuseIdentifier: impulsesCollectionViewReuseIdentifier)
+        collectionView.register(Header.self, forSupplementaryViewOfKind: MainCollectionViewController.categoryHeaderId, withReuseIdentifier: headerId)
+        
+        impulsesTableViewDelegate = ImpulseTableViewDelegate()
+        impulsesTableViewDelegate.selectedImpulse = { [unowned self] selection in
+            let detailVC = ImpulseDetailViewController()
+            detailVC.impulse = impulses[selection]
+            
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
+        addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
+        addToCCButton.layer.cornerRadius = 33
+        addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
+    }
+    
+    func addSubviewsToView() {
+        view.addSubview(collectionView)
+        view.addSubview(addToCCButton)
+    }
+    
+    func setupLayoutConstraints() {
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            addToCCButton.widthAnchor.constraint(equalToConstant: 66),
+            addToCCButton.heightAnchor.constraint(equalToConstant: 66)
+        ])
+    }
+    
+    @objc func addToConsciousCart() {
+        let vc = AddToConsciousCartViewController()
+        
+        vc.moc = self.moc
+        vc.mainCVC = self
+        
+        let modalController = UINavigationController(rootViewController: vc)
+        navigationController?.present(modalController, animated: true)
+        //        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
+        do {
+            request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
+            let allImpulses = try moc.fetch(request)
+            
+            impulses = allImpulses.filter { !$0.completed }
+            completedImpulses = allImpulses.filter { $0.completed }
+        } catch {
+            print("Error fetching data from context, \(error)")
+        }
+    }
+}
+
+extension MainCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     static func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { sectionNumber, _ in
             if sectionNumber == 0 {
@@ -50,7 +136,7 @@ class MainCollectionViewController: UICollectionViewController {
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(260)
+                        heightDimension: .absolute(300)
                     ),
                     subitems: [item]
                 )
@@ -78,7 +164,7 @@ class MainCollectionViewController: UICollectionViewController {
                 
                 section.contentInsets.leading = 16
                 section.contentInsets.trailing = 16
-                
+
                 section.boundarySupplementaryItems = [
                     .init(
                         layoutSize: .init(
@@ -95,40 +181,19 @@ class MainCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        loadImpulses()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        self.collectionView!.register(ImpulsesCollectionViewCell.self, forCellWithReuseIdentifier: impulsesCollectionViewReuseIdentifier)
-        self.collectionView!.register(Header.self, forSupplementaryViewOfKind: MainCollectionViewController.categoryHeaderId, withReuseIdentifier: headerId)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     // MARK: UICollectionViewDataSource
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // Return 2 for the number of sections, one for the SwiftUI Chart and one for the list of Impulses.
         return 2
     }
     
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseIdentifier,
@@ -146,9 +211,14 @@ class MainCollectionViewController: UICollectionViewController {
                 for: indexPath
             ) as! ImpulsesCollectionViewCell
             
-            cell.impulsesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            // keep a reference to the cell so that we can access the tableview for reloading data
+            impulsesTableViewCell = cell
+            
+            cell.impulsesTableView.register(ImpulseTableViewCell.self, forCellReuseIdentifier: "impulseTableViewCell")
             cell.impulsesTableView.delegate = impulsesTableViewDelegate
             cell.impulsesTableView.dataSource = impulsesTableViewDelegate
+            cell.impulsesTableView.separatorStyle = .none
+            cell.impulsesTableView.backgroundColor = .systemBackground
             cell.impulsesTableView.reloadData()
             
             return cell
@@ -164,7 +234,7 @@ class MainCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
             withReuseIdentifier: headerId,
@@ -172,18 +242,6 @@ class MainCollectionViewController: UICollectionViewController {
         )
         
         return header
-    }
-    
-    func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
-        do {
-            request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
-            let allImpulses = try moc.fetch(request)
-            
-            impulses = allImpulses.filter { !$0.completed }
-            completedImpulses = allImpulses.filter { $0.completed }
-        } catch {
-            print("Error fetching data from context, \(error)")
-        }
     }
 }
 

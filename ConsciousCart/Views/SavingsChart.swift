@@ -112,7 +112,8 @@ struct SavingsChart: View {
             .pickerStyle(.segmented)
             .padding([.leading, .trailing])
         }
-        .frame(height: 260)
+        .frame(height: 300)
+        .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
     }
     
     func findNearestElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> Item? {
