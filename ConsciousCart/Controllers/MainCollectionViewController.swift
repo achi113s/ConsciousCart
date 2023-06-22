@@ -13,18 +13,16 @@ class MainCollectionViewController: UIViewController {
     
     private(set) var collectionView: UICollectionView!
     
-    private var impulsesTableViewDelegate: ImpulseTableViewDelegate!
-    var impulsesTableViewCell: ImpulsesCollectionViewCell?
+    //    private var impulsesTableViewDelegate: ImpulseTableViewDelegate!
+    //    var impulsesTableViewCell: ImpulsesCollectionViewCell?
     
     static let categoryHeaderId = "categoryHeaderId"
     private let headerId = "headerId"
-    
     private let reuseIdentifier = "cell"
-    private let impulsesCollectionViewReuseIdentifier = "impulsesCollectionViewCell"
     
     var completedImpulses = [Impulse]()
     var impulses = [Impulse]()
-   
+    
     private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private let addToCCButton = ConsciousCartButton()
@@ -38,7 +36,7 @@ class MainCollectionViewController: UIViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         
         setSubviewProperties()
@@ -60,16 +58,16 @@ class MainCollectionViewController: UIViewController {
         
         // Register cell classes
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(ImpulsesCollectionViewCell.self, forCellWithReuseIdentifier: impulsesCollectionViewReuseIdentifier)
+        collectionView.register(ImpulseCollectionViewCell.self, forCellWithReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier)
         collectionView.register(Header.self, forSupplementaryViewOfKind: MainCollectionViewController.categoryHeaderId, withReuseIdentifier: headerId)
         
-        impulsesTableViewDelegate = ImpulseTableViewDelegate()
-        impulsesTableViewDelegate.selectedImpulse = { [unowned self] selection in
-            let detailVC = ImpulseDetailViewController()
-            detailVC.impulse = impulses[selection]
-            
-            navigationController?.pushViewController(detailVC, animated: true)
-        }
+        //        impulsesTableViewDelegate = ImpulseTableViewDelegate()
+        //        impulsesTableViewDelegate.selectedImpulse = { [unowned self] selection in
+        //            let detailVC = ImpulseDetailViewController()
+        //            detailVC.impulse = impulses[selection]
+        //
+        //            navigationController?.pushViewController(detailVC, animated: true)
+        //        }
         
         addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
         addToCCButton.layer.cornerRadius = 33
@@ -126,7 +124,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
+                        heightDimension: .absolute(300)
                     )
                 )
                 
@@ -148,14 +146,16 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
+                        heightDimension: .absolute(116)
                     )
                 )
+                
+                item.contentInsets.bottom = 16
                 
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
+                        heightDimension: .estimated(1000)
                     ),
                     subitems: [item]
                 )
@@ -164,7 +164,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 
                 section.contentInsets.leading = 16
                 section.contentInsets.trailing = 16
-
+                
                 section.boundarySupplementaryItems = [
                     .init(
                         layoutSize: .init(
@@ -190,7 +190,13 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return impulses.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -207,19 +213,21 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             return cell
         } else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: impulsesCollectionViewReuseIdentifier,
+                withReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier,
                 for: indexPath
-            ) as! ImpulsesCollectionViewCell
+            ) as! ImpulseCollectionViewCell
             
-            // keep a reference to the cell so that we can access the tableview for reloading data
-            impulsesTableViewCell = cell
+            let index = indexPath.row
+            print(index)
             
-            cell.impulsesTableView.register(ImpulseTableViewCell.self, forCellReuseIdentifier: "impulseTableViewCell")
-            cell.impulsesTableView.delegate = impulsesTableViewDelegate
-            cell.impulsesTableView.dataSource = impulsesTableViewDelegate
-            cell.impulsesTableView.separatorStyle = .none
-            cell.impulsesTableView.backgroundColor = .systemBackground
-            cell.impulsesTableView.reloadData()
+            let impulse = impulses[index]
+            
+            cell.itemNameLabel.text = impulse.wrappedName
+            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+            
+            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+            cell.remainingTimeLabel.text = remainingTime.0
+            cell.remainingTimeLabel.textColor = remainingTime.1 == .aLongTime ? .black : .red
             
             return cell
         } else {
@@ -227,7 +235,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 withReuseIdentifier: reuseIdentifier,
                 for: indexPath
             )
-
+            
             cell.backgroundColor = .red
             print("normal red cell was loaded")
             return cell
@@ -242,6 +250,28 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         )
         
         return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else { return }
+        
+        let detailVC = ImpulseDetailViewController()
+        detailVC.impulse = impulses[indexPath.row]
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImpulseCollectionViewCell else { return }
+        
+        UIView.animate(withDuration: 0.5) {
+            cell.insetView.backgroundColor = .lightGray
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            cell.insetView.backgroundColor = .white
+        }
     }
 }
 
@@ -260,25 +290,6 @@ class Header: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         label.frame = bounds
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented.")
-    }
-}
-
-class ImpulsesCollectionViewCell: UICollectionViewCell {
-    var impulsesTableView = UITableView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(impulsesTableView)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        impulsesTableView.frame = bounds
     }
     
     required init?(coder: NSCoder) {

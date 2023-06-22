@@ -254,12 +254,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         }
         
         if let mainCVC = mainCVC {
-            mainCVC.impulses.append(newImpulse)
+            mainCVC.loadImpulses()
             
             // The table view in the collection view needs to be reloaded to show the new addition.
-            mainCVC.impulsesTableViewCell?.impulsesTableView.reloadData()
             mainCVC.collectionView.reloadData()
-            mainCVC.view.layoutIfNeeded()
         } else {
             print("Could not get mainVC")
         }
