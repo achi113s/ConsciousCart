@@ -207,7 +207,8 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             )
             
             cell.contentConfiguration = UIHostingConfiguration {
-                SavingsChart(impulses: completedImpulses)
+//                SavingsChart(completedImpulses: completedImpulses)
+                NewSavingsChart(completedImpulses: completedImpulses)
             }
             
             return cell
@@ -218,7 +219,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             ) as! ImpulseCollectionViewCell
             
             let index = indexPath.row
-            print(index)
+//            print(index)
             
             let impulse = impulses[index]
             

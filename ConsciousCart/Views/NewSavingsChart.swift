@@ -2,47 +2,54 @@
 //  NewSavingsChart.swift
 //  ConsciousCart
 //
-//  Created by Giorgio Latour on 6/10/23.
+//  Created by Giorgio Latour on 6/24/23.
 //
 
 import Charts
-import Foundation
 import SwiftUI
 
-struct SavingsChart: View {
+struct NewSavingsChart: View {
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
-    @State private var selectedElement: Item? = nil
+    @State private var selectedItemOnChart: Item? = nil
     
     var completedImpulses: [Impulse]
-    var items: [Item] {
-        var tmp = [Item]()
-
-        for impulse in completedImpulses {
-            let item = Item(date: impulse.wrappedCompletedDate, value: impulse.amountSaved)
-            tmp.append(item)
-        }
-
-        return tmp
-    }
     
     private var maxDate: Date {
-        var date: Date? = items.first?.date
+        var date: Date? = completedImpulses.first?.wrappedCompletedDate
         
-        for item in items {
-            if item.date > date! {
-                date = item.date
+        for impulse in completedImpulses {
+            if impulse.wrappedCompletedDate > date! {
+                date = impulse.wrappedCompletedDate
             }
         }
         
         return date ?? Date.now
     }
     
+    private var minDate: Date {
+        var date: Date? = completedImpulses.first?.wrappedCompletedDate
+        
+        for impulse in completedImpulses {
+            if impulse.wrappedCompletedDate < date! {
+                date = impulse.wrappedCompletedDate
+            }
+        }
+        
+        return date ?? Date.distantPast
+    }
+    
     private var savingsRollingSum: [Item] {
-        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain, items: items)
+        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
     }
     
     private var totalSaved: Double {
-        return sumOverTimeDomain(timeDomain: selectedChartTimeDomain, items: items)
+        if let selectedNum = selectedItemOnChart?.value {
+            return selectedNum
+        }
+        
+        return completedImpulses.reduce(0.0) { partialResult, impulse in
+            return partialResult + impulse.amountSaved
+        }
     }
     
     var body: some View {
@@ -53,7 +60,7 @@ struct SavingsChart: View {
                     .foregroundColor(totalSaved > 0.0 ? .green : .red)
                 
                 Text(" Saved")
-                    .font(Font.custom("Nunito-Regular", size: 17))
+                    .font(Font.custom("Nunito-Bold", size: 17))
                     .foregroundColor(totalSaved > 0.0 ? .green : .red)
             }
             
@@ -87,24 +94,28 @@ struct SavingsChart: View {
                                 .onChanged { value in
                                     let currentX = value.location.x - geometry[chart.plotAreaFrame].origin.x
                                     let currentY = value.location.y - geometry[chart.plotAreaFrame].origin.y
-                                    
+
                                     guard currentX >= 0, currentX < chart.plotAreaSize.width else { return }
                                     guard currentY >= 0, currentY < chart.plotAreaSize.height else { return }
-                                    
+
                                     guard let element = findNearestElement(location: value.location,
                                                                            proxy: chart,
                                                                            geometry: geometry) else { return }
+                                    withAnimation {
+                                        selectedItemOnChart = element
+                                    }
                                     
-                                    selectedElement = element
                                 }
                                 .onEnded { _ in
-                                    selectedElement = nil
+                                    withAnimation {
+                                        selectedItemOnChart = nil
+                                    }
                                 }
                         )
                 }
             }
             
-            Picker("Time Domain", selection: $selectedChartTimeDomain.animation(.easeInOut)) {
+            Picker("Time Domain", selection: $selectedChartTimeDomain) {
                 ForEach(ChartTimeDomain.allCases) { domain in
                     Text(domain.rawValue)
                 }
@@ -114,6 +125,10 @@ struct SavingsChart: View {
         }
         .frame(height: 300)
         .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
+    }
+    
+    init(completedImpulses: [Impulse]) {
+        self.completedImpulses = completedImpulses
     }
     
     func findNearestElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> Item? {
@@ -126,8 +141,8 @@ struct SavingsChart: View {
             var index: Int? = nil
             
             // Go through each element and find the one that is closest to location.
-            for dataIndex in items.indices {
-                let nthDataDistance = items[dataIndex].date.distance(to: date)
+            for dataIndex in savingsRollingSum.indices {
+                let nthDataDistance = savingsRollingSum[dataIndex].date.distance(to: date)
                 if abs(nthDataDistance) < minDistance {
                     minDistance = abs(nthDataDistance)
                     index = dataIndex
@@ -135,7 +150,8 @@ struct SavingsChart: View {
             }
             
             if let index {
-                return items[index]
+                print(savingsRollingSum[index])
+                return savingsRollingSum[index]
             }
         }
         
@@ -151,37 +167,24 @@ struct SavingsChart: View {
         case .oneYear:
             return Calendar.current.date(byAdding: .year, value: -1, to: Date.now)!
         case .allTime:
-            // this is really ugly and also assumes the items are sorted by date
-            return items.first?.date ?? Date(timeIntervalSince1970: 0)
+            return minDate
         }
     }
     
-    func rollingSumOverTimeDomain(timeDomain: ChartTimeDomain, items: [Item]) -> [Item] {
+    func rollingSumOverTimeDomain(timeDomain: ChartTimeDomain) -> [Item] {
         var rollingSum = [Item]()
         var sum = 0.0
+        
         let oldestDate = oldestDateToShow(timeDomain)
         
-        for item in items where item.date > oldestDate {
-            sum += item.value
-            let newItem = Item(date: item.date, value: sum)
+        for impulse in completedImpulses where impulse.wrappedCompletedDate >= oldestDate {
+            sum += impulse.amountSaved
+            let newItem = Item(date: impulse.wrappedCompletedDate, value: sum)
             rollingSum.append(newItem)
         }
-        print(rollingSum)
-        print(rollingSum.count)
+        
+        //        print(rollingSum)
+        //        print(rollingSum.count)
         return rollingSum
-    }
-    
-    func sumOverTimeDomain(timeDomain: ChartTimeDomain, items: [Item]) -> Double {
-        if timeDomain != .allTime {
-            let oldestDate = oldestDateToShow(timeDomain)
-            
-            var sum = 0.0
-            for item in items where item.date > oldestDate {
-                sum += item.value
-            }
-            return sum
-        } else {
-            return items.reduce(0.0) { $0 + $1.value }
-        }
     }
 }

@@ -5,7 +5,22 @@
 //  Created by Giorgio Latour on 5/18/23.
 //
 
+import SwiftUI
 import UIKit
+
+struct Item: Identifiable {
+    var id = UUID()
+    let date: Date
+    let value: Double
+}
+
+enum ChartTimeDomain: String, CaseIterable, Identifiable {
+    case threeMonths = "3M"
+    case sixMonths = "6M"
+    case oneYear = "1Y"
+    case allTime = "All"
+    var id: Self { self }
+}
 
 class Utils {
     static func printFonts() {
@@ -67,8 +82,4 @@ class Utils {
         Item(date: Date(timeIntervalSince1970: 1683274339), value: -700),
         Item(date: Date(timeIntervalSince1970: 1684544894), value: -300.23)
     ]
-    
-//    static let chartTestImpulses: [Impulse] = [
-//        
-//    ]
 }
