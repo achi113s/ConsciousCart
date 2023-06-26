@@ -61,14 +61,7 @@ class MainCollectionViewController: UIViewController {
         collectionView.register(ImpulseCollectionViewCell.self, forCellWithReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier)
         collectionView.register(Header.self, forSupplementaryViewOfKind: MainCollectionViewController.categoryHeaderId, withReuseIdentifier: headerId)
         
-        //        impulsesTableViewDelegate = ImpulseTableViewDelegate()
-        //        impulsesTableViewDelegate.selectedImpulse = { [unowned self] selection in
-        //            let detailVC = ImpulseDetailViewController()
-        //            detailVC.impulse = impulses[selection]
-        //
-        //            navigationController?.pushViewController(detailVC, animated: true)
-        //        }
-        
+        // Add add button to the view.
         addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
         addToCCButton.layer.cornerRadius = 33
         addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
@@ -110,7 +103,7 @@ class MainCollectionViewController: UIViewController {
             let allImpulses = try moc.fetch(request)
             
             impulses = allImpulses.filter { !$0.completed }
-            completedImpulses = allImpulses.filter { $0.completed }
+            completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.wrappedCompletedDate < $1.wrappedCompletedDate })
         } catch {
             print("Error fetching data from context, \(error)")
         }

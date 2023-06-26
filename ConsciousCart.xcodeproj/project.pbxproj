@@ -33,7 +33,6 @@
 		4496A05A2A170F3E004C1349 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496A0592A170F3E004C1349 /* Utils.swift */; };
 		4496A05C2A171014004C1349 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496A05B2A171014004C1349 /* Nunito-Bold.ttf */; };
 		4497D8B72A34EFD700713730 /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8B62A34EFD700713730 /* SavingsChart.swift */; };
-		4497D8B92A35612100713730 /* OldSavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8B82A35612100713730 /* OldSavingsChart.swift */; };
 		4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */; };
 		4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */; };
 		4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39A29F358BC0029451E /* AppDelegate.swift */; };
@@ -93,7 +92,6 @@
 		4496A0592A170F3E004C1349 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4496A05B2A171014004C1349 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		4497D8B62A34EFD700713730 /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
-		4497D8B82A35612100713730 /* OldSavingsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSavingsChart.swift; sourceTree = "<group>"; };
 		4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Impulse+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Impulse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4497E39729F358BC0029451E /* ConsciousCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsciousCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,7 +244,6 @@
 				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
 				4497D8B62A34EFD700713730 /* SavingsChart.swift */,
-				4497D8B82A35612100713730 /* OldSavingsChart.swift */,
 				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
 				44AB96E92A47E74E00112B5D /* NewSavingsChart.swift */,
 			);
@@ -457,7 +454,6 @@
 				4497D8B72A34EFD700713730 /* SavingsChart.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
-				4497D8B92A35612100713730 /* OldSavingsChart.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,

@@ -43,10 +43,13 @@ struct NewSavingsChart: View {
     }
     
     private var totalSaved: Double {
+        // This allows us to change the amount saved to match the selected
+        // element if the user is browsing the chart.
         if let selectedNum = selectedItemOnChart?.value {
             return selectedNum
         }
         
+        // Else show the total amount saved.
         return completedImpulses.reduce(0.0) { partialResult, impulse in
             return partialResult + impulse.amountSaved
         }
@@ -59,7 +62,7 @@ struct NewSavingsChart: View {
                     .font(Font.custom("Nunito-Bold", size: 25))
                     .foregroundColor(totalSaved > 0.0 ? .green : .red)
                 
-                Text(" Saved")
+                Text(totalSaved > 0.0 ? " Saved" : " Spent")
                     .font(Font.custom("Nunito-Bold", size: 17))
                     .foregroundColor(totalSaved > 0.0 ? .green : .red)
             }
@@ -92,13 +95,14 @@ struct NewSavingsChart: View {
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
+                                    // Change from global coordinates to local.
                                     let currentX = value.location.x - geometry[chart.plotAreaFrame].origin.x
                                     let currentY = value.location.y - geometry[chart.plotAreaFrame].origin.y
-
+                                    
                                     guard currentX >= 0, currentX < chart.plotAreaSize.width else { return }
                                     guard currentY >= 0, currentY < chart.plotAreaSize.height else { return }
-
-                                    guard let element = findNearestElement(location: value.location,
+                                    
+                                    guard let element = findNearestElement(currentX: currentX,
                                                                            proxy: chart,
                                                                            geometry: geometry) else { return }
                                     withAnimation {
@@ -112,6 +116,36 @@ struct NewSavingsChart: View {
                                     }
                                 }
                         )
+                }
+            }
+            .chartBackground { chart in
+                ZStack(alignment: .topLeading) {
+                    GeometryReader { geometry in
+                        if let selectedItemOnChart {
+                            // Date span
+                            let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedItemOnChart.date)!
+                            // Map date to chart X position
+                            let startPositionX = chart.position(forX: dateInterval.start) ?? 0
+                            // Offset the chart X position by chart frame
+                            let midStartPositionX = startPositionX + geometry[chart.plotAreaFrame].origin.x
+                            
+                            let positionY = chart.position(forY: selectedItemOnChart.value) ?? 0
+                            
+                            let lineHeight = geometry[chart.plotAreaFrame].maxY
+                            //                            let boxWidth: CGFloat = 150
+                            //                            let boxOffset = max(0, min(geometry.size.width - boxWidth, midStartPositionX - boxWidth / 2))
+                            
+                            Rectangle()
+                                .fill(.quaternary)
+                                .frame(width: 2, height: lineHeight)
+                                .position(x: midStartPositionX, y: lineHeight / 2)
+                            
+                            Circle()
+                                .fill(Color("ExodusFruit"))
+                                .frame(width: 10, height: 10)
+                                .position(x: midStartPositionX, y: positionY + (5))
+                        }
+                    }
                 }
             }
             
@@ -130,12 +164,12 @@ struct NewSavingsChart: View {
     init(completedImpulses: [Impulse]) {
         self.completedImpulses = completedImpulses
     }
-    
-    func findNearestElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> Item? {
-        let relativeXPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
-        
+}
+
+extension NewSavingsChart {
+    func findNearestElement(currentX: CGFloat, proxy: ChartProxy, geometry: GeometryProxy) -> Item? {
         // Use value(atX:) to find plotted value for the given X axis position.
-        if let date = proxy.value(atX: relativeXPosition) as Date? {
+        if let date = proxy.value(atX: currentX) as Date? {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
             var index: Int? = nil
@@ -183,8 +217,8 @@ struct NewSavingsChart: View {
             rollingSum.append(newItem)
         }
         
-        //        print(rollingSum)
-        //        print(rollingSum.count)
+//        print(rollingSum)
+//        print(rollingSum.count)
         return rollingSum
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImpulseCollectionViewCell: UICollectionViewCell {
+final class ImpulseCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "impulseCVC"
     
     //    var impulseImg: UIImageView!
