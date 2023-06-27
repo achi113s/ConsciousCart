@@ -7,7 +7,24 @@
 
 import CoreData
 
-final class CoreDataManager {
+final class ImpulseDataManager {
+    static public func addImpulse(moc: NSManagedObjectContext,
+                                  remindDate: Date = Date(),
+                                  name: String = "Unknown Name",
+                                  price: Double = 0.0,
+                                  reasonNeeded: String = "Unknown Reason") {
+        let newImpulse = Impulse(context: moc)
+        newImpulse.id = UUID()
+        newImpulse.dateCreated = Date.now
+        newImpulse.remindDate = remindDate
+        newImpulse.name = name
+        newImpulse.price = price
+        newImpulse.reasonNeeded = reasonNeeded
+        newImpulse.completed = false
+        
+        saveMOC(moc: moc)
+    }
+    
     static public func deleteAllImpulses(moc: NSManagedObjectContext) {
         do {
             let impulses = try moc.fetch(Impulse.fetchRequest())
@@ -41,9 +58,7 @@ final class CoreDataManager {
         return ([Impulse](), [Impulse]())
     }
     
-
-    
-    static func saveMOC(moc: NSManagedObjectContext) {
+    static private func saveMOC(moc: NSManagedObjectContext) {
         do {
             try moc.save()
         } catch {

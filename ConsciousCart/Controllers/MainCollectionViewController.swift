@@ -101,7 +101,7 @@ class MainCollectionViewController: UIViewController {
     }
     
     func loadImpulses() {
-        (impulses, completedImpulses) = CoreDataManager.loadImpulses(moc: moc)
+        (impulses, completedImpulses) = ImpulseDataManager.loadImpulses(moc: moc)
     }
 }
 

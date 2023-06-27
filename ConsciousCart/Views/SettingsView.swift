@@ -32,7 +32,7 @@ struct SettingsView: View {
                         .alert("Delete My Data", isPresented: $showingDeleteAlert) {
                             Button("Cancel", role: .cancel) { }
                             Button("Delete", role: .destructive) {
-                                CoreDataManager.deleteAllImpulses(moc: moc)
+                                ImpulseDataManager.deleteAllImpulses(moc: moc)
                             }
                         } message: {
                             Text("Are you sure you want to permanently delete all of your data? This action cannot be undone.")

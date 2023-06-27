@@ -236,20 +236,11 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             fatalError("The NSManagedObject context could not be unwrapped.")
         }
         
-        let newImpulse = Impulse(context: moc)
-        newImpulse.id = UUID()
-        newImpulse.dateCreated = Date.now
-        newImpulse.remindDate = itemRemindDate.date
-        newImpulse.name = itemNameTextField.text ?? "Unknown Name"
-        newImpulse.price = Double(itemPriceTextField.text ?? "0")!
-        newImpulse.reasonNeeded = itemReasonNeededTextField.text ?? "Unknown Reason"
-        newImpulse.completed = false
-        
-        do {
-            try moc.save()
-        } catch {
-            print("Could not save Item.")
-        }
+        ImpulseDataManager.addImpulse(moc: moc,
+                                      remindDate: itemRemindDate.date,
+                                      name: itemNameTextField.text ?? "Unknown Name",
+                                      price: Double(itemPriceTextField.text ?? "0.0")!,
+                                      reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
         
         if let mainCVC = mainCVC {
             mainCVC.loadImpulses()
