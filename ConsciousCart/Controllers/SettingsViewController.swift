@@ -10,15 +10,17 @@ import SwiftUI
 
 class SettingsViewController: UIViewController {
 
+    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
         
-        let settingsView = SettingsView()
+        let settingsView = SettingsView(moc: moc)
         let hostingViewController = UIHostingController(rootView: settingsView)
         
-        addChild(hostingViewController)
+        self.addChild(hostingViewController)
         
         if let hostView = hostingViewController.view {
             hostView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)

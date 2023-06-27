@@ -28,7 +28,6 @@ class MainCollectionViewController: UIViewController {
     private let addToCCButton = ConsciousCartButton()
     private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +45,9 @@ class MainCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        loadImpulses()
+        collectionView.reloadData()
         
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -70,6 +72,7 @@ class MainCollectionViewController: UIViewController {
     func addSubviewsToView() {
         view.addSubview(collectionView)
         view.addSubview(addToCCButton)
+        print(FileManager.documentsDirectory)
     }
     
     func setupLayoutConstraints() {
@@ -97,20 +100,14 @@ class MainCollectionViewController: UIViewController {
         //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
-        do {
-            request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
-            let allImpulses = try moc.fetch(request)
-            
-            impulses = allImpulses.filter { !$0.completed }
-            completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.wrappedCompletedDate < $1.wrappedCompletedDate })
-        } catch {
-            print("Error fetching data from context, \(error)")
-        }
+    func loadImpulses() {
+        (impulses, completedImpulses) = CoreDataManager.loadImpulses(moc: moc)
     }
 }
 
 extension MainCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    //MARK: - Collection View Layout Creator
+    
     static func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { sectionNumber, _ in
             if sectionNumber == 0 {
@@ -186,7 +183,11 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         if section == 0 {
             return 1
         } else if section == 1 {
-            return impulses.count
+            if impulses.isEmpty {
+                return 1
+            } else {
+                return impulses.count
+            }
         }
         
         return 0
@@ -206,6 +207,18 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             
             return cell
         } else if indexPath.section == 1 {
+            // Show a placeholder view if there's no Impulse data to show in the table.
+            if impulses.isEmpty {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: reuseIdentifier,
+                    for: indexPath
+                )
+                
+                cell.contentView.addSubview(ZeroImpulsesView(frame: cell.bounds))
+                return cell
+            }
+            
+            // Show the Impulses.
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier,
                 for: indexPath
@@ -267,26 +280,26 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             cell.insetView.backgroundColor = .white
         }
     }
-}
-
-class Header: UICollectionReusableView {
-    private let label = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    class Header: UICollectionReusableView {
+        private let label = UILabel()
         
-        label.text = "My Impulses"
-        label.font = UIFont.ccFont(textStyle: .title2)
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            label.text = "My Impulses"
+            label.font = UIFont.ccFont(textStyle: .title2)
+            
+            addSubview(label)
+        }
         
-        addSubview(label)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label.frame = bounds
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented.")
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            label.frame = bounds
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented.")
+        }
     }
 }

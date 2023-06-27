@@ -11,7 +11,7 @@ import CoreData
 
 class AddToConsciousCartViewController: UIViewController, UINavigationControllerDelegate {
     
-    //MARK: - View UI Properties
+    //MARK: - Main View Properties
     
     private var saveButton: ConsciousCartButton!
     
@@ -38,8 +38,6 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //    var gradientView: UIView!
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
-    
-    //MARK: - View Data Properties
     
     var moc: NSManagedObjectContext?
     var mainCVC: MainCollectionViewController?
@@ -204,7 +202,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
 
             imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-//
+
             itemNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
 
@@ -339,7 +337,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     }
 }
 
-//MARK: - UITextField Delegate Code
+//MARK: - UITextField Delegate
 
 extension AddToConsciousCartViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -362,7 +360,7 @@ extension AddToConsciousCartViewController: UITextFieldDelegate {
     }
 }
 
-//MARK: - UIImagePickerController Delegate Code
+//MARK: - UIImagePickerController Delegate
 
 extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -385,7 +383,7 @@ extension AddToConsciousCartViewController: UIImagePickerControllerDelegate {
     }
 }
 
-//MARK: - PHPickerViewController Delegate Code
+//MARK: - PHPickerViewController Delegate
 
 extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -415,7 +413,7 @@ extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
     
 }
 
-//MARK: - Extension for Hide Keyboard on Tap
+//MARK: - Extension to Hide Keyboard on Tap
 
 extension UIViewController {
     func initializeHideKeyboardOnTap(){

@@ -15,6 +15,9 @@ struct NewSavingsChart: View {
     var completedImpulses: [Impulse]
     
     private var maxDate: Date {
+        if completedImpulses.isEmpty {
+            return Date()
+        }
         var date: Date? = completedImpulses.first?.wrappedCompletedDate
         
         for impulse in completedImpulses {
@@ -27,6 +30,9 @@ struct NewSavingsChart: View {
     }
     
     private var minDate: Date {
+        if completedImpulses.isEmpty {
+            return Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast
+        }
         var date: Date? = completedImpulses.first?.wrappedCompletedDate
         
         for impulse in completedImpulses {
@@ -39,6 +45,11 @@ struct NewSavingsChart: View {
     }
     
     private var savingsRollingSum: [Item] {
+        if completedImpulses.isEmpty {
+            return [Item(date: Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast, value: 0.0),
+                    Item(date: Date.now, value: 0.0)]
+        }
+        
         return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
     }
     
@@ -60,11 +71,11 @@ struct NewSavingsChart: View {
             HStack {
                 TextViewAnimatableCurrency(number: totalSaved)
                     .font(Font.custom("Nunito-Bold", size: 25))
-                    .foregroundColor(totalSaved > 0.0 ? .green : .red)
+                    .foregroundColor(totalSaved >= 0.0 ? .green : .red)
                 
-                Text(totalSaved > 0.0 ? " Saved" : " Spent")
+                Text(totalSaved >= 0.0 ? " Saved" : " Spent")
                     .font(Font.custom("Nunito-Bold", size: 17))
-                    .foregroundColor(totalSaved > 0.0 ? .green : .red)
+                    .foregroundColor(totalSaved >= 0.0 ? .green : .red)
             }
             
             Chart(savingsRollingSum.count != 0 ? savingsRollingSum : [Item(date: Date.now, value: 0)]) { item in
