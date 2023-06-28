@@ -47,7 +47,7 @@
 		44AACCD92A0345FC0053334C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD82A0345FC0053334C /* Secrets.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
 		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
-		44AB96EA2A47E74E00112B5D /* NewSavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB96E92A47E74E00112B5D /* NewSavingsChart.swift */; };
+		44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB96E92A47E74E00112B5D /* SavingsChart.swift */; };
 		44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */; };
 		44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */; };
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
@@ -111,7 +111,7 @@
 		44AACCD82A0345FC0053334C /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
-		44AB96E92A47E74E00112B5D /* NewSavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSavingsChart.swift; sourceTree = "<group>"; };
+		44AB96E92A47E74E00112B5D /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
 		44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAnimatableCurrency.swift; sourceTree = "<group>"; };
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
 				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
-				44AB96E92A47E74E00112B5D /* NewSavingsChart.swift */,
+				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
 				4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */,
 			);
 			path = Views;
@@ -438,7 +438,7 @@
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
-				44AB96EA2A47E74E00112B5D /* NewSavingsChart.swift in Sources */,
+				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
 				4452AD172A4A34BF004C2E7E /* ImpulseDataManager.swift in Sources */,
 				448D940F2A3E48650035B34C /* MainCollectionViewController.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,

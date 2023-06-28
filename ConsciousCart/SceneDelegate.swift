@@ -23,24 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = createTabBar()
-        window?.overrideUserInterfaceStyle = .light
+//        window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
     }
-    
-//    func createMainVC() -> UINavigationController {
-//        let mainVC = MainViewController()
-//        mainVC.title = "ConsciousCart"
-//
-////        let cartFontSize: CGFloat = 32
-////        let sizeConfig = UIImage.SymbolConfiguration(pointSize: cartFontSize, weight: .regular, scale: .default)
-//
-//        mainVC.tabBarItem = UITabBarItem()
-//        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle")
-////        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: cartFontSize / 1.3)
-//        mainVC.tabBarItem.title = "My Cart"
-//
-//        return UINavigationController(rootViewController: mainVC)
-//    }
     
     func createMainCVC() -> UINavigationController {
         let mainVC = MainCollectionViewController()
@@ -59,7 +44,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        let profileFontSize: CGFloat = 32
 //        let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
-        
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.image = UIImage(systemName: "person.circle")
 //        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: profileFontSize / 1.8)

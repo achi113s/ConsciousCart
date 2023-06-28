@@ -202,7 +202,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             
             cell.contentConfiguration = UIHostingConfiguration {
 //                SavingsChart(completedImpulses: completedImpulses)
-                NewSavingsChart(completedImpulses: completedImpulses)
+                SavingsChart(completedImpulses: completedImpulses)
             }
             
             return cell

@@ -8,7 +8,7 @@
 import Charts
 import SwiftUI
 
-struct NewSavingsChart: View {
+struct SavingsChart: View {
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
     @State private var selectedItemOnChart: Item? = nil
     
@@ -177,7 +177,7 @@ struct NewSavingsChart: View {
     }
 }
 
-extension NewSavingsChart {
+extension SavingsChart {
     func findNearestElement(currentX: CGFloat, proxy: ChartProxy, geometry: GeometryProxy) -> Item? {
         // Use value(atX:) to find plotted value for the given X axis position.
         if let date = proxy.value(atX: currentX) as Date? {
