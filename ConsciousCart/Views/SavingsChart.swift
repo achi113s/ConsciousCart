@@ -143,8 +143,6 @@ struct SavingsChart: View {
                             let positionY = chart.position(forY: selectedItemOnChart.value) ?? 0
                             
                             let lineHeight = geometry[chart.plotAreaFrame].maxY
-                            //                            let boxWidth: CGFloat = 150
-                            //                            let boxOffset = max(0, min(geometry.size.width - boxWidth, midStartPositionX - boxWidth / 2))
                             
                             Rectangle()
                                 .fill(.quaternary)
@@ -153,8 +151,8 @@ struct SavingsChart: View {
                             
                             Circle()
                                 .fill(Color("ExodusFruit"))
-                                .frame(width: 10, height: 10)
-                                .position(x: midStartPositionX, y: positionY + (5))
+                                .frame(width: 8, height: 8)
+                                .position(x: midStartPositionX, y: positionY + (4))
                         }
                     }
                 }

@@ -231,7 +231,6 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
             cell.remainingTimeLabel.text = remainingTime.0
-            cell.remainingTimeLabel.textColor = remainingTime.1 == .aLongTime ? .black : .red
             
             return cell
         } else {
@@ -256,6 +255,8 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         return header
     }
     
+    //MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 else { return }
         
@@ -274,7 +275,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         }
         
         UIView.animate(withDuration: 0.5) {
-            cell.insetView.backgroundColor = .white
+            cell.insetView.backgroundColor = .systemBackground
         }
     }
     

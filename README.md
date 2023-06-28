@@ -6,13 +6,25 @@
 - Delegate, MVC Patterns
 - Rive for Animations
 
-ConsciousCart is an iOS app that enables users to take control of their impulse purchasing habits by stashing away their desires for a later date. Users simply take a picture of the item that might be an impulse purchase and specify the price, category, etc., and a reminder date. The idea is that by waiting to buy the item, the user will execute a more mindful purchase and not buy things they don't really want. Consequently, the user will feel good about purchases made after the waiting period since they are items they really want or need.
+Introducing ConsciousCart: Empower Your Financial Journey with Mindful Spending
 
-When an impulse purchase's specified date arrives, the user will receive a notification asking if they still want to or did already purchase the item. If they didn't buy it, the price of the item gets added to their total Money Saved score (good). If they bought the item before the wait period finished, the price gets added to their Impulse Spent score (bad).
+ConsciousCart is an innovative iOS app designed to empower users to take full control of their finances through the practice of delayed gratification. By embracing the power of delayed gratification, individuals can make more thoughtful purchasing decisions, avoiding impulse buying, and ensure they invest their hard-earned money wisely.
+
+With ConsciousCart, the process is simple and effective. Users can effortlessly capture a photo of the desired item and set a reminder date along with other relevant details. This mindful approach allows users to step back and evaluate their purchasing choices, ensuring that they don't acquire items they don't genuinely desire or need.
+
+When the designated reminder date arrives, ConsciousCart discreetly sends a personalized notification, prompting users to reflect on their intent to purchase the item. By consciously evaluating their decision, users can reinforce their commitment to mindful spending. If the purchase is ultimately abstained from, the item's cost is added to the user's total money saved score—an encouraging measure of their financial progress. On the other hand, if the item was acquired before the wait period ended, the item's cost is subtracted from the total money saved, fostering a simple and transparent scoring system.
+
+ConsciousCart is more than a mere app; it offers users the opportunity to cultivate a skill embraced by highly successful individuals across various fields. By embodying the principles of delayed gratification, users can unlock their full financial potential and develop a mindful approach to shopping, leading to a more intentional and fulfilling consumer experience.
+
+Take charge of your financial journey with ConsciousCart—a trusted companion on the path to mindful spending and financial well-being.
 
 Current Mockup (May 4, 2023):
 
-![Mockup](https://github.com/achi113s/ConsciousCart/blob/main/ReadmeResources/concsciouscart_mockup_720p.gif)
+![Mockup](https://github.com/achi113s/ConsciousCart/blob/main/ReadmeResources/concsciouscart_mockup_jun27.gif)
+
+
+
+
 
 
 

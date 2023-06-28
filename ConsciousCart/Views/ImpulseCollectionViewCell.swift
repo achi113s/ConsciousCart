@@ -44,7 +44,7 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
         itemNameLabel = UILabel()
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         itemNameLabel.font = priceFont
-        itemNameLabel.text = "Pokemon Cards"
+        itemNameLabel.text = "Unknown Item"
         itemNameLabel.numberOfLines = 1
         itemNameLabel.textAlignment = .left
         insetView.addSubview(itemNameLabel)
@@ -52,16 +52,14 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
         itemPriceLabel = UILabel()
         itemPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         itemPriceLabel.font = priceFont
-        itemPriceLabel.text = "$9.99"
+        itemPriceLabel.text = "Unknown Price"
         itemPriceLabel.numberOfLines = 0
         itemPriceLabel.textAlignment = .right
         insetView.addSubview(itemPriceLabel)
 
         remainingTimeLabel = UILabel()
         remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        let remainingTime = Utils.remainingTimeMessageForDate(Date(timeIntervalSince1970: 1684905231))
-        remainingTimeLabel.text = remainingTime.0
-        remainingTimeLabel.textColor = remainingTime.1 == .aLongTime ? .black : .red
+        remainingTimeLabel.text = "Unknown Time"
         remainingTimeLabel.font = labelFont
         remainingTimeLabel.numberOfLines = 0
         remainingTimeLabel.textAlignment = .left
@@ -77,7 +75,7 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
             
             itemNameLabel.leftAnchor.constraint(equalTo: insetView.leftAnchor, constant: 8),
             itemNameLabel.topAnchor.constraint(equalTo: insetView.topAnchor, constant: 8),
-            itemNameLabel.widthAnchor.constraint(equalTo: insetView.widthAnchor, multiplier: 0.5),
+            itemNameLabel.widthAnchor.constraint(equalTo: insetView.widthAnchor, multiplier: 0.75),
             
             remainingTimeLabel.leftAnchor.constraint(equalTo: insetView.leftAnchor, constant: 8),
             remainingTimeLabel.bottomAnchor.constraint(equalTo: insetView.bottomAnchor, constant: -8),
@@ -85,7 +83,7 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
             disclosureAccessory.rightAnchor.constraint(equalTo: insetView.rightAnchor, constant: -8),
             disclosureAccessory.centerYAnchor.constraint(equalTo: insetView.centerYAnchor),
             
-            itemPriceLabel.rightAnchor.constraint(equalTo: disclosureAccessory.leftAnchor, constant: -27),
+            itemPriceLabel.rightAnchor.constraint(equalTo: disclosureAccessory.leftAnchor, constant: -8),
             itemPriceLabel.centerYAnchor.constraint(equalTo: insetView.centerYAnchor),
         ])
     }
