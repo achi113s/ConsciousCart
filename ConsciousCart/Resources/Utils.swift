@@ -22,6 +22,10 @@ enum ChartTimeDomain: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
+enum lengthRemainingForImpulse {
+    case aLongTime, aMediumTime, aShortTime
+}
+
 class Utils {
     static func printFonts() {
         for family in UIFont.familyNames.sorted() {
@@ -59,10 +63,6 @@ class Utils {
         }
         
         return ("Time's up!", .aLongTime)
-    }
-    
-    enum lengthRemainingForImpulse {
-        case aLongTime, aMediumTime, aShortTime
     }
     
     static let chartTestItems: [Item] = [

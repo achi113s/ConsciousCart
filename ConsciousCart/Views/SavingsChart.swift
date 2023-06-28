@@ -9,73 +9,28 @@ import Charts
 import SwiftUI
 
 struct SavingsChart: View {
+    var completedImpulses: [Impulse]
+    
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
     @State private var selectedItemOnChart: Item? = nil
     
-    var completedImpulses: [Impulse]
-    
-    private var maxDate: Date {
-        if completedImpulses.isEmpty {
-            return Date()
-        }
-        var date: Date? = completedImpulses.first?.wrappedCompletedDate
-        
-        for impulse in completedImpulses {
-            if impulse.wrappedCompletedDate > date! {
-                date = impulse.wrappedCompletedDate
-            }
-        }
-        
-        return date ?? Date.now
-    }
-    
-    private var minDate: Date {
-        if completedImpulses.isEmpty {
-            return Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast
-        }
-        var date: Date? = completedImpulses.first?.wrappedCompletedDate
-        
-        for impulse in completedImpulses {
-            if impulse.wrappedCompletedDate < date! {
-                date = impulse.wrappedCompletedDate
-            }
-        }
-        
-        return date ?? Date.distantPast
-    }
-    
-    private var savingsRollingSum: [Item] {
-        if completedImpulses.isEmpty {
-            return [Item(date: Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast, value: 0.0),
-                    Item(date: Date.now, value: 0.0)]
-        }
-        
-        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
-    }
-    
-    private var totalSaved: Double {
-        // This allows us to change the amount saved to match the selected
-        // element if the user is browsing the chart.
-        if let selectedNum = selectedItemOnChart?.value {
-            return selectedNum
-        }
-        
-        // Else show the total amount saved.
-        return completedImpulses.reduce(0.0) { partialResult, impulse in
-            return partialResult + impulse.amountSaved
-        }
-    }
+    @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                TextViewAnimatableCurrency(number: totalSaved)
+                TextViewAnimatableCurrency(number: totalSavedNumber)
                     .font(Font.custom("Nunito-Bold", size: 25))
-                    .foregroundColor(totalSaved >= 0.0 ? .green : .red)
+                    .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: totalSavedNumber))
                 
-                Text(totalSaved >= 0.0 ? " Saved" : " Spent")
+                if differentiateWithoutColor {
+                    Image(systemName: totalSavedNumber >= 0 ? "arrow.up" : "arrow.down")
+                        .font(.system(size: 17))
+                }
+                
+                Text(totalSavedNumber >= 0.0 ? "Saved" : "Spent")
                     .font(Font.custom("Nunito-Bold", size: 17))
-                    .foregroundColor(totalSaved >= 0.0 ? .green : .red)
+                    .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: totalSavedNumber))
             }
             
             Chart(savingsRollingSum.count != 0 ? savingsRollingSum : [Item(date: Date.now, value: 0)]) { item in
@@ -173,6 +128,58 @@ struct SavingsChart: View {
     init(completedImpulses: [Impulse]) {
         self.completedImpulses = completedImpulses
     }
+    
+    private var maxDate: Date {
+        if completedImpulses.isEmpty {
+            return Date()
+        }
+        var date: Date? = completedImpulses.first?.wrappedCompletedDate
+        
+        for impulse in completedImpulses {
+            if impulse.wrappedCompletedDate > date! {
+                date = impulse.wrappedCompletedDate
+            }
+        }
+        
+        return date ?? Date.now
+    }
+    
+    private var minDate: Date {
+        if completedImpulses.isEmpty {
+            return Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast
+        }
+        var date: Date? = completedImpulses.first?.wrappedCompletedDate
+        
+        for impulse in completedImpulses {
+            if impulse.wrappedCompletedDate < date! {
+                date = impulse.wrappedCompletedDate
+            }
+        }
+        
+        return date ?? Date.distantPast
+    }
+    
+    private var savingsRollingSum: [Item] {
+        if completedImpulses.isEmpty {
+            return [Item(date: Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast, value: 0.0),
+                    Item(date: Date.now, value: 0.0)]
+        }
+        
+        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
+    }
+    
+    private var totalSavedNumber: Double {
+        // This allows us to change the amount saved to match the selected
+        // element if the user is browsing the chart.
+        if let selectedNum = selectedItemOnChart?.value {
+            return selectedNum
+        }
+        
+        // Else show the total amount saved.
+        return completedImpulses.reduce(0.0) { partialResult, impulse in
+            return partialResult + impulse.amountSaved
+        }
+    }
 }
 
 extension SavingsChart {
@@ -229,5 +236,9 @@ extension SavingsChart {
 //        print(rollingSum)
 //        print(rollingSum.count)
         return rollingSum
+    }
+    
+    func redOrGreen(for savedAmount: Double) -> Color {
+        savedAmount >= 0.0 ? .green : .red
     }
 }
