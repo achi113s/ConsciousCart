@@ -61,6 +61,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         super.viewDidLoad()
         
         view.keyboardLayoutGuide.followsUndockedKeyboard = true
+        
         initializeHideKeyboardOnTap()
         
         NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -153,7 +154,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         itemRemindLabel = UILabel()
         itemRemindLabel.text = "When should we remind you?"
-        itemRemindLabel.font = UIFont(name: "Nunito-Regular", size: 17)
+        itemRemindLabel.font = UIFont.ccFont(textStyle: .headline)
         itemRemindLabel.textAlignment = .center
         itemRemindLabel.translatesAutoresizingMaskIntoConstraints = false
         

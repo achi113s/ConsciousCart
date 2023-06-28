@@ -18,7 +18,7 @@ ConsciousCart is more than a mere app; it offers users the opportunity to cultiv
 
 Take charge of your financial journey with ConsciousCart—a trusted companion on the path to mindful spending and financial well-being.
 
-Current Mockup (May 4, 2023):
+Current Mockup (June 27, 2023):
 
 ![Mockup](https://github.com/achi113s/ConsciousCart/blob/main/ReadmeResources/concsciouscart_mockup_jun27.gif)
 
