@@ -195,7 +195,7 @@ extension SavingsChart {
             }
             
             if let index {
-                print(savingsRollingSum[index])
+//                print(savingsRollingSum[index])
                 return savingsRollingSum[index]
             }
         }

@@ -72,7 +72,6 @@ class MainCollectionViewController: UIViewController {
     func addSubviewsToView() {
         view.addSubview(collectionView)
         view.addSubview(addToCCButton)
-        print(FileManager.documentsDirectory)
     }
     
     func setupLayoutConstraints() {
@@ -201,7 +200,6 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             )
             
             cell.contentConfiguration = UIHostingConfiguration {
-//                SavingsChart(completedImpulses: completedImpulses)
                 SavingsChart(completedImpulses: completedImpulses)
             }
             
@@ -225,7 +223,6 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             ) as! ImpulseCollectionViewCell
             
             let index = indexPath.row
-//            print(index)
             
             let impulse = impulses[index]
             
