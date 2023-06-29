@@ -12,6 +12,7 @@ final class ImpulseDataManager {
                                   remindDate: Date = Date(),
                                   name: String = "Unknown Name",
                                   price: Double = 0.0,
+                                  imageName: String? = nil,
                                   reasonNeeded: String = "Unknown Reason") {
         let newImpulse = Impulse(context: moc)
         newImpulse.id = UUID()
@@ -19,6 +20,7 @@ final class ImpulseDataManager {
         newImpulse.remindDate = remindDate
         newImpulse.name = name
         newImpulse.price = price
+        newImpulse.imageName = imageName
         newImpulse.reasonNeeded = reasonNeeded
         newImpulse.completed = false
         
@@ -30,6 +32,16 @@ final class ImpulseDataManager {
             let impulses = try moc.fetch(Impulse.fetchRequest())
             
             for impulse in impulses {
+                // Delete the image in the Documents directory if it exists.
+                if let imageName = impulse.imageName {
+                    let pathName = FileManager.documentsDirectory.appendingPathComponent(imageName, conformingTo: .png)
+                    do {
+                        try FileManager.default.removeItem(at: pathName)
+                    } catch {
+                        print("Could not delete Impulse's image: \(error.localizedDescription)")
+                    }
+                }
+                
                 moc.delete(impulse)
             }
             

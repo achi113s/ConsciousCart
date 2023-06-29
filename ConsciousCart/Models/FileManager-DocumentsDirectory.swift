@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 extension FileManager {
     static var documentsDirectory: URL {
         let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(paths[0])
         return paths[0]
     }
     

@@ -93,15 +93,12 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         uploadImageButton.setImage(UIImage(systemName: "photo.circle", withConfiguration: largeConfig), for: .normal)
         uploadImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
         
-//        containerView = ChangeImageContainerView()
-//        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
         containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = uploadImageButton.layer.cornerRadius
         containerView.layer.borderWidth = uploadImageButton.layer.borderWidth
         containerView.layer.borderColor = uploadImageButton.layer.borderColor
-
+        
         imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
@@ -109,7 +106,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         imageView.layer.borderWidth = uploadImageButton.layer.borderWidth
         imageView.layer.borderColor = uploadImageButton.layer.borderColor
         imageView.layer.masksToBounds = true
-
+        
         changeImageButton = UIButton()
         changeImageButton.translatesAutoresizingMaskIntoConstraints = false
         changeImageButton.setTitle("Change Image", for: .normal)
@@ -200,22 +197,22 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
             changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             changeImageButton.widthAnchor.constraint(equalTo: imageView.widthAnchor),
-
+            
             imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-
+            
             itemNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-
+            
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-
+            
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-
+            
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
@@ -237,10 +234,21 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
             fatalError("The NSManagedObject context could not be unwrapped.")
         }
         
+        guard let itemPriceString = itemPriceTextField.text else { return }
+        guard let itemPrice = Double(itemPriceString) else {
+            saveButton.shakeAnimation()
+            return
+        }
+        
+        // Save the image with a UUID as its name if the user selected an image.
+        // The function returns nil if there is no image to save.
+        let imageName = saveImpulseImage()
+        
         ImpulseDataManager.addImpulse(moc: moc,
                                       remindDate: itemRemindDate.date,
                                       name: itemNameTextField.text ?? "Unknown Name",
-                                      price: Double(itemPriceTextField.text ?? "0.0")!,
+                                      price: itemPrice,
+                                      imageName: imageName,
                                       reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
         
         if let mainCVC = mainCVC {
@@ -327,6 +335,23 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         //            self?.gradientView.alpha = 0.0
         //        }
     }
+    
+    func saveImpulseImage() -> String? {
+        var imageName: String? = nil
+        if let image = imageView.image {
+            do {
+                if let imageData = image.pngData() {
+                    imageName = UUID().uuidString
+                    try imageData.write(to: FileManager.documentsDirectory.appendingPathComponent(imageName!, conformingTo: .png))
+                }
+            } catch {
+                print("Could not save image for Impulse.")
+            }
+        }
+        
+        return imageName
+    }
+    
 }
 
 //MARK: - UITextField Delegate

@@ -46,6 +46,7 @@ class MainCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // need to fix this as it causes doubling of views when there are no impulses to show
         loadImpulses()
         collectionView.reloadData()
         
@@ -57,6 +58,7 @@ class MainCollectionViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         
         // Register cell classes
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -214,25 +216,26 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 
                 cell.contentView.addSubview(ZeroImpulsesView(frame: cell.bounds))
                 return cell
+            } else {
+                
+                // Show the Impulses.
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier,
+                    for: indexPath
+                ) as! ImpulseCollectionViewCell
+                
+                let index = indexPath.row
+                
+                let impulse = impulses[index]
+                
+                cell.itemNameLabel.text = impulse.wrappedName
+                cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+                
+                let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+                cell.remainingTimeLabel.text = remainingTime.0
+                
+                return cell
             }
-            
-            // Show the Impulses.
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ImpulseCollectionViewCell.reuseIdentifier,
-                for: indexPath
-            ) as! ImpulseCollectionViewCell
-            
-            let index = indexPath.row
-            
-            let impulse = impulses[index]
-            
-            cell.itemNameLabel.text = impulse.wrappedName
-            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
-            
-            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
-            cell.remainingTimeLabel.text = remainingTime.0
-            
-            return cell
         } else {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseIdentifier,
@@ -271,11 +274,11 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImpulseCollectionViewCell else { return }
         
         UIView.animate(withDuration: 0.5) {
-            cell.insetView.backgroundColor = .lightGray
+            cell.contentView.backgroundColor = .lightGray
         }
         
         UIView.animate(withDuration: 0.5) {
-            cell.insetView.backgroundColor = .systemBackground
+            cell.contentView.backgroundColor = .systemBackground
         }
     }
     

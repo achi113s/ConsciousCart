@@ -29,8 +29,7 @@ class ProfileViewController: UIViewController {
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        scoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-//        scoreLabel.text = 
+        scoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50)) 
     }
     
     func addSubviewsToView() {
