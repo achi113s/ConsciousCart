@@ -7,7 +7,6 @@
 
 import AVFoundation
 import UIKit
-import RiveRuntime
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -15,7 +14,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-    var checkmark_animation: CheckmarkAnimationViewController!
     var timer: Timer?
     var spinner: UIActivityIndicatorView!
     
@@ -99,9 +97,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         previewView.layer.addSublayer(previewLayer)
         
-        checkmark_animation = CheckmarkAnimationViewController()
-        view.addSubview(checkmark_animation.view)
-        
         spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.center = view.center
@@ -166,7 +161,6 @@ extension ScannerViewController: BarcodeAPIManagerDelegate {
             prevView.itemPriceTextField.text = barcodeInfo.Stores.first?.price ?? ""
             
             self?.spinner.stopAnimating()
-            self?.checkmark_animation.viewModel.play()
             self?.timer = Timer.scheduledTimer(timeInterval: 2.05, target: self!,
                                                selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
         }

@@ -18,8 +18,6 @@
 		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
 		4452AD192A4A7DFE004C2E7E /* ZeroImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */; };
-		44595ED52A01FE4F00D0AC48 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44595ED42A01FE4F00D0AC48 /* RiveRuntime */; };
-		44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */; };
 		44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEA2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
 		44595EEB2A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
@@ -81,7 +79,6 @@
 		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
 		4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroImpulsesView.swift; sourceTree = "<group>"; };
-		44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkAnimationViewController.swift; sourceTree = "<group>"; };
 		44595EE82A02219C00D0AC48 /* checkmark.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark.riv; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B22A187ABF0013ACB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -123,7 +120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44595ED52A01FE4F00D0AC48 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +145,6 @@
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */,
-				44595EDB2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift */,
 			);
 			path = AddToConsciousCartViewControllers;
 			sourceTree = "<group>";
@@ -315,7 +310,6 @@
 			);
 			name = ConsciousCart;
 			packageProductDependencies = (
-				44595ED42A01FE4F00D0AC48 /* RiveRuntime */,
 			);
 			productName = ConsciousCart;
 			productReference = 4497E39729F358BC0029451E /* ConsciousCart.app */;
@@ -390,7 +384,6 @@
 			);
 			mainGroup = 4497E38E29F358BC0029451E;
 			packageReferences = (
-				44595ED32A01FE4F00D0AC48 /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = 4497E39829F358BC0029451E /* Products */;
 			projectDirPath = "";
@@ -444,7 +437,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
-				44595EDC2A01FF2300D0AC48 /* CheckmarkAnimationViewController.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
@@ -814,25 +806,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		44595ED32A01FE4F00D0AC48 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rive-app/rive-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		44595ED42A01FE4F00D0AC48 /* RiveRuntime */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44595ED32A01FE4F00D0AC48 /* XCRemoteSwiftPackageReference "rive-ios" */;
-			productName = RiveRuntime;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */ = {
