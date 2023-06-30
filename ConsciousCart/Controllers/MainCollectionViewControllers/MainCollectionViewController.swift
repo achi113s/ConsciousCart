@@ -10,28 +10,19 @@ import SwiftUI
 import UIKit
 
 class MainCollectionViewController: UIViewController {
+    var impulsesStateManager: ImpulsesStateManager?
     
     private(set) var collectionView: UICollectionView!
-    
-    //    private var impulsesTableViewDelegate: ImpulseTableViewDelegate!
-    //    var impulsesTableViewCell: ImpulsesCollectionViewCell?
     
     static let categoryHeaderId = "categoryHeaderId"
     private let headerId = "headerId"
     private let reuseIdentifier = "cell"
-    
-    var completedImpulses = [Impulse]()
-    var impulses = [Impulse]()
-    
-    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private let addToCCButton = ConsciousCartButton()
     private let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadImpulses()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -46,8 +37,6 @@ class MainCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // need to fix this as it causes doubling of views when there are no impulses to show
-        loadImpulses()
         collectionView.reloadData()
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -89,25 +78,6 @@ class MainCollectionViewController: UIViewController {
             addToCCButton.heightAnchor.constraint(equalToConstant: 66)
         ])
     }
-    
-    @objc func addToConsciousCart() {
-        let vc = AddToConsciousCartViewController()
-        
-        vc.moc = self.moc
-        vc.mainCVC = self
-        
-        let modalController = UINavigationController(rootViewController: vc)
-        navigationController?.present(modalController, animated: true)
-        //        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func loadImpulses() {
-        (impulses, completedImpulses) = ImpulseDataManager.loadImpulses(moc: moc)
-    }
-}
-
-extension MainCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    //MARK: - Collection View Layout Creator
     
     static func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { sectionNumber, _ in
@@ -172,6 +142,18 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    @objc func addToConsciousCart() {
+        let vc = AddToConsciousCartViewController()
+        
+        vc.impulsesStateManager = impulsesStateManager
+        
+        let modalController = UINavigationController(rootViewController: vc)
+        navigationController?.present(modalController, animated: true)
+        //        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension MainCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     // MARK: UICollectionViewDataSource
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -184,10 +166,12 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         if section == 0 {
             return 1
         } else if section == 1 {
-            if impulses.isEmpty {
+            guard let impulsesStateManager = impulsesStateManager else { return 1 }
+            
+            if impulsesStateManager.impulses.isEmpty {
                 return 1
             } else {
-                return impulses.count
+                return impulsesStateManager.impulses.count
             }
         }
         
@@ -195,6 +179,17 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let impulsesStateManager = impulsesStateManager else {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: reuseIdentifier,
+                for: indexPath
+            )
+            
+            cell.backgroundColor = .red
+            print("normal red cell was loaded")
+            return cell
+        }
+        
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseIdentifier,
@@ -202,13 +197,13 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
             )
             
             cell.contentConfiguration = UIHostingConfiguration {
-                SavingsChart(completedImpulses: completedImpulses)
+                SavingsChart(completedImpulses: impulsesStateManager.completedImpulses)
             }
             
             return cell
-        } else if indexPath.section == 1 {
+        } else {
             // Show a placeholder view if there's no Impulse data to show in the table.
-            if impulses.isEmpty {
+            if impulsesStateManager.impulses.isEmpty {
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: reuseIdentifier,
                     for: indexPath
@@ -226,7 +221,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 
                 let index = indexPath.row
                 
-                let impulse = impulses[index]
+                let impulse = impulsesStateManager.impulses[index]
                 
                 cell.itemNameLabel.text = impulse.wrappedName
                 cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
@@ -236,15 +231,6 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
                 
                 return cell
             }
-        } else {
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: reuseIdentifier,
-                for: indexPath
-            )
-            
-            cell.backgroundColor = .red
-            print("normal red cell was loaded")
-            return cell
         }
     }
     
@@ -264,7 +250,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
         guard indexPath.section == 1 else { return }
         
         let detailVC = ImpulseDetailViewController()
-        detailVC.impulse = impulses[indexPath.row]
+        detailVC.impulse = impulsesStateManager?.impulses[indexPath.row]
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

@@ -9,15 +9,17 @@ import UIKit
 import SwiftUI
 
 class SettingsViewController: UIViewController {
-
-    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var impulsesStateController: ImpulsesStateManager?
+//    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
         
-        let settingsView = SettingsView(moc: moc)
+        var settingsView = SettingsView()
+        settingsView.impulsesStateController = impulsesStateController
+        
         let hostingViewController = UIHostingController(rootView: settingsView)
         
         self.addChild(hostingViewController)

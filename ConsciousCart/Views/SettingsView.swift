@@ -9,7 +9,7 @@ import CoreData
 import SwiftUI
 
 struct SettingsView: View {
-    var moc: NSManagedObjectContext
+    var impulsesStateController: ImpulsesStateManager?
     
     @State private var showingDeleteAlert = false
     
@@ -24,7 +24,8 @@ struct SettingsView: View {
                         .alert("Delete My Data", isPresented: $showingDeleteAlert) {
                             Button("Cancel", role: .cancel) { }
                             Button("Delete", role: .destructive) {
-                                ImpulseDataManager.deleteAllImpulses(moc: moc)
+//                                ImpulseDataManager.deleteAllImpulses(moc: moc)
+                                impulsesStateController?.deleteAllImpulses()
                             }
                         } message: {
                             Text("Are you sure you want to permanently delete all of your Impulses? This action cannot be undone.")
@@ -34,9 +35,5 @@ struct SettingsView: View {
                 }
             }
         }
-    }
-    
-    init(moc: NSManagedObjectContext) {
-        self.moc = moc
     }
 }

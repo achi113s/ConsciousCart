@@ -8,8 +8,9 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
+    let impulsesStateManager = ImpulsesStateManager(moc: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -28,14 +29,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createMainCVC() -> UINavigationController {
-        let mainVC = MainCollectionViewController()
-        mainVC.title = "ConsciousCart"
+        let mainCVC = MainCollectionViewController()
+        mainCVC.title = "ConsciousCart"
+        mainCVC.impulsesStateManager = impulsesStateManager
         
-        mainVC.tabBarItem = UITabBarItem()
-        mainVC.tabBarItem.image = UIImage(systemName: "cart.circle")
-        mainVC.tabBarItem.title = "My Cart"
+        mainCVC.tabBarItem = UITabBarItem()
+        mainCVC.tabBarItem.image = UIImage(systemName: "cart.circle")
+        mainCVC.tabBarItem.title = "My Cart"
         
-        return UINavigationController(rootViewController: mainVC)
+        return UINavigationController(rootViewController: mainCVC)
     }
     
     func createProfileVC() -> UINavigationController {

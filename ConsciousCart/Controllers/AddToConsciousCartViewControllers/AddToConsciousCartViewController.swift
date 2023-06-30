@@ -39,8 +39,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
-    var moc: NSManagedObjectContext?
-    var mainCVC: MainCollectionViewController?
+    var impulsesStateManager: ImpulsesStateManager?
     
     override func loadView() {
         super.loadView()
@@ -230,11 +229,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //MARK: - Selectors
     
     @objc func saveItem() {
-        guard let moc = moc else {
-            fatalError("The NSManagedObject context could not be unwrapped.")
-        }
+        guard let impulsesStateManager = impulsesStateManager else { return }
         
         guard let itemPriceString = itemPriceTextField.text else { return }
+        
         guard let itemPrice = Double(itemPriceString) else {
             saveButton.shakeAnimation()
             return
@@ -244,21 +242,11 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         // The function returns nil if there is no image to save.
         let imageName = saveImpulseImage()
         
-        ImpulseDataManager.addImpulse(moc: moc,
-                                      remindDate: itemRemindDate.date,
+        impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
                                       name: itemNameTextField.text ?? "Unknown Name",
                                       price: itemPrice,
                                       imageName: imageName,
                                       reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
-        
-        if let mainCVC = mainCVC {
-            mainCVC.loadImpulses()
-            
-            // The collection view needs to be reloaded to show the new addition.
-            mainCVC.collectionView.reloadData()
-        } else {
-            print("Could not get mainVC")
-        }
         
         dismiss(animated: true)
     }
