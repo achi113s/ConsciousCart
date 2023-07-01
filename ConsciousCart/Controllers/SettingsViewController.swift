@@ -9,8 +9,7 @@ import UIKit
 import SwiftUI
 
 class SettingsViewController: UIViewController {
-    var impulsesStateController: ImpulsesStateManager?
-//    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var impulsesStateManager: ImpulsesStateManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +17,7 @@ class SettingsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         var settingsView = SettingsView()
-        settingsView.impulsesStateController = impulsesStateController
+        settingsView.impulsesStateManager = impulsesStateManager
         
         let hostingViewController = UIHostingController(rootView: settingsView)
         

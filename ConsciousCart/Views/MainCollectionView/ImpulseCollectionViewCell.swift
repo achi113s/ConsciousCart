@@ -58,11 +58,6 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
         setCellCorners()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.refreshContentView()
-    }
-    
     func setCellLayoutConstraints() {
         NSLayoutConstraint.activate([
             itemNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),

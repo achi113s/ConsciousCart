@@ -8,7 +8,6 @@
 import UIKit
 
 class ImpulseDetailViewController: UIViewController {
-    
     var impulse: Impulse?
     
     override func viewDidLoad() {

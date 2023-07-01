@@ -111,9 +111,4 @@ extension UICollectionViewCell {
             view.removeFromSuperview()
         }
     }
-    
-    override open func prepareForReuse() {
-        super.prepareForReuse()
-        self.refreshContentView()
-    }
 }

@@ -155,6 +155,17 @@
 			path = AddToConsciousCartViewController;
 			sourceTree = "<group>";
 		};
+		444A58E72A4FC353006FC02B /* MainCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
+				4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */,
+				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
+				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
+			);
+			path = MainCollectionView;
+			sourceTree = "<group>";
+		};
 		4450EED12A088A6A00D8C680 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,10 +258,7 @@
 				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
 				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
-				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
-				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
-				4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */,
-				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
+				444A58E72A4FC353006FC02B /* MainCollectionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -40,6 +40,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
     var impulsesStateManager: ImpulsesStateManager?
+    var mainCVC: MainCollectionViewController?
     
     override func loadView() {
         super.loadView()
@@ -229,7 +230,11 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     //MARK: - Selectors
     
     @objc func saveItem() {
-        guard let impulsesStateManager = impulsesStateManager else { return }
+        guard let impulsesStateManager = impulsesStateManager else {
+            print("impulsesStateManager not unwrapped successfully.")
+            return
+        }
+        guard let mainCVC = mainCVC else { return }
         
         guard let itemPriceString = itemPriceTextField.text else { return }
         
@@ -247,6 +252,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
                                       price: itemPrice,
                                       imageName: imageName,
                                       reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
+        mainCVC.collectionView.reloadData()
         
         dismiss(animated: true)
     }

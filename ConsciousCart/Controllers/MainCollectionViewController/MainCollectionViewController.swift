@@ -147,11 +147,16 @@ class MainCollectionViewController: UIViewController {
     }
     
     @objc func addToConsciousCart() {
-        let vc = AddToConsciousCartViewController()
+        let addToCartVC = AddToConsciousCartViewController()
         
-        vc.impulsesStateManager = impulsesStateManager
+        addToCartVC.impulsesStateManager = impulsesStateManager
         
-        let modalController = UINavigationController(rootViewController: vc)
+        // A reference back to this view is required in order to
+        // reload the table data because viewWillAppear is not
+        // called when a modal is dismissed.
+        addToCartVC.mainCVC = self
+        
+        let modalController = UINavigationController(rootViewController: addToCartVC)
         navigationController?.present(modalController, animated: true)
 //                navigationController?.pushViewController(vc, animated: true)
     }

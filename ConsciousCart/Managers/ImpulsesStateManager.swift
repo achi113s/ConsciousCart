@@ -45,6 +45,8 @@ final class ImpulsesStateManager {
         } catch {
             print("Error saving context: \(error.localizedDescription)")
         }
+        
+        loadImpulses()
     }
     
     public func addImpulse(
@@ -87,7 +89,7 @@ final class ImpulsesStateManager {
                 
                 moc.delete(impulse)
             }
-            
+            print("All impulses deleted!")
             saveImpulses()
         } catch {
             print("Error deleting data from context: \(error.localizedDescription)")

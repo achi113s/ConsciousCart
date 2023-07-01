@@ -71,6 +71,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
                 cell.refreshContentView()
                 
                 cell.contentView.addSubview(ZeroImpulsesView(frame: cell.bounds))
+                
                 return cell
             } else {
                 // Show the Impulses.
@@ -79,13 +80,15 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
                     for: indexPath
                 ) as! ImpulseCollectionViewCell
                 
-                let index = indexPath.row
+                let index: Int = indexPath.row
                 
-                let impulse = impulsesStateManager.impulses[index]
+                let impulse: Impulse = impulsesStateManager.impulses[index]
                 
                 cell.itemNameLabel.text = impulse.wrappedName
+                print("loading impulse cell")
+                print(impulse.wrappedName)
+                print("number of subviews in cell's contentview: \(cell.contentView.subviews.count)")
                 cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
-                
                 let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
                 cell.remainingTimeLabel.text = remainingTime.0
                 
