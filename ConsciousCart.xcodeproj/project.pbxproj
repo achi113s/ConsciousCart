@@ -16,6 +16,9 @@
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */; };
 		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
+		444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */; };
+		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
+		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
 		4452AD192A4A7DFE004C2E7E /* ZeroImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */; };
 		44595EE92A02219C00D0AC48 /* checkmark.riv in Resources */ = {isa = PBXBuildFile; fileRef = 44595EE82A02219C00D0AC48 /* checkmark.riv */; };
@@ -77,6 +80,9 @@
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
+		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
 		4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroImpulsesView.swift; sourceTree = "<group>"; };
 		44595EE82A02219C00D0AC48 /* checkmark.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark.riv; sourceTree = "<group>"; };
@@ -140,13 +146,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		442B92612A34D86D0042082C /* AddToConsciousCartViewControllers */ = {
+		442B92612A34D86D0042082C /* AddToConsciousCartViewController */ = {
 			isa = PBXGroup;
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */,
 			);
-			path = AddToConsciousCartViewControllers;
+			path = AddToConsciousCartViewController;
 			sourceTree = "<group>";
 		};
 		4450EED12A088A6A00D8C680 /* Managers */ = {
@@ -244,6 +250,7 @@
 				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
 				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
 				4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */,
+				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,11 +258,11 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				442B92612A34D86D0042082C /* AddToConsciousCartViewControllers */,
+				442B92612A34D86D0042082C /* AddToConsciousCartViewController */,
 				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
 				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
-				44F1EC6B2A4E569A00091BD1 /* MainCollectionViewControllers */,
+				44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,12 +292,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		44F1EC6B2A4E569A00091BD1 /* MainCollectionViewControllers */ = {
+		44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
 				448D940E2A3E48650035B34C /* MainCollectionViewController.swift */,
+				444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */,
+				444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */,
 			);
-			path = MainCollectionViewControllers;
+			path = MainCollectionViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
@@ -453,9 +463,11 @@
 				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
+				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
+				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,

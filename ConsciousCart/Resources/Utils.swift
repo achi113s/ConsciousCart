@@ -26,6 +26,15 @@ enum lengthRemainingForImpulse {
     case aLongTime, aMediumTime, aShortTime
 }
 
+enum MainCollectionViewCellReuseIdentifiers: String {
+    case defaultCellReuseIdentifier = "cell"
+    case savingsChartCellReuseIdentifier = "savingsChartCell"
+    case noImpulsesCellReuseIdentifier = "noImpulsesCell"
+    case impulseCellReuseIdentifier = "impulseCell"
+    case impulsesCategoryHeaderIdentifier = "impulsesCategoryHeaderId"
+    case headerIdentifier = "headerId"
+}
+
 class Utils {
     static func printFonts() {
         for family in UIFont.familyNames.sorted() {
@@ -93,4 +102,18 @@ class Utils {
         Item(date: Date(timeIntervalSince1970: 1683274339), value: -700),
         Item(date: Date(timeIntervalSince1970: 1684544894), value: -300.23)
     ]
+}
+
+extension UICollectionViewCell {
+    /// Refreshes the cell's contentView by removing all of its subviews.
+    func refreshContentView() {
+        for view in self.contentView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+        self.refreshContentView()
+    }
 }

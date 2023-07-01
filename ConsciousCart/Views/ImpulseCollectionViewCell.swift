@@ -8,8 +8,6 @@
 import UIKit
 
 final class ImpulseCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "impulseCVC"
-    
     var itemNameLabel: UILabel!
     var itemPriceLabel: UILabel!
     var remainingTimeLabel: UILabel!
@@ -58,6 +56,11 @@ final class ImpulseCollectionViewCell: UICollectionViewCell {
         setCellShadow()
         
         setCellCorners()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.refreshContentView()
     }
     
     func setCellLayoutConstraints() {

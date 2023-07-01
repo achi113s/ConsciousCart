@@ -18,7 +18,7 @@ class ZeroImpulsesView: UIView {
         viewLabel.translatesAutoresizingMaskIntoConstraints = false
         viewLabel.text = "Tap the add button to get started!"
         viewLabel.lineBreakMode = .byWordWrapping
-        viewLabel.font = UIFont.ccFont(textStyle: .subheadline2)
+        viewLabel.font = UIFont.ccFont(textStyle: .headline)
         viewLabel.textColor = .black
         
         self.addSubview(viewLabel)
