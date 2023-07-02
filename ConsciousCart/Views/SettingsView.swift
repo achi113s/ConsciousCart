@@ -12,10 +12,20 @@ struct SettingsView: View {
     var impulsesStateManager: ImpulsesStateManager?
     
     @State private var showingDeleteAlert = false
+    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
     
     var body: some View {
         VStack {
             Form {
+                Section("Appearance") {
+                    List {
+                        Toggle("Dark Mode", isOn: $forceDarkModeSetting)
+                            .onChange(of: forceDarkModeSetting) { darkModeEnabled in
+                                UserDefaults.standard.set(forceDarkModeSetting, forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
+                            }
+                    }
+                }
+                
                 Section("My Data") {
                     List {
                         Button("Delete My Data", role: .destructive) {

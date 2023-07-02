@@ -45,8 +45,6 @@ final class ImpulsesStateManager {
         } catch {
             print("Error saving context: \(error.localizedDescription)")
         }
-        
-        loadImpulses()
     }
     
     public func addImpulse(
@@ -68,6 +66,7 @@ final class ImpulsesStateManager {
             newImpulse.completed = false
             
             saveImpulses()
+            loadImpulses()
         }
     
     public func deleteAllImpulses() {
@@ -91,6 +90,7 @@ final class ImpulsesStateManager {
             }
             print("All impulses deleted!")
             saveImpulses()
+            loadImpulses()
         } catch {
             print("Error deleting data from context: \(error.localizedDescription)")
         }

@@ -35,6 +35,10 @@ enum MainCollectionViewCellReuseIdentifiers: String {
     case headerIdentifier = "headerId"
 }
 
+enum UserDefaultsKeys: String {
+    case forceDarkModeSetting = "forceDarkMode"
+}
+
 class Utils {
     static func printFonts() {
         for family in UIFont.familyNames.sorted() {

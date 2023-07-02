@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = createTabBar()
-//        window?.overrideUserInterfaceStyle = .light
+        window?.overrideUserInterfaceStyle = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue) ? .dark : .unspecified
         window?.makeKeyAndVisible()
     }
     
