@@ -90,6 +90,7 @@ extension MainCollectionViewController {
     }
     
     private func impulseListSection(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        guard let impulsesStateManager = impulsesStateManager else { fatalError("No data manager for impulseListSection.")}
         var listConfig = UICollectionLayoutListConfiguration(appearance: .plain)
         
         listConfig.showsSeparators = false
@@ -101,16 +102,11 @@ extension MainCollectionViewController {
                     return
                 }
                 
-                guard let impulsesStateManager = impulsesStateManager else {
-                    completion(false)
-                    return
-                }
-                
                 let impulse = impulsesStateManager.impulses[indexPath.row]
                 impulsesStateManager.deleteImpulse(impulse: impulse)
                 
                 collectionView.deleteItems(at: [indexPath])
-                
+
                 completion(true)
             })
             
@@ -128,11 +124,20 @@ extension MainCollectionViewController {
                     heightDimension: .absolute(60)
                 ),
             elementKind: MainCollectionViewReuseIdentifiers.impulsesCategoryHeaderIdentifier.rawValue,
-            alignment: .topLeading,
-            absoluteOffset: CGPoint(x: 16, y: 0)
+            alignment: .topLeading
         )
         
-        section.boundarySupplementaryItems = [header]
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize:
+                .init(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(60)
+                ),
+            elementKind: MainCollectionViewReuseIdentifiers.impulsesCategoryFooterIdentifier.rawValue,
+            alignment: .bottom
+        )
+        
+        section.boundarySupplementaryItems = impulsesStateManager.impulses.isEmpty ? [header, footer] : [header]
         
         return section
     }
@@ -142,6 +147,9 @@ extension MainCollectionViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewReuseIdentifiers.savingsChartCellReuseIdentifier.rawValue)
         
         collectionView.register(ImpulsesCategoryHeader.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryHeaderIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue)
+        
+        collectionView.register(ImpulsesCategoryNoElementsFooter.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryFooterIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.footerIdentifier.rawValue)
+        
         collectionView.register(UICollectionViewListCell.self, forCellWithReuseIdentifier: MainCollectionViewReuseIdentifiers.noImpulsesCellReuseIdentifier.rawValue)
         collectionView.register(ImpulseCollectionViewListCell.self, forCellWithReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue)
     }

@@ -28,19 +28,6 @@ class MainCollectionViewDelegate: NSObject, UICollectionViewDelegate {
         mainCVC?.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else { return }
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ImpulseCollectionViewCell else { return }
-        
-        UIView.animate(withDuration: 0.5) {
-            cell.contentView.backgroundColor = .lightGray
-        }
-        
-        UIView.animate(withDuration: 0.5) {
-            cell.contentView.backgroundColor = .systemBackground
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let impulsesStateManager = impulsesStateManager else { return false }
         guard !impulsesStateManager.impulses.isEmpty else { return false }

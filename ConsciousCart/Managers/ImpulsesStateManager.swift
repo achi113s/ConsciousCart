@@ -8,12 +8,12 @@
 import CoreData
 
 final class ImpulsesStateManager {
-    private var moc: NSManagedObjectContext?
+    private var moc: NSManagedObjectContext? = nil
     
     private(set) var impulses: [Impulse] = [Impulse]()
     private(set) var completedImpulses: [Impulse] = [Impulse]()
     
-    init(moc: NSManagedObjectContext? = nil) {
+    init(moc: NSManagedObjectContext?) {
         self.moc = moc
         
         loadImpulses()
@@ -99,8 +99,13 @@ final class ImpulsesStateManager {
     public func deleteImpulse(impulse: Impulse) {
         guard let moc = moc else { return }
         
-        moc.delete(impulse)
-        saveContext()
-        loadImpulses()
+        if let index = impulses.firstIndex(of: impulse) {
+            impulses.remove(at: index)
+            
+            moc.delete(impulse)
+            
+            saveContext()
+            loadImpulses()
+        }
     }
 }

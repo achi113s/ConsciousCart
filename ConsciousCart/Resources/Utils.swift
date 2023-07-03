@@ -33,6 +33,8 @@ enum MainCollectionViewReuseIdentifiers: String {
     case impulseCellReuseIdentifier = "impulseCell"
     case impulsesCategoryHeaderIdentifier = "impulsesCategoryHeaderId"
     case headerIdentifier = "headerId"
+    case impulsesCategoryFooterIdentifier = "impulsesCategoryFooterId"
+    case footerIdentifier = "footerId"
 }
 
 enum UserDefaultsKeys: String {

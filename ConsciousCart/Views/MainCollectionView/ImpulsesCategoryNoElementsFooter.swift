@@ -1,20 +1,20 @@
 //
-//  ImpulsesCategoryHeader.swift
+//  ImpulsesFooterViewController.swift
 //  ConsciousCart
 //
-//  Created by Giorgio Latour on 6/30/23.
+//  Created by Giorgio Latour on 7/2/23.
 //
 
 import UIKit
 
-class ImpulsesCategoryHeader: UICollectionReusableView {
+class ImpulsesCategoryNoElementsFooter: UICollectionReusableView {
     private let label = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        label.text = "My Impulses"
-        label.font = UIFont.ccFont(textStyle: .title2)
+        label.text = "Tap the add button below to get started!"
+        label.font = UIFont.ccFont(textStyle: .headline)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
     }
@@ -22,8 +22,8 @@ class ImpulsesCategoryHeader: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16)
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
     

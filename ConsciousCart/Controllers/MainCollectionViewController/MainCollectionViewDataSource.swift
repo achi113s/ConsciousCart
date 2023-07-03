@@ -24,17 +24,11 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else if section == 1 {
-            guard let impulsesStateManager = impulsesStateManager else { return 1 }
+        } else {
+            guard let impulsesStateManager = impulsesStateManager else { return 0 }
             
-            if impulsesStateManager.impulses.isEmpty {
-                return 1
-            } else {
-                return impulsesStateManager.impulses.count
-            }
+            return impulsesStateManager.impulses.count
         }
-        
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,6 +43,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             return cell
         }
         
+        // Section 0 is the Savings Chart Section
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MainCollectionViewReuseIdentifiers.savingsChartCellReuseIdentifier.rawValue,
@@ -61,48 +56,44 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             
             return cell
         } else {
-            // Show a placeholder view if there's no Impulse data to show in the table.
-            if impulsesStateManager.impulses.isEmpty {
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.noImpulsesCellReuseIdentifier.rawValue,
-                    for: indexPath
-                )
-                
-                cell.refreshContentView()
-                
-                cell.contentView.addSubview(ZeroImpulsesView(frame: cell.bounds))
-                
-                return cell
-            } else {
-                // Show the Impulses.
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue,
-                    for: indexPath
-                ) as! ImpulseCollectionViewListCell
-                
-                let index: Int = indexPath.row
-                
-                let impulse: Impulse = impulsesStateManager.impulses[index]
-                
-                cell.itemNameLabel.text = impulse.wrappedName
-                cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
-                let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
-                cell.remainingTimeLabel.text = remainingTime.0
-                
-                return cell
-            }
+            // Show the Impulses.
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue,
+                for: indexPath
+            ) as! ImpulseCollectionViewListCell
+            
+            let index: Int = indexPath.row
+            
+            let impulse: Impulse = impulsesStateManager.impulses[index]
+            
+            cell.itemNameLabel.text = impulse.wrappedName
+            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+            cell.remainingTimeLabel.text = remainingTime.0
+            
+            return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue,
-            for: indexPath
-        )
+        if kind == MainCollectionViewReuseIdentifiers.impulsesCategoryHeaderIdentifier.rawValue {
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue,
+                for: indexPath
+            )
+            
+            return header
+        } else {
+            let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.footerIdentifier.rawValue,
+                for: indexPath
+            )
+            
+            return footer
+        }
         
-        return header
+        
     }
-    
-    
 }
