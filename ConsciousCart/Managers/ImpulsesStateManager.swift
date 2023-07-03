@@ -11,7 +11,13 @@ final class ImpulsesStateManager {
     private var moc: NSManagedObjectContext? = nil
     
     private(set) var impulses: [Impulse] = [Impulse]()
-    private(set) var completedImpulses: [Impulse] = [Impulse]()
+    private(set) var completedImpulses: [Impulse] = [Impulse]() {
+        didSet {
+            totalAmountSaved = completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
+        }
+    }
+    
+    public var totalAmountSaved: Double = Double(0)
     
     init(moc: NSManagedObjectContext?) {
         self.moc = moc

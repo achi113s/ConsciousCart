@@ -5,36 +5,31 @@
 //  Created by Giorgio Latour on 4/27/23.
 //
 
+import SwiftUI
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
-    var completedImpulses = [Impulse]()
-    var impulses = [Impulse]()
-    
-    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var impulsesStateManager: ImpulsesStateManager?
     
     private var scoreLabel: UILabel!
     private var titleLabel: UILabel!
     private var differentiateWithoutColorIndicator: UIImageView!
-    
-    private var amountSaved: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-//        (impulses, completedImpulses) = ImpulseDataManager.loadImpulses(moc: moc)
-        
-        amountSaved = completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
-        
-        setSubviewProperties()
-        addSubviewsToView()
-        setLayoutConstraints()
+        configureSubviews()
+        configureSubviewsText()
+        configureLayoutConstraints()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSubviewsText()
     }
     
-    func setSubviewProperties() {
+    private func configureSubviews() {
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Your ConsciousCart score is"
@@ -43,28 +38,33 @@ class ProfileViewController: UIViewController {
         
         scoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.text = Utils.formatNumberAsCurrency(NSNumber(value: amountSaved))
         scoreLabel.numberOfLines = 1
         scoreLabel.adjustsFontSizeToFitWidth = true
         scoreLabel.font = UIFont.ccFont(textStyle: .title)
-        scoreLabel.textColor = .green
+        scoreLabel.textColor = .systemGreen
         
-        let arrowConfig = UIImage.SymbolConfiguration(pointSize: scoreLabel.font.pointSize,
-                                                      weight: .regular, scale: .default)
-        let arrowImage = UIImage(systemName: amountSaved >= 0.0 ? "arrow.up" : "arrow.down",
-                                 withConfiguration: arrowConfig)
-        differentiateWithoutColorIndicator = UIImageView(image: arrowImage)
+        differentiateWithoutColorIndicator.tintColor = .black
         differentiateWithoutColorIndicator.translatesAutoresizingMaskIntoConstraints = false
         differentiateWithoutColorIndicator.isHidden = UIAccessibility.shouldDifferentiateWithoutColor
-    }
-    
-    func addSubviewsToView() {
+        
         view.addSubview(titleLabel)
         view.addSubview(scoreLabel)
         view.addSubview(differentiateWithoutColorIndicator)
     }
     
-    func setLayoutConstraints() {
+    private func configureSubviewsText() {
+        let totalAmountSaved = impulsesStateManager?.totalAmountSaved ?? 0.0
+        
+        scoreLabel.text = Utils.formatNumberAsCurrency(NSNumber(value: totalAmountSaved))
+        
+        let arrowConfig = UIImage.SymbolConfiguration(pointSize: scoreLabel.font.pointSize,
+                                                      weight: .regular, scale: .default)
+        let arrowImage = UIImage(systemName: totalAmountSaved >= 0.0 ? "arrow.up" : "arrow.down",
+                                 withConfiguration: arrowConfig)
+        differentiateWithoutColorIndicator = UIImageView(image: arrowImage)
+    }
+    
+    private func configureLayoutConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
