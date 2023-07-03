@@ -40,7 +40,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let impulsesStateManager = impulsesStateManager else {
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MainCollectionViewCellReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
                 for: indexPath
             )
             
@@ -51,7 +51,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MainCollectionViewCellReuseIdentifiers.savingsChartCellReuseIdentifier.rawValue,
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.savingsChartCellReuseIdentifier.rawValue,
                 for: indexPath
             )
             
@@ -64,7 +64,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             // Show a placeholder view if there's no Impulse data to show in the table.
             if impulsesStateManager.impulses.isEmpty {
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MainCollectionViewCellReuseIdentifiers.noImpulsesCellReuseIdentifier.rawValue,
+                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.noImpulsesCellReuseIdentifier.rawValue,
                     for: indexPath
                 )
                 
@@ -76,18 +76,15 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             } else {
                 // Show the Impulses.
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MainCollectionViewCellReuseIdentifiers.impulseCellReuseIdentifier.rawValue,
+                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue,
                     for: indexPath
-                ) as! ImpulseCollectionViewCell
+                ) as! ImpulseCollectionViewListCell
                 
                 let index: Int = indexPath.row
                 
                 let impulse: Impulse = impulsesStateManager.impulses[index]
                 
                 cell.itemNameLabel.text = impulse.wrappedName
-                print("loading impulse cell")
-                print(impulse.wrappedName)
-                print("number of subviews in cell's contentview: \(cell.contentView.subviews.count)")
                 cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
                 let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
                 cell.remainingTimeLabel.text = remainingTime.0
@@ -100,10 +97,12 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
-            withReuseIdentifier: MainCollectionViewCellReuseIdentifiers.headerIdentifier.rawValue,
+            withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue,
             for: indexPath
         )
         
         return header
     }
+    
+    
 }

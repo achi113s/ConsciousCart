@@ -12,10 +12,9 @@ class ImpulsesCategoryHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         label.text = "My Impulses"
         label.font = UIFont.ccFont(textStyle: .title2)
-        
         addSubview(label)
     }
     

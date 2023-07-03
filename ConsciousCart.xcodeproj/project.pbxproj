@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */; };
+		4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		44296B5129F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		44296B5229F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
@@ -27,7 +29,7 @@
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B32A187ABF0013ACB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B22A187ABF0013ACB1 /* SettingsView.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
-		448D940F2A3E48650035B34C /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D940E2A3E48650035B34C /* MainCollectionViewController.swift */; };
+		448D940F2A3E48650035B34C /* OldMainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D940E2A3E48650035B34C /* OldMainCollectionViewController.swift */; };
 		448D94112A3E94D60035B34C /* ImpulseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */; };
 		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
 		448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */; };
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewListCell.swift; sourceTree = "<group>"; };
+		4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToConsciousCartViewController.swift; sourceTree = "<group>"; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
@@ -89,7 +93,7 @@
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B22A187ABF0013ACB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		448D940E2A3E48650035B34C /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		448D940E2A3E48650035B34C /* OldMainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldMainCollectionViewController.swift; sourceTree = "<group>"; };
 		448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewCell.swift; sourceTree = "<group>"; };
 		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
 		448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
 				4452AD182A4A7DFE004C2E7E /* ZeroImpulsesView.swift */,
 				448D94102A3E94D60035B34C /* ImpulseCollectionViewCell.swift */,
+				4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */,
 				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
 			);
 			path = MainCollectionView;
@@ -303,9 +308,10 @@
 		44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
-				448D940E2A3E48650035B34C /* MainCollectionViewController.swift */,
+				448D940E2A3E48650035B34C /* OldMainCollectionViewController.swift */,
 				444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */,
 				444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */,
+				4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */,
 			);
 			path = MainCollectionViewController;
 			sourceTree = "<group>";
@@ -458,10 +464,11 @@
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
-				448D940F2A3E48650035B34C /* MainCollectionViewController.swift in Sources */,
+				448D940F2A3E48650035B34C /* OldMainCollectionViewController.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */,
+				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				448D94112A3E94D60035B34C /* ImpulseCollectionViewCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
@@ -478,6 +485,7 @@
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
+				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,

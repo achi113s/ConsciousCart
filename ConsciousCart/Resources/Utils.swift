@@ -26,7 +26,7 @@ enum lengthRemainingForImpulse {
     case aLongTime, aMediumTime, aShortTime
 }
 
-enum MainCollectionViewCellReuseIdentifiers: String {
+enum MainCollectionViewReuseIdentifiers: String {
     case defaultCellReuseIdentifier = "cell"
     case savingsChartCellReuseIdentifier = "savingsChartCell"
     case noImpulsesCellReuseIdentifier = "noImpulsesCell"
