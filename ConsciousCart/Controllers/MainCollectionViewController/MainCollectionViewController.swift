@@ -95,9 +95,22 @@ extension MainCollectionViewController {
         listConfig.showsSeparators = false
         
         listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { action, view, completion in
-                guard let self = self else { return }
-                print("delete action")
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] action, view, completion in
+                guard let self = self else {
+                    completion(false)
+                    return
+                }
+                
+                guard let impulsesStateManager = impulsesStateManager else {
+                    completion(false)
+                    return
+                }
+                
+                let impulse = impulsesStateManager.impulses[indexPath.row]
+                impulsesStateManager.deleteImpulse(impulse: impulse)
+                
+                collectionView.deleteItems(at: [indexPath])
+                
                 completion(true)
             })
             

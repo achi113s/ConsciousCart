@@ -9,10 +9,10 @@ import UIKit
 
 //MARK: - UICollectionViewDelegate
 class MainCollectionViewDelegate: NSObject, UICollectionViewDelegate {
-    var impulsesStateManager: ImpulsesStateManager?
-    var mainCVC: MainCollectionViewController?
+    var impulsesStateManager: ImpulsesStateManager? = nil
+    var mainCVC: MainCollectionViewController? = nil
     
-    init(impulsesStateManager: ImpulsesStateManager? = nil, mainCVC: MainCollectionViewController? = nil) {
+    init(impulsesStateManager: ImpulsesStateManager?, mainCVC: MainCollectionViewController?) {
         self.impulsesStateManager = impulsesStateManager
         self.mainCVC = mainCVC
     }

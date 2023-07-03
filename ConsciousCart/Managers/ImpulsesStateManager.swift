@@ -19,7 +19,7 @@ final class ImpulsesStateManager {
         loadImpulses()
     }
     
-    public func setMOC(moc: NSManagedObjectContext) {
+    public func setContext(moc: NSManagedObjectContext) {
         self.moc = moc
     }
     
@@ -37,7 +37,7 @@ final class ImpulsesStateManager {
         }
     }
     
-    private func saveImpulses() {
+    private func saveContext() {
         guard let moc = moc else { return }
         
         do {
@@ -65,7 +65,7 @@ final class ImpulsesStateManager {
             newImpulse.reasonNeeded = reasonNeeded
             newImpulse.completed = false
             
-            saveImpulses()
+            saveContext()
             loadImpulses()
         }
     
@@ -89,10 +89,18 @@ final class ImpulsesStateManager {
                 moc.delete(impulse)
             }
             print("All impulses deleted!")
-            saveImpulses()
+            saveContext()
             loadImpulses()
         } catch {
             print("Error deleting data from context: \(error.localizedDescription)")
         }
+    }
+    
+    public func deleteImpulse(impulse: Impulse) {
+        guard let moc = moc else { return }
+        
+        moc.delete(impulse)
+        saveContext()
+        loadImpulses()
     }
 }
