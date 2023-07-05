@@ -18,6 +18,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // Return 2 for the number of sections, one for the SwiftUI Chart and one for the list of Impulses.
+        guard let impulsesStateManager else { return 0 }
         return 2
     }
     
@@ -66,10 +67,17 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             
             let impulse: Impulse = impulsesStateManager.impulses[index]
             
-            cell.itemNameLabel.text = impulse.wrappedName
-            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+            var content = UIListContentConfiguration.subtitleCell()
+            content.text = impulse.wrappedName
+            content.textProperties.font = UIFont.ccFont(textStyle: .title3)
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
-            cell.remainingTimeLabel.text = remainingTime.0
+            content.secondaryText = remainingTime.0
+            cell.contentConfiguration = content
+            cell.accessories = [.disclosureIndicator()]
+//            cell.itemNameLabel.text = impulse.wrappedName
+//            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+//            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+//            cell.remainingTimeLabel.text = remainingTime.0
             
             return cell
         }
@@ -93,7 +101,5 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             
             return footer
         }
-        
-        
     }
 }

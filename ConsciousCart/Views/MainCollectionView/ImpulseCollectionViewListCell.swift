@@ -8,20 +8,20 @@
 import UIKit
 
 final class ImpulseCollectionViewListCell: UICollectionViewListCell {
-    var itemNameLabel: UILabel!
-    var itemPriceLabel: UILabel!
-    var remainingTimeLabel: UILabel!
-    var disclosureAccessory: UIImageView!
-    
-    private let labelFont = UIFont.ccFont(textStyle: .body)
-    private let priceFont = UIFont.ccFont(textStyle: .regular, fontSize: 21)
+//    var itemNameLabel: UILabel!
+//    var itemPriceLabel: UILabel!
+//    var remainingTimeLabel: UILabel!
+//    var disclosureAccessory: UIImageView!
+//    
+//    private let labelFont = UIFont.ccFont(textStyle: .body)
+//    private let priceFont = UIFont.ccFont(textStyle: .regular, fontSize: 21)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureSubviews()
+//        configureSubviews()
         configureCorners()
-        configureLayoutConstraints()
+//        configureLayoutConstraints()
 //        configureShadows()
     }
     
@@ -29,57 +29,57 @@ final class ImpulseCollectionViewListCell: UICollectionViewListCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureSubviews() {
-        let ltr = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .leftToRight
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold, scale: .large)
-        
-        disclosureAccessory = UIImageView(image:  UIImage(systemName: ltr ? "chevron.right" : "chevron.left", withConfiguration: largeConfig))
-        disclosureAccessory.tintColor = .lightGray
-        disclosureAccessory.translatesAutoresizingMaskIntoConstraints = false
-
-        itemNameLabel = UILabel()
-        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.font = priceFont
-        itemNameLabel.text = "Unknown Item"
-        itemNameLabel.numberOfLines = 1
-        itemNameLabel.textAlignment = .left
-        
-        itemPriceLabel = UILabel()
-        itemPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemPriceLabel.font = priceFont
-        itemPriceLabel.text = "Unknown Price"
-        itemPriceLabel.numberOfLines = 0
-        itemPriceLabel.textAlignment = .right
-
-        remainingTimeLabel = UILabel()
-        remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        remainingTimeLabel.text = "Unknown Time"
-        remainingTimeLabel.font = labelFont
-        remainingTimeLabel.numberOfLines = 0
-        remainingTimeLabel.textAlignment = .left
-        
-        contentView.addSubview(disclosureAccessory)
-        contentView.addSubview(itemNameLabel)
-        contentView.addSubview(itemPriceLabel)
-        contentView.addSubview(remainingTimeLabel)
-    }
-    
-    private func configureLayoutConstraints() {
-        NSLayoutConstraint.activate([
-            itemNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
-            itemNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            itemNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
-            
-            remainingTimeLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
-            remainingTimeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            
-            disclosureAccessory.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8),
-            disclosureAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            itemPriceLabel.rightAnchor.constraint(equalTo: disclosureAccessory.leftAnchor, constant: -8),
-            itemPriceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-        ])
-    }
+//    private func configureSubviews() {
+//        let ltr = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .leftToRight
+//        let largeConfig = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold, scale: .large)
+//
+//        disclosureAccessory = UIImageView(image:  UIImage(systemName: ltr ? "chevron.right" : "chevron.left", withConfiguration: largeConfig))
+//        disclosureAccessory.tintColor = .lightGray
+//        disclosureAccessory.translatesAutoresizingMaskIntoConstraints = false
+//
+//        itemNameLabel = UILabel()
+//        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
+//        itemNameLabel.font = priceFont
+//        itemNameLabel.text = "Unknown Item"
+//        itemNameLabel.numberOfLines = 1
+//        itemNameLabel.textAlignment = .left
+//
+//        itemPriceLabel = UILabel()
+//        itemPriceLabel.translatesAutoresizingMaskIntoConstraints = false
+//        itemPriceLabel.font = priceFont
+//        itemPriceLabel.text = "Unknown Price"
+//        itemPriceLabel.numberOfLines = 0
+//        itemPriceLabel.textAlignment = .right
+//
+//        remainingTimeLabel = UILabel()
+//        remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+//        remainingTimeLabel.text = "Unknown Time"
+//        remainingTimeLabel.font = labelFont
+//        remainingTimeLabel.numberOfLines = 0
+//        remainingTimeLabel.textAlignment = .left
+//
+//        contentView.addSubview(disclosureAccessory)
+//        contentView.addSubview(itemNameLabel)
+//        contentView.addSubview(itemPriceLabel)
+//        contentView.addSubview(remainingTimeLabel)
+//    }
+//
+//    private func configureLayoutConstraints() {
+//        NSLayoutConstraint.activate([
+//            itemNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
+//            itemNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+//            itemNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
+//
+//            remainingTimeLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
+//            remainingTimeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+//
+//            disclosureAccessory.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8),
+//            disclosureAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//
+//            itemPriceLabel.rightAnchor.constraint(equalTo: disclosureAccessory.leftAnchor, constant: -8),
+//            itemPriceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//        ])
+//    }
     
     private func configureCorners() {
         layer.cornerRadius = 10.0

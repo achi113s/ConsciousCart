@@ -21,15 +21,15 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         configureSubviews()
-        configureSubviewsText()
         configureLayoutConstraints()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSubviewsText()
     }
     
     private func configureSubviews() {
+        let totalAmountSaved = impulsesStateManager?.totalAmountSaved ?? 0.0
+        
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Your ConsciousCart score is"
@@ -42,7 +42,14 @@ class ProfileViewController: UIViewController {
         scoreLabel.adjustsFontSizeToFitWidth = true
         scoreLabel.font = UIFont.ccFont(textStyle: .title)
         scoreLabel.textColor = .systemGreen
+        scoreLabel.text = Utils.formatNumberAsCurrency(NSNumber(value: totalAmountSaved))
         
+        differentiateWithoutColorIndicator = UIImageView()
+        let arrowConfig = UIImage.SymbolConfiguration(pointSize: scoreLabel.font.pointSize,
+                                                      weight: .regular, scale: .default)
+        let arrowImage = UIImage(systemName: totalAmountSaved >= 0.0 ? "arrow.up" : "arrow.down",
+                                 withConfiguration: arrowConfig)
+        differentiateWithoutColorIndicator = UIImageView(image: arrowImage)
         differentiateWithoutColorIndicator.tintColor = .black
         differentiateWithoutColorIndicator.translatesAutoresizingMaskIntoConstraints = false
         differentiateWithoutColorIndicator.isHidden = UIAccessibility.shouldDifferentiateWithoutColor
@@ -50,18 +57,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(scoreLabel)
         view.addSubview(differentiateWithoutColorIndicator)
-    }
-    
-    private func configureSubviewsText() {
-        let totalAmountSaved = impulsesStateManager?.totalAmountSaved ?? 0.0
-        
-        scoreLabel.text = Utils.formatNumberAsCurrency(NSNumber(value: totalAmountSaved))
-        
-        let arrowConfig = UIImage.SymbolConfiguration(pointSize: scoreLabel.font.pointSize,
-                                                      weight: .regular, scale: .default)
-        let arrowImage = UIImage(systemName: totalAmountSaved >= 0.0 ? "arrow.up" : "arrow.down",
-                                 withConfiguration: arrowConfig)
-        differentiateWithoutColorIndicator = UIImageView(image: arrowImage)
     }
     
     private func configureLayoutConstraints() {

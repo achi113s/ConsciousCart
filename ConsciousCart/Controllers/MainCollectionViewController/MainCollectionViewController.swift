@@ -38,6 +38,7 @@ extension MainCollectionViewController {
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.autoresizingMask = [.flexibleHeight]
         
         collectionViewDataSource = MainCollectionViewDataSource(impulsesStateManager: impulsesStateManager)
         collectionView.dataSource = collectionViewDataSource
