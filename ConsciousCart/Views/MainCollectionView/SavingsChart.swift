@@ -20,7 +20,7 @@ struct SavingsChart: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 TextViewAnimatableCurrency(number: totalSavedNumber)
-                    .font(Font.custom("Nunito-Bold", size: 25))
+                    .font(Font.custom("Nunito-Bold", size: 24))
                     .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: totalSavedNumber))
                 
                 if differentiateWithoutColor {
@@ -120,9 +120,11 @@ struct SavingsChart: View {
             }
             .pickerStyle(.segmented)
             .padding([.leading, .trailing])
+            
+            Text("My Impulses")
+                .font(Font.custom("Nunito-Bold", size: 24))
         }
         .frame(height: 300)
-        .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
     }
     
     init(completedImpulses: [Impulse]) {
@@ -233,8 +235,6 @@ extension SavingsChart {
             rollingSum.append(newItem)
         }
         
-//        print(rollingSum)
-//        print(rollingSum.count)
         return rollingSum
     }
     

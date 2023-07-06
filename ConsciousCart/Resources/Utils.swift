@@ -31,6 +31,7 @@ enum MainCollectionViewReuseIdentifiers: String {
     case savingsChartCellReuseIdentifier = "savingsChartCell"
     case noImpulsesCellReuseIdentifier = "noImpulsesCell"
     case impulseCellReuseIdentifier = "impulseCell"
+    
     case impulsesCategoryHeaderIdentifier = "impulsesCategoryHeaderId"
     case headerIdentifier = "headerId"
     case impulsesCategoryFooterIdentifier = "impulsesCategoryFooterId"

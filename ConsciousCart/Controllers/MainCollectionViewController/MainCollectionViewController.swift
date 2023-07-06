@@ -10,7 +10,7 @@ import UIKit
 class MainCollectionViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager?
     
-    private(set) var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     private var collectionViewDataSource: MainCollectionViewDataSource!
     private var collectionViewDelegate: MainCollectionViewDelegate!
     

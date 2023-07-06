@@ -29,10 +29,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createMainCVC() -> UINavigationController {
-        let mainCVC = MainCollectionViewController()
+//        let mainCVC = MainCollectionViewController()
+        let mainCVC = CVDiffableViewController()
         mainCVC.title = "ConsciousCart"
         mainCVC.impulsesStateManager = impulsesStateManager
-        
+
         mainCVC.tabBarItem = UITabBarItem()
         mainCVC.tabBarItem.image = UIImage(systemName: "cart.circle")
         mainCVC.tabBarItem.title = "My Cart"

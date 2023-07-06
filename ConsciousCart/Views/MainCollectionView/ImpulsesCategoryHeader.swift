@@ -23,7 +23,7 @@ class ImpulsesCategoryHeader: UICollectionReusableView {
         super.layoutSubviews()
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16)
+            label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20)
         ])
     }
     
