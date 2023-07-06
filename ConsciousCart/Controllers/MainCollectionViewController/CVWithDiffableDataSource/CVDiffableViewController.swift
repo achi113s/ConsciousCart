@@ -129,6 +129,7 @@ extension CVDiffableViewController {
         
         section.contentInsets = .init(top: CGFloat(0), leading: CGFloat(16), bottom: CGFloat(0), trailing: CGFloat(16))
         
+        // This is a hack to get the Swift charts view in the collection view.
         let superHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize:
                 .init(
