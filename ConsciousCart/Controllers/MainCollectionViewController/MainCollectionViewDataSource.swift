@@ -64,21 +64,23 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             ) as! ImpulseCollectionViewListCell
             
             let index: Int = indexPath.row
-            
+
             let impulse: Impulse = impulsesStateManager.impulses[index]
-            
+
             var content = UIListContentConfiguration.subtitleCell()
             content.text = impulse.wrappedName
             content.textProperties.font = UIFont.ccFont(textStyle: .title3)
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
             content.secondaryText = remainingTime.0
+
             cell.contentConfiguration = content
             cell.accessories = [.disclosureIndicator()]
+            
 //            cell.itemNameLabel.text = impulse.wrappedName
 //            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
 //            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
 //            cell.remainingTimeLabel.text = remainingTime.0
-            
+
             return cell
         }
     }

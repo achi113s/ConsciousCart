@@ -103,6 +103,8 @@ extension MainCollectionViewController {
                     return
                 }
                 
+                view.frame = .init(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: CGFloat(150))
+                
                 let impulse = impulsesStateManager.impulses[indexPath.row]
                 impulsesStateManager.deleteImpulse(impulse: impulse)
                 
@@ -115,7 +117,7 @@ extension MainCollectionViewController {
         }
         
         let section = NSCollectionLayoutSection.list(using: listConfig, layoutEnvironment: layoutEnvironment)
-        
+        section.interGroupSpacing = CGFloat(10)
         section.contentInsets = .init(top: CGFloat(0), leading: CGFloat(16), bottom: CGFloat(0), trailing: CGFloat(16))
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
