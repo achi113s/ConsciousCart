@@ -17,7 +17,7 @@
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222132A11C35800753F8D /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222122A11C35800753F8D /* FileManager-DocumentsDirectory.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
-		4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */; };
+		4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */; };
 		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
 		444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */; };
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
@@ -81,7 +81,7 @@
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222122A11C35800753F8D /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
-		4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
-				4445B89C2A00BD4A0022F281 /* ScannerViewController.swift */,
+				4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */,
 			);
 			path = AddToConsciousCartViewController;
 			sourceTree = "<group>";
@@ -286,11 +286,11 @@
 		44D7291B2A0A9E4D0031A9EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				448D94122A3EA1020035B34C /* CCFonts.swift */,
+				44C749E52A58FC70000AAE63 /* Extensions.swift */,
+				44C749E72A58FE57000AAE63 /* Enums.swift */,
 				44AACCD82A0345FC0053334C /* Secrets.swift */,
 				4496A0592A170F3E004C1349 /* Utils.swift */,
-				44C749E52A58FC70000AAE63 /* Extensions.swift */,
-				448D94122A3EA1020035B34C /* CCFonts.swift */,
-				44C749E72A58FE57000AAE63 /* Enums.swift */,
 				44D7291A2A0A9E430031A9EE /* Fonts */,
 			);
 			path = Resources;
@@ -478,7 +478,7 @@
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
-				4445B89D2A00BD4A0022F281 /* ScannerViewController.swift in Sources */,
+				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

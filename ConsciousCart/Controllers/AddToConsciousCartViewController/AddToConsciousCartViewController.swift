@@ -103,7 +103,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     }
     
     @objc func scanBarcode() {
-        let scanBarcodeVC = ScannerViewController()
+        let scanBarcodeVC = BarcodeScannerViewController()
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
     

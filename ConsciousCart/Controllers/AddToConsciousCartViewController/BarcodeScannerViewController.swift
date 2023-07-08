@@ -8,16 +8,16 @@
 import AVFoundation
 import UIKit
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+/// This scanner based on Paul Hudson's barcode scanner.
+/// https://www.hackingwithswift.com/example-code/media/how-to-scan-a-barcode
+class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    //MARK: - View Properties
+    private var captureSession: AVCaptureSession!
+    private var previewLayer: AVCaptureVideoPreviewLayer!
+    private var timer: Timer?
+    private var spinner: UIActivityIndicatorView!
     
-    var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
-    var timer: Timer?
-    var spinner: UIActivityIndicatorView!
-    
-    var barcodeAPIManager = BarcodeAPIManager()
+    private var barcodeAPIManager: BarcodeAPIManager! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +25,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .white
         
+        barcodeAPIManager = BarcodeAPIManager()
         barcodeAPIManager.delegate = self
         
         loadScannerView()
+        configureSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +55,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
-    //MARK: - Scanner View Setup and Support Funcs
-    
-    func loadScannerView() {
+}
+
+//MARK: - Scanner View Setup and Support
+extension BarcodeScannerViewController {
+    private func loadScannerView() {
         captureSession = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -97,16 +100,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         previewView.layer.addSublayer(previewLayer)
         
-        spinner = UIActivityIndicatorView(style: .large)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.center = view.center
-        spinner.hidesWhenStopped = true
-        view.addSubview(spinner)
-        
         startRunningCaptureSession()
     }
     
-    func failed() {
+    private func failed() {
         let message = """
             Your device does not support scanning a code
             from an item. Please use a device with a camera.
@@ -117,7 +114,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession = nil
     }
     
-    func startRunningCaptureSession() {
+    private func startRunningCaptureSession() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.captureSession.startRunning()
         }
@@ -134,15 +131,29 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    func found(code: String) {
+    private func found(code: String) {
         spinner.startAnimating()
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             self?.barcodeAPIManager.fetchBarcodeInfo(for: code)
         }
     }
     
-    //MARK: - Selectors
+    private func configureSpinner() {
+        spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.center = view.center
+        spinner.color = UIColor(named: "ShyMoment")
+        spinner.hidesWhenStopped = true
+        
+        view.addSubview(spinner)
+        
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
     
+    //MARK: - Selectors
     @objc func dismissAfterTime() {
         timer?.invalidate()
         navigationController?.popViewController(animated: true)
@@ -150,22 +161,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 }
 
 //MARK: - BarcodeAPIManager Delegate Extension
-
-extension ScannerViewController: BarcodeAPIManagerDelegate {
+extension BarcodeScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
         DispatchQueue.main.async { [weak self] in
             guard let count = self?.navigationController?.viewControllers.count else { return }
             guard let prevView = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController else { return }
 
+            let price: String = barcodeInfo.Stores.first?.price ?? "0"
             prevView.itemNameTextField.text = barcodeInfo.itemAttributes.title
-            prevView.itemPriceTextField.text = barcodeInfo.Stores.first?.price ?? ""
+            prevView.itemPriceTextField.text = price.asCurrency(locale: Locale.current)
             
             self?.spinner.stopAnimating()
-            self?.timer = Timer.scheduledTimer(timeInterval: 2.05, target: self!,
+            // Wait a short time before dismissing the scanner view.
+            self?.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self!,
                                                selector: #selector(self?.dismissAfterTime), userInfo: nil, repeats: false)
         }
-        
-        print(barcodeInfo)
     }
     
     func didFailWithError(error: Error) {
