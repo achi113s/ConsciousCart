@@ -27,8 +27,8 @@ class MainCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
         
+        navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.reloadData()
     }
 }
@@ -39,6 +39,7 @@ extension MainCollectionViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleHeight]
+        collectionView.contentInset = UIEdgeInsets(top: CGFloat(0), left: CGFloat(0), bottom: CGFloat(10), right: CGFloat(0))
         
         collectionViewDataSource = MainCollectionViewDataSource(impulsesStateManager: impulsesStateManager)
         collectionView.dataSource = collectionViewDataSource
@@ -56,7 +57,7 @@ extension MainCollectionViewController {
             guard let self = self else { fatalError("MainCollectionViewController could not be unwrapped.") }
             
             // Section for the Savings Chart SwiftUI View.
-            if sectionNumber == 0 {
+            if sectionNumber == CVSection.chartSection.rawValue {
                 return savingsChartSection()
             } else {
                 // Only other case is the section for the Impulses.
@@ -117,6 +118,8 @@ extension MainCollectionViewController {
         }
         
         let section = NSCollectionLayoutSection.list(using: listConfig, layoutEnvironment: layoutEnvironment)
+        
+        // THIS SETS THE SPACING BETWEEN CELLS IN THE LIST
         section.interGroupSpacing = CGFloat(10)
         section.contentInsets = .init(top: CGFloat(0), leading: CGFloat(16), bottom: CGFloat(0), trailing: CGFloat(16))
         
@@ -141,7 +144,6 @@ extension MainCollectionViewController {
         )
         
         section.boundarySupplementaryItems = impulsesStateManager.impulses.isEmpty ? [header, footer] : [header]
-        
         return section
     }
     
@@ -151,9 +153,8 @@ extension MainCollectionViewController {
         
         collectionView.register(ImpulsesCategoryHeader.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryHeaderIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue)
         
-        collectionView.register(ImpulsesCategoryNoElementsFooter.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryFooterIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.footerIdentifier.rawValue)
-        
-        collectionView.register(UICollectionViewListCell.self, forCellWithReuseIdentifier: MainCollectionViewReuseIdentifiers.noImpulsesCellReuseIdentifier.rawValue)
+        collectionView.register(NoImpulsesFooter.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryFooterIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.footerIdentifier.rawValue)
+
         collectionView.register(ImpulseCollectionViewListCell.self, forCellWithReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue)
     }
 }

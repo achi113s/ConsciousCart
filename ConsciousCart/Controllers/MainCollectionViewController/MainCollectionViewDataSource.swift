@@ -18,17 +18,19 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // Return 2 for the number of sections, one for the SwiftUI Chart and one for the list of Impulses.
-        guard let impulsesStateManager else { return 0 }
-        return 2
+        guard impulsesStateManager != nil else { return 0 }
+        return CVSection.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        if section == CVSection.chartSection.rawValue {
             return 1
-        } else {
+        } else if section == CVSection.impulseSection.rawValue {
             guard let impulsesStateManager = impulsesStateManager else { return 0 }
             
             return impulsesStateManager.impulses.count
+        } else {
+            return 0
         }
     }
     
@@ -40,12 +42,12 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             )
             
             cell.backgroundColor = .red
-            print("Error red cell was loaded.")
+            print("Could not unwrap impulsesStateManager. Error red cell was loaded.")
             return cell
         }
         
         // Section 0 is the Savings Chart Section
-        if indexPath.section == 0 {
+        if indexPath.section == CVSection.chartSection.rawValue {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MainCollectionViewReuseIdentifiers.savingsChartCellReuseIdentifier.rawValue,
                 for: indexPath
@@ -56,7 +58,7 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             }
             
             return cell
-        } else {
+        } else if indexPath.section == CVSection.impulseSection.rawValue {
             // Show the Impulses.
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MainCollectionViewReuseIdentifiers.impulseCellReuseIdentifier.rawValue,
@@ -68,19 +70,24 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             let impulse: Impulse = impulsesStateManager.impulses[index]
 
             var content = UIListContentConfiguration.subtitleCell()
-            content.text = impulse.wrappedName
+            let itemPrice = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+            content.text = "\(impulse.wrappedName), \(itemPrice)"
             content.textProperties.font = UIFont.ccFont(textStyle: .title3)
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
             content.secondaryText = remainingTime.0
 
             cell.contentConfiguration = content
             cell.accessories = [.disclosureIndicator()]
-            
-//            cell.itemNameLabel.text = impulse.wrappedName
-//            cell.itemPriceLabel.text = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
-//            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
-//            cell.remainingTimeLabel.text = remainingTime.0
 
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MainCollectionViewReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
+                for: indexPath
+            )
+            
+            cell.backgroundColor = .red
+            print("Could not find appropriate section. Error red cell was loaded.")
             return cell
         }
     }

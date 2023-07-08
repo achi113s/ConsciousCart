@@ -18,29 +18,13 @@ class MainCollectionViewDelegate: NSObject, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == CVSection.impulseSection.rawValue else { return }
         guard let impulsesStateManager = impulsesStateManager else { return }
-        guard indexPath.section == 1 else { return }
-        guard !impulsesStateManager.impulses.isEmpty else { return }
+        guard let mainCVC = mainCVC else { return }
         
         let detailVC = ImpulseDetailViewController()
         detailVC.impulse = impulsesStateManager.impulses[indexPath.row]
         
-        mainCVC?.navigationController?.pushViewController(detailVC, animated: true)
+        mainCVC.navigationController?.pushViewController(detailVC, animated: true)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-//        guard let impulsesStateManager = impulsesStateManager else { return false }
-//        guard !impulsesStateManager.impulses.isEmpty else { return false }
-//        return true
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? ImpulseCollectionViewListCell else { return }
-//        cell.customContentView.backgroundColor = .red
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? ImpulseCollectionViewListCell else { return }
-//        cell.customContentView.backgroundColor = .systemBackground
-//    }
 }
