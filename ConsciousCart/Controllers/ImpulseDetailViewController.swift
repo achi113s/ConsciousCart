@@ -15,13 +15,8 @@ class ImpulseDetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.prefersLargeTitles = false
-        title = impulse?.name ?? "Impulse"
+        navigationItem.title = impulse?.name ?? "Impulse"
+        navigationItem.largeTitleDisplayMode = .never
     }
 }
