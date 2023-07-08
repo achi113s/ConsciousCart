@@ -14,8 +14,6 @@ struct Item: Identifiable {
     let value: Double
 }
 
-
-
 class Utils {
     static func printFonts() {
         for family in UIFont.familyNames.sorted() {
