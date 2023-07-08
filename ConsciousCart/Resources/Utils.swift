@@ -14,32 +14,7 @@ struct Item: Identifiable {
     let value: Double
 }
 
-enum ChartTimeDomain: String, CaseIterable, Identifiable {
-    case threeMonths = "3M"
-    case sixMonths = "6M"
-    case oneYear = "1Y"
-    case allTime = "All"
-    var id: Self { self }
-}
 
-enum lengthRemainingForImpulse {
-    case aLongTime, aMediumTime, aShortTime
-}
-
-enum MainCollectionViewReuseIdentifiers: String {
-    case defaultCellReuseIdentifier = "cell"
-    case savingsChartCellReuseIdentifier = "savingsChartCell"
-    case noImpulsesCellReuseIdentifier = "noImpulsesCell"
-    case impulseCellReuseIdentifier = "impulseCell"
-    case impulsesCategoryHeaderIdentifier = "impulsesCategoryHeaderId"
-    case headerIdentifier = "headerId"
-    case impulsesCategoryFooterIdentifier = "impulsesCategoryFooterId"
-    case footerIdentifier = "footerId"
-}
-
-enum UserDefaultsKeys: String {
-    case forceDarkModeSetting = "forceDarkMode"
-}
 
 class Utils {
     static func printFonts() {
@@ -108,13 +83,4 @@ class Utils {
         Item(date: Date(timeIntervalSince1970: 1683274339), value: -700),
         Item(date: Date(timeIntervalSince1970: 1684544894), value: -300.23)
     ]
-}
-
-extension UICollectionViewCell {
-    /// Refreshes the cell's contentView by removing all of its subviews.
-    func refreshContentView() {
-        for view in self.contentView.subviews {
-            view.removeFromSuperview()
-        }
-    }
 }

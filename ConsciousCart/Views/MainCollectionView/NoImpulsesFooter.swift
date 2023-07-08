@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImpulsesCategoryNoElementsFooter: UICollectionReusableView {
+class NoImpulsesFooter: UICollectionReusableView {
     private let label = UILabel()
     
     override init(frame: CGRect) {

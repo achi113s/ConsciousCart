@@ -7,6 +7,24 @@
 
 import UIKit
 
+enum CCTextStyle {
+    case largeTitle
+    case title
+    case title2
+    case title3
+    case body
+    case headline
+    case subheadline
+    case subheadline2
+    case footnote
+    case footnote2
+    case caption
+    case caption2
+    case bold
+    case semibold
+    case regular
+}
+
 extension UIFont {
     private static func customFont(name: String, size: CGFloat) -> UIFont {
             let font = UIFont(name: name, size: size)
@@ -76,23 +94,4 @@ extension UIFont {
             return "Nunito-SemiBold"
         }
     }
-    
-}
-
-enum CCTextStyle {
-    case largeTitle
-    case title
-    case title2
-    case title3
-    case body
-    case headline
-    case subheadline
-    case subheadline2
-    case footnote
-    case footnote2
-    case caption
-    case caption2
-    case bold
-    case semibold
-    case regular
 }
