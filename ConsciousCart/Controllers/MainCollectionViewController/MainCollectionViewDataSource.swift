@@ -75,10 +75,11 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             content.textProperties.font = UIFont.ccFont(textStyle: .title3)
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
             content.secondaryText = remainingTime.0
-
+            
             cell.contentConfiguration = content
+            
             cell.accessories = [.disclosureIndicator()]
-
+            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(

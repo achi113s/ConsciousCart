@@ -258,7 +258,7 @@ extension AddToConsciousCartViewController {
         inputItemsStack.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func addSubviewsToView() {
+    private func addSubviewsToView() {
         view.addSubview(uploadButtonsStack)
         view.addSubview(inputItemsStack)
         view.addSubview(saveButton)

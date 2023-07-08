@@ -20,6 +20,8 @@ class MainCollectionViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        view.backgroundColor = UIColor(named: "DefaultBackground")
+        
         configureCollectionView()
         configureAddButton()
         configureLayoutConstraints()
@@ -40,6 +42,7 @@ extension MainCollectionViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleHeight]
         collectionView.contentInset = UIEdgeInsets(top: CGFloat(0), left: CGFloat(0), bottom: CGFloat(10), right: CGFloat(0))
+        collectionView.backgroundColor = UIColor(named: "DefaultBackground")
         
         collectionViewDataSource = MainCollectionViewDataSource(impulsesStateManager: impulsesStateManager)
         collectionView.dataSource = collectionViewDataSource
@@ -94,7 +97,7 @@ extension MainCollectionViewController {
     private func impulseListSection(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         guard let impulsesStateManager = impulsesStateManager else { fatalError("No data manager for impulseListSection.")}
         var listConfig = UICollectionLayoutListConfiguration(appearance: .plain)
-        
+        listConfig.backgroundColor = UIColor(named: "DefaultBackground")
         listConfig.showsSeparators = false
         
         listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
@@ -121,6 +124,7 @@ extension MainCollectionViewController {
         
         // THIS SETS THE SPACING BETWEEN CELLS IN THE LIST
         section.interGroupSpacing = CGFloat(10)
+        
         section.contentInsets = .init(top: CGFloat(0), leading: CGFloat(16), bottom: CGFloat(0), trailing: CGFloat(16))
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(

@@ -23,16 +23,16 @@ class Utils {
         }
     }
     
-    static func formatNumberAsCurrency(_ price: NSNumber) -> String {
-        let formatter = NumberFormatter()
-
-        formatter.numberStyle = .currency
-        formatter.locale = NSLocale.current
-        
-        let priceString: String? = formatter.string(from: price)
-        
-        return priceString ?? "$0.00"
-    }
+//    static func formatNumberAsCurrency(_ price: NSNumber) -> String {
+//        let formatter = NumberFormatter()
+//
+//        formatter.numberStyle = .currency
+//        formatter.locale = NSLocale.current
+//        
+//        let priceString: String? = formatter.string(from: price)
+//        
+//        return priceString ?? "$0.00"
+//    }
     
     static func calculateTimeRemainingUntil(_ futureDate: Date) -> DateComponents {
         let now = Date()

@@ -11,13 +11,11 @@ final class ImpulsesStateManager {
     private var moc: NSManagedObjectContext? = nil
     
     private(set) var impulses: [Impulse] = [Impulse]()
-    private(set) var completedImpulses: [Impulse] = [Impulse]() {
-        didSet {
-            totalAmountSaved = completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
-        }
-    }
+    private(set) var completedImpulses: [Impulse] = [Impulse]()
     
-    public var totalAmountSaved: Double = Double(0)
+    public var totalAmountSaved: Double {
+        return completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
+    }
     
     init(moc: NSManagedObjectContext?) {
         self.moc = moc
@@ -94,7 +92,9 @@ final class ImpulsesStateManager {
                 
                 moc.delete(impulse)
             }
+            
             print("All impulses deleted!")
+            
             saveContext()
             loadImpulses()
         } catch {
