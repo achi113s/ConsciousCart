@@ -18,7 +18,10 @@ class MainCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         
         view.backgroundColor = UIColor(named: "DefaultBackground")
         
@@ -31,6 +34,8 @@ class MainCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode =  .always
+        
         collectionView.reloadData()
     }
 }
