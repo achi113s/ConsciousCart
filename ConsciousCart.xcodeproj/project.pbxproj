@@ -46,7 +46,6 @@
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
 		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
 		44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB96E92A47E74E00112B5D /* SavingsChart.swift */; };
-		44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */; };
 		44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C749E12A58F007000AAE63 /* CurrencyTextField.swift */; };
 		44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C749E52A58FC70000AAE63 /* Extensions.swift */; };
 		44C749E82A58FE57000AAE63 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C749E72A58FE57000AAE63 /* Enums.swift */; };
@@ -114,7 +113,6 @@
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
 		44AB96E92A47E74E00112B5D /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
-		44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		44C749E12A58F007000AAE63 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		44C749E52A58FC70000AAE63 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		44C749E72A58FE57000AAE63 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -155,6 +153,18 @@
 				4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */,
 			);
 			path = AddToConsciousCartViewController;
+			sourceTree = "<group>";
+		};
+		443DC34F2A59F50600A9DCF0 /* SupportViews */ = {
+			isa = PBXGroup;
+			children = (
+				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
+				44C749E12A58F007000AAE63 /* CurrencyTextField.swift */,
+				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
+				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
+				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
+			);
+			path = SupportViews;
 			sourceTree = "<group>";
 		};
 		444A58E72A4FC353006FC02B /* MainCollectionView */ = {
@@ -246,14 +256,9 @@
 			isa = PBXGroup;
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
-				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
-				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
-				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
-				44C6D18D2A04A552007E4751 /* SpinnerViewController.swift */,
-				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
-				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
-				44C749E12A58F007000AAE63 /* CurrencyTextField.swift */,
 				444A58E72A4FC353006FC02B /* MainCollectionView */,
+				445EF7B22A187ABF0013ACB1 /* SettingsView.swift */,
+				443DC34F2A59F50600A9DCF0 /* SupportViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,7 +458,6 @@
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
-				44C6D18E2A04A552007E4751 /* SpinnerViewController.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,

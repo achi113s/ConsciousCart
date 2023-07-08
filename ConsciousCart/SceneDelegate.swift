@@ -43,6 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createProfileVC() -> UINavigationController {
         let profileVC = ProfileViewController()
         profileVC.title = "My Profile"
+        profileVC.impulsesStateManager = impulsesStateManager
         
 //        let profileFontSize: CGFloat = 32
 //        let sizeConfig = UIImage.SymbolConfiguration(pointSize: profileFontSize, weight: .regular, scale: .default)
