@@ -13,8 +13,6 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .systemBackground
         
         var settingsView = SettingsView()
         settingsView.impulsesStateManager = impulsesStateManager
