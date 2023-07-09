@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = createTabBar()
-        window?.overrideUserInterfaceStyle = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue) ? .dark : .unspecified
+        window?.overrideUserInterfaceStyle = .light
+//        UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue) ? .dark : .unspecified
         window?.makeKeyAndVisible()
     }
     
@@ -56,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UINavigationController(rootViewController: profileVC)
     }
     
-    func createSettingsVC() -> UINavigationController {
+    func createSettingsVC() -> UIViewController {
         let settingsVC = SettingsViewController()
         settingsVC.title = "Settings"
         settingsVC.impulsesStateManager = impulsesStateManager
@@ -65,7 +66,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         settingsVC.tabBarItem.image = UIImage(systemName: "gearshape")
         settingsVC.tabBarItem.title = "Settings"
         
-        return UINavigationController(rootViewController: settingsVC)
+        return settingsVC
     }
     
     func createTabBar() -> UITabBarController {
