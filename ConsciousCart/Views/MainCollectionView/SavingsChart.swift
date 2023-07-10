@@ -13,7 +13,8 @@ struct SavingsChart: View {
     
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
     @State private var selectedItemOnChart: Item? = nil
-    
+    private var chartColor: Color = Color(
+        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ExodusFruit")!)
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     
     var body: some View {
@@ -38,7 +39,7 @@ struct SavingsChart: View {
                     x: .value("Date", item.date),
                     y: .value("Saved", item.value)
                 )
-                .foregroundStyle(Color("ExodusFruit"))
+                .foregroundStyle(chartColor)
             }
             .chartYAxis {
                 AxisMarks(position: .trailing, values: .automatic) { value in

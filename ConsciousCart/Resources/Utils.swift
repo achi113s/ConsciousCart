@@ -23,16 +23,10 @@ class Utils {
         }
     }
     
-//    static func formatNumberAsCurrency(_ price: NSNumber) -> String {
-//        let formatter = NumberFormatter()
-//
-//        formatter.numberStyle = .currency
-//        formatter.locale = NSLocale.current
-//        
-//        let priceString: String? = formatter.string(from: price)
-//        
-//        return priceString ?? "$0.00"
-//    }
+    static func resetUserDefaults() {
+        UserDefaults.standard.set(UIColor(named: "ShyMoment"), forKey: UserDefaultsKeys.accentColor.rawValue)
+        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
+    }
     
     static func calculateTimeRemainingUntil(_ futureDate: Date) -> DateComponents {
         let now = Date()

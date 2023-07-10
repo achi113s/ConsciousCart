@@ -18,18 +18,19 @@ final class ConsciousCartButton: UIButton {
         configureButton()
     }
     
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.2) {
-                self.backgroundColor = self.isHighlighted ? UIColor(named: "ExodusFruit") : UIColor(named: "ShyMoment")
-                self.transform = self.isHighlighted ? CGAffineTransform(translationX: 0, y: 3) : CGAffineTransform.identity
-                self.layer.shadowOffset = self.isHighlighted ? CGSize(width: 0.0, height: 0) : CGSize(width: 0.0, height: 3.0)
-            }
-        }
-    }
+//    override var isHighlighted: Bool {
+//        didSet {
+//            UIView.animate(withDuration: 0.2) {
+//                self.backgroundColor = self.isHighlighted ? UIColor(named: "ExodusFruit") : UIColor(named: "ShyMoment")
+//                self.transform = self.isHighlighted ? CGAffineTransform(translationX: 0, y: 3) : CGAffineTransform.identity
+//                self.layer.shadowOffset = self.isHighlighted ? CGSize(width: 0.0, height: 0) : CGSize(width: 0.0, height: 3.0)
+//            }
+//        }
+//    }
     
     func configureButton() {
-        backgroundColor = UIColor(named: "ShyMoment")
+//        backgroundColor = UIColor(named: "ShyMoment")
+        backgroundColor = UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")
         tintColor = .black
         self.setTitleColor(.black, for: .normal)
         
