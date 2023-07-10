@@ -12,6 +12,8 @@ struct SettingsView: View {
     
     @State private var showingDeleteAlert = false
     @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
+    @State private var accentColorSetting: Color = Color(
+        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ExodusFruit")!)
     
     var body: some View {
         NavigationView {
@@ -31,7 +33,7 @@ struct SettingsView: View {
                             }
                             .frame(height: 30)
                         }
-                        .modifier(CCButton())
+                        .buttonStyle(CCButtonStyle())
                         
                         Button {
                             
@@ -44,7 +46,7 @@ struct SettingsView: View {
                             }
                             .frame(height: 30)
                         }
-                        .modifier(CCButton())
+                        .buttonStyle(CCButtonStyle())
                         
                         Button {
                             
@@ -57,8 +59,7 @@ struct SettingsView: View {
                             }
                             .frame(height: 30)
                         }
-                        .modifier(CCButton())
-                        
+                        .buttonStyle(CCButtonStyle())
                     }
                     .padding()
                     
@@ -83,6 +84,40 @@ struct SettingsView: View {
                             )
                             .font(Font.custom("Nunito-Semibold", size: 17))
                         
+                        VStack(alignment: .leading, spacing: 1) {
+                            ColorPicker("🎨  Accent Color", selection: $accentColorSetting, supportsOpacity: false)
+                                .onChange(of: accentColorSetting, perform: { newColor in
+                                    let uiColor = UIColor(newColor)
+                                    UserDefaults.standard.set(uiColor, forKey: UserDefaultsKeys.accentColor.rawValue)
+                                })
+                                .frame(height: 40)
+                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 25))
+                                .background(.white)
+                                .cornerRadius(8)
+                                .foregroundColor(.black)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(style: .init(lineWidth: 1))
+                                        .fill(Color.init(white: 0.8))
+                                )
+                                .font(Font.custom("Nunito-Semibold", size: 17))
+                            Text("Restart app to apply appearance.")
+                                .font(Font.custom("Nunito-Semibold", size: 12))
+                                .foregroundColor(.secondary)
+                                .padding([.leading])
+                            
+                            Button {
+                                UserDefaults.standard.set(UIColor(named: "ShyMoment"), forKey: UserDefaultsKeys.accentColor.rawValue)
+                                accentColorSetting = Color("ShyMoment")
+                            } label: {
+                                HStack {
+                                    Text("Reset Accent Color")
+                                    Spacer()
+                                }
+                                .frame(height: 30)
+                            }
+                            .buttonStyle(CCButtonStyle())
+                        }
                     }
                     .padding()
                     
@@ -103,11 +138,13 @@ struct SettingsView: View {
                             Button("Cancel", role: .cancel) { }
                             Button("Delete", role: .destructive) {
                                 impulsesStateManager?.deleteAllImpulses()
+                                
+                                Utils.resetUserDefaults()
                             }
                         } message: {
-                            Text("Are you sure you want to permanently delete all of your Impulses? This action cannot be undone.")
+                            Text("Are you sure you want to permanently delete all of your Impulses and settings? This action cannot be undone.")
                         }
-                        .modifier(CCButton())
+                        .buttonStyle(CCButtonStyle())
                     }
                     .padding()
                 }
@@ -155,14 +192,16 @@ struct CCButton: ViewModifier {
     }
 }
 
-struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
+struct CCButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(
-                withAnimation {
-                    configuration.isPressed ? 1.03 : 1
-                }
+            .padding(EdgeInsets(top: 7, leading: 12, bottom: 7, trailing: 12))
+            .background(configuration.isPressed ? Color(white: 0.8) : .white)
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8).stroke(style: .init(lineWidth: 1))
+                    .fill(Color.init(white: 0.8))
             )
-        
+            .font(Font.custom("Nunito-Semibold", size: 17))
     }
 }

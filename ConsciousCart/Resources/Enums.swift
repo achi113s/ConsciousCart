@@ -37,4 +37,5 @@ enum MainCollectionViewReuseIdentifiers: String {
 
 enum UserDefaultsKeys: String {
     case forceDarkModeSetting = "forceDarkMode"
+    case accentColor = "accentColor"
 }

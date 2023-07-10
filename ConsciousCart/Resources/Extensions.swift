@@ -5,6 +5,7 @@
 //  Created by Giorgio Latour on 7/7/23.
 //
 
+import SwiftUI
 import UIKit
 
 //MARK: - Extension to Hide Keyboard on Tap
@@ -51,6 +52,32 @@ extension String {
             return number.doubleValue
         } else {
             return 0.0
+        }
+    }
+}
+
+/// Color extension to UserDefaults by Andrew on StackOverflow.
+/// https://stackoverflow.com/a/30576832/21574991
+extension UserDefaults {
+    func color(forKey key: String) -> UIColor? {
+        guard let colorData = data(forKey: key) else { return nil }
+        
+        do {
+            return try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData)
+        } catch {
+            print("Color error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func set(_ value: UIColor?, forKey key: String) {
+        guard let color = value else { return }
+        
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
+            set(data, forKey: key)
+        } catch {
+            print("Color error, color key not saved: \(error.localizedDescription)")
         }
     }
 }
