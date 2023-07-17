@@ -7,6 +7,9 @@
 
 import Foundation
 
+// This manager is using the old async API with completion handlers.
+// It can (should) be updated to use the new async-await API.
+
 protocol BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo)
     func didFailWithError(error: Error)
@@ -38,7 +41,6 @@ struct BarcodeAPIManager {
                     }
                 }
             }
-            
             task.resume()
         }
     }

@@ -164,6 +164,7 @@ extension BarcodeScannerViewController {
 extension BarcodeScannerViewController: BarcodeAPIManagerDelegate {
     func didFetchBarcodeInfo(_ barcodeAPIManager: BarcodeAPIManager, barcodeInfo: BarcodeInfo) {
         DispatchQueue.main.async { [weak self] in
+            // this is a fragile way of getting the previous VC
             guard let count = self?.navigationController?.viewControllers.count else { return }
             guard let prevView = self?.navigationController?.viewControllers[count-2] as? AddToConsciousCartViewController else { return }
 
