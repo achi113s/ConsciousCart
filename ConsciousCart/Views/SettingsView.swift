@@ -13,7 +13,7 @@ struct SettingsView: View {
     @State private var showingDeleteAlert = false
     @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
     @State private var accentColorSetting: Color = Color(
-        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ExodusFruit")!)
+        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
     
     var body: some View {
         NavigationView {
@@ -66,32 +66,32 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         SectionLabel(text: "Appearance")
                         
-                        Toggle("🌙  Dark Mode", isOn: $forceDarkModeSetting)
-                            .onChange(of: forceDarkModeSetting) { darkModeEnabled in
-                                UserDefaults.standard.set(forceDarkModeSetting, forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
-                            }
-                            .strikethrough()
-                            .frame(height: 40)
-                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 20))
-                            .background(.white)
-                            .tint(.green)
-                            .cornerRadius(8)
-                            .foregroundColor(.black)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(style: .init(lineWidth: 1))
-                                    .fill(Color.init(white: 0.8))
-                            )
-                            .font(Font.custom("Nunito-Semibold", size: 17))
+//                        Toggle("🌙  Dark Mode", isOn: $forceDarkModeSetting)
+//                            .onChange(of: forceDarkModeSetting) { darkModeEnabled in
+//                                UserDefaults.standard.set(forceDarkModeSetting, forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
+//                            }
+//                            .strikethrough()
+//                            .frame(height: 40)
+//                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 20))
+//                            .background(.white)
+//                            .tint(.green)
+//                            .cornerRadius(8)
+//                            .foregroundColor(.black)
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 8)
+//                                    .stroke(style: .init(lineWidth: 1))
+//                                    .fill(Color.init(white: 0.8))
+//                            )
+//                            .font(Font.custom("Nunito-Semibold", size: 17))
                         
-                        VStack(alignment: .leading, spacing: 1) {
+                        VStack(alignment: .leading) {
                             ColorPicker("🎨  Accent Color", selection: $accentColorSetting, supportsOpacity: false)
                                 .onChange(of: accentColorSetting, perform: { newColor in
                                     let uiColor = UIColor(newColor)
                                     UserDefaults.standard.set(uiColor, forKey: UserDefaultsKeys.accentColor.rawValue)
                                 })
                                 .frame(height: 40)
-                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 25))
+                                .padding(EdgeInsets(top: 3, leading: 10, bottom: 3, trailing: 25))
                                 .background(.white)
                                 .cornerRadius(8)
                                 .foregroundColor(.black)
@@ -101,10 +101,6 @@ struct SettingsView: View {
                                         .fill(Color.init(white: 0.8))
                                 )
                                 .font(Font.custom("Nunito-Semibold", size: 17))
-                            Text("Restart app to apply appearance.")
-                                .font(Font.custom("Nunito-Semibold", size: 12))
-                                .foregroundColor(.secondary)
-                                .padding([.leading])
                             
                             Button {
                                 UserDefaults.standard.set(UIColor(named: "ShyMoment"), forKey: UserDefaultsKeys.accentColor.rawValue)

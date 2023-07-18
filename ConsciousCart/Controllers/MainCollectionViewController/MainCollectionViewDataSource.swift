@@ -18,7 +18,6 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // Return 2 for the number of sections, one for the SwiftUI Chart and one for the list of Impulses.
-        guard impulsesStateManager != nil else { return 0 }
         return CVSection.allCases.count
     }
     

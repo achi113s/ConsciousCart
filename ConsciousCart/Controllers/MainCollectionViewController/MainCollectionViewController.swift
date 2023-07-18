@@ -36,6 +36,8 @@ class MainCollectionViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode =  .always
         
+        addToCCButton.setColor()
+        
         collectionView.reloadData()
     }
 }

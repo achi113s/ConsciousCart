@@ -7,6 +7,8 @@
 
 import CoreData
 
+// should make thread safe?
+
 final class ImpulsesStateManager {
     private var moc: NSManagedObjectContext? = nil
     
