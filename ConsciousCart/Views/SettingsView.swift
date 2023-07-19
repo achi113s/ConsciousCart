@@ -18,7 +18,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                VStack(spacing: 25) {
                     VStack(alignment: .leading) {
                         SectionLabel(text: "About")
                         
@@ -61,7 +61,6 @@ struct SettingsView: View {
                         }
                         .buttonStyle(CCButtonStyle())
                     }
-                    .padding()
                     
                     VStack(alignment: .leading) {
                         SectionLabel(text: "Appearance")
@@ -107,7 +106,7 @@ struct SettingsView: View {
                                 accentColorSetting = Color("ShyMoment")
                             } label: {
                                 HStack {
-                                    Text("Reset Accent Color")
+                                    Text("🪄  Reset Accent Color")
                                     Spacer()
                                 }
                                 .frame(height: 30)
@@ -115,7 +114,6 @@ struct SettingsView: View {
                             .buttonStyle(CCButtonStyle())
                         }
                     }
-                    .padding()
                     
                     VStack(alignment: .leading) {
                         SectionLabel(text: "My Data")
@@ -124,7 +122,7 @@ struct SettingsView: View {
                             showingDeleteAlert = true
                         } label: {
                             HStack {
-                                Text("🗑️  Delete My Data")
+                                Text("💣  Delete My Data")
                                     .foregroundColor(.red)
                                 Spacer()
                             }
@@ -142,9 +140,9 @@ struct SettingsView: View {
                         }
                         .buttonStyle(CCButtonStyle())
                     }
-                    .padding()
                 }
                 .frame(maxWidth: .infinity)
+                .padding()
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// This subclass originally by NSExceptional on StackOverflow.
+/// This subclass originally by NSExceptional on StackOverflow. Modified a couple things for my app.
 /// https://stackoverflow.com/a/60859491/21574991
 class CurrencyTextField: UITextField {
     private var enteredNumbers: String = ""
@@ -34,7 +34,6 @@ class CurrencyTextField: UITextField {
     }
     
     override func deleteBackward() {
-        // Changed this line.
         let _ = enteredNumbers.popLast()
         text = enteredNumbers.asCurrency(locale: locale)
         // Call super so that the .editingChanged event gets fired, but we need to handle it differently, so we set the `didBackspace` flag first
@@ -50,8 +49,12 @@ class CurrencyTextField: UITextField {
         
         guard didBackspace == false else { return }
         
-        if let lastEnteredCharacter = text?.last, lastEnteredCharacter.isNumber {
-            enteredNumbers.append(lastEnteredCharacter)
+        if let lastEnteredCharacter = text?.last {
+            if lastEnteredCharacter.isNumber {
+                enteredNumbers.append(lastEnteredCharacter)
+            } else if lastEnteredCharacter == "." {
+                enteredNumbers.append(".")
+            }
         }
     }
 }
