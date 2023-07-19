@@ -134,11 +134,11 @@ struct SavingsChart: View {
         if completedImpulses.isEmpty {
             return Date()
         }
-        var date: Date? = completedImpulses.first?.wrappedCompletedDate
+        var date: Date? = completedImpulses.first?.unwrappedCompletedDate
         
         for impulse in completedImpulses {
-            if impulse.wrappedCompletedDate > date! {
-                date = impulse.wrappedCompletedDate
+            if impulse.unwrappedCompletedDate > date! {
+                date = impulse.unwrappedCompletedDate
             }
         }
         
@@ -149,11 +149,11 @@ struct SavingsChart: View {
         if completedImpulses.isEmpty {
             return Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast
         }
-        var date: Date? = completedImpulses.first?.wrappedCompletedDate
+        var date: Date? = completedImpulses.first?.unwrappedCompletedDate
         
         for impulse in completedImpulses {
-            if impulse.wrappedCompletedDate < date! {
-                date = impulse.wrappedCompletedDate
+            if impulse.unwrappedCompletedDate < date! {
+                date = impulse.unwrappedCompletedDate
             }
         }
         
@@ -228,9 +228,9 @@ extension SavingsChart {
         
         let oldestDate = oldestDateToShow(timeDomain)
         
-        for impulse in completedImpulses where impulse.wrappedCompletedDate >= oldestDate {
+        for impulse in completedImpulses where impulse.unwrappedCompletedDate >= oldestDate {
             sum += impulse.amountSaved
-            let newItem = Item(date: impulse.wrappedCompletedDate, value: sum)
+            let newItem = Item(date: impulse.unwrappedCompletedDate, value: sum)
             rollingSum.append(newItem)
         }
         

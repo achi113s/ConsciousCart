@@ -17,7 +17,7 @@ extension Impulse {
     }
 
     @NSManaged public var dateCreated: Date?
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: UUID
     @NSManaged public var imageName: String?
     @NSManaged public var name: String?
     @NSManaged public var price: Double
@@ -27,19 +27,19 @@ extension Impulse {
     @NSManaged public var dateCompleted: Date?
     @NSManaged public var amountSaved: Double
 
-    public var wrappedName: String {
+    public var unwrappedName: String {
         name ?? ""
     }
     
-    public var wrappedReasonNeeded: String {
+    public var unwrappedReasonNeeded: String {
         reasonNeeded ?? ""
     }
     
-    public var wrappedRemindDate: Date {
+    public var unwrappedRemindDate: Date {
         remindDate ?? Date.now
     }
     
-    public var wrappedCompletedDate: Date {
+    public var unwrappedCompletedDate: Date {
         dateCompleted ?? Date.now
     }
 }

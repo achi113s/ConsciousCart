@@ -5,9 +5,9 @@
 //  Created by Giorgio Latour on 4/25/23.
 //
 
-import UIKit
 import PhotosUI
-import CoreData
+import UIKit
+import UserNotifications
 
 class AddToConsciousCartViewController: UIViewController, UINavigationControllerDelegate {
     var impulsesStateManager: ImpulsesStateManager?
@@ -63,9 +63,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         navigationController?.navigationBar.tintColor = .black
     }
-    
-    
-    //MARK: - Selectors
+}
+
+//MARK: - Selectors
+extension AddToConsciousCartViewController {
     @objc func uploadImage() {
         let alert = UIAlertController(title: "Upload an Image", message: nil, preferredStyle: .actionSheet)
         
@@ -107,6 +108,43 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
     
+    func setupNotification(for impulse: Impulse) {
+        let center = UNUserNotificationCenter.current()
+        
+        let addRequest = {
+            let content = UNMutableNotificationContent()
+            content.title = "ConsciousCart"
+            content.body = "Your impulse for \(impulse.unwrappedName) is ready to be reviewed!"
+            content.sound = .default
+            
+            //            var calendar = Calendar.current
+            //            var dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
+            //            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: impulse.id.uuidString, content: content, trigger: trigger)
+            center.add(request)
+        }
+        
+        center.getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+                addRequest()
+            } else {
+                center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        addRequest()
+                    } else {
+                        if let error = error {
+                            print("Error authorizing notifications: \(error.localizedDescription)")
+                        } else {
+                            print("Unknown error authorizing notifications.")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     @objc func saveItem() {
         guard let impulsesStateManager = impulsesStateManager else {
             print("impulsesStateManager not unwrapped successfully.")
@@ -116,16 +154,21 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         guard let itemPriceString = itemPriceTextField.text else { return }
         let itemPrice = itemPriceString.asDoubleFromCurrency(locale: Locale.current)
-
+        
         // Save the image with a UUID as its name if the user selected an image.
         // The function returns nil if there is no image to save.
         let imageName = saveImpulseImage()
-
-        impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
-                                        name: itemNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Name",
-                                      price: itemPrice,
-                                      imageName: imageName,
-                                      reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
+        
+        let impulse = impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
+                                                      name: itemNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Name",
+                                                      price: itemPrice,
+                                                      imageName: imageName,
+                                                      reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
+        
+        if let impulse = impulse {
+            setupNotification(for: impulse)
+        }
+        
         mainCVC.collectionView.reloadData()
         
         dismiss(animated: true)

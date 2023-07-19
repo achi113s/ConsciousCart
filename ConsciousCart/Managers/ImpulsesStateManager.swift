@@ -37,7 +37,7 @@ final class ImpulsesStateManager {
             let allImpulses = try moc.fetch(request)
             
             self.impulses = allImpulses.filter { !$0.completed }
-            self.completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.wrappedCompletedDate < $1.wrappedCompletedDate })
+            self.completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.unwrappedCompletedDate < $1.unwrappedCompletedDate })
         } catch {
             print("Error fetching data from context: \(error.localizedDescription)")
         }
@@ -58,21 +58,25 @@ final class ImpulsesStateManager {
         name: String = "Unknown Name",
         price: Double = 0.0,
         imageName: String? = nil,
-        reasonNeeded: String = "Unknown Reason") {
-            guard let moc = moc else { return }
-            
-            let newImpulse = Impulse(context: moc)
-            newImpulse.id = UUID()
-            newImpulse.dateCreated = Date.now
-            newImpulse.remindDate = remindDate
-            newImpulse.name = name
-            newImpulse.price = price
-            newImpulse.imageName = imageName
-            newImpulse.reasonNeeded = reasonNeeded
-            newImpulse.completed = false
-            
-            saveContext()
-            loadImpulses()
+        reasonNeeded: String = "Unknown Reason") -> Impulse? {
+            if let moc = moc {
+                
+                let newImpulse = Impulse(context: moc)
+                newImpulse.id = UUID()
+                newImpulse.dateCreated = Date.now
+                newImpulse.remindDate = remindDate
+                newImpulse.name = name
+                newImpulse.price = price
+                newImpulse.imageName = imageName
+                newImpulse.reasonNeeded = reasonNeeded
+                newImpulse.completed = false
+                
+                saveContext()
+                loadImpulses()
+                
+                return newImpulse
+            }
+            return nil
         }
     
     public func deleteAllImpulses() {

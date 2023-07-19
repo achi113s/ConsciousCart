@@ -70,9 +70,9 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
             var content = UIListContentConfiguration.subtitleCell()
             let itemPrice = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
-            content.text = "\(impulse.wrappedName), \(itemPrice)"
+            content.text = "\(impulse.unwrappedName), \(itemPrice)"
             content.textProperties.font = UIFont.ccFont(textStyle: .title3)
-            let remainingTime = Utils.remainingTimeMessageForDate(impulse.wrappedRemindDate)
+            let remainingTime = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate)
             content.secondaryText = remainingTime.0
             
             cell.contentConfiguration = content
