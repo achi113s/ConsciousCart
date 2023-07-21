@@ -7,19 +7,27 @@
 
 import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 
-//MARK: - Extension to Hide Keyboard on Tap
-extension UIViewController {
-    func initializeHideKeyboardOnTap(){
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissMyKeyboardOnTap))
-        
-        view.addGestureRecognizer(tap)
+extension FileManager {
+    static var documentsDirectory: URL {
+        let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        print(paths[0])
+        return paths[0]
     }
     
-    @objc func dismissMyKeyboardOnTap(){
-        view.endEditing(true)
+    func decode<T: Decodable>(_ file: String, encodingType: UTType) -> T {
+        guard let data = try? Data(contentsOf: FileManager.documentsDirectory.appendingPathComponent(file, conformingTo: encodingType)) else {
+            fatalError("Failed to load \(file) from Documents.")
+        }
+        
+        let decoder = JSONDecoder()
+        
+        guard let loaded = try? decoder.decode(T.self, from: data) else {
+            fatalError("Failed to decode \(file) from Documents.")
+        }
+        
+        return loaded
     }
 }
 
@@ -56,33 +64,6 @@ extension String {
     }
 }
 
-/// Color extension to UserDefaults by Andrew on StackOverflow.
-/// https://stackoverflow.com/a/30576832/21574991
-extension UserDefaults {
-    func color(forKey key: String) -> UIColor? {
-        guard let colorData = data(forKey: key) else { return nil }
-        
-        do {
-            return try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData)
-        } catch {
-            print("Color error: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    func set(_ value: UIColor?, forKey key: String) {
-        guard let color = value else { return }
-        
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
-            set(data, forKey: key)
-        } catch {
-            print("Color error, color key not saved: \(error.localizedDescription)")
-        }
-    }
-}
-
-
 extension UIColor {
   /**
    Create a lighter color
@@ -114,4 +95,45 @@ extension UIColor {
     }
     return self
   }
+}
+
+//MARK: - Extension to Hide Keyboard on Tap
+extension UIViewController {
+    func initializeHideKeyboardOnTap(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboardOnTap))
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissMyKeyboardOnTap(){
+        view.endEditing(true)
+    }
+}
+
+/// Color extension to UserDefaults by Andrew on StackOverflow.
+/// https://stackoverflow.com/a/30576832/21574991
+extension UserDefaults {
+    func color(forKey key: String) -> UIColor? {
+        guard let colorData = data(forKey: key) else { return nil }
+        
+        do {
+            return try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData)
+        } catch {
+            print("Color error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func set(_ value: UIColor?, forKey key: String) {
+        guard let color = value else { return }
+        
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
+            set(data, forKey: key)
+        } catch {
+            print("Color error, color key not saved: \(error.localizedDescription)")
+        }
+    }
 }

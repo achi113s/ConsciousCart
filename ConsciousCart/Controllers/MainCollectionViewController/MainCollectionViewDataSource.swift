@@ -76,10 +76,6 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate)
             content.secondaryText = remainingTime.0
             
-            if let imageName = impulse.imageName {
-                content.image = UIImage(named: imageName)
-            }
-            
             cell.contentConfiguration = content
             
             cell.accessories = [.disclosureIndicator()]

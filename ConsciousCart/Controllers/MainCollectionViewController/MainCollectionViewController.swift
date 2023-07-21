@@ -15,6 +15,7 @@ class MainCollectionViewController: UIViewController {
     private var collectionViewDelegate: MainCollectionViewDelegate!
     
     private var addToCCButton: ConsciousCartButton!
+    private var testImpulseExpiredViewButton: ConsciousCartButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class MainCollectionViewController: UIViewController {
         
         configureCollectionView()
         configureAddButton()
+        configureTestButton()
         configureLayoutConstraints()
     }
     
@@ -197,6 +199,28 @@ extension MainCollectionViewController {
         navigationController?.present(modalController, animated: true)
         //                navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func configureTestButton() {
+        testImpulseExpiredViewButton = ConsciousCartButton()
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+        testImpulseExpiredViewButton.setImage(UIImage(systemName: "testtube.2", withConfiguration: largeConfig), for: .normal)
+        testImpulseExpiredViewButton.layer.cornerRadius = 33
+        testImpulseExpiredViewButton.addTarget(self, action: #selector(testView), for: .touchUpInside)
+        
+        self.view.addSubview(testImpulseExpiredViewButton)
+    }
+    
+    @objc private func testView() {
+        let impulseExpiredVC = ImpulseExpiredViewController()
+        if let impulse = impulsesStateManager?.impulses.first{
+            impulseExpiredVC.impulse = impulse
+        }
+        let modalController = UINavigationController(rootViewController: impulseExpiredVC)
+        navigationController?.present(modalController, animated: true)
+    }
+    
+    
 }
 
 //MARK: - Configure Layout Constraints
@@ -211,7 +235,12 @@ extension MainCollectionViewController {
             addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             addToCCButton.widthAnchor.constraint(equalToConstant: 66),
-            addToCCButton.heightAnchor.constraint(equalToConstant: 66)
+            addToCCButton.heightAnchor.constraint(equalToConstant: 66),
+            
+            testImpulseExpiredViewButton.centerXAnchor.constraint(equalTo: addToCCButton.centerXAnchor, constant: -75),
+            testImpulseExpiredViewButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            testImpulseExpiredViewButton.widthAnchor.constraint(equalToConstant: 66),
+            testImpulseExpiredViewButton.heightAnchor.constraint(equalToConstant: 66)
         ])
     }
 }

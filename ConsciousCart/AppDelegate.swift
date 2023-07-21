@@ -115,7 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let impulseExpiredVC = ImpulseExpiredViewController()
             impulseExpiredVC.impulse = impulse
             
-            mainCVNavController.present(impulseExpiredVC, animated: false)
+            let modalController = UINavigationController(rootViewController: impulseExpiredVC)
+            
+            mainCVNavController.present(modalController, animated: false)
         } else {
             print("Error: Could not present a new view controller.")
         }
