@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -37,6 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         mainCVC.tabBarItem = UITabBarItem()
         mainCVC.tabBarItem.image = UIImage(systemName: "cart.circle")
         mainCVC.tabBarItem.title = "My Cart"
+        mainCVC.tabBarItem.tag = TabBarKeys.mainTab.rawValue
         
         return UINavigationController(rootViewController: mainCVC)
     }
@@ -53,6 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        , withConfiguration: sizeConfig)!.withBaselineOffset(fromBottom: profileFontSize / 1.8)
 //        profileVC.tabBarItem.image = UIImage(named: "person.circle")
         profileVC.tabBarItem.title = "Profile"
+        profileVC.tabBarItem.tag = TabBarKeys.profileTab.rawValue
         
         return UINavigationController(rootViewController: profileVC)
     }
@@ -65,6 +68,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         settingsVC.tabBarItem = UITabBarItem()
         settingsVC.tabBarItem.image = UIImage(systemName: "gearshape")
         settingsVC.tabBarItem.title = "Settings"
+        settingsVC.tabBarItem.tag = TabBarKeys.settingsTab.rawValue
         
         return settingsVC
     }

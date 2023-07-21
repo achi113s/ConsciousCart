@@ -25,6 +25,7 @@
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
+		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
 		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
 		448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */; };
 		4496A0562A16895F004C1349 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496A0552A16895F004C1349 /* Nunito-Regular.ttf */; };
@@ -89,6 +90,7 @@
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
 		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
 		448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		4496A0552A16895F004C1349 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
@@ -189,6 +191,23 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		448807A82A69CD2C005377DE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				44C9AFDB2A5A444200B03846 /* SettingsView.swift */,
+				44C9AFDD2A5A53EA00B03846 /* AboutView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		448807A92A6A0705005377DE /* ImpulseExpiredViewController */ = {
+			isa = PBXGroup;
+			children = (
+				448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */,
+			);
+			path = ImpulseExpiredViewController;
+			sourceTree = "<group>";
+		};
 		4497E38E29F358BC0029451E = {
 			isa = PBXGroup;
 			children = (
@@ -259,8 +278,7 @@
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				444A58E72A4FC353006FC02B /* MainCollectionView */,
-				44C9AFDB2A5A444200B03846 /* SettingsView.swift */,
-				44C9AFDD2A5A53EA00B03846 /* AboutView.swift */,
+				448807A82A69CD2C005377DE /* Settings */,
 				443DC34F2A59F50600A9DCF0 /* SupportViews */,
 			);
 			path = Views;
@@ -270,8 +288,9 @@
 			isa = PBXGroup;
 			children = (
 				44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */,
-				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
 				442B92612A34D86D0042082C /* AddToConsciousCartViewController */,
+				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
+				448807A92A6A0705005377DE /* ImpulseExpiredViewController */,
 				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
 				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
 			);
@@ -462,6 +481,7 @@
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
+				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,

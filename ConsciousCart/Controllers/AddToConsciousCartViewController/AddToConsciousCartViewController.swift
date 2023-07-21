@@ -116,6 +116,7 @@ extension AddToConsciousCartViewController {
             content.title = "ConsciousCart"
             content.body = "Your impulse for \(impulse.unwrappedName) is ready to be reviewed!"
             content.sound = .default
+            content.categoryIdentifier = NotificationCategory.impulseExpired.rawValue
             
             //            var calendar = Calendar.current
             //            var dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)

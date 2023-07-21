@@ -24,6 +24,10 @@ enum CVSection: Int, CaseIterable {
     case impulseSection = 1
 }
 
+enum NotificationCategory: String {
+    case impulseExpired = "impulseExpired"
+}
+
 enum MainCollectionViewReuseIdentifiers: String {
     case defaultCellReuseIdentifier = "cell"
     case savingsChartCellReuseIdentifier = "savingsChartCell"
@@ -33,6 +37,12 @@ enum MainCollectionViewReuseIdentifiers: String {
     case headerIdentifier = "headerId"
     case impulsesCategoryFooterIdentifier = "impulsesCategoryFooterId"
     case footerIdentifier = "footerId"
+}
+
+enum TabBarKeys: Int {
+    case mainTab = 0
+    case profileTab = 1
+    case settingsTab = 2
 }
 
 enum UserDefaultsKeys: String {

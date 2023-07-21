@@ -72,8 +72,13 @@ class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             let itemPrice = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
             content.text = "\(impulse.unwrappedName), \(itemPrice)"
             content.textProperties.font = UIFont.ccFont(textStyle: .title3)
+            
             let remainingTime = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate)
             content.secondaryText = remainingTime.0
+            
+            if let imageName = impulse.imageName {
+                content.image = UIImage(named: imageName)
+            }
             
             cell.contentConfiguration = content
             

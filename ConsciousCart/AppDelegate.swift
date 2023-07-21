@@ -5,14 +5,28 @@
 //  Created by Giorgio Latour on 4/21/23.
 //
 
-import UIKit
 import CoreData
+import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
         return true
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let notificationCategory = response.notification.request.content.categoryIdentifier
+        
+        switch notificationCategory {
+        case NotificationCategory.impulseExpired.rawValue:
+            displayImpulseScreenFromNotification(for: response)
+        default:
+            print("No defined notification category response.")
+        }
+        
+        completionHandler()
     }
 
     // MARK: UISceneSession Lifecycle
@@ -73,6 +87,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func displayImpulseScreenFromNotification(for response: UNNotificationResponse) {
+        guard let sceneDelegate = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate) else {
+            print("Error: Could not get Scene Delegate.")
+            return
+        }
+        guard let window = sceneDelegate.window else {
+            print("Error: Could not get window from Scene Delegate.")
+            return
+        }
+        guard let tabBarController = window.rootViewController as? UITabBarController else {
+            print("Error: Could not get UITabBarController from window.")
+            return
+        }
+        
+        let impulseID = response.notification.request.identifier
+        
+        guard let impulse = sceneDelegate.impulsesStateManager.impulses.first(where: { $0.id.uuidString == impulseID }) else {
+            print("Error: Could not find Impulse.")
+            return
+        }
+        
+        tabBarController.selectedIndex = TabBarKeys.mainTab.rawValue
+        if let mainCVNavController = tabBarController.selectedViewController as? UINavigationController {
+            let impulseExpiredVC = ImpulseExpiredViewController()
+            impulseExpiredVC.impulse = impulse
+            
+            mainCVNavController.present(impulseExpiredVC, animated: false)
+        } else {
+            print("Error: Could not present a new view controller.")
+        }
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
     }
 }
 
