@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import SPConfetti
 
 class ImpulseExpiredViewController: UIViewController {
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
+    var impulsesStateManager: ImpulsesStateManager? = nil
     var impulse: Impulse? = nil
+    var mainCVC: MainCollectionViewController? = nil
     
     private var scoreLabel: UILabel! = nil
     
@@ -53,10 +56,10 @@ extension ImpulseExpiredViewController {
         
         awesomeLabel = UILabel()
         awesomeLabel.translatesAutoresizingMaskIntoConstraints = false
-        awesomeLabel.text = "🥳 Awesome!"
+        awesomeLabel.text = "🥳 Awesome!\nYour score is..."
         awesomeLabel.font = UIFont.ccFont(textStyle: .title)
         awesomeLabel.textAlignment = .center
-        awesomeLabel.numberOfLines = 1
+        awesomeLabel.numberOfLines = 2
         
         messageLabel = UILabel()
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -78,9 +81,10 @@ extension ImpulseExpiredViewController {
         scoreLabel = UILabel()
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.textAlignment = .center
-        scoreLabel.numberOfLines = 0
+        scoreLabel.numberOfLines = 1
         scoreLabel.text = "\(0.00)".asCurrency(locale: Locale.current) ?? "$0.00"
         scoreLabel.font = UIFont.ccFont(textStyle: .bold, fontSize: 72)
+        scoreLabel.adjustsFontSizeToFitWidth = true
         scoreLabel.textColor = .systemGreen
         
         waitedButton = ConsciousCartButton()
@@ -179,12 +183,41 @@ extension ImpulseExpiredViewController {
     }
     
     @objc func saveButtonPressed() {
+        guard let impulsesStateManager = impulsesStateManager else {
+            print("Error: impulsesStateManager is nil.")
+            return
+        }
+        
+        guard let impulse = impulse else { return }
+        
+        guard let mainCVC = mainCVC else {
+            print("Error: mainCVC is nil.")
+            return
+        }
+        
+        impulse.dateCompleted = Date.now
+        impulse.completed = true
+        
         switch activeOption {
         case -1:
             saveButton.shakeAnimation()
+        case ButtonTags.waitedButton.rawValue:
+            impulse.amountSaved = impulse.price
+            
+            SPConfettiConfiguration.particlesConfig.velocity = CGFloat(500)
+            SPConfetti.startAnimating(.centerWidthToDown, particles: [.arc], duration: 1)
+            
+        case ButtonTags.waitedAndWillBuyButton.rawValue:
+            impulse.amountSaved = Double(0)
+        case ButtonTags.failedButton.rawValue:
+            impulse.amountSaved = -impulse.price
         default:
-            print("df")
+            impulse.amountSaved = Double(0)
         }
+        
+        impulsesStateManager.updateImpulse()
+        mainCVC.collectionView.reloadData()
+        exitView()
     }
     
     private func changeActiveOption(pressedButton: ButtonTags) {

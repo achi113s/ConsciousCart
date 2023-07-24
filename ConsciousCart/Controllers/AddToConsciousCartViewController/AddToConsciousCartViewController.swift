@@ -43,7 +43,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(exitAddView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitAddView))
         navigationController?.navigationBar.prefersLargeTitles = true
         
         configureSubviewProperties()

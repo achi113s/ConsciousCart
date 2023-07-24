@@ -55,31 +55,35 @@ final class ImpulsesStateManager {
         }
     }
     
-    public func addImpulse(
-        remindDate: Date = Date(),
-        name: String = "Unknown Name",
-        price: Double = 0.0,
-        imageName: String? = nil,
-        reasonNeeded: String = "Unknown Reason") -> Impulse? {
-            if let moc = moc {
-                
-                let newImpulse = Impulse(context: moc)
-                newImpulse.id = UUID()
-                newImpulse.dateCreated = Date.now
-                newImpulse.remindDate = remindDate
-                newImpulse.name = name
-                newImpulse.price = price
-                newImpulse.imageName = imageName
-                newImpulse.reasonNeeded = reasonNeeded
-                newImpulse.completed = false
-                
-                saveContext()
-                loadImpulses()
-                
-                return newImpulse
-            }
-            return nil
+    public func addImpulse(remindDate: Date = Date(),
+                           name: String = "Unknown Name",
+                           price: Double = 0.0,
+                           imageName: String? = nil,
+                           reasonNeeded: String = "Unknown Reason") -> Impulse? {
+        if let moc = moc {
+            
+            let newImpulse = Impulse(context: moc)
+            newImpulse.id = UUID()
+            newImpulse.dateCreated = Date.now
+            newImpulse.remindDate = remindDate
+            newImpulse.name = name
+            newImpulse.price = price
+            newImpulse.imageName = imageName
+            newImpulse.reasonNeeded = reasonNeeded
+            newImpulse.completed = false
+            
+            saveContext()
+            loadImpulses()
+            
+            return newImpulse
         }
+        return nil
+    }
+    
+    public func updateImpulse() {
+        saveContext()
+        loadImpulses()
+    }
     
     public func deleteAllImpulses() {
         guard let moc = moc else { return }

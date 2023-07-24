@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "spconfetti",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanvorobei/SPConfetti",
+      "state" : {
+        "revision" : "257a8674c62212a3919abd1f9cb31dc2fc7b0992",
+        "version" : "1.4.1"
+      }
+    }
+  ],
+  "version" : 2
+}

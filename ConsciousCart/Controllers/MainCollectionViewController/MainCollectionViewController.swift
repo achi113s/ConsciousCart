@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SPConfetti
 
 class MainCollectionViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager?
@@ -187,16 +188,17 @@ extension MainCollectionViewController {
     
     @objc private func addToConsciousCart() {
         let addToCartVC = AddToConsciousCartViewController()
-        
+
         addToCartVC.impulsesStateManager = impulsesStateManager
-        
+
         // A reference back to this view is required in order to
         // reload the table data because viewWillAppear is not
         // called when a modal is dismissed.
         addToCartVC.mainCVC = self
-        
+
         let modalController = UINavigationController(rootViewController: addToCartVC)
         navigationController?.present(modalController, animated: true)
+        
         //                navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -216,6 +218,8 @@ extension MainCollectionViewController {
         if let impulse = impulsesStateManager?.impulses.first{
             impulseExpiredVC.impulse = impulse
         }
+        impulseExpiredVC.impulsesStateManager = impulsesStateManager
+        impulseExpiredVC.mainCVC = self
         let modalController = UINavigationController(rootViewController: impulseExpiredVC)
         navigationController?.present(modalController, animated: true)
     }

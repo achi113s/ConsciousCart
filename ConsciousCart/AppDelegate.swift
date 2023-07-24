@@ -114,6 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let mainCVNavController = tabBarController.selectedViewController as? UINavigationController {
             let impulseExpiredVC = ImpulseExpiredViewController()
             impulseExpiredVC.impulse = impulse
+            impulseExpiredVC.impulsesStateManager = sceneDelegate.impulsesStateManager
+            impulseExpiredVC.mainCVC = mainCVNavController.viewControllers.first as? MainCollectionViewController
             
             let modalController = UINavigationController(rootViewController: impulseExpiredVC)
             

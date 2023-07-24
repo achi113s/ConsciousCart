@@ -35,6 +35,7 @@
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
+		44AA7C1B2A6E13480089412A /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 44AA7C1A2A6E13480089412A /* SPConfetti */; };
 		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
 		44AACCD92A0345FC0053334C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD82A0345FC0053334C /* Secrets.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
@@ -114,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44AA7C1B2A6E13480089412A /* SPConfetti in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +317,7 @@
 			);
 			name = ConsciousCart;
 			packageProductDependencies = (
+				44AA7C1A2A6E13480089412A /* SPConfetti */,
 			);
 			productName = ConsciousCart;
 			productReference = 4497E39729F358BC0029451E /* ConsciousCart.app */;
@@ -367,6 +370,7 @@
 			);
 			mainGroup = 4497E38E29F358BC0029451E;
 			packageReferences = (
+				44AA7C192A6E13480089412A /* XCRemoteSwiftPackageReference "SPConfetti" */,
 			);
 			productRefGroup = 4497E39829F358BC0029451E /* Products */;
 			projectDirPath = "";
@@ -723,6 +727,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		44AA7C192A6E13480089412A /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPConfetti";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		44AA7C1A2A6E13480089412A /* SPConfetti */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44AA7C192A6E13480089412A /* XCRemoteSwiftPackageReference "SPConfetti" */;
+			productName = SPConfetti;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */ = {
