@@ -11,8 +11,6 @@
 		4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */; };
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
-		44296B5129F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
-		44296B5229F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
@@ -37,9 +35,6 @@
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
-		4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3B129F358BD0029451E /* ConsciousCartTests.swift */; };
-		4497E3BC29F358BD0029451E /* ConsciousCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */; };
-		4497E3BE29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */; };
 		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
 		44AACCD92A0345FC0053334C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD82A0345FC0053334C /* Secrets.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
@@ -53,17 +48,11 @@
 		44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */; };
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
 		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
+		44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		4497E3AE29F358BD0029451E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4497E38F29F358BC0029451E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4497E39629F358BC0029451E;
-			remoteInfo = ConsciousCart;
-		};
-		4497E3B829F358BD0029451E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4497E38F29F358BC0029451E /* Project object */;
 			proxyType = 1;
@@ -104,10 +93,6 @@
 		4497E3A629F358BC0029451E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4497E3AD29F358BD0029451E /* ConsciousCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4497E3B129F358BD0029451E /* ConsciousCartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTests.swift; sourceTree = "<group>"; };
-		4497E3B729F358BD0029451E /* ConsciousCartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITests.swift; sourceTree = "<group>"; };
-		4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeAPIManager.swift; sourceTree = "<group>"; };
 		44AACCD82A0345FC0053334C /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
@@ -121,6 +106,7 @@
 		44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAnimatableCurrency.swift; sourceTree = "<group>"; };
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
+		44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,13 +118,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4497E3AA29F358BD0029451E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4497E3B429F358BD0029451E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,7 +190,6 @@
 			children = (
 				4497E39929F358BC0029451E /* ConsciousCart */,
 				4497E3B029F358BD0029451E /* ConsciousCartTests */,
-				4497E3BA29F358BD0029451E /* ConsciousCartUITests */,
 				4497E39829F358BC0029451E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,7 +199,6 @@
 			children = (
 				4497E39729F358BC0029451E /* ConsciousCart.app */,
 				4497E3AD29F358BD0029451E /* ConsciousCartTests.xctest */,
-				4497E3B729F358BD0029451E /* ConsciousCartUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -245,18 +222,9 @@
 		4497E3B029F358BD0029451E /* ConsciousCartTests */ = {
 			isa = PBXGroup;
 			children = (
-				4497E3B129F358BD0029451E /* ConsciousCartTests.swift */,
+				44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */,
 			);
 			path = ConsciousCartTests;
-			sourceTree = "<group>";
-		};
-		4497E3BA29F358BD0029451E /* ConsciousCartUITests */ = {
-			isa = PBXGroup;
-			children = (
-				4497E3BB29F358BD0029451E /* ConsciousCartUITests.swift */,
-				4497E3BD29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift */,
-			);
-			path = ConsciousCartUITests;
 			sourceTree = "<group>";
 		};
 		4497E3D929F35B040029451E /* Models */ = {
@@ -370,24 +338,6 @@
 			productReference = 4497E3AD29F358BD0029451E /* ConsciousCartTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4497E3B629F358BD0029451E /* ConsciousCartUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4497E3C729F358BD0029451E /* Build configuration list for PBXNativeTarget "ConsciousCartUITests" */;
-			buildPhases = (
-				4497E3B329F358BD0029451E /* Sources */,
-				4497E3B429F358BD0029451E /* Frameworks */,
-				4497E3B529F358BD0029451E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4497E3B929F358BD0029451E /* PBXTargetDependency */,
-			);
-			name = ConsciousCartUITests;
-			productName = ConsciousCartUITests;
-			productReference = 4497E3B729F358BD0029451E /* ConsciousCartUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -402,10 +352,6 @@
 						CreatedOnToolsVersion = 14.3;
 					};
 					4497E3AC29F358BD0029451E = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 4497E39629F358BC0029451E;
-					};
-					4497E3B629F358BD0029451E = {
 						CreatedOnToolsVersion = 14.3;
 						TestTargetID = 4497E39629F358BC0029451E;
 					};
@@ -428,7 +374,6 @@
 			targets = (
 				4497E39629F358BC0029451E /* ConsciousCart */,
 				4497E3AC29F358BD0029451E /* ConsciousCartTests */,
-				4497E3B629F358BD0029451E /* ConsciousCartUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -450,13 +395,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4497E3AB29F358BD0029451E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4497E3B529F358BD0029451E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -510,18 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44296B5129F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
-				4497E3B229F358BD0029451E /* ConsciousCartTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4497E3B329F358BD0029451E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4497E3BC29F358BD0029451E /* ConsciousCartUITests.swift in Sources */,
-				44296B5229F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
-				4497E3BE29F358BD0029451E /* ConsciousCartUITestsLaunchTests.swift in Sources */,
+				44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,11 +459,6 @@
 			isa = PBXTargetDependency;
 			target = 4497E39629F358BC0029451E /* ConsciousCart */;
 			targetProxy = 4497E3AE29F358BD0029451E /* PBXContainerItemProxy */;
-		};
-		4497E3B929F358BD0029451E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4497E39629F358BC0029451E /* ConsciousCart */;
-			targetProxy = 4497E3B829F358BD0029451E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -770,42 +692,6 @@
 			};
 			name = Release;
 		};
-		4497E3C829F358BD0029451E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = E24P6RF94S;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCartUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConsciousCart;
-			};
-			name = Debug;
-		};
-		4497E3C929F358BD0029451E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = E24P6RF94S;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCartUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConsciousCart;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -832,15 +718,6 @@
 			buildConfigurations = (
 				4497E3C529F358BD0029451E /* Debug */,
 				4497E3C629F358BD0029451E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4497E3C729F358BD0029451E /* Build configuration list for PBXNativeTarget "ConsciousCartUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4497E3C829F358BD0029451E /* Debug */,
-				4497E3C929F358BD0029451E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

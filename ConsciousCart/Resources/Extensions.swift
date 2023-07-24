@@ -62,6 +62,11 @@ extension String {
             return 0.0
         }
     }
+    
+    func stringInputIsValid() -> Bool {
+        if self.trimmingCharacters(in: .whitespacesAndNewlines) == "" { return false }
+        return true
+    }
 }
 
 extension UIColor {
@@ -95,6 +100,27 @@ extension UIColor {
     }
     return self
   }
+}
+
+extension UILabel {
+    func countAnimation(upto: Double) {
+        let from: Double = text?.asDoubleFromCurrency(locale: Locale.current) ?? 0.0
+        
+        let steps: Int = 50
+        let duration = 0.5
+        let delay = duration / Double(steps)
+        
+        let diff = upto - from
+        let step = diff / Double(steps)
+        
+        for i in 0...steps {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay * Double(i)) {
+                let newValue = from + (step * Double(i))
+                let newValueAsString = "\(newValue)".asCurrency(locale: Locale.current)
+                self.text = newValueAsString
+            }
+        }
+    }
 }
 
 //MARK: - Extension to Hide Keyboard on Tap

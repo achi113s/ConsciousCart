@@ -10,12 +10,12 @@ import SwiftUI
 struct TextViewAnimatableCurrency: View, Animatable {
     var number: Double
     
-    var formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
-        return formatter
-    }()
+//    var formatter: NumberFormatter = {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.locale = Locale.current
+//        return formatter
+//    }()
     
     var animatableData: Double {
         get { number }
@@ -23,6 +23,7 @@ struct TextViewAnimatableCurrency: View, Animatable {
     }
     
     var body: some View {
-        Text(formatter.string(for: number) ?? "")
+//        Text(formatter.string(for: number) ?? "")
+        Text("\(number)".asCurrency(locale: Locale.current) ?? "")
     }
 }

@@ -159,12 +159,30 @@ extension AddToConsciousCartViewController {
         // Save the image with a UUID as its name if the user selected an image.
         // The function returns nil if there is no image to save.
         let imageName = saveImpulseImage()
+        var itemName = ""
+        var itemReason = ""
+        
+        if let name = itemNameTextField.text {
+            if name.stringInputIsValid() {
+                itemName = name
+            } else {
+                itemName = "Unknown"
+            }
+        }
+        
+        if let reason = itemReasonNeededTextField.text {
+            if reason.stringInputIsValid() {
+                itemReason = reason
+            } else {
+                itemReason = "Unknown"
+            }
+        }
         
         let impulse = impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
-                                                      name: itemNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Name",
+                                                      name: itemName,
                                                       price: itemPrice,
                                                       imageName: imageName,
-                                                      reasonNeeded: itemReasonNeededTextField.text ?? "Unknown Reason")
+                                                      reasonNeeded: itemReason)
         
         if let impulse = impulse {
             setupNotification(for: impulse)
@@ -315,8 +333,8 @@ extension AddToConsciousCartViewController {
         NSLayoutConstraint.activate([
             uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            uploadButtonsStack.heightAnchor.constraint(equalTo: uploadButtonsStack.widthAnchor, multiplier: 0.5),
+            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            uploadButtonsStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
             changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
             changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),

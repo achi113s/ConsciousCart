@@ -56,7 +56,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        profileVC.tabBarItem.image = UIImage(named: "person.circle")
         profileVC.tabBarItem.title = "Profile"
         profileVC.tabBarItem.tag = TabBarKeys.profileTab.rawValue
-        
+        if impulsesStateManager.completedImpulses.count != 0 {
+            profileVC.tabBarItem.badgeValue = "\(impulsesStateManager.pendingImpulses.count)"
+        }
         return UINavigationController(rootViewController: profileVC)
     }
     

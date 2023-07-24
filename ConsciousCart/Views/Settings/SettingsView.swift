@@ -11,6 +11,7 @@ struct SettingsView: View {
     var impulsesStateManager: ImpulsesStateManager?
     
     @State private var showingDeleteAlert = false
+    @State private var showingAccentResetAlert = false
     @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
     @State private var accentColorSetting: Color = Color(
         uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
@@ -102,8 +103,7 @@ struct SettingsView: View {
                                 .font(Font.custom("Nunito-Semibold", size: 17))
                             
                             Button {
-                                UserDefaults.standard.set(UIColor(named: "ShyMoment"), forKey: UserDefaultsKeys.accentColor.rawValue)
-                                accentColorSetting = Color("ShyMoment")
+                                showingAccentResetAlert = true
                             } label: {
                                 HStack {
                                     Text("🪄  Reset Accent Color")
@@ -112,6 +112,15 @@ struct SettingsView: View {
                                 .frame(height: 30)
                             }
                             .buttonStyle(CCButtonStyle())
+                            .alert("Reset Accent Color", isPresented: $showingAccentResetAlert) {
+                                Button("Cancel", role: .cancel) { }
+                                Button("Reset") {
+                                    UserDefaults.standard.set(UIColor(named: "ShyMoment"), forKey: UserDefaultsKeys.accentColor.rawValue)
+                                    accentColorSetting = Color("ShyMoment")
+                                }
+                            } message: {
+                                Text("Are you sure you want to reset the app's accent color to its default value? This action cannot be undone.")
+                            }
                         }
                     }
                     

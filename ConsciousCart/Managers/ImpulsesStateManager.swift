@@ -14,6 +14,7 @@ final class ImpulsesStateManager {
     
     private(set) var impulses: [Impulse] = [Impulse]()
     private(set) var completedImpulses: [Impulse] = [Impulse]()
+    private(set) var pendingImpulses: [Impulse] = [Impulse]()
     
     public var totalAmountSaved: Double {
         return completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
@@ -36,7 +37,8 @@ final class ImpulsesStateManager {
             request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
             let allImpulses = try moc.fetch(request)
             
-            self.impulses = allImpulses.filter { !$0.completed }
+            self.impulses = allImpulses.filter { !$0.completed && ($0.unwrappedRemindDate > Date.now)}
+            self.pendingImpulses = allImpulses.filter { !$0.completed && ($0.unwrappedRemindDate < Date.now)}
             self.completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.unwrappedCompletedDate < $1.unwrappedCompletedDate })
         } catch {
             print("Error fetching data from context: \(error.localizedDescription)")
