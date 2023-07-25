@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import UserNotifications
 
 // should make thread safe?
 
@@ -125,5 +126,51 @@ final class ImpulsesStateManager {
             saveContext()
             loadImpulses()
         }
+    }
+    
+    public func setupNotification(for impulse: Impulse) {
+        let center = UNUserNotificationCenter.current()
+        
+        let addRequest = {
+            let content = UNMutableNotificationContent()
+            content.title = "ConsciousCart"
+            content.body = "Your impulse for \(impulse.unwrappedName) is ready to be reviewed!"
+            content.sound = .default
+            content.categoryIdentifier = NotificationCategory.impulseExpired.rawValue
+            
+            //            var calendar = Calendar.current
+            //            var dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
+            //            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: impulse.id.uuidString, content: content, trigger: trigger)
+            center.add(request)
+        }
+        
+        center.getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+                addRequest()
+            } else {
+                center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        addRequest()
+                    } else {
+                        if let error = error {
+                            print("Error authorizing notifications: \(error.localizedDescription)")
+                        } else {
+                            print("Unknown error authorizing notifications.")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public func updateNotification(for impulse: Impulse) {
+        let center = UNUserNotificationCenter.current()
+        
+        center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
+        
+        setupNotification(for: impulse)
     }
 }

@@ -108,44 +108,6 @@ extension AddToConsciousCartViewController {
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
     
-    func setupNotification(for impulse: Impulse) {
-        let center = UNUserNotificationCenter.current()
-        
-        let addRequest = {
-            let content = UNMutableNotificationContent()
-            content.title = "ConsciousCart"
-            content.body = "Your impulse for \(impulse.unwrappedName) is ready to be reviewed!"
-            content.sound = .default
-            content.categoryIdentifier = NotificationCategory.impulseExpired.rawValue
-            
-            //            var calendar = Calendar.current
-            //            var dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
-            //            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: impulse.id.uuidString, content: content, trigger: trigger)
-            center.add(request)
-        }
-        
-        center.getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized {
-                addRequest()
-            } else {
-                center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                    if success {
-                        addRequest()
-                    } else {
-                        if let error = error {
-                            print("Error authorizing notifications: \(error.localizedDescription)")
-                        } else {
-                            print("Unknown error authorizing notifications.")
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
     @objc func saveItem() {
         guard let impulsesStateManager = impulsesStateManager else {
             print("impulsesStateManager not unwrapped successfully.")
@@ -185,7 +147,7 @@ extension AddToConsciousCartViewController {
                                                       reasonNeeded: itemReason)
         
         if let impulse = impulse {
-            setupNotification(for: impulse)
+            impulsesStateManager.setupNotification(for: impulse)
         }
         
         mainCVC.collectionView.reloadData()
@@ -293,7 +255,7 @@ extension AddToConsciousCartViewController {
         itemReasonNeededTextField.placeholder = "Reason Needed"
         itemReasonNeededTextField.tag = 2
         itemReasonNeededTextField.delegate = self
-        
+
         itemPriceTextField = CurrencyTextField()
         itemPriceTextField.placeholder = "0".asCurrency(locale: Locale.current)
         itemPriceTextField.delegate = self

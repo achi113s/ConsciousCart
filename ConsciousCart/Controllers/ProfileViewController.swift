@@ -12,8 +12,11 @@ class ProfileViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager?
     
     private var scrollView: UIScrollView!
-    
     private var contentView: UIView!
+//    
+//    private var impulseStack: UIStackView! = nil
+//    private var impulsePropertiesStack: UIStackView! = nil
+    
     private var scoreLabel: UILabel!
     private var titleLabel: UILabel!
     private var differentiateWithoutColorIndicator: UIImageView!
@@ -41,9 +44,8 @@ extension ProfileViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.bounces = true
         scrollView.alwaysBounceVertical = true
-        
-        view.addSubview(scrollView)
     }
+    
     private func configureSubviews() {
         contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +63,7 @@ extension ProfileViewController {
         scoreLabel.font = UIFont.ccFont(textStyle: .bold, fontSize: 88)
         scoreLabel.textAlignment = .center
 
-        addSubviewsToScrollView()
+        addSubviewsToView()
         
         if UIAccessibility.shouldDifferentiateWithoutColor {
             differentiateScoreWithoutColor()
@@ -70,7 +72,9 @@ extension ProfileViewController {
         }
     }
     
-    private func addSubviewsToScrollView() {
+    private func addSubviewsToView() {
+        view.addSubview(scrollView)
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(scoreLabel)
         

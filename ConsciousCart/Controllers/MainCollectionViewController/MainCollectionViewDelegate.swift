@@ -23,6 +23,7 @@ class MainCollectionViewDelegate: NSObject, UICollectionViewDelegate {
         guard let mainCVC = mainCVC else { return }
         
         let detailVC = ImpulseDetailViewController()
+        detailVC.impulsesStateManager = impulsesStateManager
         detailVC.impulse = impulsesStateManager.impulses[indexPath.row]
         
         mainCVC.navigationController?.pushViewController(detailVC, animated: true)

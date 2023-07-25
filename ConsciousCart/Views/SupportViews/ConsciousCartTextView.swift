@@ -1,41 +1,41 @@
 //
-//  ConsciousCartTextField.swift
+//  ConsciousCartTextView.swift
 //  ConsciousCart
 //
-//  Created by Giorgio Latour on 5/3/23.
+//  Created by Giorgio Latour on 7/24/23.
 //
 
-import UIKit.UITextField
+import UIKit.UITextView
 
-final class ConsciousCartTextField: UITextField {
-    var textPadding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 5)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configureTextField()
+final class ConsciousCartTextView: UITextView {
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        configureTextView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureTextField()
+        configureTextView()
     }
     
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.textRect(forBounds: bounds)
-        return rect.inset(by: textPadding)
-    }
+//    override func textRect(forBounds bounds: CGRect) -> CGRect {
+//        let rect = super.textRect(forBounds: bounds)
+//        return rect.inset(by: textPadding)
+//    }
+//
+//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+//        let rect = super.editingRect(forBounds: bounds)
+//        return rect.inset(by: textPadding)
+//    }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.editingRect(forBounds: bounds)
-        return rect.inset(by: textPadding)
-    }
-    
-    func configureTextField() {
+    func configureTextView() {
         translatesAutoresizingMaskIntoConstraints = false
+        
+        textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         
         backgroundColor = .secondarySystemBackground
         
-        font = UIFont(name: "Nunito-Regular", size: 17)
+        font = UIFont.ccFont(textStyle: .body)
         
         self.layer.cornerRadius = 8
         self.layer.borderColor = UIColor.lightGray.cgColor
@@ -43,7 +43,9 @@ final class ConsciousCartTextField: UITextField {
         
         self.inputAccessoryView = toolBar()
     }
-    
+}
+
+extension ConsciousCartTextView {
     func toolBar() -> UIToolbar{
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
@@ -75,5 +77,4 @@ final class ConsciousCartTextField: UITextField {
     @objc func onClickCancelButton() {
         self.endEditing(true)
     }
-    
 }

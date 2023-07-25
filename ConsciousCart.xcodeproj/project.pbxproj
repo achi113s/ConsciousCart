@@ -50,6 +50,7 @@
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
 		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
 		44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */; };
+		44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
 		44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
 				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
 				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
+				44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
+				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
 				44C9AFDE2A5A53EA00B03846 /* AboutView.swift in Sources */,
