@@ -32,8 +32,6 @@ class ImpulseDetailViewController: UIViewController {
     private var canEditText: Bool = false
     private var activeView: UIView?
     
-    private var updateButton: ConsciousCartButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,10 +142,6 @@ extension ImpulseDetailViewController {
         itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.isEnabled = false
         
-        updateButton = ConsciousCartButton()
-        updateButton.setTitle("Update Impulse", for: .normal)
-        updateButton.addTarget(self, action: #selector(updateImpulse), for: .touchUpInside)
-        
         addSubViewsToView()
     }
     
@@ -166,8 +160,6 @@ extension ImpulseDetailViewController {
         impulsePropertiesStack.addArrangedSubview(itemRemindDate)
         
         contentView.addSubview(impulsePropertiesStack)
-        
-        contentView.addSubview(updateButton)
         
         scrollView.addSubview(contentView)
     }
@@ -192,9 +184,9 @@ extension ImpulseDetailViewController {
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
-            impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+//            impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             impulsePropertiesStack.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            //            impulsePropertiesStack.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
+            impulsePropertiesStack.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
             impulsePropertiesStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemNameTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
@@ -207,12 +199,7 @@ extension ImpulseDetailViewController {
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            
-            updateButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            updateButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            updateButton.heightAnchor.constraint(equalToConstant: 50),
-            updateButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -25)
+            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
         ])
     }
 }
@@ -220,10 +207,17 @@ extension ImpulseDetailViewController {
 //MARK: - Configure View Functions
 extension ImpulseDetailViewController {
     @objc private func enableImpulseEditing() {
+        if canEditText == true {
+            // If editing was enabled (true), and this function was called,
+            // it means the user was done editing. This function checks
+            // if there are updates to be made before performing an update.
+            updateImpulse()
+        }
+        
         toggleTextFieldsEditable()
     }
     
-    func toggleTextFieldsEditable() {
+    private func toggleTextFieldsEditable() {
         canEditText.toggle()
         
         itemNameTextField.isEditable.toggle()
@@ -237,7 +231,7 @@ extension ImpulseDetailViewController {
         navigationItem.rightBarButtonItem?.title = canEditText ? "Done Editing" : "Edit"
     }
     
-    @objc func keyboardWillShow(_ notification: NSNotification) {
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
@@ -252,11 +246,11 @@ extension ImpulseDetailViewController {
         }
     }
     
-    @objc func keyboardWillHide(_ notification: NSNotification) {
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
     
-    @objc private func updateImpulse() {
+    private func updateImpulse() {
         guard updatesPendingForImpulse() == true else { return }
         
         let updateImpulseAlert = UIAlertController(title: "Update Impulse", message: "Are you sure you want to update this Impulse? You cannot undo this action.", preferredStyle: .alert)
