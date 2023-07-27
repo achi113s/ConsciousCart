@@ -43,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UINavigationController(rootViewController: mainCVC)
     }
     
-    func createProfileVC() -> UINavigationController {
+    func createProfileVC() -> UIViewController {
         let profileVC = ProfileViewController()
         profileVC.title = "My Profile"
         profileVC.impulsesStateManager = impulsesStateManager
@@ -59,7 +59,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if impulsesStateManager.completedImpulses.count != 0 {
             profileVC.tabBarItem.badgeValue = "\(impulsesStateManager.pendingImpulses.count)"
         }
-        return UINavigationController(rootViewController: profileVC)
+//        return UINavigationController(rootViewController: profileVC)
+        return profileVC
     }
     
     func createSettingsVC() -> UIViewController {

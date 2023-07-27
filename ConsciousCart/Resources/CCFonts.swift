@@ -23,6 +23,7 @@ enum CCTextStyle {
     case bold
     case semibold
     case regular
+    case uibutton
 }
 
 extension UIFont {
@@ -81,12 +82,14 @@ extension UIFont {
             return 17
         case .semibold:
             return 17
+        case .uibutton:
+            return 17
         }
     }
     
     private static func textStyleWeight(for textStyle: CCTextStyle) -> String {
         switch textStyle {
-        case .largeTitle, .title, .title2, .title3, .bold:
+        case .largeTitle, .title, .title2, .title3, .bold, .uibutton:
             return "Nunito-Bold"
         case .body, .subheadline, .footnote, .caption, .regular:
             return "Nunito-Regular"

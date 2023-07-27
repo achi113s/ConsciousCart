@@ -47,6 +47,8 @@ final class ConsciousCartButton: UIButton {
         
         translatesAutoresizingMaskIntoConstraints = false
         
+        titleLabel?.font = UIFont.ccFont(textStyle: .uibutton)
+        
         isHighlighted = false
         
         layer.borderWidth = 1
