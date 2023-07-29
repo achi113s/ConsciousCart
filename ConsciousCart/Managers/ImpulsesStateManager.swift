@@ -17,8 +17,21 @@ final class ImpulsesStateManager {
     private(set) var completedImpulses: [Impulse] = [Impulse]()
     private(set) var pendingImpulses: [Impulse] = [Impulse]()
     
-    public var totalAmountSaved: Double {
+    lazy public var totalAmountSaved: Double = {
         return completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
+    }()
+    
+    public var userLevel: UserLevel {
+        switch totalAmountSaved {
+        case 5000...:
+            return .ultimateSaver
+        case 1000...:
+            return .superSaver
+        case 200...:
+            return .saver
+        default:
+            return .beginner
+        }
     }
     
     init(moc: NSManagedObjectContext?) {

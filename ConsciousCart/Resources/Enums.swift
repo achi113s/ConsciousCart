@@ -49,3 +49,10 @@ enum UserDefaultsKeys: String {
     case forceDarkModeSetting = "forceDarkMode"
     case accentColor = "accentColor"
 }
+
+enum UserLevel {
+    case beginner
+    case saver
+    case superSaver
+    case ultimateSaver
+}

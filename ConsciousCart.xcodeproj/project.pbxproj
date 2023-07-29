@@ -23,6 +23,7 @@
 		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
 		445E50452A745C1400DAFCDF /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50442A745C1400DAFCDF /* CoinView.swift */; };
 		445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50692A74AF9900DAFCDF /* MotionManager.swift */; };
+		445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E506D2A74B57300DAFCDF /* SparkleShape.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
@@ -83,6 +84,7 @@
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		445E50442A745C1400DAFCDF /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		445E50692A74AF9900DAFCDF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		445E506D2A74B57300DAFCDF /* SparkleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleShape.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		445E50682A74AF8800DAFCDF /* CoinView */ = {
 			isa = PBXGroup;
 			children = (
+				445E506D2A74B57300DAFCDF /* SparkleShape.swift */,
 				445E50442A745C1400DAFCDF /* CoinView.swift */,
 				445E50692A74AF9900DAFCDF /* MotionManager.swift */,
 			);
@@ -464,6 +467,7 @@
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
+				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,

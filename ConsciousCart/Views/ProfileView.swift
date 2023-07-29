@@ -21,22 +21,30 @@ struct ProfileView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 25) {
-                    Text(scoreMessage)
-                    
-                    HStack {
-                        TextViewAnimatableCurrency(number: score)
-                            .font(Font.custom("Nunito-Bold", size: 48))
-                            .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: score))
-                        Spacer()
-                        CoinView(coinSize: 100)
+                    VStack(spacing: 20) {
+                        CoinView(coinSize: 125, userLevel: (impulsesStateManager?.userLevel ?? .beginner))
+                        
+                        VStack {
+                            Text(scoreMessage)
+                                .font(Font.custom("Nunito-Bold", size: 18))
+                                .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: score))
+                            
+                            TextViewAnimatableCurrency(number: score)
+                                .font(Font.custom("Nunito-Bold", size: 42))
+                                .lineLimit(0...1)
+                                .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: score))
+                        }
                     }
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal)
+                    
+                    Spacer()
                     
                     Button {
                         print("df")
                     } label: {
                         HStack {
                             Text("⏰  Pending Impulses")
+                            
                             Spacer()
                             
                             if pendingImpulsesCount != 0 {
@@ -61,6 +69,7 @@ struct ProfileView: View {
         .scrollContentBackground(.hidden)
         .tint(.black)
         .onAppear {
+            print(impulsesStateManager?.userLevel)
             setScore()
             setPending()
         }
