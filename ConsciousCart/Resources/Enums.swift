@@ -15,6 +15,14 @@ enum ChartTimeDomain: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
+enum ImpulseCategory: String, CaseIterable {
+    case clothing = "clothing"
+    case electronics = "electronics"
+    case general = "general"
+    case restaurants = "restaurants"
+    case videoGames = "videoGames"
+}
+
 enum lengthRemainingForImpulse {
     case aLongTime, aMediumTime, aShortTime
 }

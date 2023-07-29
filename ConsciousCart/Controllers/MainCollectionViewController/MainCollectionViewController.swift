@@ -11,9 +11,9 @@ import SPConfetti
 class MainCollectionViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager?
     
-    private(set) var collectionView: UICollectionView!
-    private var collectionViewDataSource: MainCollectionViewDataSource!
-    private var collectionViewDelegate: MainCollectionViewDelegate!
+    private(set) var collectionView: UICollectionView! = nil
+    private var collectionViewDataSource: MainCollectionViewDataSource! = nil
+    private var collectionViewDelegate: MainCollectionViewDelegate! = nil
     
     private var addToCCButton: ConsciousCartButton!
     private var testImpulseExpiredViewButton: ConsciousCartButton!

@@ -26,7 +26,8 @@ extension Impulse {
     @NSManaged public var completed: Bool
     @NSManaged public var dateCompleted: Date?
     @NSManaged public var amountSaved: Double
-
+    @NSManaged public var category: String?
+    
     public var unwrappedCreationDate: Date {
         dateCreated ?? Date.now
     }
@@ -37,6 +38,10 @@ extension Impulse {
     
     public var unwrappedReasonNeeded: String {
         reasonNeeded ?? "None"
+    }
+    
+    public var unwrappedCategory: String {
+        category ?? "None"
     }
     
     public var unwrappedRemindDate: Date {

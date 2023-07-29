@@ -20,6 +20,8 @@
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
+		445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */; };
+		445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */; };
 		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
 		445E50452A745C1400DAFCDF /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50442A745C1400DAFCDF /* CoinView.swift */; };
 		445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50692A74AF9900DAFCDF /* MotionManager.swift */; };
@@ -81,6 +83,8 @@
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
+		445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDataSource.swift; sourceTree = "<group>"; };
+		445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDelegate.swift; sourceTree = "<group>"; };
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		445E50442A745C1400DAFCDF /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		445E50692A74AF9900DAFCDF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */,
+				445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */,
+				445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */,
 			);
 			path = AddToConsciousCartViewController;
 			sourceTree = "<group>";
@@ -182,6 +188,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		445DD50E2A75BFBB00DC56C8 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		445E50682A74AF8800DAFCDF /* CoinView */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,13 +206,13 @@
 			path = CoinView;
 			sourceTree = "<group>";
 		};
-		448807A82A69CD2C005377DE /* Settings */ = {
+		448807A82A69CD2C005377DE /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
 				44C9AFDB2A5A444200B03846 /* SettingsView.swift */,
 				44C9AFDD2A5A53EA00B03846 /* AboutView.swift */,
 			);
-			path = Settings;
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		448807A92A6A0705005377DE /* ImpulseExpiredViewController */ = {
@@ -267,9 +281,9 @@
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				444A58E72A4FC353006FC02B /* MainCollectionView */,
-				448807A82A69CD2C005377DE /* Settings */,
+				445DD50E2A75BFBB00DC56C8 /* ProfileView */,
+				448807A82A69CD2C005377DE /* SettingsView */,
 				443DC34F2A59F50600A9DCF0 /* SupportViews */,
-				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -449,6 +463,7 @@
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
+				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
@@ -457,6 +472,7 @@
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
+				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,

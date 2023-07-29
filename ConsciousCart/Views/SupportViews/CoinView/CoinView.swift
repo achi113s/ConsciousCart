@@ -23,7 +23,7 @@ struct CoinView: View {
     @State private var secondaryColor: Color
     
     @StateObject private var motionManager = MotionManager()
-    let motionStrength: CGFloat = 0.05
+    let motionStrength: CGFloat = 0.1
     
     var body: some View {
         ZStack {
@@ -117,7 +117,7 @@ struct CoinView_Previews: PreviewProvider {
     static let coinSize: CGFloat = 300
     
     static var previews: some View {
-        CoinView(coinSize: coinSize, userLevel: .beginner)
+        CoinView(coinSize: coinSize, userLevel: .ultimateSaver)
     }
 }
 

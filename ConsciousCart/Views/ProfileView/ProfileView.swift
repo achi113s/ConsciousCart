@@ -33,6 +33,7 @@ struct ProfileView: View {
                                 .font(Font.custom("Nunito-Bold", size: 42))
                                 .lineLimit(0...1)
                                 .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: score))
+                                .minimumScaleFactor(0.5)
                         }
                     }
                     .padding(.horizontal)
@@ -69,7 +70,6 @@ struct ProfileView: View {
         .scrollContentBackground(.hidden)
         .tint(.black)
         .onAppear {
-            print(impulsesStateManager?.userLevel)
             setScore()
             setPending()
         }

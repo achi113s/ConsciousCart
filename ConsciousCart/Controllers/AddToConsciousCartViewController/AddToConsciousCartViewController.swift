@@ -29,6 +29,10 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     var itemReasonNeededTextField: ConsciousCartTextField!
     private var activeTextField: UITextField?
     
+//    private var categoryPicker: UIPickerView! = nil
+//    private var categoryPickerDataSource: CategoryPickerDataSource! = nil
+//    private var categoryPickerDelegate: CategoryPickerDelegate! = nil
+    
     private var itemRemindLabel: UILabel!
     private var itemRemindDate: UIDatePicker!
     
@@ -262,6 +266,13 @@ extension AddToConsciousCartViewController {
         itemPriceTextField.tag = 3
         itemPriceTextField.keyboardType = .decimalPad
         
+//        categoryPicker = UIPickerView()
+//        categoryPicker.translatesAutoresizingMaskIntoConstraints = false
+//        categoryPickerDataSource = CategoryPickerDataSource(impulsesStateManager: impulsesStateManager)
+//        categoryPicker.dataSource = categoryPickerDataSource
+//        categoryPickerDelegate = CategoryPickerDelegate()
+//        categoryPicker.delegate = categoryPickerDelegate
+        
         itemRemindLabel = UILabel()
         itemRemindLabel.text = "When should we remind you?"
         itemRemindLabel.font = UIFont.ccFont(textStyle: .headline)
@@ -313,6 +324,9 @@ extension AddToConsciousCartViewController {
             
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            
+//            categoryPicker.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+//            categoryPicker.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
