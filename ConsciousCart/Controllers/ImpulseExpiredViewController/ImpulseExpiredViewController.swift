@@ -217,7 +217,13 @@ extension ImpulseExpiredViewController {
         
         impulsesStateManager.updateImpulse()
         mainCVC.collectionView.reloadData()
+        simpleSuccess()
         exitView()
+    }
+    
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
     private func changeActiveOption(pressedButton: ButtonTags) {

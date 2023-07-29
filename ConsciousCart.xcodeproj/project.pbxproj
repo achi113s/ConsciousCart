@@ -21,6 +21,8 @@
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
 		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
+		445E50452A745C1400DAFCDF /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50442A745C1400DAFCDF /* CoinView.swift */; };
+		445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50692A74AF9900DAFCDF /* MotionManager.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
@@ -79,6 +81,8 @@
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		445E50442A745C1400DAFCDF /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
+		445E50692A74AF9900DAFCDF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				444222102A11B19000753F8D /* ChangeImageContainerView.swift */,
 				44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */,
 				44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */,
+				445E50682A74AF8800DAFCDF /* CoinView */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -173,6 +178,15 @@
 				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		445E50682A74AF8800DAFCDF /* CoinView */ = {
+			isa = PBXGroup;
+			children = (
+				445E50442A745C1400DAFCDF /* CoinView.swift */,
+				445E50692A74AF9900DAFCDF /* MotionManager.swift */,
+			);
+			path = CoinView;
 			sourceTree = "<group>";
 		};
 		448807A82A69CD2C005377DE /* Settings */ = {
@@ -422,6 +436,7 @@
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
+				445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */,
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
@@ -439,6 +454,7 @@
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
+				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,

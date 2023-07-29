@@ -103,12 +103,12 @@ struct SavingsChart: View {
                             Rectangle()
                                 .fill(.quaternary)
                                 .frame(width: 2, height: lineHeight)
-                                .position(x: midStartPositionX, y: lineHeight / 2)
+                                .position(x: midStartPositionX + 3, y: lineHeight / 2)
                             
                             Circle()
                                 .fill(chartColor)
                                 .frame(width: 8, height: 8)
-                                .position(x: midStartPositionX, y: positionY + (4))
+                                .position(x: midStartPositionX + 3, y: positionY + 5)
                         }
                     }
                 }
