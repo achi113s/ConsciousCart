@@ -38,7 +38,7 @@ struct ImpulsesView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 10) {
-                ForEach(impulses, id: \.id) { impulse in
+                ForEach(filteredImpulses, id: \.id) { impulse in
                     ImpulseCellView(name: impulse.unwrappedName, price: impulse.price, remindDate: impulse.unwrappedRemindDate)
                 }
             }
