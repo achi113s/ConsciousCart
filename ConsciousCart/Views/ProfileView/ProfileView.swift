@@ -44,7 +44,7 @@ struct ProfileView: View {
                         SectionLabel(text: "My Impulses")
                         
                         NavigationLink {
-                            ImpulsesView(impulses: impulsesStateManager?.impulses ?? [], filter: .active)
+                            ImpulsesView(filter: .active)
                         } label: {
                             HStack {
                                 Text("🛍️  Active Impulses")
@@ -59,7 +59,7 @@ struct ProfileView: View {
                         .buttonStyle(CCButtonStyle())
                         
                         NavigationLink {
-                            ImpulsesView(impulses: impulsesStateManager?.pendingImpulses ?? [], filter: .pending)
+                            ImpulsesView(filter: .pending)
                         } label: {
                             HStack {
                                 Text("⏱️  Pending Impulses")
@@ -80,7 +80,7 @@ struct ProfileView: View {
                         .buttonStyle(CCButtonStyle())
                         
                         NavigationLink {
-                            ImpulsesView(impulses: impulsesStateManager?.completedImpulses ?? [], filter: .completed)
+                            ImpulsesView(filter: .completed)
                         } label: {
                             HStack {
                                 Text("✅  Completed Impulses")

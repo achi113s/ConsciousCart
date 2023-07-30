@@ -181,20 +181,6 @@ struct SectionLabel: View {
     }
 }
 
-struct CCButton: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .buttonStyle(.borderedProminent)
-            .tint(.white)
-            .foregroundColor(.black)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
-                    .fill(Color.init(white: 0.8))
-            )
-            .font(Font.custom("Nunito-Semibold", size: 17))
-    }
-}
-
 struct CCButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -203,7 +189,7 @@ struct CCButtonStyle: ButtonStyle {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
-                    .fill(Color.init(white: 0.8))
+                    .fill(Color.init(white: 0.9))
             )
             .font(Font.custom("Nunito-Semibold", size: 17))
     }

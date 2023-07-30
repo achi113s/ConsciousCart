@@ -11,7 +11,7 @@ import UserNotifications
 // should make thread safe?
 
 final class ImpulsesStateManager {
-    private var moc: NSManagedObjectContext? = nil
+    public var moc: NSManagedObjectContext? = nil
     
     private(set) var impulses: [Impulse] = [Impulse]()
     private(set) var completedImpulses: [Impulse] = [Impulse]()

@@ -20,13 +20,13 @@ struct ImpulseCellView: View {
                 
             } label: {
                 HStack {
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 3) {
                         Text("\(name), \(price)")
                             .font(Font.custom("Nunito-Bold", size: 20))
                             .lineLimit(0...2)
                         
                         Text("\(daysRemaining)")
-                            .font(Font.custom("Nunito-Regular", size: 14))
+                            .font(Font.custom("Nunito-Regular", size: 12))
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -57,12 +57,12 @@ struct ImpulseCellView: View {
 struct ImpulseCellStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 7, leading: 12, bottom: 7, trailing: 12))
+            .padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
             .background(configuration.isPressed ? Color(white: 0.8) : .white)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
-                    .fill(Color.init(white: 0.8))
+                    .fill(Color.init(white: 0.9))
             )
     }
 }

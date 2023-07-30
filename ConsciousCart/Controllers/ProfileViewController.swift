@@ -14,8 +14,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         var profileView = ProfileView()
         profileView.impulsesStateManager = impulsesStateManager
+        // this is a mess, either we need to use the statemanager or the moc in the swiftui views.
+        // the state manager is performing like a singleton and im not sure this is the best
+        // way to share state across the app. plus, it is not even thread safe in its current form.
+        let profile = profileView.environment(\.managedObjectContext, impulsesStateManager!.moc!)
         
-        let hostingViewController = UIHostingController(rootView: profileView)
+        let hostingViewController = UIHostingController(rootView: profile)
         
         self.addChild(hostingViewController)
         
