@@ -188,7 +188,7 @@ struct CCButton: ViewModifier {
             .tint(.white)
             .foregroundColor(.black)
             .overlay(
-                RoundedRectangle(cornerRadius: 8).stroke(style: .init(lineWidth: 1))
+                RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
                     .fill(Color.init(white: 0.8))
             )
             .font(Font.custom("Nunito-Semibold", size: 17))
@@ -202,7 +202,7 @@ struct CCButtonStyle: ButtonStyle {
             .background(configuration.isPressed ? Color(white: 0.8) : .white)
             .cornerRadius(8)
             .overlay(
-                RoundedRectangle(cornerRadius: 8).stroke(style: .init(lineWidth: 1))
+                RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
                     .fill(Color.init(white: 0.8))
             )
             .font(Font.custom("Nunito-Semibold", size: 17))

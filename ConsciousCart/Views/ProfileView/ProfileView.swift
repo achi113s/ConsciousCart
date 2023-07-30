@@ -20,7 +20,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 25) {
+                VStack(spacing: 20) {
                     VStack(spacing: 20) {
                         CoinView(coinSize: 125, userLevel: (impulsesStateManager?.userLevel ?? .beginner))
                         
@@ -40,26 +40,60 @@ struct ProfileView: View {
                     
                     Spacer()
                     
-                    Button {
-                        print("df")
-                    } label: {
-                        HStack {
-                            Text("⏰  Pending Impulses")
-                            
-                            Spacer()
-                            
-                            if pendingImpulsesCount != 0 {
-                                Text("\(pendingImpulsesCount)")
-                                    .font(Font.custom("Nunito-Bold", size: 17))
-                                    .foregroundColor(.red)
+                    VStack(alignment: .leading) {
+                        SectionLabel(text: "My Impulses")
+                        
+                        NavigationLink {
+                            ImpulsesView(impulses: impulsesStateManager?.impulses ?? [], filter: .active)
+                        } label: {
+                            HStack {
+                                Text("🛍️  Active Impulses")
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(Color.init(white: 0.6))
                             }
-                            
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(Color.init(white: 0.6))
+                            .frame(height: 30)
                         }
-                        .frame(height: 30)
+                        .buttonStyle(CCButtonStyle())
+                        
+                        NavigationLink {
+                            ImpulsesView(impulses: impulsesStateManager?.pendingImpulses ?? [], filter: .pending)
+                        } label: {
+                            HStack {
+                                Text("⏱️  Pending Impulses")
+                                
+                                Spacer()
+                                
+                                if pendingImpulsesCount != 0 {
+                                    Text("\(pendingImpulsesCount)")
+                                        .font(Font.custom("Nunito-Bold", size: 17))
+                                        .foregroundColor(.red)
+                                }
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(Color.init(white: 0.6))
+                            }
+                            .frame(height: 30)
+                        }
+                        .buttonStyle(CCButtonStyle())
+                        
+                        NavigationLink {
+                            ImpulsesView(impulses: impulsesStateManager?.completedImpulses ?? [], filter: .completed)
+                        } label: {
+                            HStack {
+                                Text("✅  Completed Impulses")
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(Color.init(white: 0.6))
+                            }
+                            .frame(height: 30)
+                        }
+                        .buttonStyle(CCButtonStyle())
                     }
-                    .buttonStyle(CCButtonStyle())
                 }
                 .frame(maxWidth: .infinity)
                 .padding()

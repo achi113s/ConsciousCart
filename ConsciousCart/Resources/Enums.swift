@@ -23,6 +23,12 @@ enum ImpulseCategory: String, CaseIterable {
     case videoGames = "videoGames"
 }
 
+enum ImpulseOption {
+    case active
+    case pending
+    case completed
+}
+
 enum lengthRemainingForImpulse {
     case aLongTime, aMediumTime, aShortTime
 }

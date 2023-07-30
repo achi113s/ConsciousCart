@@ -70,7 +70,7 @@ extension MainCollectionViewController {
                 let impulse: Impulse = impulsesStateManager.impulses[index]
                 
                 var content = UIListContentConfiguration.subtitleCell()
-                let itemPrice = impulse.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+                let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
                 content.text = "\(impulse.unwrappedName), \(itemPrice)"
                 content.textProperties.font = UIFont.ccFont(textStyle: .title3)
                 

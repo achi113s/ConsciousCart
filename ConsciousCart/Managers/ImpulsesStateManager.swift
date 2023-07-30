@@ -151,10 +151,10 @@ final class ImpulsesStateManager {
             content.sound = .default
             content.categoryIdentifier = NotificationCategory.impulseExpired.rawValue
             
-            //            var calendar = Calendar.current
-            //            var dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
-            //            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            let calendar = Calendar.current
+            let dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             
             let request = UNNotificationRequest(identifier: impulse.id.uuidString, content: content, trigger: trigger)
             center.add(request)

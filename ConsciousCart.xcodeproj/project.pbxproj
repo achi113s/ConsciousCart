@@ -28,6 +28,12 @@
 		445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E506D2A74B57300DAFCDF /* SparkleShape.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
+		448533E82A75C41A006CBE69 /* ImpulseCollectionView_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533E72A75C41A006CBE69 /* ImpulseCollectionView_UIKit.swift */; };
+		448533EA2A75C9D7006CBE69 /* ImpulseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533E92A75C9D7006CBE69 /* ImpulseCollectionViewDataSource.swift */; };
+		448533EC2A75C9E1006CBE69 /* ImpulseCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EB2A75C9E1006CBE69 /* ImpulseCollectionViewDelegate.swift */; };
+		448533EE2A75E395006CBE69 /* ImpulsesView_firstTry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533ED2A75E395006CBE69 /* ImpulsesView_firstTry.swift */; };
+		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
+		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
 		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
 		448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */; };
@@ -91,6 +97,12 @@
 		445E506D2A74B57300DAFCDF /* SparkleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleShape.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		448533E72A75C41A006CBE69 /* ImpulseCollectionView_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionView_UIKit.swift; sourceTree = "<group>"; };
+		448533E92A75C9D7006CBE69 /* ImpulseCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		448533EB2A75C9E1006CBE69 /* ImpulseCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		448533ED2A75E395006CBE69 /* ImpulsesView_firstTry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView_firstTry.swift; sourceTree = "<group>"; };
+		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
+		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
 		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
 		448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -192,6 +204,12 @@
 			isa = PBXGroup;
 			children = (
 				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
+				448533ED2A75E395006CBE69 /* ImpulsesView_firstTry.swift */,
+				448533E72A75C41A006CBE69 /* ImpulseCollectionView_UIKit.swift */,
+				448533E92A75C9D7006CBE69 /* ImpulseCollectionViewDataSource.swift */,
+				448533EB2A75C9E1006CBE69 /* ImpulseCollectionViewDelegate.swift */,
+				448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */,
+				448533F12A76089B006CBE69 /* ImpulsesView.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -457,13 +475,16 @@
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
+				448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */,
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
+				448533EC2A75C9E1006CBE69 /* ImpulseCollectionViewDelegate.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
+				448533EA2A75C9D7006CBE69 /* ImpulseCollectionViewDataSource.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
@@ -471,6 +492,7 @@
 				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
+				448533E82A75C41A006CBE69 /* ImpulseCollectionView_UIKit.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
@@ -479,11 +501,13 @@
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
+				448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
+				448533EE2A75E395006CBE69 /* ImpulsesView_firstTry.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
