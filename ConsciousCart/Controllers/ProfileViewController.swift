@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     //    var impulsesStateManager: ImpulsesStateManager?
-    var coreDataManager: ConsciousCartDataManager?
+    var coreDataManager: CoreDataManager?
     
     override func viewDidLoad() {
         guard let mainMOC = coreDataManager?.mainManagedObjectContext else { return }

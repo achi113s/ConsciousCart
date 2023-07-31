@@ -30,7 +30,7 @@
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
 		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
-		448533F42A76C47C006CBE69 /* ConsciousCartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */; };
+		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
 		448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */; };
 		448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */; };
 		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
@@ -98,7 +98,7 @@
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
 		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
-		448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartDataManager.swift; sourceTree = "<group>"; };
+		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataClass.swift"; sourceTree = "<group>"; };
 		448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 			children = (
 				4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */,
 				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
-				448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */,
+				448533F32A76C47C006CBE69 /* CoreDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -494,7 +494,7 @@
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
-				448533F42A76C47C006CBE69 /* ConsciousCartDataManager.swift in Sources */,
+				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,

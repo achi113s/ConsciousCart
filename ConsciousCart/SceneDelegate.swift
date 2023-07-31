@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    private let coreDataManager = ConsciousCartDataManager(modelName: "ConsciousCart")
+    private let coreDataManager = CoreDataManager(modelName: "ConsciousCart")
     
 //    let impulsesStateManager = ImpulsesStateManager(moc: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
 

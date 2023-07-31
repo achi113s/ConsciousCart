@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 
 // trying this out in new branch
-class ConsciousCartDataManager {
+class CoreDataManager {
     //MARK: - Properties
     
     private let modelName: String
