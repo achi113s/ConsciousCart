@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Impulse {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Impulse> {

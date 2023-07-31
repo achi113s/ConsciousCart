@@ -64,9 +64,9 @@ enum UserDefaultsKeys: String {
     case accentColor = "accentColor"
 }
 
-enum UserLevel {
-    case beginner
-    case saver
-    case superSaver
-    case ultimateSaver
+enum UserLevel: Int {
+    case beginner = 0
+    case saver = 1
+    case superSaver = 2
+    case ultimateSaver = 3
 }

@@ -8,21 +8,54 @@
 import SwiftUI
 
 struct ProfileView: View {
-    var impulsesStateManager: ImpulsesStateManager? = nil
+    //    var impulsesStateManager: ImpulsesStateManager? = nil
+    @FetchRequest(entity: Impulse.entity(), sortDescriptors: []) var impulses: FetchedResults<Impulse>
+    @FetchRequest(entity: UserStats.entity(), sortDescriptors: []) var userStats: FetchedResults<UserStats>
     
-    @State private var scoreMessage: String = ""
-    @State private var score: Double = 0.0
+    //    var score: Double {
+    //        return impulses.filter { $0.completed }.reduce(0.0) { $0 + $1.amountSaved }
+    ////        let totalSaved: Double = impulsesStateManager?.totalAmountSaved ?? 0.0
+    ////        scoreMessage = totalSaved < 0.0 ? "You've spent" : "You've saved"
+    ////        return score
+    //    }
+    
+    var score: Double {
+        userStats.first?.totalAmountSaved ?? 0.0
+    }
+    
+    var userLevel: UserLevel {
+        let level: Int16 = userStats.first?.level ?? 0
+        
+        switch level {
+        case 0:
+            return .beginner
+        case 1:
+            return .saver
+        case 2:
+            return .superSaver
+        case 3:
+            return .ultimateSaver
+        default:
+            return .beginner
+        }
+    }
+    
+    var pendingImpulsesCount: Int {
+        impulses.filter { !$0.completed && ($0.unwrappedRemindDate < Date.now)}.count
+    }
+    
+    var scoreMessage: String {
+        score < 0.0 ? "You've spent" : "You've saved"
+    }
     
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
-    
-    @State private var pendingImpulsesCount: Int = 0
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
                     VStack(spacing: 20) {
-                        CoinView(coinSize: 125, userLevel: (impulsesStateManager?.userLevel ?? .beginner))
+                        CoinView(coinSize: 125, userLevel: userLevel)
                         
                         VStack {
                             Text(scoreMessage)
@@ -103,21 +136,6 @@ struct ProfileView: View {
         }
         .scrollContentBackground(.hidden)
         .tint(.black)
-        .onAppear {
-            setScore()
-            setPending()
-        }
-    }
-    
-    private func setScore() {
-        let totalSaved: Double = impulsesStateManager?.totalAmountSaved ?? 0.0
-        scoreMessage = totalSaved < 0.0 ? "You've spent" : "You've saved"
-        score = totalSaved
-    }
-    
-    private func setPending() {
-        guard let impulsesStateManager = impulsesStateManager else { return }
-        pendingImpulsesCount = impulsesStateManager.pendingImpulses.count
     }
     
     private func redOrGreen(for savedAmount: Double) -> Color {

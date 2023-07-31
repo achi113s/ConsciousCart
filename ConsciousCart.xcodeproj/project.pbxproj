@@ -31,6 +31,8 @@
 		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
 		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448533F42A76C47C006CBE69 /* ConsciousCartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */; };
+		448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */; };
+		448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */; };
 		448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */; };
 		448D94132A3EA1020035B34C /* CCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D94122A3EA1020035B34C /* CCFonts.swift */; };
 		448D94152A3EA4870035B34C /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */; };
@@ -97,6 +99,8 @@
 		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
 		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartDataManager.swift; sourceTree = "<group>"; };
+		448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataClass.swift"; sourceTree = "<group>"; };
+		448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseExpiredViewController.swift; sourceTree = "<group>"; };
 		448D94122A3EA1020035B34C /* CCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCFonts.swift; sourceTree = "<group>"; };
 		448D94142A3EA4870035B34C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 			children = (
 				4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */,
 				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
+				448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -276,11 +281,12 @@
 		4497E3D929F35B040029451E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */,
+				448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */,
 				4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */,
 				4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */,
 				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				44AACCDA2A0346260053334C /* BarcodeInfo.swift */,
-				448533F32A76C47C006CBE69 /* ConsciousCartDataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -473,6 +479,7 @@
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
+				448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */,
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
@@ -480,6 +487,7 @@
 				44C9AFDE2A5A53EA00B03846 /* AboutView.swift in Sources */,
 				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
 				444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */,
+				448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,

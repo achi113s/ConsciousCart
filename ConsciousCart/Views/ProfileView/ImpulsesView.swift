@@ -9,7 +9,7 @@ import CoreData
 import SwiftUI
 
 struct ImpulsesView: View {
-    @FetchRequest(sortDescriptors: []) var impulses: FetchedResults<Impulse>
+    @FetchRequest(entity: Impulse.entity(), sortDescriptors: []) var impulses: FetchedResults<Impulse>
     
     var impulseOption: ImpulseOption = .active
     
@@ -47,6 +47,9 @@ struct ImpulsesView: View {
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            print(impulses)
+        }
     }
     
     init(filter: ImpulseOption) {
