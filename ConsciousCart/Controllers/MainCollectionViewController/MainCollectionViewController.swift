@@ -9,7 +9,7 @@ import UIKit
 import SPConfetti
 
 class MainCollectionViewController: UIViewController {
-    var impulsesStateManager: ImpulsesStateManager?
+    var impulsesStateManager: ImpulsesStateManager! = nil
     
     private(set) var collectionView: UICollectionView! = nil
     private var collectionViewDataSource: MainCollectionViewDataSource! = nil
@@ -17,6 +17,11 @@ class MainCollectionViewController: UIViewController {
     
     private var addToCCButton: ConsciousCartButton!
     private var testImpulseExpiredViewButton: ConsciousCartButton!
+    
+    convenience init(impulsesStateManager: ImpulsesStateManager) {
+        self.init(nibName: nil, bundle: nil)
+        self.impulsesStateManager = impulsesStateManager
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -198,8 +203,6 @@ extension MainCollectionViewController {
 
         let modalController = UINavigationController(rootViewController: addToCartVC)
         navigationController?.present(modalController, animated: true)
-        
-        //                navigationController?.pushViewController(vc, animated: true)
     }
     
     private func configureTestButton() {
@@ -223,8 +226,6 @@ extension MainCollectionViewController {
         let modalController = UINavigationController(rootViewController: impulseExpiredVC)
         navigationController?.present(modalController, animated: true)
     }
-    
-    
 }
 
 //MARK: - Configure Layout Constraints

@@ -45,7 +45,7 @@ class CoreDataManager {
         let storeName = "\(self.modelName).sqlite"
         
         let persistentStoreURL = FileManager.documentsDirectory.appendingPathComponent(storeName, conformingTo: .database)
-        print(persistentStoreURL)
+
         do {
             let options = [
                 NSMigratePersistentStoresAutomaticallyOption: true,
@@ -118,5 +118,17 @@ class CoreDataManager {
                 print("\(error), \(error.localizedDescription)")
             }
         }
+    }
+    
+    public func deleteObject(object: NSManagedObject) {
+        mainManagedObjectContext.performAndWait {
+            self.mainManagedObjectContext.delete(object)
+        }
+        
+        privateManagedObjectContext.perform {
+            self.privateManagedObjectContext.delete(object)
+        }
+        
+        saveChanges()
     }
 }

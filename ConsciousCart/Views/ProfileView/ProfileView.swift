@@ -8,16 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
-    //    var impulsesStateManager: ImpulsesStateManager? = nil
     @FetchRequest(entity: Impulse.entity(), sortDescriptors: []) var impulses: FetchedResults<Impulse>
     @FetchRequest(entity: UserStats.entity(), sortDescriptors: []) var userStats: FetchedResults<UserStats>
-    
-    //    var score: Double {
-    //        return impulses.filter { $0.completed }.reduce(0.0) { $0 + $1.amountSaved }
-    ////        let totalSaved: Double = impulsesStateManager?.totalAmountSaved ?? 0.0
-    ////        scoreMessage = totalSaved < 0.0 ? "You've spent" : "You've saved"
-    ////        return score
-    //    }
     
     var score: Double {
         userStats.first?.totalAmountSaved ?? 0.0
@@ -44,8 +36,12 @@ struct ProfileView: View {
         impulses.filter { !$0.completed && ($0.unwrappedRemindDate < Date.now)}.count
     }
     
+    var userName: String {
+        userStats.first?.userName ?? "NoName"
+    }
+    
     var scoreMessage: String {
-        score < 0.0 ? "You've spent" : "You've saved"
+        score < 0.0 ? "Yikes, you've spent" : "Nice job \(userName), you've saved"
     }
     
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor

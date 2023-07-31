@@ -12,7 +12,7 @@ struct SettingsView: View {
     
     @State private var showingDeleteAlert = false
     @State private var showingAccentResetAlert = false
-    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
+//    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
     @State private var accentColorSetting: Color = Color(
         uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
     
@@ -141,7 +141,7 @@ struct SettingsView: View {
                             Button("Cancel", role: .cancel) { }
                             Button("Delete", role: .destructive) {
                                 impulsesStateManager?.deleteAllImpulses()
-                                
+//                                impulsesStateManager?.deleteUser()
                                 Utils.resetUserDefaults()
                             }
                         } message: {

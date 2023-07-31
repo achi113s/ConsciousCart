@@ -12,9 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    private let coreDataManager = CoreDataManager(modelName: "ConsciousCart")
-    
-//    let impulsesStateManager = ImpulsesStateManager(moc: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+    private let impulsesStateManager = ImpulsesStateManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -34,10 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createMainCVC() -> UINavigationController {
-        let mainCVC = UIViewController()
-//        MainCollectionViewController()
+        let mainCVC = MainCollectionViewController()
         mainCVC.title = "ConsciousCart"
-//        mainCVC.impulsesStateManager = impulsesStateManager
+        mainCVC.impulsesStateManager = impulsesStateManager
         
         mainCVC.tabBarItem = UITabBarItem()
         mainCVC.tabBarItem.image = UIImage(systemName: "cart.circle")
@@ -49,17 +46,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func createProfileVC() -> UIViewController {
         let profileVC = ProfileViewController()
-        profileVC.coreDataManager = coreDataManager
         profileVC.title = "My Profile"
-//        profileVC.impulsesStateManager = impulsesStateManager
+        profileVC.impulsesStateManager = impulsesStateManager
         
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.image = UIImage(systemName: "person.circle")
         profileVC.tabBarItem.title = "Profile"
         profileVC.tabBarItem.tag = TabBarKeys.profileTab.rawValue
-//        if impulsesStateManager.pendingImpulses.count > 0 {
-//            profileVC.tabBarItem.badgeValue = "\(impulsesStateManager.pendingImpulses.count)"
-//        }
+        if impulsesStateManager.pendingImpulses.count > 0 {
+            profileVC.tabBarItem.badgeValue = "\(impulsesStateManager.pendingImpulses.count)"
+        }
         
         return profileVC
     }

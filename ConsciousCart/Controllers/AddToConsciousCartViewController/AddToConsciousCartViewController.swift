@@ -29,9 +29,9 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     var itemReasonNeededTextField: ConsciousCartTextField!
     private var activeTextField: UITextField?
     
-//    private var categoryPicker: UIPickerView! = nil
-//    private var categoryPickerDataSource: CategoryPickerDataSource! = nil
-//    private var categoryPickerDelegate: CategoryPickerDelegate! = nil
+    //    private var categoryPicker: UIPickerView! = nil
+    //    private var categoryPickerDataSource: CategoryPickerDataSource! = nil
+    //    private var categoryPickerDelegate: CategoryPickerDelegate! = nil
     
     private var itemRemindLabel: UILabel!
     private var itemRemindDate: UIDatePicker!
@@ -150,9 +150,7 @@ extension AddToConsciousCartViewController {
                                                       imageName: imageName,
                                                       reasonNeeded: itemReason)
         
-        if let impulse = impulse {
-            impulsesStateManager.setupNotification(for: impulse)
-        }
+        impulsesStateManager.setupNotification(for: impulse)
         
         mainCVC.collectionView.reloadData()
         
@@ -259,19 +257,19 @@ extension AddToConsciousCartViewController {
         itemReasonNeededTextField.placeholder = "Reason Needed"
         itemReasonNeededTextField.tag = 2
         itemReasonNeededTextField.delegate = self
-
+        
         itemPriceTextField = CurrencyTextField()
         itemPriceTextField.placeholder = "0".asCurrency(locale: Locale.current)
         itemPriceTextField.delegate = self
         itemPriceTextField.tag = 3
         itemPriceTextField.keyboardType = .decimalPad
         
-//        categoryPicker = UIPickerView()
-//        categoryPicker.translatesAutoresizingMaskIntoConstraints = false
-//        categoryPickerDataSource = CategoryPickerDataSource(impulsesStateManager: impulsesStateManager)
-//        categoryPicker.dataSource = categoryPickerDataSource
-//        categoryPickerDelegate = CategoryPickerDelegate()
-//        categoryPicker.delegate = categoryPickerDelegate
+        //        categoryPicker = UIPickerView()
+        //        categoryPicker.translatesAutoresizingMaskIntoConstraints = false
+        //        categoryPickerDataSource = CategoryPickerDataSource(impulsesStateManager: impulsesStateManager)
+        //        categoryPicker.dataSource = categoryPickerDataSource
+        //        categoryPickerDelegate = CategoryPickerDelegate()
+        //        categoryPicker.delegate = categoryPickerDelegate
         
         itemRemindLabel = UILabel()
         itemRemindLabel.text = "When should we remind you?"
@@ -325,8 +323,8 @@ extension AddToConsciousCartViewController {
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-//            categoryPicker.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-//            categoryPicker.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            //            categoryPicker.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            //            categoryPicker.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),

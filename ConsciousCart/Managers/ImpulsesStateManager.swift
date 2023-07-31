@@ -11,8 +11,9 @@ import UserNotifications
 // should make thread safe?
 
 final class ImpulsesStateManager {
-    public var moc: NSManagedObjectContext? = nil
+    public let coreDataManager = CoreDataManager(modelName: "ConsciousCart")
     
+    private(set) var userStats: UserStats? = nil
     private(set) var impulses: [Impulse] = [Impulse]()
     private(set) var completedImpulses: [Impulse] = [Impulse]()
     private(set) var pendingImpulses: [Impulse] = [Impulse]()
@@ -34,38 +35,31 @@ final class ImpulsesStateManager {
         }
     }
     
-    init(moc: NSManagedObjectContext?) {
-        self.moc = moc
-        
+    init() {
         loadImpulses()
-    }
-    
-    public func setContext(moc: NSManagedObjectContext) {
-        self.moc = moc
+        loadUserStats()
     }
     
     private func loadImpulses(with request: NSFetchRequest<Impulse> = Impulse.fetchRequest()) {
-        guard let moc = moc else { return }
-        
         do {
             request.sortDescriptors = [NSSortDescriptor(key:"dateCreated", ascending:true)]
-            let allImpulses = try moc.fetch(request)
+            let allImpulses = try coreDataManager.mainManagedObjectContext.fetch(request)
             
             self.impulses = allImpulses.filter { !$0.completed && ($0.unwrappedRemindDate > Date.now)}
             self.pendingImpulses = allImpulses.filter { !$0.completed && ($0.unwrappedRemindDate < Date.now)}
             self.completedImpulses = allImpulses.filter { $0.completed }.sorted(by: { $0.unwrappedCompletedDate < $1.unwrappedCompletedDate })
         } catch {
-            print("Error fetching data from context: \(error.localizedDescription)")
+            print("Error fetching Impulses from main context: \(error.localizedDescription)")
         }
     }
     
-    private func saveContext() {
-        guard let moc = moc else { return }
-        
+    private func loadUserStats(with request: NSFetchRequest<UserStats> = UserStats.fetchRequest()) {
         do {
-            try moc.save()
+            let listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
+            
+            self.userStats = listOfUsers.first
         } catch {
-            print("Error saving context: \(error.localizedDescription)")
+            print("Error fetching UserStats from main context: \(error.localizedDescription)")
         }
     }
     
@@ -73,37 +67,32 @@ final class ImpulsesStateManager {
                            name: String = "Unknown Name",
                            price: Double = 0.0,
                            imageName: String? = nil,
-                           reasonNeeded: String = "Unknown Reason") -> Impulse? {
-        if let moc = moc {
-            
-            let newImpulse = Impulse(context: moc)
-            newImpulse.id = UUID()
-            newImpulse.dateCreated = Date.now
-            newImpulse.remindDate = remindDate
-            newImpulse.name = name
-            newImpulse.price = price
-            newImpulse.imageName = imageName
-            newImpulse.reasonNeeded = reasonNeeded
-            newImpulse.completed = false
-            
-            saveContext()
-            loadImpulses()
-            
-            return newImpulse
-        }
-        return nil
+                           reasonNeeded: String = "Unknown Reason") -> Impulse {
+        
+        let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
+        newImpulse.id = UUID()
+        newImpulse.dateCreated = Date.now
+        newImpulse.remindDate = remindDate
+        newImpulse.name = name
+        newImpulse.price = price
+        newImpulse.imageName = imageName
+        newImpulse.reasonNeeded = reasonNeeded
+        newImpulse.completed = false
+        
+        coreDataManager.saveChanges()
+        loadImpulses()
+        
+        return newImpulse
     }
     
     public func updateImpulse() {
-        saveContext()
+        coreDataManager.saveChanges()
         loadImpulses()
     }
     
     public func deleteAllImpulses() {
-        guard let moc = moc else { return }
-        
         do {
-            let allImpulses = try moc.fetch(Impulse.fetchRequest())
+            let allImpulses = try coreDataManager.mainManagedObjectContext.fetch(Impulse.fetchRequest())
             
             for impulse in allImpulses {
                 // Delete the image in the Documents directory if it exists.
@@ -116,12 +105,12 @@ final class ImpulsesStateManager {
                     }
                 }
                 
-                moc.delete(impulse)
+                coreDataManager.mainManagedObjectContext.delete(impulse)
             }
             
             print("All impulses deleted!")
             
-            saveContext()
+            coreDataManager.saveChanges()
             loadImpulses()
         } catch {
             print("Error deleting data from context: \(error.localizedDescription)")
@@ -129,16 +118,17 @@ final class ImpulsesStateManager {
     }
     
     public func deleteImpulse(impulse: Impulse) {
-        guard let moc = moc else { return }
-        
         if let index = impulses.firstIndex(of: impulse) {
             impulses.remove(at: index)
             
-            moc.delete(impulse)
+            coreDataManager.deleteObject(object: impulse)
             
-            saveContext()
             loadImpulses()
         }
+    }
+    
+    public func deleteUser(user: UserStats) {
+        
     }
     
     public func setupNotification(for impulse: Impulse) {

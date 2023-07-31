@@ -9,13 +9,17 @@ import SwiftUI
 import UIKit
 
 class ProfileViewController: UIViewController {
-    //    var impulsesStateManager: ImpulsesStateManager?
-    var coreDataManager: CoreDataManager?
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    
+    convenience init(impulsesStateManager: ImpulsesStateManager) {
+        self.init(nibName: nil, bundle: nil)
+        self.impulsesStateManager = impulsesStateManager
+    }
     
     override func viewDidLoad() {
-        guard let mainMOC = coreDataManager?.mainManagedObjectContext else { return }
+        let mainMOC = impulsesStateManager.coreDataManager.mainManagedObjectContext
         
-        var profileView = ProfileView()
+        let profileView = ProfileView()
         
         let profile = profileView.environment(\.managedObjectContext, mainMOC)
         

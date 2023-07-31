@@ -11,9 +11,9 @@ import UIKit
 // MARK: UICollectionViewDataSource
 extension MainCollectionViewController {
     class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-        var impulsesStateManager: ImpulsesStateManager?
+        var impulsesStateManager: ImpulsesStateManager! = nil
         
-        init(impulsesStateManager: ImpulsesStateManager? = nil) {
+        init(impulsesStateManager: ImpulsesStateManager) {
             self.impulsesStateManager = impulsesStateManager
         }
         
@@ -26,8 +26,6 @@ extension MainCollectionViewController {
             if section == CVSection.chartSection.rawValue {
                 return 1
             } else if section == CVSection.impulseSection.rawValue {
-                guard let impulsesStateManager = impulsesStateManager else { return 0 }
-                
                 return impulsesStateManager.impulses.count
             } else {
                 return 0
@@ -35,16 +33,16 @@ extension MainCollectionViewController {
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let impulsesStateManager = impulsesStateManager else {
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
-                    for: indexPath
-                )
-                
-                cell.backgroundColor = .red
-                print("Could not unwrap impulsesStateManager. Error red cell was loaded.")
-                return cell
-            }
+//            guard let impulsesStateManager = impulsesStateManager else {
+//                let cell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
+//                    for: indexPath
+//                )
+//                
+//                cell.backgroundColor = .red
+//                print("Could not unwrap impulsesStateManager. Error red cell was loaded.")
+//                return cell
+//            }
             
             // Section 0 is the Savings Chart Section
             if indexPath.section == CVSection.chartSection.rawValue {

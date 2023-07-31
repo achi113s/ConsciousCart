@@ -10,8 +10,8 @@ import UIKit
 //MARK: - UICollectionViewDelegate
 extension MainCollectionViewController {
     class MainCollectionViewDelegate: NSObject, UICollectionViewDelegate {
-        var impulsesStateManager: ImpulsesStateManager? = nil
-        var mainCVC: MainCollectionViewController? = nil
+        var impulsesStateManager: ImpulsesStateManager! = nil
+        var mainCVC: MainCollectionViewController! = nil
         
         init(impulsesStateManager: ImpulsesStateManager?, mainCVC: MainCollectionViewController?) {
             self.impulsesStateManager = impulsesStateManager
@@ -20,8 +20,6 @@ extension MainCollectionViewController {
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard indexPath.section == CVSection.impulseSection.rawValue else { return }
-            guard let impulsesStateManager = impulsesStateManager else { return }
-            guard let mainCVC = mainCVC else { return }
             
             let detailVC = ImpulseDetailViewController()
             detailVC.impulsesStateManager = impulsesStateManager

@@ -43,13 +43,10 @@ struct ImpulsesView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
+            .padding(16)
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            print(impulses)
-        }
     }
     
     init(filter: ImpulseOption) {
