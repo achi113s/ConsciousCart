@@ -185,12 +185,24 @@ final class ImpulsesStateManager {
         switch option {
         case .waited:
             impulse.amountSaved = impulse.price
+            if let userStats = userStats {
+                userStats.totalAmountSaved = userStats.totalAmountSaved + impulse.price
+            }
         case .waitedAndWillBuy:
             impulse.amountSaved = Double(0)
+            // The user doesn't save any money here, so we don't need to update userStats.
         case .failed:
             impulse.amountSaved = -impulse.price
+            if let userStats = userStats {
+                userStats.totalAmountSaved = userStats.totalAmountSaved - impulse.price
+            }
         }
         
+        // If for whatever reason the notification is still in the NotificationCenter,
+        // remove it.
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
+        print("the impulse was completed")
         updateImpulse()
     }
 }
