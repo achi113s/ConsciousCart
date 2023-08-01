@@ -4,7 +4,6 @@
 - UIKit, SwiftUI
 - BarcodeSpider API
 - Delegate, MVC Patterns
-- Rive for Animations
 
 Introducing ConsciousCart: Empower Your Financial Journey with Mindful Spending
 
