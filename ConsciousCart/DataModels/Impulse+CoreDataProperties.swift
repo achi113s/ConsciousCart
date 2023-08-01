@@ -17,6 +17,7 @@ extension Impulse {
 
     @NSManaged public var dateCreated: Date?
     @NSManaged public var id: UUID
+    @NSManaged public var userID: UUID?
     @NSManaged public var imageName: String?
     @NSManaged public var name: String?
     @NSManaged public var price: Double
@@ -49,6 +50,14 @@ extension Impulse {
     
     public var unwrappedCompletedDate: Date {
         dateCompleted ?? Date.now
+    }
+    
+    public var daysSinceCreation: Int {
+        if let dateCreated = dateCreated {
+            let components = Calendar.current.dateComponents([.day], from: dateCreated, to: Date.now)
+            return components.day ?? 0
+        }
+        return 0
     }
 }
 

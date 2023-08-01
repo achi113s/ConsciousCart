@@ -12,8 +12,8 @@ class ImpulseExpiredViewController: UIViewController {
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
-    var impulsesStateManager: ImpulsesStateManager? = nil
-    var impulse: Impulse? = nil
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    var impulse: Impulse! = nil
     var mainCVC: MainCollectionViewController? = nil
     
     private var scoreLabel: UILabel! = nil
@@ -25,7 +25,7 @@ class ImpulseExpiredViewController: UIViewController {
     private var waitedButton: ConsciousCartButton! = nil
     private var waitedAndWillBuyButton: ConsciousCartButton! = nil
     private var saveButton: ConsciousCartButton! = nil
-    private var activeOption: Int = -1
+    private var activeOptionButton: ImpulseOutcomeButtonOptions = .allUnselected
     
     private var contentStack: UIStackView! = nil
     private var buttonOptionsStack: UIStackView! = nil
@@ -37,7 +37,7 @@ class ImpulseExpiredViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitView))
         
-        navigationItem.title = impulse?.name ?? "Impulse"
+        navigationItem.title = impulse.unwrappedName
         
         configureSubviewProperties()
         addSubviewsToView()
@@ -67,12 +67,7 @@ extension ImpulseExpiredViewController {
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         
-        var daysWaited = 0
-        if let createdDate = impulse.dateCreated {
-            let components = Calendar.current.dateComponents([.day], from: createdDate, to: Date.now)
-            daysWaited = components.day ?? 0
-        }
-        
+        let daysWaited: Int = impulse.daysSinceCreation
         let dayOrDays = daysWaited == 1 ? "day" : "days"
         let messageText = "It's been \(daysWaited) \(dayOrDays) since you created an Impulse for \(impulse.unwrappedName)! Did you hold out or slip up?"
         messageLabel.text = messageText
@@ -90,22 +85,21 @@ extension ImpulseExpiredViewController {
         waitedButton = ConsciousCartButton()
         waitedButton.setTitle("I waited! 😁", for: .normal)
         waitedButton.addTarget(self, action: #selector(waitedButtonPressed), for: .touchUpInside)
-        waitedButton.tag = ButtonTags.waitedButton.rawValue
+        waitedButton.tag = ImpulseOutcomeButtonOptions.waitedButton.rawValue
         
         waitedAndWillBuyButton = ConsciousCartButton()
         waitedAndWillBuyButton.setTitle("I waited and now I'll buy it. 🤑", for: .normal)
         waitedAndWillBuyButton.addTarget(self, action: #selector(waitedAndWillBuyButtonPressed), for: .touchUpInside)
-        waitedAndWillBuyButton.tag = ButtonTags.waitedAndWillBuyButton.rawValue
+        waitedAndWillBuyButton.tag = ImpulseOutcomeButtonOptions.waitedAndWillBuyButton.rawValue
         
         failedButton = ConsciousCartButton()
         failedButton.setTitle("I bought it... 😭", for: .normal)
         failedButton.addTarget(self, action: #selector(failedButtonPressed), for: .touchUpInside)
-        failedButton.tag = ButtonTags.failedButton.rawValue
+        failedButton.tag = ImpulseOutcomeButtonOptions.failedButton.rawValue
         
         saveButton = ConsciousCartButton()
         saveButton.setTitle("Save", for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-        saveButton.tag = ButtonTags.saveButton.rawValue
         
         contentStack = UIStackView()
         contentStack.translatesAutoresizingMaskIntoConstraints = false
@@ -141,7 +135,7 @@ extension ImpulseExpiredViewController {
             contentStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             contentStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.9),
             contentStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-
+            
             waitedButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             waitedButton.heightAnchor.constraint(equalToConstant: 50),
             
@@ -163,13 +157,12 @@ extension ImpulseExpiredViewController {
 
 //MARK: - Button Functions
 extension ImpulseExpiredViewController {
-    private enum ButtonTags: Int {
+    private enum ImpulseOutcomeButtonOptions: Int {
+        case allUnselected = -1
         case waitedButton = 0
         case waitedAndWillBuyButton = 1
         case failedButton = 2
-        case saveButton = 3
     }
-    
     @objc func waitedButtonPressed() {
         changeActiveOption(pressedButton: .waitedButton)
     }
@@ -183,50 +176,32 @@ extension ImpulseExpiredViewController {
     }
     
     @objc func saveButtonPressed() {
-        guard let impulsesStateManager = impulsesStateManager else {
-            print("Error: impulsesStateManager is nil.")
-            return
-        }
-        
-        guard let impulse = impulse else { return }
-        
-        guard let mainCVC = mainCVC else {
-            print("Error: mainCVC is nil.")
-            return
-        }
-        
-        impulse.dateCompleted = Date.now
-        impulse.completed = true
-        
-        switch activeOption {
-        case -1:
+        switch activeOptionButton {
+        case .allUnselected:
             saveButton.shakeAnimation()
-        case ButtonTags.waitedButton.rawValue:
-            impulse.amountSaved = impulse.price
-            
-            SPConfettiConfiguration.particlesConfig.velocity = CGFloat(500)
-            SPConfetti.startAnimating(.centerWidthToDown, particles: [.arc], duration: 1)
-            
-        case ButtonTags.waitedAndWillBuyButton.rawValue:
-            impulse.amountSaved = Double(0)
-        case ButtonTags.failedButton.rawValue:
-            impulse.amountSaved = -impulse.price
-        default:
-            impulse.amountSaved = Double(0)
+        case .waitedButton:
+            impulsesStateManager.completeImpulseWithOption(.waited, for: impulse)
+            simpleSuccess()
+        case .waitedAndWillBuyButton:
+            impulsesStateManager.completeImpulseWithOption(.waitedAndWillBuy, for: impulse)
+        case .failedButton:
+            impulsesStateManager.completeImpulseWithOption(.failed, for: impulse)
         }
         
-        impulsesStateManager.updateImpulse()
-        mainCVC.collectionView.reloadData()
-        simpleSuccess()
+        mainCVC?.collectionView.reloadData()
+        
         exitView()
     }
     
     func simpleSuccess() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
+        
+        SPConfettiConfiguration.particlesConfig.velocity = CGFloat(500)
+        SPConfetti.startAnimating(.centerWidthToDown, particles: [.arc], duration: 1)
     }
     
-    private func changeActiveOption(pressedButton: ButtonTags) {
+    private func changeActiveOption(pressedButton: ImpulseOutcomeButtonOptions) {
         switch pressedButton {
         case .waitedButton:
             failedButton.backgroundColor = .gray
@@ -235,7 +210,7 @@ extension ImpulseExpiredViewController {
             scoreLabel.countAnimation(upto: impulse?.price ?? 0.0)
             scoreLabel.textColor = .systemGreen
             
-            activeOption = ButtonTags.waitedButton.rawValue
+            activeOptionButton = .waitedButton
         case .waitedAndWillBuyButton:
             waitedButton.backgroundColor = .gray
             failedButton.backgroundColor = .gray
@@ -243,7 +218,7 @@ extension ImpulseExpiredViewController {
             scoreLabel.countAnimation(upto: 0.0)
             scoreLabel.textColor = .systemGreen
             
-            activeOption = ButtonTags.waitedAndWillBuyButton.rawValue
+            activeOptionButton = .waitedAndWillBuyButton
         case .failedButton:
             waitedButton.backgroundColor = .gray
             waitedAndWillBuyButton.backgroundColor = .gray
@@ -251,9 +226,16 @@ extension ImpulseExpiredViewController {
             scoreLabel.countAnimation(upto: ((impulse?.price ?? 0.0) * -1))
             scoreLabel.textColor = .systemRed
             
-            activeOption = ButtonTags.failedButton.rawValue
-        default:
-            print("none")
+            activeOptionButton = .failedButton
+        case .allUnselected:
+            waitedButton.backgroundColor = .gray
+            waitedAndWillBuyButton.backgroundColor = .gray
+            failedButton.backgroundColor = .gray
+            
+            scoreLabel.countAnimation(upto: impulse?.price ?? 0.0)
+            scoreLabel.textColor = .systemGreen
+            
+            activeOptionButton = .allUnselected
         }
     }
 }

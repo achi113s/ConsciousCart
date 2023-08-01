@@ -71,6 +71,7 @@ final class ImpulsesStateManager {
         
         let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
         newImpulse.id = UUID()
+        newImpulse.userID = userStats?.id
         newImpulse.dateCreated = Date.now
         newImpulse.remindDate = remindDate
         newImpulse.name = name
@@ -175,5 +176,21 @@ final class ImpulsesStateManager {
         center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
         
         setupNotification(for: impulse)
+    }
+    
+    public func completeImpulseWithOption(_ option: ImpulseEndedOptions, for impulse: Impulse) {
+        impulse.dateCompleted = Date.now
+        impulse.completed = true
+        
+        switch option {
+        case .waited:
+            impulse.amountSaved = impulse.price
+        case .waitedAndWillBuy:
+            impulse.amountSaved = Double(0)
+        case .failed:
+            impulse.amountSaved = -impulse.price
+        }
+        
+        updateImpulse()
     }
 }

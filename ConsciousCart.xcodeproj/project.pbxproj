@@ -189,14 +189,14 @@
 			path = MainCollectionView;
 			sourceTree = "<group>";
 		};
-		4450EED12A088A6A00D8C680 /* Managers */ = {
+		4450EED12A088A6A00D8C680 /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
 				4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */,
 				44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */,
 				448533F32A76C47C006CBE69 /* CoreDataManager.swift */,
 			);
-			path = Managers;
+			path = DataManagers;
 			sourceTree = "<group>";
 		};
 		445DD50E2A75BFBB00DC56C8 /* ProfileView */ = {
@@ -259,8 +259,8 @@
 			children = (
 				4497E39A29F358BC0029451E /* AppDelegate.swift */,
 				4497E39C29F358BC0029451E /* SceneDelegate.swift */,
-				4450EED12A088A6A00D8C680 /* Managers */,
-				4497E3D929F35B040029451E /* Models */,
+				4450EED12A088A6A00D8C680 /* DataManagers */,
+				4497E3D929F35B040029451E /* DataModels */,
 				4497E3DA29F35B090029451E /* Views */,
 				4497E3DB29F35B150029451E /* Controllers */,
 				44D7291B2A0A9E4D0031A9EE /* Resources */,
@@ -278,7 +278,7 @@
 			path = ConsciousCartTests;
 			sourceTree = "<group>";
 		};
-		4497E3D929F35B040029451E /* Models */ = {
+		4497E3D929F35B040029451E /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
 				448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */,
@@ -288,7 +288,7 @@
 				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				44AACCDA2A0346260053334C /* BarcodeInfo.swift */,
 			);
-			path = Models;
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 		4497E3DA29F35B090029451E /* Views */ = {
