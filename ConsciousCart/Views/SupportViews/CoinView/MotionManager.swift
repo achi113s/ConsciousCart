@@ -23,8 +23,12 @@ extension CoinView {
             self.x = x
             self.y = y
             
-            motionManager.accelerometerUpdateInterval = 0.10
+            motionManager.accelerometerUpdateInterval = 0.20
             
+            startMotionUpdates()
+        }
+        
+        func startMotionUpdates() {
             motionManager.startDeviceMotionUpdates(to: .main) { [weak self] data, error in
                 guard let motion = data?.attitude, let self = self, error == nil else { return }
                 
@@ -53,10 +57,17 @@ extension CoinView {
                 self.x = deltaRoll
                 self.y = deltaPitch
             }
+            
+//            print("device motion updates enabled")
         }
         
         func stopMotionUpdates() {
             motionManager.stopDeviceMotionUpdates()
+//            print("device motion updates disabled")
+        }
+        
+        func isMotionActive() -> Bool {
+            return motionManager.isDeviceMotionActive
         }
     }
 }

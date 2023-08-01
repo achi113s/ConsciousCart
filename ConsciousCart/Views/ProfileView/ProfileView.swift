@@ -14,21 +14,21 @@ struct ProfileView: View {
     var score: Double {
         userStats.first?.totalAmountSaved ?? 0.0
     }
-    
+
     var userLevel: UserLevel {
-        let level: Int16 = userStats.first?.level ?? 0
+        guard let userStats = userStats.first else { return .beginner }
         
-        switch level {
+        switch userStats.level {
         case 0:
-            return .beginner
+            return UserLevel.beginner
         case 1:
-            return .saver
+            return UserLevel.saver
         case 2:
-            return .superSaver
+            return UserLevel.superSaver
         case 3:
-            return .ultimateSaver
+            return UserLevel.ultimateSaver
         default:
-            return .beginner
+            return UserLevel.beginner
         }
     }
     
@@ -41,7 +41,9 @@ struct ProfileView: View {
     }
     
     var scoreMessage: String {
-        score < 0.0 ? "Yikes, you've spent" : "Nice job \(userName), you've saved"
+        if score == 0.0 { return "Either you haven't spent any money, or you broke even..." }
+        
+        return score < 0.0 ? "Yikes, you've spent" : "Nice job \(userName), you've saved"
     }
     
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
@@ -55,6 +57,7 @@ struct ProfileView: View {
                         
                         VStack {
                             Text(scoreMessage)
+                                .multilineTextAlignment(.center)
                                 .font(Font.custom("Nunito-Bold", size: 18))
                                 .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: score))
                             

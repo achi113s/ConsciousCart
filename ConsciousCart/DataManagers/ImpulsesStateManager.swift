@@ -18,23 +18,6 @@ final class ImpulsesStateManager {
     private(set) var completedImpulses: [Impulse] = [Impulse]()
     private(set) var pendingImpulses: [Impulse] = [Impulse]()
     
-    lazy public var totalAmountSaved: Double = {
-        return completedImpulses.reduce(0.0) { $0 + $1.amountSaved }
-    }()
-    
-    public var userLevel: UserLevel {
-        switch totalAmountSaved {
-        case 5000...:
-            return .ultimateSaver
-        case 1000...:
-            return .superSaver
-        case 200...:
-            return .saver
-        default:
-            return .beginner
-        }
-    }
-    
     init() {
         loadImpulses()
         loadUserStats()
@@ -57,7 +40,16 @@ final class ImpulsesStateManager {
         do {
             let listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
             
-            self.userStats = listOfUsers.first
+            if let user = listOfUsers.first {
+                self.userStats = user
+            } else {
+                print("No user was found so we are creating one.")
+                let newUser = UserStats(context: coreDataManager.mainManagedObjectContext)
+                newUser.id = UUID()
+                newUser.level = Int16(UserLevel.beginner.rawValue)
+                newUser.totalAmountSaved = 0.0
+                coreDataManager.saveChanges()
+            }
         } catch {
             print("Error fetching UserStats from main context: \(error.localizedDescription)")
         }
@@ -132,6 +124,23 @@ final class ImpulsesStateManager {
         
     }
     
+    public func getUserLevel() -> UserLevel {
+        guard let userStats = userStats else { return .beginner }
+        
+        switch userStats.level {
+        case 0:
+            return UserLevel.beginner
+        case 1:
+            return UserLevel.saver
+        case 2:
+            return UserLevel.superSaver
+        case 3:
+            return UserLevel.ultimateSaver
+        default:
+            return UserLevel.beginner
+        }
+    }
+    
     public func setupNotification(for impulse: Impulse) {
         let center = UNUserNotificationCenter.current()
         
@@ -178,6 +187,11 @@ final class ImpulsesStateManager {
         setupNotification(for: impulse)
     }
     
+    public func removePendingNotification(for impulse: Impulse) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
+    }
+    
     public func completeImpulseWithOption(_ option: ImpulseEndedOptions, for impulse: Impulse) {
         impulse.dateCompleted = Date.now
         impulse.completed = true
@@ -185,24 +199,38 @@ final class ImpulsesStateManager {
         switch option {
         case .waited:
             impulse.amountSaved = impulse.price
-            if let userStats = userStats {
-                userStats.totalAmountSaved = userStats.totalAmountSaved + impulse.price
-            }
+            updateUserAmountSaved(amount: impulse.price)
         case .waitedAndWillBuy:
             impulse.amountSaved = Double(0)
             // The user doesn't save any money here, so we don't need to update userStats.
         case .failed:
             impulse.amountSaved = -impulse.price
-            if let userStats = userStats {
-                userStats.totalAmountSaved = userStats.totalAmountSaved - impulse.price
-            }
+            updateUserAmountSaved(amount: -impulse.price)
         }
         
         // If for whatever reason the notification is still in the NotificationCenter,
         // remove it.
-        let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
+        removePendingNotification(for: impulse)
         print("the impulse was completed")
         updateImpulse()
+    }
+    
+    public func updateUserAmountSaved(amount: Double) {
+        guard let userStats = userStats else { return }
+        
+        let runningTotalSaved = userStats.totalAmountSaved + amount
+        
+        userStats.totalAmountSaved = runningTotalSaved
+        
+        switch runningTotalSaved {
+        case 5000...:
+            userStats.level = Int16(UserLevel.ultimateSaver.rawValue)
+        case 1000...:
+            userStats.level = Int16(UserLevel.superSaver.rawValue)
+        case 200...:
+            userStats.level = Int16(UserLevel.saver.rawValue)
+        default:
+            userStats.level = Int16(UserLevel.beginner.rawValue)
+        }
     }
 }

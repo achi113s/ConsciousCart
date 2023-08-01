@@ -23,7 +23,7 @@ struct CoinView: View {
     @State private var secondaryColor: Color
     
     @StateObject private var motionManager = MotionManager()
-    let motionStrength: CGFloat = 0.1
+    let motionStrength: CGFloat = 0.05
     
     var body: some View {
         ZStack {
@@ -88,8 +88,15 @@ struct CoinView: View {
                 .foregroundColor(.white)
                 .frame(width: coinSize)
         }
+        .onAppear {
+            if !motionManager.isMotionActive() {
+                motionManager.startMotionUpdates()
+            }
+        }
         .onDisappear {
-            motionManager.stopMotionUpdates()
+            if motionManager.isMotionActive() {
+                motionManager.stopMotionUpdates()
+            }
         }
     }
     

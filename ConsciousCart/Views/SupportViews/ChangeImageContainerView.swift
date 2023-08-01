@@ -39,8 +39,6 @@ final class ChangeImageContainerView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = cornerRadius
-//        imageView.layer.borderWidth = borderWidth
-//        imageView.layer.borderColor = borderColor
         imageView.layer.masksToBounds = true
 
         changeImageButton = UIButton()
@@ -50,8 +48,6 @@ final class ChangeImageContainerView: UIView {
         changeImageButton.setTitleColor(.gray, for: .highlighted)
         changeImageButton.backgroundColor = UIColor(white: 0.05, alpha: 0.8)
         changeImageButton.layer.cornerRadius = cornerRadius
-//        changeImageButton.layer.borderWidth = borderWidth
-//        changeImageButton.layer.borderColor = borderColor
         changeImageButton.layer.masksToBounds = true
         
         containerView.addSubview(imageView)

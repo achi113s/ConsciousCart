@@ -184,7 +184,6 @@ extension ImpulseDetailViewController {
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
-//            impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             impulsePropertiesStack.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             impulsePropertiesStack.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
             impulsePropertiesStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),

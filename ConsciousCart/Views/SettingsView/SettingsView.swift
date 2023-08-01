@@ -98,7 +98,7 @@ struct SettingsView: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 8)
                                         .stroke(style: .init(lineWidth: 1))
-                                        .fill(Color.init(white: 0.8))
+                                        .fill(Color.init(white: 0.9))
                                 )
                                 .font(Font.custom("Nunito-Semibold", size: 17))
                             
