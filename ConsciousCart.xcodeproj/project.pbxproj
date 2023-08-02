@@ -60,6 +60,8 @@
 		44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */; };
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
 		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
+		44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */; };
+		44EA21FB2A7A04EE00ECC74C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FA2A7A04EE00ECC74C /* Test.swift */; };
 		44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */; };
 		44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */; };
 /* End PBXBuildFile section */
@@ -130,6 +132,8 @@
 		44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAnimatableCurrency.swift; sourceTree = "<group>"; };
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
+		44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewSwiftUI.swift; sourceTree = "<group>"; };
+		44EA21FA2A7A04EE00ECC74C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +209,8 @@
 				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
 				448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */,
 				448533F12A76089B006CBE69 /* ImpulsesView.swift */,
+				44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */,
+				44EA21FA2A7A04EE00ECC74C /* Test.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,
+				44EA21FB2A7A04EE00ECC74C /* Test.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
@@ -503,6 +510,7 @@
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
+				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,

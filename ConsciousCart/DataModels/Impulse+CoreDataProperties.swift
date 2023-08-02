@@ -59,6 +59,14 @@ extension Impulse {
         }
         return 0
     }
+    
+    public var daysSinceExpiry: Int {
+        if let remindDate = remindDate {
+            let components = Calendar.current.dateComponents([.day], from: remindDate, to: Date.now)
+            return components.day ?? 0
+        }
+        return 0
+    }
 }
 
 extension Impulse : Identifiable {

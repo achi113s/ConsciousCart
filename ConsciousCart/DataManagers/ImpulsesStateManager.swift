@@ -121,7 +121,7 @@ final class ImpulsesStateManager {
     }
     
     public func deleteUser(user: UserStats) {
-        
+        // will have to delete user then go to an onboarding screen or something
     }
     
     public func getUserLevel() -> UserLevel {

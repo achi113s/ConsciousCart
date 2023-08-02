@@ -11,6 +11,8 @@ struct ProfileView: View {
     @FetchRequest(entity: Impulse.entity(), sortDescriptors: []) var impulses: FetchedResults<Impulse>
     @FetchRequest(entity: UserStats.entity(), sortDescriptors: []) var userStats: FetchedResults<UserStats>
     
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    
     var score: Double {
         userStats.first?.totalAmountSaved ?? 0.0
     }
@@ -76,7 +78,7 @@ struct ProfileView: View {
                         SectionLabel(text: "My Impulses")
                         
                         NavigationLink {
-                            ImpulsesView(filter: .active)
+                            ImpulsesView(filter: .active, impulsesStateManager: impulsesStateManager)
                         } label: {
                             HStack {
                                 Text("🛍️  Active Impulses")
@@ -91,7 +93,7 @@ struct ProfileView: View {
                         .buttonStyle(CCButtonStyle())
                         
                         NavigationLink {
-                            ImpulsesView(filter: .pending)
+                            ImpulsesView(filter: .pending, impulsesStateManager: impulsesStateManager)
                         } label: {
                             HStack {
                                 Text("⏱️  Pending Impulses")
@@ -112,7 +114,7 @@ struct ProfileView: View {
                         .buttonStyle(CCButtonStyle())
                         
                         NavigationLink {
-                            ImpulsesView(filter: .completed)
+                            ImpulsesView(filter: .completed, impulsesStateManager: impulsesStateManager)
                         } label: {
                             HStack {
                                 Text("✅  Completed Impulses")
@@ -137,13 +139,11 @@ struct ProfileView: View {
         .tint(.black)
     }
     
+    init(impulsesStateManager: ImpulsesStateManager) {
+        self.impulsesStateManager = impulsesStateManager
+    }
+    
     private func redOrGreen(for savedAmount: Double) -> Color {
         savedAmount >= 0.0 ? .green : .red
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }

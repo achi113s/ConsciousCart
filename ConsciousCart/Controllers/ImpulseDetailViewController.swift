@@ -54,6 +54,14 @@ class ImpulseDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let parent = self.parent {
+            parent.navigationItem.rightBarButtonItems = self.navigationItem.rightBarButtonItems
+        }
+    }
 }
 
 //MARK: - Configure Subviews

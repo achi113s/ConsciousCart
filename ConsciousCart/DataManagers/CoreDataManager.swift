@@ -125,9 +125,9 @@ class CoreDataManager {
             self.mainManagedObjectContext.delete(object)
         }
         
-        privateManagedObjectContext.perform {
-            self.privateManagedObjectContext.delete(object)
-        }
+//        privateManagedObjectContext.perform {
+//            self.privateManagedObjectContext.delete(object)
+//        }
         
         saveChanges()
     }

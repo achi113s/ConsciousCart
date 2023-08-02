@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         let mainMOC = impulsesStateManager.coreDataManager.mainManagedObjectContext
         
-        let profileView = ProfileView()
+        let profileView = ProfileView(impulsesStateManager: impulsesStateManager)
         
         let profile = profileView.environment(\.managedObjectContext, mainMOC)
         

@@ -11,6 +11,8 @@ import SwiftUI
 struct ImpulsesView: View {
     @FetchRequest(entity: Impulse.entity(), sortDescriptors: []) var impulses: FetchedResults<Impulse>
     
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    
     var impulseOption: ImpulseOption = .active
     
     var filteredImpulses: [Impulse] {
@@ -39,7 +41,12 @@ struct ImpulsesView: View {
         ScrollView {
             LazyVStack(spacing: 10) {
                 ForEach(filteredImpulses, id: \.id) { impulse in
-                    ImpulseCellView(name: impulse.unwrappedName, price: impulse.price, remindDate: impulse.unwrappedRemindDate)
+                    NavigationLink {
+                        ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
+                    } label: {
+                        ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
+                    }
+                    .buttonStyle(ImpulseCellStyle())
                 }
             }
             .frame(maxWidth: .infinity)
@@ -49,13 +56,8 @@ struct ImpulsesView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    init(filter: ImpulseOption) {
+    init(filter: ImpulseOption, impulsesStateManager: ImpulsesStateManager) {
         self.impulseOption = filter
-    }
-}
-
-struct ImpulsesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImpulsesView(filter: .active)
+        self.impulsesStateManager = impulsesStateManager
     }
 }

@@ -9,39 +9,16 @@ import CoreData
 import SwiftUI
 
 struct ImpulseCellView: View {
-
-    @State var name: String
-    @State var price: String
-    @State var daysRemaining: String
+    var impulseOption: ImpulseOption = .active
+    var impulse: Impulse
     
     var body: some View {
-        VStack {
-            Button {
-                
-            } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("\(name), \(price)")
-                            .font(Font.custom("Nunito-Bold", size: 20))
-                            .lineLimit(0...2)
-                        
-                        Text("\(daysRemaining)")
-                            .font(Font.custom("Nunito-Regular", size: 12))
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color.init(white: 0.6))
-                        .font(.system(size: 12))
-                }
-            }
-            .buttonStyle(ImpulseCellStyle())
-        }
+        ImpulseCellContent(impulseOption: impulseOption, impulse: impulse)
     }
     
-    init(name: String, price: Double, remindDate: Date) {
-        self.name = name
-        self.price = String(price).asCurrency(locale: Locale.current) ?? "$0.00"
-        self.daysRemaining = Utils.remainingTimeMessageForDate(remindDate).0
+    init(impulse: Impulse, impulseOption: ImpulseOption) {
+        self.impulse = impulse
+        self.impulseOption = impulseOption
     }
 }
 
@@ -64,5 +41,107 @@ struct ImpulseCellStyle: ButtonStyle {
                 RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
                     .fill(Color.init(white: 0.9))
             )
+    }
+}
+
+struct ImpulseCellContent: View {
+    var impulseOption: ImpulseOption
+    var impulse: Impulse
+    
+    var body: some View {
+        impulseContent
+    }
+    
+    @ViewBuilder var impulseContent: some View {
+        switch impulseOption {
+        case .active:
+            viewOne
+        case .pending:
+            viewTwo
+        case .completed:
+            viewThree
+        }
+    }
+    
+    private var viewOne: some View {
+        let price = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+        let daysRemaining = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate).0
+        
+        return HStack {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("\(impulse.unwrappedName), \(price)")
+                    .font(Font.custom("Nunito-Bold", size: 20))
+                    .lineLimit(0...2)
+                
+                Text("\(daysRemaining)")
+                    .font(Font.custom("Nunito-Regular", size: 12))
+            }
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(Color.init(white: 0.6))
+                .font(.system(size: 12))
+        }
+    }
+    
+    private var viewTwo: some View {
+        let price = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+        
+        return HStack {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("\(impulse.unwrappedName), \(price)")
+                    .font(Font.custom("Nunito-Bold", size: 20))
+                    .lineLimit(0...2)
+                
+                Text("⌛️ \(impulse.daysSinceExpiry) Overdue")
+                    .font(Font.custom("Nunito-Regular", size: 12))
+            }
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(Color.init(white: 0.6))
+                .font(.system(size: 12))
+        }
+    }
+    
+    private var viewThree: some View {
+        let price = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+        var savedMessage: String = ""
+        var sealColor: Color = .black
+        
+        if impulse.amountSaved == 0 {
+            savedMessage = "You didn't save anything!"
+        } else if impulse.amountSaved > 0 {
+            savedMessage = "You saved \(price)!"
+            sealColor = .green
+        } else if impulse.amountSaved < 0 {
+            savedMessage = "You spent \(price)!"
+            sealColor = .red
+        }
+        
+        return HStack {
+            VStack(alignment: .leading, spacing: 3) {
+                HStack {
+                    Text("\(impulse.unwrappedName)")
+                        .font(Font.custom("Nunito-Bold", size: 20))
+                        .lineLimit(0...2)
+                }
+                
+                Text(savedMessage)
+                    .font(Font.custom("Nunito-Regular", size: 12))
+            }
+            
+            Spacer()
+            
+            Image(systemName: "checkmark.seal")
+                .font(.system(size: 20))
+                .foregroundColor(sealColor)
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(Color.init(white: 0.6))
+                .font(.system(size: 12))
+        }
     }
 }
