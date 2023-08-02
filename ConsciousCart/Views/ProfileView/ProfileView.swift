@@ -45,7 +45,7 @@ struct ProfileView: View {
     var scoreMessage: String {
         if score == 0.0 { return "Either you haven't spent any money, or you broke even..." }
         
-        return score < 0.0 ? "Yikes, you've spent" : "Nice job \(userName), you've saved"
+        return score < 0.0 ? "Yikes \(userName), you've spent" : "Nice job \(userName), you've saved"
     }
     
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor

@@ -212,7 +212,9 @@ final class ImpulsesStateManager {
         // remove it.
         removePendingNotification(for: impulse)
         print("the impulse was completed")
-        updateImpulse()
+        
+        coreDataManager.saveChanges()
+        loadImpulses()
     }
     
     public func updateUserAmountSaved(amount: Double) {
@@ -232,5 +234,16 @@ final class ImpulsesStateManager {
         default:
             userStats.level = Int16(UserLevel.beginner.rawValue)
         }
+        
+        coreDataManager.saveChanges()
+        loadUserStats()
+    }
+    
+    public func updateUserName(to newName: String) {
+        guard let userStats = userStats else { return }
+        
+        userStats.userName = newName
+        coreDataManager.saveChanges()
+        loadUserStats()
     }
 }

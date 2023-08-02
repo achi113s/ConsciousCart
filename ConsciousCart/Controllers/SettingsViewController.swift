@@ -9,13 +9,17 @@ import UIKit
 import SwiftUI
 
 class SettingsViewController: UIViewController {
-    var impulsesStateManager: ImpulsesStateManager?
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    
+    convenience init(impulsesStateManager: ImpulsesStateManager) {
+        self.init(nibName: nil, bundle: nil)
+        self.impulsesStateManager = impulsesStateManager
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var settingsView = SettingsView()
-        settingsView.impulsesStateManager = impulsesStateManager
+        let settingsView = SettingsView(impulsesStateManager: impulsesStateManager)
         
         let hostingViewController = UIHostingController(rootView: settingsView)
         

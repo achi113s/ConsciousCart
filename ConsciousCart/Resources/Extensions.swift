@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 extension FileManager {
     static var documentsDirectory: URL {
         let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        print(paths[0])
+        //        print(paths[0])
         return paths[0]
     }
     
@@ -31,8 +31,8 @@ extension FileManager {
     }
 }
 
-/// Formatter and String extensions originally by NSExceptional on StackOverflow.
-/// https://stackoverflow.com/a/60859491/21574991
+// Formatter and String extensions originally by NSExceptional on StackOverflow.
+// https://stackoverflow.com/a/60859491/21574991
 extension Formatter {
     static let currency: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -51,7 +51,7 @@ extension String {
         }
     }
     
-    /// This function by me.
+    // This function by me.
     func asDoubleFromCurrency(locale: Locale) -> Double {
         Formatter.currency.locale = locale
         let number = Formatter.currency.number(from: self)
@@ -63,6 +63,21 @@ extension String {
         }
     }
     
+    // By gavanon on StackOverflow
+    // https://stackoverflow.com/a/46859176/21574991
+    func isAlphanumeric() -> Bool {
+        return self.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil && self != ""
+    }
+    
+    func isAlphanumeric(ignoreDiacritics: Bool = false) -> Bool {
+        if ignoreDiacritics {
+            return self.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil && self != ""
+        }
+        else {
+            return self.isAlphanumeric()
+        }
+    }
+    
     func stringInputIsValid() -> Bool {
         if self.trimmingCharacters(in: .whitespacesAndNewlines) == "" { return false }
         return true
@@ -70,36 +85,36 @@ extension String {
 }
 
 extension UIColor {
-  /**
-   Create a lighter color
-   */
-  func lighter(by percentage: CGFloat = 30.0) -> UIColor {
-    return self.adjustBrightness(by: abs(percentage))
-  }
-  
-  /**
-   Create a darker color
-   */
-  func darker(by percentage: CGFloat = 30.0) -> UIColor {
-    return self.adjustBrightness(by: -abs(percentage))
-  }
-  
-  /**
-   Try to increase brightness or decrease saturation
-   */
-  func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
-    var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-    if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-      if b < 1.0 {
-        let newB: CGFloat = max(min(b + (percentage/100.0)*b, 1.0), 0.0)
-        return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
-      } else {
-        let newS: CGFloat = min(max(s - (percentage/100.0)*s, 0.0), 1.0)
-        return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
-      }
+    /**
+     Create a lighter color
+     */
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjustBrightness(by: abs(percentage))
     }
-    return self
-  }
+    
+    /**
+     Create a darker color
+     */
+    func darker(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjustBrightness(by: -abs(percentage))
+    }
+    
+    /**
+     Try to increase brightness or decrease saturation
+     */
+    func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
+        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+            if b < 1.0 {
+                let newB: CGFloat = max(min(b + (percentage/100.0)*b, 1.0), 0.0)
+                return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
+            } else {
+                let newS: CGFloat = min(max(s - (percentage/100.0)*s, 0.0), 1.0)
+                return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
+            }
+        }
+        return self
+    }
 }
 
 extension UILabel {

@@ -61,9 +61,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createSettingsVC() -> UIViewController {
-        let settingsVC = SettingsViewController()
+        let settingsVC = SettingsViewController(impulsesStateManager: impulsesStateManager)
         settingsVC.title = "Settings"
-//        settingsVC.impulsesStateManager = impulsesStateManager
         
         settingsVC.tabBarItem = UITabBarItem()
         settingsVC.tabBarItem.image = UIImage(systemName: "gearshape")

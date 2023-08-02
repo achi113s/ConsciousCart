@@ -267,6 +267,7 @@ extension ImpulseDetailViewController {
             guard let impulsesStateManager = self?.impulsesStateManager else { return }
                 
             self?.stageUpdatesForImpulse()
+            // this needs to be updated. should not modify impulses from a view controller
             impulsesStateManager.updateImpulse()
             impulsesStateManager.updateNotification(for: impulse)
             
