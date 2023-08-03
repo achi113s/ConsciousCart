@@ -28,6 +28,7 @@
 		445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E506D2A74B57300DAFCDF /* SparkleShape.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
+		446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */; };
 		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
 		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
@@ -64,6 +65,7 @@
 		44EA21FB2A7A04EE00ECC74C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FA2A7A04EE00ECC74C /* Test.swift */; };
 		44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */; };
 		44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */; };
+		44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */; };
 		44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */; };
 		44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,7 @@
 		445E506D2A74B57300DAFCDF /* SparkleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleShape.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
 		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		44EA21FA2A7A04EE00ECC74C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
+		44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +187,7 @@
 				44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */,
 				445E50682A74AF8800DAFCDF /* CoinView */,
 				44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */,
+				44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				4496A0592A170F3E004C1349 /* Utils.swift */,
 				44D7291A2A0A9E430031A9EE /* Fonts */,
 				44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */,
+				446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 				448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
+				446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
@@ -523,6 +530,7 @@
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
+				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
 			);
