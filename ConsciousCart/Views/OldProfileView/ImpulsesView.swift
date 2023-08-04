@@ -37,49 +37,49 @@ struct ImpulsesView: View {
         }
     }
     
-    //    var body: some View {
-    //        ScrollView {
-    //            LazyVStack(spacing: 10) {
-    //                ForEach(filteredImpulses, id: \.id) { impulse in
-    //                    NavigationLink {
-    //                        ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
-    //                    } label: {
-    //                        ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
-    //                    }.buttonStyle(ImpulseCellStyle())
-    //                }
-    //            }
-    //            .padding(16)
-    //        }
-    //        .navigationTitle(title)
-    //        .navigationBarTitleDisplayMode(.inline)
-    //    }
-    
-    var body: some View {
-        List {
-            ForEach(filteredImpulses, id: \.id) { impulse in
-                NavigationLink {
-                    ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
-                } label: {
-                    ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
+        var body: some View {
+            ScrollView {
+                LazyVStack(spacing: 10) {
+                    ForEach(filteredImpulses, id: \.id) { impulse in
+                        NavigationLink {
+                            ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
+                        } label: {
+                            ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
+                        }.buttonStyle(ImpulseCellStyle())
+                    }
                 }
-                .listStyle(.plain)
-                .listRowSeparator(.hidden)
-                .listRowBackground(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(style: .init(lineWidth: 1))
-                        .fill(Color.init(white: 0.9))
-                        .padding(EdgeInsets(top: 5, leading: 1, bottom: 5, trailing: 1))
-                )
-                .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+                .padding(16)
             }
-            .onDelete { index in
-                print("delete")
-            }
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding(EdgeInsets(top: -32, leading: 0, bottom: 0, trailing: 0))
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-    }
+    
+//    var body: some View {
+//        List {
+//            ForEach(filteredImpulses, id: \.id) { impulse in
+//                NavigationLink {
+//                    ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
+//                } label: {
+//                    ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
+//                }
+//                .listStyle(.plain)
+//                .listRowSeparator(.hidden)
+//                .listRowBackground(
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .stroke(style: .init(lineWidth: 1))
+//                        .fill(Color.init(white: 0.9))
+//                        .padding(EdgeInsets(top: 5, leading: 1, bottom: 5, trailing: 1))
+//                )
+//                .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+//            }
+//            .onDelete { index in
+//                print("delete")
+//            }
+//        }
+//        .padding(EdgeInsets(top: -32, leading: 0, bottom: 0, trailing: 0))
+//        .navigationTitle(title)
+//        .navigationBarTitleDisplayMode(.inline)
+//    }
     
     init(filter: ImpulseOption, impulsesStateManager: ImpulsesStateManager) {
         self.impulseOption = filter
