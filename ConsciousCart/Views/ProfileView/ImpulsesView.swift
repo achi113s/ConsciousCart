@@ -29,11 +29,11 @@ struct ImpulsesView: View {
     var title: String {
         switch impulseOption {
         case .active:
-            return "🛍️  Active Impulses"
+            return "Active Impulses"
         case .pending:
-            return "⏱️  Pending Impulses"
+            return "Pending Impulses"
         case .completed:
-            return "✅  Completed Impulses"
+            return "Completed Impulses"
         }
     }
     
@@ -45,11 +45,9 @@ struct ImpulsesView: View {
                         ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)
                     } label: {
                         ImpulseCellView(impulse: impulse, impulseOption: impulseOption)
-                    }
-                    .buttonStyle(ImpulseCellStyle())
+                    }.buttonStyle(ImpulseCellStyle())
                 }
             }
-            .frame(maxWidth: .infinity)
             .padding(16)
         }
         .navigationTitle(title)

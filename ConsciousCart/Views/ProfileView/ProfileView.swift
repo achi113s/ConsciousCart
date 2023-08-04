@@ -53,8 +53,8 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 20) {
-                    VStack(spacing: 20) {
+                VStack(spacing: 15) {
+                    VStack(spacing: 10) {
                         CoinView(coinSize: 125, userLevel: userLevel)
                         
                         VStack {
@@ -72,7 +72,7 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal)
                     
-                    Spacer()
+                    
                     
                     VStack(alignment: .leading) {
                         SectionLabel(text: "My Impulses")
@@ -85,8 +85,7 @@ struct ProfileView: View {
                                 
                                 Spacer()
                                 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color.init(white: 0.6))
+                                ChevronFromScratch()
                             }
                             .frame(height: 30)
                         }
@@ -106,8 +105,7 @@ struct ProfileView: View {
                                         .foregroundColor(.red)
                                 }
                                 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color.init(white: 0.6))
+                                ChevronFromScratch()
                             }
                             .frame(height: 30)
                         }
@@ -117,12 +115,17 @@ struct ProfileView: View {
                             ImpulsesView(filter: .completed, impulsesStateManager: impulsesStateManager)
                         } label: {
                             HStack {
-                                Text("✅  Completed Impulses")
+                                HStack(spacing: 1) {
+                                    Image(systemName: "checkmark.seal")
+                                        .font(.system(size: 20))
+                                        .foregroundColor(.green)
+                                    
+                                    Text(" Completed Impulses")
+                                }
                                 
                                 Spacer()
                                 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color.init(white: 0.6))
+                                ChevronFromScratch()
                             }
                             .frame(height: 30)
                         }
@@ -130,7 +133,7 @@ struct ProfileView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(.horizontal)
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)

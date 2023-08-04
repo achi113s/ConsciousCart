@@ -45,8 +45,7 @@ struct SettingsView: View {
                                 HStack {
                                     Text("📒  About ConsciousCart")
                                     Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(Color.init(white: 0.6))
+                                    ChevronFromScratch()
                                 }
                                 .frame(height: 30)
                             }
@@ -60,7 +59,8 @@ struct SettingsView: View {
                                 Text("📧  Share Feedback")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
-                                    .foregroundColor(Color.init(white: 0.6))
+                                    .foregroundColor(Color.init(white: 0.8))
+                                    .font(.system(size: 12, weight: .bold))
                             }
                             .frame(height: 30)
                         }
@@ -73,7 +73,8 @@ struct SettingsView: View {
                                 Text("💫  Rate ConsciousCart!")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
-                                    .foregroundColor(Color.init(white: 0.6))
+                                    .foregroundColor(Color.init(white: 0.8))
+                                    .font(.system(size: 12, weight: .bold))
                             }
                             .frame(height: 30)
                         }
@@ -131,7 +132,7 @@ struct SettingsView: View {
                                 HStack {
                                     Text("Save")
                                 }
-                                .frame(height: 30)
+                                .frame(height: 34)
                             }
                             .buttonStyle(CCButtonStyle())
                         }

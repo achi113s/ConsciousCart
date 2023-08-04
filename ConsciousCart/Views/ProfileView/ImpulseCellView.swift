@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ImpulseCellView: View {
     var impulseOption: ImpulseOption = .active
-    var impulse: Impulse
+    var impulse: Impulse  // should be a binding?
     
     var body: some View {
         ImpulseCellContent(impulseOption: impulseOption, impulse: impulse)
@@ -30,19 +30,6 @@ struct ImpulseCellView: View {
 //        ImpulseCellView(name: name, price: price, daysRemaining: daysRemaining)
 //    }
 //}
-
-struct ImpulseCellStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
-            .background(configuration.isPressed ? Color(white: 0.8) : .white)
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1))
-                    .fill(Color.init(white: 0.9))
-            )
-    }
-}
 
 struct ImpulseCellContent: View {
     var impulseOption: ImpulseOption
@@ -79,9 +66,7 @@ struct ImpulseCellContent: View {
             
             Spacer()
             
-            Image(systemName: "chevron.right")
-                .foregroundColor(Color.init(white: 0.6))
-                .font(.system(size: 12))
+            ChevronFromScratch()
         }
     }
     
@@ -100,9 +85,7 @@ struct ImpulseCellContent: View {
             
             Spacer()
             
-            Image(systemName: "chevron.right")
-                .foregroundColor(Color.init(white: 0.6))
-                .font(.system(size: 12))
+            ChevronFromScratch()
         }
     }
     
@@ -139,9 +122,7 @@ struct ImpulseCellContent: View {
                 .font(.system(size: 20))
                 .foregroundColor(sealColor)
             
-            Image(systemName: "chevron.right")
-                .foregroundColor(Color.init(white: 0.6))
-                .font(.system(size: 12))
+            ChevronFromScratch()
         }
     }
 }
