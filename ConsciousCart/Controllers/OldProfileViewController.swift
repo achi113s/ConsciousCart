@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-class ProfileViewController: UIViewController {
+class OldProfileViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager! = nil
     
     convenience init(impulsesStateManager: ImpulsesStateManager) {

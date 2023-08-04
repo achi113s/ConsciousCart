@@ -12,10 +12,14 @@
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */; };
+		442B54E42A7D6FC400383B54 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */; };
+		442B54E62A7D714200383B54 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E52A7D714200383B54 /* Custom.swift */; };
+		442B54E82A7D82F600383B54 /* HackedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E72A7D82F600383B54 /* HackedButton.swift */; };
+		442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E92A7D9F5700383B54 /* SectionUILabel.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */; };
-		4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* ProfileViewController.swift */; };
+		4445FFB029FA31510067FD1F /* OldProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */; };
 		444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */; };
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
@@ -87,10 +91,14 @@
 		4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoImpulsesFooter.swift; sourceTree = "<group>"; };
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToConsciousCartViewController.swift; sourceTree = "<group>"; };
+		442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
+		442B54E52A7D714200383B54 /* Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
+		442B54E72A7D82F600383B54 /* HackedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackedButton.swift; sourceTree = "<group>"; };
+		442B54E92A7D9F5700383B54 /* SectionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUILabel.swift; sourceTree = "<group>"; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
-		4445FFAF29FA31510067FD1F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldProfileViewController.swift; sourceTree = "<group>"; };
 		444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -167,7 +175,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		442B92612A34D86D0042082C /* AddToConsciousCartViewController */ = {
+		442B54E22A7D6FA300383B54 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */,
+				442B54E52A7D714200383B54 /* Custom.swift */,
+				442B54E72A7D82F600383B54 /* HackedButton.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		442B54EB2A7DA0EF00383B54 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		442B92612A34D86D0042082C /* AddToConsciousCartView */ = {
 			isa = PBXGroup;
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
@@ -175,7 +201,7 @@
 				445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */,
 				445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */,
 			);
-			path = AddToConsciousCartViewController;
+			path = AddToConsciousCartView;
 			sourceTree = "<group>";
 		};
 		443DC34F2A59F50600A9DCF0 /* SupportViews */ = {
@@ -190,6 +216,7 @@
 				445E50682A74AF8800DAFCDF /* CoinView */,
 				44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */,
 				44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */,
+				442B54E92A7D9F5700383B54 /* SectionUILabel.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -215,7 +242,7 @@
 			path = DataManagers;
 			sourceTree = "<group>";
 		};
-		445DD50E2A75BFBB00DC56C8 /* ProfileView */ = {
+		445DD50E2A75BFBB00DC56C8 /* OldProfileView */ = {
 			isa = PBXGroup;
 			children = (
 				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
@@ -225,7 +252,7 @@
 				446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */,
 				446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */,
 			);
-			path = ProfileView;
+			path = OldProfileView;
 			sourceTree = "<group>";
 		};
 		445E50682A74AF8800DAFCDF /* CoinView */ = {
@@ -247,12 +274,12 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
-		448807A92A6A0705005377DE /* ImpulseExpiredViewController */ = {
+		448807A92A6A0705005377DE /* ImpulseExpiredView */ = {
 			isa = PBXGroup;
 			children = (
 				448807AA2A6A073A005377DE /* ImpulseExpiredViewController.swift */,
 			);
-			path = ImpulseExpiredViewController;
+			path = ImpulseExpiredView;
 			sourceTree = "<group>";
 		};
 		4497E38E29F358BC0029451E = {
@@ -315,7 +342,7 @@
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				444A58E72A4FC353006FC02B /* MainCollectionView */,
-				445DD50E2A75BFBB00DC56C8 /* ProfileView */,
+				445DD50E2A75BFBB00DC56C8 /* OldProfileView */,
 				448807A82A69CD2C005377DE /* SettingsView */,
 				443DC34F2A59F50600A9DCF0 /* SupportViews */,
 			);
@@ -325,12 +352,13 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */,
-				442B92612A34D86D0042082C /* AddToConsciousCartViewController */,
+				442B54E22A7D6FA300383B54 /* ProfileView */,
+				44F1EC6B2A4E569A00091BD1 /* MainCollectionView */,
+				442B92612A34D86D0042082C /* AddToConsciousCartView */,
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
-				448807A92A6A0705005377DE /* ImpulseExpiredViewController */,
-				4445FFAF29FA31510067FD1F /* ProfileViewController.swift */,
-				445EF7B42A187B140013ACB1 /* SettingsViewController.swift */,
+				448807A92A6A0705005377DE /* ImpulseExpiredView */,
+				4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */,
+				442B54EB2A7DA0EF00383B54 /* SettingsView */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -363,14 +391,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		44F1EC6B2A4E569A00091BD1 /* MainCollectionViewController */ = {
+		44F1EC6B2A4E569A00091BD1 /* MainCollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */,
 				444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */,
 				4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */,
 			);
-			path = MainCollectionViewController;
+			path = MainCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,6 +515,7 @@
 			files = (
 				444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
+				442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
 				445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */,
@@ -508,6 +537,7 @@
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
+				442B54E82A7D82F600383B54 /* HackedButton.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
 				44C9AFDE2A5A53EA00B03846 /* AboutView.swift in Sources */,
 				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
@@ -517,12 +547,13 @@
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
+				442B54E42A7D6FC400383B54 /* NewProfileViewController.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
-				4445FFB029FA31510067FD1F /* ProfileViewController.swift in Sources */,
+				4445FFB029FA31510067FD1F /* OldProfileViewController.swift in Sources */,
 				448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
@@ -534,6 +565,7 @@
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
+				442B54E62A7D714200383B54 /* Custom.swift in Sources */,
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
