@@ -89,7 +89,7 @@ struct SettingsView: View {
                             SectionLabel(text: "Appearance")
                             
                             CustomColorPicker(title: "🎨  Accent Color",
-                                              colors: [Color("ShyMoment"), .red, .blue],
+                                              colors: [Color("ShyMoment"), Color("Yriel"), Color("Soil"), Color("DarkMountainMeadow")],
                                               selectedColor: $selectedAccentColor,
                                               colorShapeSize: CGSize(width: 20, height: 20)
                             )

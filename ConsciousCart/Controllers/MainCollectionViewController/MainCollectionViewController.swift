@@ -115,26 +115,25 @@ extension MainCollectionViewController {
         listConfig.backgroundColor = UIColor(named: "DefaultBackground")
         listConfig.showsSeparators = false
         
-        // Disabling swipe to delete for now.
-//        listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
-//            let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] action, view, completion in
-//                guard let self = self else {
-//                    completion(false)
-//                    return
-//                }
-//
-//                view.frame = .init(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: CGFloat(150))
-//
-//                let impulse = impulsesStateManager.impulses[indexPath.row]
-//                impulsesStateManager.deleteImpulse(impulse: impulse)
-//
-//                collectionView.deleteItems(at: [indexPath])
-//
-//                completion(true)
-//            })
-//
-//            return .init(actions: [deleteAction])
-//        }
+        listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] action, view, completion in
+                guard let self = self else {
+                    completion(false)
+                    return
+                }
+
+                view.frame = .init(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: CGFloat(150))
+
+                let impulse = impulsesStateManager.impulses[indexPath.row]
+                impulsesStateManager.deleteImpulse(impulse: impulse)
+
+                collectionView.deleteItems(at: [indexPath])
+
+                completion(true)
+            })
+
+            return .init(actions: [deleteAction])
+        }
         
         let section = NSCollectionLayoutSection.list(using: listConfig, layoutEnvironment: layoutEnvironment)
         

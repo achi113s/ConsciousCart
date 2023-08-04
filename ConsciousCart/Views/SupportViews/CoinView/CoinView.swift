@@ -105,17 +105,17 @@ struct CoinView: View {
         
         switch userLevel {
         case .beginner:
-            self.baseColor = Color(red: 121/255, green: 85/255, blue: 80/255)  // Soil
-            self.secondaryColor = Color(red: 179/255, green: 146/255, blue: 134/255)  // Spoiled Chocolate
+            self.baseColor = Color("Soil")  // Soil
+            self.secondaryColor = Color("SpoiledChocolate")  // Spoiled Chocolate
         case .saver:
-            self.baseColor = Color(red: 128/255, green: 142/255, blue: 155/255)  // London Square
-            self.secondaryColor = Color(red: 210/255, green: 218/255, blue: 226/255) // Hint of Elusive Blue
+            self.baseColor = Color("LondonSquare")  // London Square
+            self.secondaryColor = Color("HintOfElusiveBlue") // Hint of Elusive Blue
         case .superSaver:
-            self.baseColor = Color(red: 247/255, green: 183/255, blue: 49/255)  // NYC Taxi
-            self.secondaryColor = Color(red: 255/255, green: 221/255, blue: 89/255)  // Yriel Yellow
+            self.baseColor = Color("NYCTaxi")  // NYC Taxi
+            self.secondaryColor = Color("Yriel")  // Yriel Yellow
         case .ultimateSaver:
-            self.baseColor = Color(red: 199/255, green: 236/255, blue: 238/255, opacity: 0.8)  // Hint of Ice
-            self.secondaryColor = Color(red: 130/255, green: 204/255, blue: 221/255, opacity: 0.8)  // Spray
+            self.baseColor = Color("HintOfIce")  // Hint of Ice
+            self.secondaryColor = Color("Spray")  // Spray
         }
     }
 }

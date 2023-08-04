@@ -66,7 +66,7 @@ struct ImpulseCellContent: View {
             
             Spacer()
             
-            ChevronFromScratch()
+//            ChevronFromScratch()
         }
     }
     
@@ -85,7 +85,7 @@ struct ImpulseCellContent: View {
             
             Spacer()
             
-            ChevronFromScratch()
+//            ChevronFromScratch()
         }
     }
     
@@ -122,7 +122,7 @@ struct ImpulseCellContent: View {
                 .font(.system(size: 20))
                 .foregroundColor(sealColor)
             
-            ChevronFromScratch()
+//            ChevronFromScratch()
         }
     }
 }
