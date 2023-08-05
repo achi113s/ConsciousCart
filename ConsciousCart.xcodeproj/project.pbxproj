@@ -15,12 +15,7 @@
 		442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E32A7D6FC400383B54 /* ProfileViewController.swift */; };
 		442B54E82A7D82F600383B54 /* ImpulseOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */; };
 		442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E92A7D9F5700383B54 /* SectionUILabel.swift */; };
-		442B54ED2A7DA14D00383B54 /* ImpulsesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */; };
-		442B54F32A7DACC100383B54 /* ActiveImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */; };
-		442B54F52A7DACCE00383B54 /* PendingImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */; };
-		442B54F72A7DACD900383B54 /* CompletedImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */; };
 		442B54F92A7DCE9100383B54 /* ImpulsesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */; };
-		442B54FB2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */; };
@@ -99,12 +94,7 @@
 		442B54E32A7D6FC400383B54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseOptionButton.swift; sourceTree = "<group>"; };
 		442B54E92A7D9F5700383B54 /* SectionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUILabel.swift; sourceTree = "<group>"; };
-		442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesTableViewController.swift; sourceTree = "<group>"; };
-		442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveImpulseTableViewCell.swift; sourceTree = "<group>"; };
-		442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingImpulseTableViewCell.swift; sourceTree = "<group>"; };
-		442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedImpulseTableViewCell.swift; sourceTree = "<group>"; };
 		442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCollectionViewController.swift; sourceTree = "<group>"; };
-		442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveImpulseCollectionViewCell.swift; sourceTree = "<group>"; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -189,13 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				442B54E32A7D6FC400383B54 /* ProfileViewController.swift */,
-				442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */,
-				442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */,
-				442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */,
-				442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */,
-				442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */,
 				442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */,
-				442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -222,6 +206,7 @@
 		443DC34F2A59F50600A9DCF0 /* SupportViews */ = {
 			isa = PBXGroup;
 			children = (
+				442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */,
 				44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */,
 				44C749E12A58F007000AAE63 /* CurrencyTextField.swift */,
 				44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */,
@@ -236,7 +221,7 @@
 			path = SupportViews;
 			sourceTree = "<group>";
 		};
-		444A58E72A4FC353006FC02B /* MainCollectionView */ = {
+		444A58E72A4FC353006FC02B /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
@@ -244,7 +229,7 @@
 				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
 				4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */,
 			);
-			path = MainCollectionView;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		4450EED12A088A6A00D8C680 /* DataManagers */ = {
@@ -356,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
-				444A58E72A4FC353006FC02B /* MainCollectionView */,
+				444A58E72A4FC353006FC02B /* CollectionView */,
 				445DD50E2A75BFBB00DC56C8 /* OldProfileView */,
 				448807A82A69CD2C005377DE /* SettingsView */,
 				443DC34F2A59F50600A9DCF0 /* SupportViews */,
@@ -534,7 +519,6 @@
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,
 				445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */,
-				442B54F32A7DACC100383B54 /* ActiveImpulseTableViewCell.swift in Sources */,
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
@@ -545,11 +529,9 @@
 				44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */,
-				442B54F52A7DACCE00383B54 /* PendingImpulseTableViewCell.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
-				442B54FB2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
 				448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */,
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
@@ -577,13 +559,11 @@
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */,
-				442B54ED2A7DA14D00383B54 /* ImpulsesTableViewController.swift in Sources */,
 				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
-				442B54F72A7DACD900383B54 /* CompletedImpulseTableViewCell.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,

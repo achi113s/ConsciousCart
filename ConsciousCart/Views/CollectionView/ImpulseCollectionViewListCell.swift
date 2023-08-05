@@ -20,7 +20,7 @@ class ImpulseCollectionViewListCell: UICollectionViewListCell {
     
     private func configureAppearance() {
         configureCorners()
-//        configureShadows()
+        //        configureShadows()
     }
     
     // Need to figure out how to make this work with the rounded corners.

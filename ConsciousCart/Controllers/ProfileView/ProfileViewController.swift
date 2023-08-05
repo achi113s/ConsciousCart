@@ -215,13 +215,13 @@ extension ProfileViewController {
     @objc private func goToImpulses(_ sender: ImpulseOptionButton) {
         switch sender.filterType {
         case .active:
-            let activeVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .active)
+            let activeVC = ImpulsesCollectionViewController(impulsesStateManager: impulsesStateManager, impulseOption: .active)
             self.navigationController?.pushViewController(activeVC, animated: true)
         case .pending:
-            let pendingVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .pending)
+            let pendingVC = ImpulsesCollectionViewController(impulsesStateManager: impulsesStateManager, impulseOption: .pending)
             self.navigationController?.pushViewController(pendingVC, animated: true)
         case .completed:
-            let completedVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .completed)
+            let completedVC = ImpulsesCollectionViewController(impulsesStateManager: impulsesStateManager, impulseOption: .completed)
             self.navigationController?.pushViewController(completedVC, animated: true)
         default:
             print("none")

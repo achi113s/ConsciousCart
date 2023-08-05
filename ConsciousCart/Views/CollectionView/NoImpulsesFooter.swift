@@ -15,6 +15,7 @@ class NoImpulsesFooter: UICollectionReusableView {
 
         label.text = "Tap the add button below to get started!"
         label.font = UIFont.ccFont(textStyle: .headline)
+        label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
     }

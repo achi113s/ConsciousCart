@@ -120,6 +120,26 @@ final class ImpulsesStateManager {
         }
     }
     
+    public func deletePendingImpulse(impulse: Impulse) {
+        if let index = pendingImpulses.firstIndex(of: impulse) {
+            pendingImpulses.remove(at: index)
+            
+            coreDataManager.deleteObject(object: impulse)
+            
+            loadImpulses()
+        }
+    }
+    
+    public func deleteCompletedImpulse(impulse: Impulse) {
+        if let index = completedImpulses.firstIndex(of: impulse) {
+            completedImpulses.remove(at: index)
+            
+            coreDataManager.deleteObject(object: impulse)
+            
+            loadImpulses()
+        }
+    }
+    
     public func deleteUser(user: UserStats) {
         // will have to delete user then go to an onboarding screen or something
     }

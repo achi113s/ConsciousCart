@@ -33,17 +33,6 @@ extension MainCollectionViewController {
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//            guard let impulsesStateManager = impulsesStateManager else {
-//                let cell = collectionView.dequeueReusableCell(
-//                    withReuseIdentifier: MainCollectionViewReuseIdentifiers.defaultCellReuseIdentifier.rawValue,
-//                    for: indexPath
-//                )
-//                
-//                cell.backgroundColor = .red
-//                print("Could not unwrap impulsesStateManager. Error red cell was loaded.")
-//                return cell
-//            }
-            
             // Section 0 is the Savings Chart Section
             if indexPath.section == CVSection.chartSection.rawValue {
                 let cell = collectionView.dequeueReusableCell(

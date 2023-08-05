@@ -13,9 +13,9 @@ class ImpulsesCollectionViewController: UIViewController {
     
     private var collectionView: UICollectionView! = nil
     
-    private let activeCellReuse = "activeCell"
-    private let pendingCellReuse = "pendingCell"
-    private let completedCellReuse = "completedCell"
+    private let impulseCellReuse = "activeCell"
+    
+    private var nothingToShow: UILabel! = nil
     
     lazy private var viewTitle: String = {
         switch impulseOption {
@@ -38,27 +38,82 @@ class ImpulsesCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
         title = viewTitle
         
         configureCollectionView()
+        configureSubviews()
         addSubviews()
         configureLayoutConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        switch impulseOption {
+        case .active:
+            if impulsesStateManager.impulses.count == 0 {
+                nothingToShow.isHidden = false
+                collectionView.isHidden = true
+            }
+        case .pending:
+            if impulsesStateManager.pendingImpulses.count == 0 {
+                nothingToShow.isHidden = false
+                collectionView.isHidden = true
+            }
+        case .completed:
+            if impulsesStateManager.completedImpulses.count == 0 {
+                nothingToShow.isHidden = false
+                collectionView.isHidden = true
+            }
+        default:
+            nothingToShow.isHidden = true
+            collectionView.isHidden = false
+        }
+        
+        collectionView.reloadData()
     }
 }
 
 extension ImpulsesCollectionViewController {
     private func configureCollectionView() {
-        collectionView = UICollectionView(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.contentInset = UIEdgeInsets(top: CGFloat(0), left: CGFloat(0), bottom: CGFloat(10), right: CGFloat(0))
+        collectionView.backgroundColor = .systemBackground
+        
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        registerCellClasses()
+        
+        view.addSubview(collectionView)
+    }
+    
+    private func configureSubviews() {
+        nothingToShow = UILabel()
+        nothingToShow.translatesAutoresizingMaskIntoConstraints = false
+        nothingToShow.text = "Nothing to see here!"
+        nothingToShow.font = UIFont.ccFont(textStyle: .title3)
+        nothingToShow.textColor = .secondaryLabel
+        nothingToShow.adjustsFontSizeToFitWidth = true
+        nothingToShow.minimumScaleFactor = 0.5
+        nothingToShow.numberOfLines = 1
+        nothingToShow.textAlignment = .center
+        nothingToShow.isHidden = true
+    }
+    
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { [weak self] sectionNumber, layoutEnvironment in
+            guard let self = self else { fatalError("Self could not be unwrapped.") }
+            
+            return impulseListSection(layoutEnvironment)
+        }
     }
     
     private func addSubviews() {
         view.addSubview(collectionView)
+        view.addSubview(nothingToShow)
     }
     
     private func configureLayoutConstraints() {
@@ -66,7 +121,10 @@ extension ImpulsesCollectionViewController {
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            nothingToShow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nothingToShow.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -81,17 +139,30 @@ extension ImpulsesCollectionViewController {
                     completion(false)
                     return
                 }
-
+                
                 view.frame = .init(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: CGFloat(150))
-
-                let impulse = impulsesStateManager.impulses[indexPath.row]
-                impulsesStateManager.deleteImpulse(impulse: impulse)
-
+                
+                var impulse: Impulse? = nil
+                switch impulseOption {
+                case .active:
+                    impulse = impulsesStateManager.impulses[indexPath.row]
+                    if let impulse = impulse { impulsesStateManager.deleteImpulse(impulse: impulse) }
+                case .pending:
+                    impulse = impulsesStateManager.pendingImpulses[indexPath.row]
+                    if let impulse = impulse { impulsesStateManager.deletePendingImpulse(impulse: impulse) }
+                case .completed:
+                    impulse = impulsesStateManager.completedImpulses[indexPath.row]
+                    if let impulse = impulse { impulsesStateManager.deleteCompletedImpulse(impulse: impulse) }
+                default:
+                    completion(false)
+                    return
+                }
+                
                 collectionView.deleteItems(at: [indexPath])
-
+                
                 completion(true)
             })
-
+            
             return .init(actions: [deleteAction])
         }
         
@@ -106,7 +177,7 @@ extension ImpulsesCollectionViewController {
     }
     
     private func registerCellClasses() {
-        collectionView.register(ImpulsesCategoryHeader.self, forSupplementaryViewOfKind: MainCollectionViewReuseIdentifiers.impulsesCategoryHeaderIdentifier.rawValue, withReuseIdentifier: MainCollectionViewReuseIdentifiers.headerIdentifier.rawValue)
+        collectionView.register(ImpulseCollectionViewListCell.self, forCellWithReuseIdentifier: impulseCellReuse)
     }
 }
 
@@ -116,51 +187,105 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        switch impulseOption {
+        case .active:
+            return impulsesStateManager.impulses.count
+        case .pending:
+            return impulsesStateManager.pendingImpulses.count
+        case .completed:
+            return impulsesStateManager.completedImpulses.count
+        default:
+            return 0
+        }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: impulseCellReuse, for: indexPath) as! ImpulseCollectionViewListCell
+        
+        let index: Int = indexPath.row
+        
+        var content = UIListContentConfiguration.subtitleCell()
+        
+        switch impulseOption {
+        case .active:
+            let impulse: Impulse = impulsesStateManager.impulses[index]
+            let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+            content.text = "\(impulse.unwrappedName), \(itemPrice)"
+            content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
+            
+            let remainingTime = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate)
+            content.secondaryText = remainingTime.0
+            content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
+            
+            cell.accessories = [.disclosureIndicator()]
+        case .pending:
+            let impulse: Impulse = impulsesStateManager.pendingImpulses[index]
+            let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+            content.text = "\(impulse.unwrappedName), \(itemPrice)"
+            content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
+            
+            
+            content.secondaryText = "⌛️ \(impulse.daysSinceExpiry) Overdue"
+            content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
+            
+            cell.accessories = [.disclosureIndicator()]
+        case .completed:
+            let impulse: Impulse = impulsesStateManager.completedImpulses[index]
+            let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+            
+            var savedMessage: String = ""
+            var sealColor: UIColor = .black
+            
+            if impulse.amountSaved == 0 {
+                savedMessage = "You didn't save anything!"
+            } else if impulse.amountSaved > 0 {
+                savedMessage = "You saved \(itemPrice)!"
+                sealColor = .systemGreen
+            } else if impulse.amountSaved < 0 {
+                savedMessage = "You spent \(itemPrice)!"
+                sealColor = .systemRed
+            }
+            
+            content.text = "\(impulse.unwrappedName), \(itemPrice)"
+            content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
+            
+            content.secondaryText = savedMessage
+            content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
+            
+            let seal = UIImage(systemName: "checkmark.seal")?.withTintColor(sealColor, renderingMode: .alwaysOriginal)
+            let sealView = UIImageView(image: seal)
+            
+            cell.accessories = [.customView(configuration: .init(customView: sealView, placement: .trailing())), .disclosureIndicator()]
+        default:
+            print("No case matched.")
+        }
+        
+        cell.contentConfiguration = content
+        
         return cell
     }
 }
 
 // MARK: UICollectionViewDelegate
 extension ImpulsesCollectionViewController: UICollectionViewDelegate {
-    
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = ImpulseDetailViewController()
+        
+        switch impulseOption {
+        case .active:
+            detailVC.impulse = impulsesStateManager.impulses[indexPath.row]
+        case .pending:
+            detailVC.impulse = impulsesStateManager.pendingImpulses[indexPath.row]
+        case .completed:
+            detailVC.impulse = impulsesStateManager.completedImpulses[indexPath.row]
+        default:
+            return
+        }
+        
+        detailVC.impulsesStateManager = impulsesStateManager
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
