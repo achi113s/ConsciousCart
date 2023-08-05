@@ -13,8 +13,9 @@ struct SettingsView: View {
     @State private var showingDeleteAlert = false
     @State private var showingAccentResetAlert = false
     //    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
-    @State private var selectedAccentColor: Color = Color(
-        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
+//    @State private var selectedAccentColor: Color = Color(
+//        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
+    @State private var selectedAccentColor: String = UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment"
     
     @State private var userNameField: String = ""
     @State private var showUserNameMessage: Bool = false
@@ -87,14 +88,15 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: spacingToSectionLabel) {
                             SectionLabel(text: "Appearance")
                             
-                            CustomColorPicker(title: "🎨  Accent Color",
-                                              colors: [Color("ShyMoment"), Color("Yriel"), Color("Soil"), Color("DarkMountainMeadow")],
+                            CustomColorPicker("🎨  Accent Color",
+                                              colors: ["ShyMoment", "Yriel", "Soil", "DarkMountainMeadow"],
                                               selectedColor: $selectedAccentColor,
                                               colorShapeSize: CGSize(width: 20, height: 20)
                             )
                             .onChange(of: selectedAccentColor, perform: { newColor in
-                                let uiColor = UIColor(newColor)
-                                UserDefaults.standard.set(uiColor, forKey: UserDefaultsKeys.accentColor.rawValue)
+//                                let uiColor = UIColor(named: newColor)
+                                
+                                UserDefaults.standard.set(newColor, forKey: UserDefaultsKeys.accentColor.rawValue)
                             })
                             .frame(height: 40)
                             .padding(EdgeInsets(top: 3, leading: 10, bottom: 3, trailing: 25))

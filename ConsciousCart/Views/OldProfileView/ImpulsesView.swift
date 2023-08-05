@@ -39,7 +39,8 @@ struct ImpulsesView: View {
     
         var body: some View {
             ScrollView {
-                LazyVStack(spacing: 10) {
+//                LazyVStack(spacing: 10) {
+                List {
                     ForEach(filteredImpulses, id: \.id) { impulse in
                         NavigationLink {
                             ImpulseDetailViewSwiftUI(impulse: impulse, impulsesStateManager: impulsesStateManager)

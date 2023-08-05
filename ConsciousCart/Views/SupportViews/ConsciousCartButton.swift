@@ -9,11 +9,11 @@ import UIKit
 
 final class ConsciousCartButton: UIButton {
     var unhighlightedColor: UIColor? {
-        UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")
+        UIColor(named: UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment")
     }
     
     var highlightedColor: UIColor? {
-        UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue)?.darker() ?? UIColor(named: "ExodusFruit")
+        UIColor(named: UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ExodusFruit")!.darker()
     }
     
     override init(frame: CGRect) {
