@@ -13,9 +13,8 @@ struct SettingsView: View {
     @State private var showingDeleteAlert = false
     @State private var showingAccentResetAlert = false
     //    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
-    @State private var accentColorSetting: Color = Color(
+    @State private var selectedAccentColor: Color = Color(
         uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
-    @State private var selectedAccentColor: Color = Color("ShyMoment")
     
     @State private var userNameField: String = ""
     @State private var showUserNameMessage: Bool = false
@@ -59,7 +58,7 @@ struct SettingsView: View {
                                 Text("📧  Share Feedback")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
-                                    .foregroundColor(Color.init(white: 0.8))
+                                    .foregroundColor(Color.init(white: 0.7))
                                     .font(.system(size: 12, weight: .bold))
                             }
                             .frame(height: 30)
@@ -73,7 +72,7 @@ struct SettingsView: View {
                                 Text("💫  Rate ConsciousCart!")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
-                                    .foregroundColor(Color.init(white: 0.8))
+                                    .foregroundColor(Color.init(white: 0.7))
                                     .font(.system(size: 12, weight: .bold))
                             }
                             .frame(height: 30)

@@ -12,13 +12,15 @@
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */; };
-		442B54E42A7D6FC400383B54 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */; };
-		442B54E82A7D82F600383B54 /* HackedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E72A7D82F600383B54 /* HackedButton.swift */; };
+		442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E32A7D6FC400383B54 /* ProfileViewController.swift */; };
+		442B54E82A7D82F600383B54 /* ImpulseOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */; };
 		442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E92A7D9F5700383B54 /* SectionUILabel.swift */; };
 		442B54ED2A7DA14D00383B54 /* ImpulsesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */; };
 		442B54F32A7DACC100383B54 /* ActiveImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */; };
 		442B54F52A7DACCE00383B54 /* PendingImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */; };
 		442B54F72A7DACD900383B54 /* CompletedImpulseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */; };
+		442B54F92A7DCE9100383B54 /* ImpulsesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */; };
+		442B54FB2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */; };
@@ -94,13 +96,15 @@
 		4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoImpulsesFooter.swift; sourceTree = "<group>"; };
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToConsciousCartViewController.swift; sourceTree = "<group>"; };
-		442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
-		442B54E72A7D82F600383B54 /* HackedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackedButton.swift; sourceTree = "<group>"; };
+		442B54E32A7D6FC400383B54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseOptionButton.swift; sourceTree = "<group>"; };
 		442B54E92A7D9F5700383B54 /* SectionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUILabel.swift; sourceTree = "<group>"; };
 		442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesTableViewController.swift; sourceTree = "<group>"; };
 		442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveImpulseTableViewCell.swift; sourceTree = "<group>"; };
 		442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingImpulseTableViewCell.swift; sourceTree = "<group>"; };
 		442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedImpulseTableViewCell.swift; sourceTree = "<group>"; };
+		442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCollectionViewController.swift; sourceTree = "<group>"; };
+		442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveImpulseCollectionViewCell.swift; sourceTree = "<group>"; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -184,12 +188,14 @@
 		442B54E22A7D6FA300383B54 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				442B54E32A7D6FC400383B54 /* NewProfileViewController.swift */,
-				442B54E72A7D82F600383B54 /* HackedButton.swift */,
+				442B54E32A7D6FC400383B54 /* ProfileViewController.swift */,
+				442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */,
 				442B54EC2A7DA14D00383B54 /* ImpulsesTableViewController.swift */,
 				442B54F22A7DACC100383B54 /* ActiveImpulseTableViewCell.swift */,
 				442B54F42A7DACCE00383B54 /* PendingImpulseTableViewCell.swift */,
 				442B54F62A7DACD900383B54 /* CompletedImpulseTableViewCell.swift */,
+				442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */,
+				442B54FA2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -543,12 +549,14 @@
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
+				442B54FB2A7DD11100383B54 /* ActiveImpulseCollectionViewCell.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
 				448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */,
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
-				442B54E82A7D82F600383B54 /* HackedButton.swift in Sources */,
+				442B54F92A7DCE9100383B54 /* ImpulsesCollectionViewController.swift in Sources */,
+				442B54E82A7D82F600383B54 /* ImpulseOptionButton.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
 				44C9AFDE2A5A53EA00B03846 /* AboutView.swift in Sources */,
 				448D94132A3EA1020035B34C /* CCFonts.swift in Sources */,
@@ -558,7 +566,7 @@
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
-				442B54E42A7D6FC400383B54 /* NewProfileViewController.swift in Sources */,
+				442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,

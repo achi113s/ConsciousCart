@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-class NewProfileViewController: UIViewController {
+class ProfileViewController: UIViewController {
     private var impulsesStateManager: ImpulsesStateManager! = nil
     private var userLevel: UserLevel! = nil
     
@@ -23,9 +23,9 @@ class NewProfileViewController: UIViewController {
     
     private var myImpulsesSectionLabel: SectionUILabel! = nil
     private var optionsStackView: UIStackView! = nil
-    private var activeImpulsesButton: HackedButton! = nil
-    private var pendingImpulsesButton: HackedButton! = nil
-    private var completedImpulsesButton: HackedButton! = nil
+    private var activeImpulsesButton: ImpulseOptionButton! = nil
+    private var pendingImpulsesButton: ImpulseOptionButton! = nil
+    private var completedImpulsesButton: ImpulseOptionButton! = nil
     
     private var score: Double {
         impulsesStateManager.userStats?.totalAmountSaved ?? 0.0
@@ -72,7 +72,7 @@ class NewProfileViewController: UIViewController {
 }
 
 //MARK: - Configure Subviews
-extension NewProfileViewController {
+extension ProfileViewController {
     private func configureScrollView() {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,15 +117,15 @@ extension NewProfileViewController {
         myImpulsesSectionLabel.text = "MY IMPULSES"
         myImpulsesSectionLabel.textAlignment = .left
         
-        activeImpulsesButton = HackedButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .active)
+        activeImpulsesButton = ImpulseOptionButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .active)
         activeImpulsesButton.setLabelText("🛍️  Active Impulses")
         activeImpulsesButton.addTarget(self, action: #selector(goToImpulses), for: .touchUpInside)
         
-        pendingImpulsesButton = HackedButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .pending)
-        pendingImpulsesButton.setLabelText("🛍️  Active Impulses")
+        pendingImpulsesButton = ImpulseOptionButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .pending)
+        pendingImpulsesButton.setLabelText("⏱️  Pending Impulses")
         pendingImpulsesButton.addTarget(self, action: #selector(goToImpulses), for: .touchUpInside)
         
-        completedImpulsesButton = HackedButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .completed)
+        completedImpulsesButton = ImpulseOptionButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .completed)
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "checkmark.seal")?.withTintColor(.systemGreen)
         let fullString = NSMutableAttributedString(string: "")
@@ -188,13 +188,16 @@ extension NewProfileViewController {
             myImpulsesSectionLabel.widthAnchor.constraint(equalToConstant: 100),
             
             activeImpulsesButton.heightAnchor.constraint(equalToConstant: 40),
-            activeImpulsesButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            activeImpulsesButton.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            activeImpulsesButton.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16),
             
             pendingImpulsesButton.heightAnchor.constraint(equalToConstant: 40),
-            pendingImpulsesButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            pendingImpulsesButton.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            pendingImpulsesButton.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16),
             
             completedImpulsesButton.heightAnchor.constraint(equalToConstant: 40),
-            completedImpulsesButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            completedImpulsesButton.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            completedImpulsesButton.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16),
             
             optionsStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             optionsStackView.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 20)
@@ -208,15 +211,18 @@ extension NewProfileViewController {
     }
 }
 
-extension NewProfileViewController {
-    @objc private func goToImpulses(_ sender: HackedButton) {
+extension ProfileViewController {
+    @objc private func goToImpulses(_ sender: ImpulseOptionButton) {
         switch sender.filterType {
         case .active:
-            print("active")
+            let activeVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .active)
+            self.navigationController?.pushViewController(activeVC, animated: true)
         case .pending:
-            print("pending")
+            let pendingVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .pending)
+            self.navigationController?.pushViewController(pendingVC, animated: true)
         case .completed:
-            print("completed")
+            let completedVC = ImpulsesTableViewController(impulsesStateManager: impulsesStateManager, impulseOption: .completed)
+            self.navigationController?.pushViewController(completedVC, animated: true)
         default:
             print("none")
         }

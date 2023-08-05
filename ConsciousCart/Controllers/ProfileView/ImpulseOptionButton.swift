@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HackedButton: UIControl {
+class ImpulseOptionButton: UIControl {
     
     public var textLabel: UILabel! = nil
     public var accessoryView: UIImageView! = nil

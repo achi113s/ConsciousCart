@@ -10,7 +10,7 @@ import SwiftUI
 struct ChevronFromScratch: View {
     var body: some View {
         Image(systemName: "chevron.right")
-            .foregroundColor(Color.init(white: 0.8))
+            .foregroundColor(Color.init(white: 0.7))
             .font(.system(size: 12, weight: .bold))
     }
 }

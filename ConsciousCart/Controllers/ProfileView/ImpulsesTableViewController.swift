@@ -13,6 +13,19 @@ class ImpulsesTableViewController: UIViewController, UITableViewDataSource, UITa
     
     private var tableView: UITableView! = nil
     
+    lazy private var viewTitle: String = {
+        switch impulseOption {
+        case .active:
+            return "Active Impulses"
+        case .pending:
+            return "Pending Impulses"
+        case .completed:
+            return "Completed Impulses"
+        default:
+            return ""
+        }
+    }()
+    
     convenience init(impulsesStateManager: ImpulsesStateManager, impulseOption: ImpulseOption) {
         self.init(nibName: nil, bundle: nil)
         self.impulsesStateManager = impulsesStateManager
@@ -21,8 +34,14 @@ class ImpulsesTableViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.tintColor = .black
+        title = viewTitle
         
         configureTableView()
+        addSubviews()
+        configureLayoutConstraints()
     }
 }
 
@@ -33,6 +52,11 @@ extension ImpulsesTableViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+    }
+    
+    private func addSubviews() {
+        view.addSubview(tableView)
     }
     
     private func configureLayoutConstraints() {
@@ -61,13 +85,39 @@ extension ImpulsesTableViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        switch impulseOption {
+        case .active:
+            print("hello")
+            let impulse = impulsesStateManager.impulses[indexPath.row]
+            let cell = ActiveImpulseTableViewCell()
+            var content = UIListContentConfiguration.subtitleCell()
+            let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
+            content.text = "\(impulse.unwrappedName), \(itemPrice)"
+            content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
+            
+            let remainingTime = Utils.remainingTimeMessageForDate(impulse.unwrappedRemindDate)
+            content.secondaryText = remainingTime.0
+            content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
+            
+            cell.contentConfiguration = content
+            cell.accessoryType = .disclosureIndicator
+            
+            cell.backgroundColor = .systemBackground
+            
+            return cell
+        case .pending:
+            return PendingImpulseTableViewCell()
+        case .completed:
+            return CompletedImpulseTableViewCell()
+        default:
+            return UITableViewCell()
+        }
     }
 }
 
 //MARK: - UITableViewDelegate
 extension ImpulsesTableViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        print("selected \(indexPath.row)")
     }
 }

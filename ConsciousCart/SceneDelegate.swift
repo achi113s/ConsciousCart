@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createProfileVC() -> UINavigationController {
-        let profileVC = NewProfileViewController(impulsesStateManager: impulsesStateManager)
+        let profileVC = ProfileViewController(impulsesStateManager: impulsesStateManager)
         profileVC.title = "Profile"
         
         profileVC.tabBarItem = UITabBarItem()
