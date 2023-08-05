@@ -41,19 +41,25 @@ final class ConsciousCartButton: UIButton {
     }
     
     func configureButton() {
-        setColor()
+        backgroundColor = unhighlightedColor
         tintColor = .black
-        self.setTitleColor(.black, for: .normal)
+        setTitleColor(.black, for: .normal)
         
         translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel?.font = UIFont.ccFont(textStyle: .uibutton)
-        
-        isHighlighted = false
-        
+    
+        configureBorder()
+        configureShadow()
+    }
+    
+    private func configureBorder() {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 25
+    }
+    
+    private func configureShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 1
         layer.shadowRadius = 0

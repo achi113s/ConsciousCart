@@ -13,8 +13,10 @@ struct SavingsChart: View {
     
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
     @State private var selectedItemOnChart: Item? = nil
+    
     private var chartColor: Color = Color(
         uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
+    
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     
     var body: some View {
@@ -122,8 +124,8 @@ struct SavingsChart: View {
             .pickerStyle(.segmented)
             .padding([.leading, .trailing])
         }
-        .frame(height: 300)
-        .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
+//        .frame(height: 300)
+//        .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
     }
     
     init(completedImpulses: [Impulse]) {

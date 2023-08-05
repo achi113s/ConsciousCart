@@ -130,7 +130,7 @@ extension AddToConsciousCartViewController {
         
         if let name = itemNameTextField.text {
             if name.stringInputIsValid() {
-                itemName = name
+                itemName = name.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
                 itemName = "Unknown"
             }
@@ -138,7 +138,7 @@ extension AddToConsciousCartViewController {
         
         if let reason = itemReasonNeededTextField.text {
             if reason.stringInputIsValid() {
-                itemReason = reason
+                itemReason = reason.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
                 itemReason = "Unknown"
             }
@@ -302,10 +302,10 @@ extension AddToConsciousCartViewController {
 extension AddToConsciousCartViewController {
     func configureLayoutConstraints() {
         NSLayoutConstraint.activate([
-            uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            uploadButtonsStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
+            uploadButtonsStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.35),
             
             changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
             changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
@@ -339,7 +339,7 @@ extension AddToConsciousCartViewController {
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 }

@@ -89,22 +89,23 @@ extension MainCollectionViewController {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(300)
+                heightDimension: .fractionalHeight(1.0)
             )
         )
         
-        item.contentInsets.leading = 10
-        item.contentInsets.trailing = 10
+//        item.contentInsets.leading = 10
+//        item.contentInsets.trailing = 10
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(300)
+                heightDimension: .fractionalHeight(0.4)
             ),
             subitems: [item]
         )
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: CGFloat(-12), leading: CGFloat(10), bottom: CGFloat(0), trailing: CGFloat(10))
         
         return section
     }
@@ -185,7 +186,7 @@ extension MainCollectionViewController {
         
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         addToCCButton.setImage(UIImage(systemName: "cart.badge.plus", withConfiguration: largeConfig), for: .normal)
-        addToCCButton.layer.cornerRadius = 33
+        addToCCButton.layer.cornerRadius = view.bounds.width * 0.175 * 0.5
         addToCCButton.addTarget(self, action: #selector(addToConsciousCart), for: .touchUpInside)
         
         self.view.addSubview(addToCCButton)
@@ -210,10 +211,11 @@ extension MainCollectionViewController {
         
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         testImpulseExpiredViewButton.setImage(UIImage(systemName: "testtube.2", withConfiguration: largeConfig), for: .normal)
-        testImpulseExpiredViewButton.layer.cornerRadius = 33
+        testImpulseExpiredViewButton.layer.cornerRadius = view.bounds.width * 0.175 * 0.5
         testImpulseExpiredViewButton.addTarget(self, action: #selector(testView), for: .touchUpInside)
         
         self.view.addSubview(testImpulseExpiredViewButton)
+        testImpulseExpiredViewButton.isHidden = true
     }
     
     @objc private func testView() {
@@ -239,13 +241,13 @@ extension MainCollectionViewController {
             
             addToCCButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             addToCCButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            addToCCButton.widthAnchor.constraint(equalToConstant: 66),
-            addToCCButton.heightAnchor.constraint(equalToConstant: 66),
+            addToCCButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
+            addToCCButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
             
             testImpulseExpiredViewButton.centerXAnchor.constraint(equalTo: addToCCButton.centerXAnchor, constant: -75),
             testImpulseExpiredViewButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            testImpulseExpiredViewButton.widthAnchor.constraint(equalToConstant: 66),
-            testImpulseExpiredViewButton.heightAnchor.constraint(equalToConstant: 66)
+            testImpulseExpiredViewButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
+            testImpulseExpiredViewButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.175)
         ])
     }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct AboutView: View {
     let aboutText: String = """
-        ConsciousCart is the first official iOS app developed by Giorgio Latour,
-        a self-taught iOS Engineer who has a background in physics. The idea for
-        the app comes from the developer's own experience practicing delayed
-        gratification to curb regretful spending. \n
-        The developer wishes to thank his parents for their unwavering support.
+    ConsciousCart is my first official iOS app! \
+    I'm a self-taught iOS Engineer who has a background in physics. The idea for \
+    this app came from my own experience practicing delayed \
+    gratification to curb regretful spending. \n
+    I want to thank my parents for their unwavering support.
     """
     var body: some View {
         VStack(alignment: .center, spacing: 50) {

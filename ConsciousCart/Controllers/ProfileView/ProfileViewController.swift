@@ -102,7 +102,10 @@ extension ProfileViewController {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.text = scoreMessage
         messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
         messageLabel.font = UIFont.ccFont(textStyle: .bold, fontSize: 18)
+        messageLabel.adjustsFontSizeToFitWidth = true
+        messageLabel.minimumScaleFactor = 0.5
         
         scoreLabel = UILabel()
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -180,8 +183,9 @@ extension ProfileViewController {
             
             messageLabel.topAnchor.constraint(equalTo: coinHostView.bottomAnchor, constant: 10),
             messageLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            messageLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
             
-            scoreLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor),
+            scoreLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10),
             scoreLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             scoreLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
             
