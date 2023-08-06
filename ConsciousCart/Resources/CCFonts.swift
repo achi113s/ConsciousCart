@@ -5,8 +5,10 @@
 //  Created by Giorgio Latour on 6/17/23.
 //
 
+import SwiftUI
 import UIKit
 
+//MARK: - Catalog of Text Styles
 enum CCTextStyle {
     case largeTitle
     case title
@@ -26,6 +28,7 @@ enum CCTextStyle {
     case uibutton
 }
 
+//MARK: - Extension to use Nunito with UIKit
 extension UIFont {
     private static func customFont(name: String, size: CGFloat) -> UIFont {
         let font = UIFont(name: name, size: size)
@@ -96,5 +99,68 @@ extension UIFont {
         case .headline, .subheadline2, .footnote2, .caption2, .semibold:
             return "Nunito-SemiBold"
         }
+    }
+}
+
+//MARK: - Extension to use Nunito with SwiftUI
+struct CCFont: ViewModifier {
+    var textStyle: CCTextStyle
+    
+    var name: String {
+        switch textStyle {
+        case .largeTitle, .title, .title2, .title3, .bold, .uibutton:
+            return "Nunito-Bold"
+        case .body, .subheadline, .footnote, .caption, .regular:
+            return "Nunito-Regular"
+        case .headline, .subheadline2, .footnote2, .caption2, .semibold:
+            return "Nunito-SemiBold"
+        }
+    }
+    
+    var size: CGFloat {
+        switch textStyle {
+        case .largeTitle:
+            return 34
+        case .title:
+            return 28
+        case .title2:
+            return 24
+        case .title3:
+            return 20
+        case .body:
+            return 17
+        case .headline:
+            return 17
+        case .subheadline:
+            return 15
+        case .subheadline2:
+            return 15
+        case .footnote:
+            return 13
+        case .footnote2:
+            return 13
+        case .caption:
+            return 12
+        case .caption2:
+            return 12
+        case .bold:
+            return 17
+        case .regular:
+            return 17
+        case .semibold:
+            return 17
+        case .uibutton:
+            return 17
+        }
+    }
+    
+    func body(content: Content) -> some View {
+        content.font(.custom(name, size: size))
+    }
+}
+
+extension View {
+    func ccFont(_ textStyle: CCTextStyle) -> some View {
+        modifier(CCFont(textStyle: textStyle))
     }
 }

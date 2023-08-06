@@ -13,7 +13,8 @@ struct AboutView: View {
     I'm a self-taught iOS Engineer who has a background in physics. The idea for \
     this app came from my own experience practicing delayed \
     gratification to curb regretful spending. \n
-    I want to thank my parents for their unwavering support.
+    I want to thank my friends and family for their unwavering support. \
+    Without them this wouldn't be possible.
     """
     var body: some View {
         VStack(alignment: .center, spacing: 50) {

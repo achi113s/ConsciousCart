@@ -25,7 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = createTabBar()
+        
+        if impulsesStateManager.userStats?.userName == nil {
+            let firstScreen = LaunchScreenViewController()
+            firstScreen.impulsesStateManager = impulsesStateManager
+            window?.rootViewController = firstScreen
+        } else {
+            let firstScreen = createTabBar()
+            window?.rootViewController = firstScreen
+        }
+        
         window?.overrideUserInterfaceStyle = .light
 //        UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue) ? .dark : .unspecified
         window?.makeKeyAndVisible()

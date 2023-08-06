@@ -24,6 +24,12 @@
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
+		445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */; };
+		445B0FBF2A7F2FFB0075657C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */; };
+		445B0FC12A7F34E50075657C /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */; };
+		445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC22A8023C20075657C /* SecondOnboardingView.swift */; };
+		445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */; };
+		445B0FC72A80486F0075657C /* SubmitUsernameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */; };
 		445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */; };
 		445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */; };
 		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
@@ -103,6 +109,12 @@
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
+		445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		445B0FC22A8023C20075657C /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
+		445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameOnboardingViewController.swift; sourceTree = "<group>"; };
+		445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitUsernameButton.swift; sourceTree = "<group>"; };
 		445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDataSource.swift; sourceTree = "<group>"; };
 		445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDelegate.swift; sourceTree = "<group>"; };
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -242,6 +254,19 @@
 			path = DataManagers;
 			sourceTree = "<group>";
 		};
+		445B0FBB2A7EEEC20075657C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */,
+				445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */,
+				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
+				445B0FC22A8023C20075657C /* SecondOnboardingView.swift */,
+				445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */,
+				445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		445DD50E2A75BFBB00DC56C8 /* OldProfileView */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +337,7 @@
 				44D7291B2A0A9E4D0031A9EE /* Resources */,
 				4497E3A329F358BC0029451E /* Assets.xcassets */,
 				4497E3A829F358BC0029451E /* Info.plist */,
+				445B0FBB2A7EEEC20075657C /* Onboarding */,
 			);
 			path = ConsciousCart;
 			sourceTree = "<group>";
@@ -514,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */,
+				445B0FC72A80486F0075657C /* SubmitUsernameButton.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
 				442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
@@ -524,10 +551,13 @@
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */,
 				446F9DDF2A7C9D5900997D48 /* ImpulseCellStyle.swift in Sources */,
+				445B0FBF2A7F2FFB0075657C /* WelcomeViewController.swift in Sources */,
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
+				445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */,
 				44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
+				445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */,
 				446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */,
@@ -537,6 +567,7 @@
 				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
+				445B0FC12A7F34E50075657C /* LaunchScreenViewController.swift in Sources */,
 				442B54F92A7DCE9100383B54 /* ImpulsesCollectionViewController.swift in Sources */,
 				442B54E82A7D82F600383B54 /* ImpulseOptionButton.swift in Sources */,
 				44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */,
@@ -566,6 +597,7 @@
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
+				445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */,
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
