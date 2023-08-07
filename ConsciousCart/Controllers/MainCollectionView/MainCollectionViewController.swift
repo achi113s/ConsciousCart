@@ -34,7 +34,7 @@ class MainCollectionViewController: UIViewController {
         
         configureCollectionView()
         configureAddButton()
-        configureTestButton()
+//        configureTestButton()
         configureLayoutConstraints()
     }
     
@@ -241,10 +241,10 @@ extension MainCollectionViewController {
             addToCCButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
             addToCCButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
             
-            testImpulseExpiredViewButton.centerXAnchor.constraint(equalTo: addToCCButton.centerXAnchor, constant: -75),
-            testImpulseExpiredViewButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            testImpulseExpiredViewButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
-            testImpulseExpiredViewButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.175)
+//            testImpulseExpiredViewButton.centerXAnchor.constraint(equalTo: addToCCButton.centerXAnchor, constant: -75),
+//            testImpulseExpiredViewButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+//            testImpulseExpiredViewButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.175),
+//            testImpulseExpiredViewButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.175)
         ])
     }
 }
