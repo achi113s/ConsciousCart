@@ -8,6 +8,8 @@
 	<string></string>
 	<key>CFBundleSignature</key>
 	<string></string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSCameraPortraitEffectEnabled</key>
 	<false/>
 	<key>UIAppFonts</key>
