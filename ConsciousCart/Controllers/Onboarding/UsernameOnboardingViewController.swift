@@ -51,7 +51,7 @@ class UsernameOnboardingViewController: UIViewController {
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
-        titleLabel.font = UIFont.ccFont(textStyle: .semibold, fontSize: 24)
+        titleLabel.font = UIFont.ccFont(textStyle: .semibold, fontSize: 38)
         titleLabel.text = "One last thing."
     }
     
@@ -60,7 +60,7 @@ class UsernameOnboardingViewController: UIViewController {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.font = UIFont.ccFont(textStyle: .body, fontSize: 15)
+        subtitleLabel.font = UIFont.ccFont(textStyle: .body, fontSize: 20)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.adjustsFontSizeToFitWidth = true
         subtitleLabel.minimumScaleFactor = 0.5
@@ -101,7 +101,7 @@ class UsernameOnboardingViewController: UIViewController {
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
-        stackView.spacing = 15
+        stackView.spacing = 25
         stackView.distribution = .equalSpacing
         
         usernameStackView = UIStackView()
@@ -129,7 +129,7 @@ class UsernameOnboardingViewController: UIViewController {
             
             submitUsernameButton.widthAnchor.constraint(equalToConstant: 80),
             usernameTextField.heightAnchor.constraint(equalTo: submitUsernameButton.heightAnchor),
-            usernameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5)
+            usernameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6)
         ])
     }
     

@@ -20,10 +20,15 @@ extension UserStats {
     @NSManaged public var userName: String?
     @NSManaged public var totalAmountSaved: Double
     @NSManaged public var level: Int16
+    @NSManaged public var dateCreated: Date?
     @NSManaged public var impulses: NSSet?
 
     public var unwrappedUserName: String {
         userName ?? "No Name"
+    }
+    
+    public var unwrappedDateCreated: Date {
+        dateCreated ?? Date.now
     }
 }
 

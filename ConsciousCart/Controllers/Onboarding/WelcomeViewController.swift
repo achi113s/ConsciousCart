@@ -35,11 +35,11 @@ class WelcomeViewController: UIViewController {
         
         let welcomeToString: String = "Welcome to "
         let welcomeToAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont.ccFont(textStyle: .semibold, fontSize: 36)
+            .font: UIFont.ccFont(textStyle: .semibold, fontSize: 38)
         ]
         let CCString: String = "ConsciousCart"
         let CCAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont.ccFont(textStyle: .bold, fontSize: 36),
+            .font: UIFont.ccFont(textStyle: .bold, fontSize: 38),
             .foregroundColor: UIColor(named: "ExodusFruit")!
         ]
         let attributedString1 = NSAttributedString(string: welcomeToString, attributes: welcomeToAttrs)
@@ -64,7 +64,7 @@ class WelcomeViewController: UIViewController {
         welcomeSubtitle.translatesAutoresizingMaskIntoConstraints = false
         welcomeSubtitle.textAlignment = .center
         welcomeSubtitle.numberOfLines = 0
-        welcomeSubtitle.font = UIFont.ccFont(textStyle: .body)
+        welcomeSubtitle.font = UIFont.ccFont(textStyle: .body, fontSize: 20)
         welcomeSubtitle.adjustsFontSizeToFitWidth = true
         welcomeSubtitle.minimumScaleFactor = 0.5
         
@@ -79,7 +79,7 @@ class WelcomeViewController: UIViewController {
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
-        stackView.spacing = 15
+        stackView.spacing = 20
         stackView.distribution = .equalSpacing
         
         stackView.addArrangedSubview(welcomeLabel)
@@ -92,10 +92,11 @@ class WelcomeViewController: UIViewController {
     private func setupLayoutConstraints() {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
+            stackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            appScreenshot.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
+            welcomeLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            appScreenshot.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
     }
 }

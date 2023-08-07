@@ -9,10 +9,13 @@ import Charts
 import SwiftUI
 
 struct SavingsChart: View {
-    var completedImpulses: [Impulse]
+    var impulsesStateManager: ImpulsesStateManager
     
     @State private var selectedChartTimeDomain: ChartTimeDomain = .allTime
+    let defaultMinDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+    
     @State private var selectedItemOnChart: Item? = nil
+    
     
     private var chartColor: Color = Color(
         uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
@@ -36,7 +39,7 @@ struct SavingsChart: View {
                     .foregroundColor(differentiateWithoutColor ? .primary : redOrGreen(for: totalSavedNumber))
             }
             
-            Chart(savingsRollingSum.count != 0 ? savingsRollingSum : [Item(date: Date.now, value: 0)]) { item in
+            Chart(generatedRollingSumData) { item in
                 LineMark(
                     x: .value("Date", item.date),
                     y: .value("Saved", item.value)
@@ -124,21 +127,20 @@ struct SavingsChart: View {
             .pickerStyle(.segmented)
             .padding([.leading, .trailing])
         }
-//        .frame(height: 300)
-//        .padding(EdgeInsets(top: 24, leading: 0, bottom: 32, trailing: 0))
     }
     
-    init(completedImpulses: [Impulse]) {
-        self.completedImpulses = completedImpulses
+    init(impulsesStateManager: ImpulsesStateManager) {
+        self.impulsesStateManager = impulsesStateManager
     }
     
     private var maxDate: Date {
-        if completedImpulses.isEmpty {
-            return Date()
+        if impulsesStateManager.completedImpulses.isEmpty {
+            return Date.now
         }
-        var date: Date? = completedImpulses.first?.unwrappedCompletedDate
         
-        for impulse in completedImpulses {
+        var date: Date? = impulsesStateManager.completedImpulses.first?.unwrappedCompletedDate
+        
+        for impulse in impulsesStateManager.completedImpulses {
             if impulse.unwrappedCompletedDate > date! {
                 date = impulse.unwrappedCompletedDate
             }
@@ -148,12 +150,19 @@ struct SavingsChart: View {
     }
     
     private var minDate: Date {
-        if completedImpulses.isEmpty {
-            return Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast
+        if impulsesStateManager.completedImpulses.isEmpty {
+            return defaultMinDate
         }
-        var date: Date? = completedImpulses.first?.unwrappedCompletedDate
         
-        for impulse in completedImpulses {
+        if impulsesStateManager.completedImpulses.count == 1 {
+            guard let userStats = impulsesStateManager.userStats else { return defaultMinDate }
+            
+            return userStats.unwrappedDateCreated
+        }
+        
+        var date: Date? = impulsesStateManager.completedImpulses.first?.unwrappedCompletedDate
+        
+        for impulse in impulsesStateManager.completedImpulses {
             if impulse.unwrappedCompletedDate < date! {
                 date = impulse.unwrappedCompletedDate
             }
@@ -162,13 +171,36 @@ struct SavingsChart: View {
         return date ?? Date.distantPast
     }
     
-    private var savingsRollingSum: [Item] {
-        if completedImpulses.isEmpty {
-            return [Item(date: Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date.distantPast, value: 0.0),
-                    Item(date: Date.now, value: 0.0)]
+    // We always want to have at least two points in the chart data
+    // so that Chart can generate a line. Therefore, if there is no available data,
+    // we generate two dummy data points; one at zero on the creation date of the UserStats
+    // object, and the second at zero at the current date. Otherwise, we always generate a zero
+    // data point based on the creation date of the UserStats entity.
+    private var generatedRollingSumData: [Item] {
+        // Case where there is no data.
+        lazy var defaultData = [
+            Item(date: defaultMinDate, value: 0.0),
+            Item(date: Date.now, value: 0.0)
+        ]
+        
+        if impulsesStateManager.completedImpulses.isEmpty {
+            return defaultData
         }
         
-        return rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
+        // Case where there is only one data point.
+        lazy var rollingSum = rollingSumOverTimeDomain(timeDomain: selectedChartTimeDomain)
+        
+        if impulsesStateManager.completedImpulses.count == 1 {
+            guard let userStats = impulsesStateManager.userStats else { return defaultData }
+            
+            let defaultItem = Item(date: userStats.unwrappedDateCreated, value: 0.0)
+            
+            rollingSum.insert(defaultItem, at: 0)
+            
+            return rollingSum
+        }
+        
+        return rollingSum
     }
     
     private var totalSavedNumber: Double {
@@ -179,7 +211,7 @@ struct SavingsChart: View {
         }
         
         // Else show the total amount saved.
-        return completedImpulses.reduce(0.0) { partialResult, impulse in
+        return impulsesStateManager.completedImpulses.reduce(0.0) { partialResult, impulse in
             return partialResult + impulse.amountSaved
         }
     }
@@ -194,8 +226,8 @@ extension SavingsChart {
             var index: Int? = nil
             
             // Go through each element and find the one that is closest to location.
-            for dataIndex in savingsRollingSum.indices {
-                let nthDataDistance = savingsRollingSum[dataIndex].date.distance(to: date)
+            for dataIndex in generatedRollingSumData.indices {
+                let nthDataDistance = generatedRollingSumData[dataIndex].date.distance(to: date)
                 if abs(nthDataDistance) < minDistance {
                     minDistance = abs(nthDataDistance)
                     index = dataIndex
@@ -204,7 +236,7 @@ extension SavingsChart {
             
             if let index {
 //                print(savingsRollingSum[index])
-                return savingsRollingSum[index]
+                return generatedRollingSumData[index]
             }
         }
         
@@ -230,7 +262,7 @@ extension SavingsChart {
         
         let oldestDate = oldestDateToShow(timeDomain)
         
-        for impulse in completedImpulses where impulse.unwrappedCompletedDate >= oldestDate {
+        for impulse in impulsesStateManager.completedImpulses where impulse.unwrappedCompletedDate >= oldestDate {
             sum += impulse.amountSaved
             let newItem = Item(date: impulse.unwrappedCompletedDate, value: sum)
             rollingSum.append(newItem)

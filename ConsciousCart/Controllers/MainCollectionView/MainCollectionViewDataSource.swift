@@ -41,7 +41,7 @@ extension MainCollectionViewController {
                 )
                 
                 cell.contentConfiguration = UIHostingConfiguration {
-                    SavingsChart(completedImpulses: impulsesStateManager.completedImpulses)
+                    SavingsChart(impulsesStateManager: impulsesStateManager)
                 }
                 
                 return cell

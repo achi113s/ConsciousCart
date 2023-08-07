@@ -30,7 +30,7 @@ class MainCollectionViewController: UIViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         
-        view.backgroundColor = UIColor(named: "DefaultBackground")
+        view.backgroundColor = .systemBackground
         
         configureCollectionView()
         configureAddButton()
@@ -92,9 +92,6 @@ extension MainCollectionViewController {
                 heightDimension: .fractionalHeight(1.0)
             )
         )
-        
-//        item.contentInsets.leading = 10
-//        item.contentInsets.trailing = 10
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
@@ -215,7 +212,7 @@ extension MainCollectionViewController {
         testImpulseExpiredViewButton.addTarget(self, action: #selector(testView), for: .touchUpInside)
         
         self.view.addSubview(testImpulseExpiredViewButton)
-        testImpulseExpiredViewButton.isHidden = true
+//        testImpulseExpiredViewButton.isHidden = true
     }
     
     @objc private func testView() {

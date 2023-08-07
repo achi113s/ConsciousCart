@@ -259,7 +259,6 @@
 			children = (
 				445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */,
 				445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */,
-				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
 				445B0FC22A8023C20075657C /* SecondOnboardingView.swift */,
 				445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */,
 				445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */,
@@ -337,7 +336,6 @@
 				44D7291B2A0A9E4D0031A9EE /* Resources */,
 				4497E3A329F358BC0029451E /* Assets.xcassets */,
 				4497E3A829F358BC0029451E /* Info.plist */,
-				445B0FBB2A7EEEC20075657C /* Onboarding */,
 			);
 			path = ConsciousCart;
 			sourceTree = "<group>";
@@ -378,9 +376,10 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				442B54E22A7D6FA300383B54 /* ProfileView */,
+				445B0FBB2A7EEEC20075657C /* Onboarding */,
 				44F1EC6B2A4E569A00091BD1 /* MainCollectionView */,
-				442B92612A34D86D0042082C /* AddToConsciousCartView */,
+				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
+				442B54E22A7D6FA300383B54 /* ProfileView */,
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
 				448807A92A6A0705005377DE /* ImpulseExpiredView */,
 				4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */,
@@ -420,6 +419,7 @@
 		44F1EC6B2A4E569A00091BD1 /* MainCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				442B92612A34D86D0042082C /* AddToConsciousCartView */,
 				444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */,
 				444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */,
 				4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */,

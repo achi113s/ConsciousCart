@@ -42,7 +42,7 @@ class SecondOnboardingView: UIViewController {
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
-        titleLabel.font = UIFont.ccFont(textStyle: .semibold, fontSize: 24)
+        titleLabel.font = UIFont.ccFont(textStyle: .semibold, fontSize: 38)
     }
     
     private func setupImage() {
@@ -55,7 +55,7 @@ class SecondOnboardingView: UIViewController {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.font = UIFont.ccFont(textStyle: .body, fontSize: 15)
+        subtitleLabel.font = UIFont.ccFont(textStyle: .body, fontSize: 20)
         subtitleLabel.adjustsFontSizeToFitWidth = true
         subtitleLabel.minimumScaleFactor = 0.5
     }
@@ -65,7 +65,7 @@ class SecondOnboardingView: UIViewController {
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
-        stackView.spacing = 15
+        stackView.spacing = 20
         stackView.distribution = .equalSpacing
         
         stackView.addArrangedSubview(titleLabel)
@@ -77,11 +77,12 @@ class SecondOnboardingView: UIViewController {
     private func setupLayoutConstraints() {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
             stackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            appScreenshot.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
-            appScreenshot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            titleLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            appScreenshot.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            appScreenshot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
         ])
     }
 }

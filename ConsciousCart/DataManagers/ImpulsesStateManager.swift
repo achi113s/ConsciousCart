@@ -48,6 +48,7 @@ final class ImpulsesStateManager {
                 newUser.id = UUID()
                 newUser.level = Int16(UserLevel.beginner.rawValue)
                 newUser.totalAmountSaved = 0.0
+                newUser.dateCreated = Date.now
                 coreDataManager.saveChanges()
             }
         } catch {
