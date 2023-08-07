@@ -16,13 +16,14 @@ protocol BarcodeAPIManagerDelegate {
 }
 
 struct BarcodeAPIManager {
-    let barcodeAPIURL = "https://api.barcodespider.com/v1/lookup?token=\(Secrets.barcodeSpiderAPIKey)"
-    
     var delegate: BarcodeAPIManagerDelegate?
     
     func fetchBarcodeInfo(for barcode: String) {
-        let urlString = "\(barcodeAPIURL)&upc=\(barcode)"
-        performRequest(with: urlString)
+        if let api_key = Bundle.main.infoDictionary?["BARCODESPIDER_API_KEY"] as? String {
+            let barcodeAPIURL = "https://api.barcodespider.com/v1/lookup?token=\(api_key)"
+            let urlString = "\(barcodeAPIURL)&upc=\(barcode)"
+            performRequest(with: urlString)
+        }
     }
     
     func performRequest(with urlString: String) {

@@ -61,7 +61,6 @@
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
 		44AA7C1B2A6E13480089412A /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 44AA7C1A2A6E13480089412A /* SPConfetti */; };
 		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
-		44AACCD92A0345FC0053334C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD82A0345FC0053334C /* Secrets.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
 		44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */; };
 		44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB96E92A47E74E00112B5D /* SavingsChart.swift */; };
@@ -115,6 +114,7 @@
 		445B0FC22A8023C20075657C /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
 		445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameOnboardingViewController.swift; sourceTree = "<group>"; };
 		445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitUsernameButton.swift; sourceTree = "<group>"; };
+		445B0FC82A8171A00075657C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDataSource.swift; sourceTree = "<group>"; };
 		445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDelegate.swift; sourceTree = "<group>"; };
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -148,7 +148,6 @@
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4497E3AD29F358BD0029451E /* ConsciousCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeAPIManager.swift; sourceTree = "<group>"; };
-		44AACCD82A0345FC0053334C /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
 		44AB96E92A47E74E00112B5D /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
@@ -309,6 +308,7 @@
 		4497E38E29F358BC0029451E = {
 			isa = PBXGroup;
 			children = (
+				445B0FC82A8171A00075657C /* Config.xcconfig */,
 				4497E39929F358BC0029451E /* ConsciousCart */,
 				4497E3B029F358BD0029451E /* ConsciousCartTests */,
 				4497E39829F358BC0029451E /* Products */,
@@ -407,7 +407,6 @@
 				448D94122A3EA1020035B34C /* CCFonts.swift */,
 				44C749E52A58FC70000AAE63 /* Extensions.swift */,
 				44C749E72A58FE57000AAE63 /* Enums.swift */,
-				44AACCD82A0345FC0053334C /* Secrets.swift */,
 				4496A0592A170F3E004C1349 /* Utils.swift */,
 				44D7291A2A0A9E430031A9EE /* Fonts */,
 				44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */,
@@ -590,7 +589,6 @@
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */,
-				44AACCD92A0345FC0053334C /* Secrets.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
@@ -636,6 +634,7 @@
 /* Begin XCBuildConfiguration section */
 		4497E3BF29F358BD0029451E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445B0FC82A8171A00075657C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -696,6 +695,7 @@
 		};
 		4497E3C029F358BD0029451E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445B0FC82A8171A00075657C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

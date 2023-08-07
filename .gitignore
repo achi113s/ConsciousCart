@@ -48,4 +48,5 @@ playground.xcworkspace
 
 # Secrets
 Secrets.swift
+Config.xcconfig
 .DS_Store
