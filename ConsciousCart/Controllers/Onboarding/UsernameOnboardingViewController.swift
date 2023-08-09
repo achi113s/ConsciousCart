@@ -179,7 +179,10 @@ class UsernameOnboardingViewController: UIViewController {
     private func navigateToMainScreen() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                let mainScreen = sceneDelegate.createTabBar()
+                let mainUICreator = CreateMainUI()
+                mainUICreator.impulsesStateManager = self.impulsesStateManager
+                
+                let mainScreen = mainUICreator.createUI()
                 sceneDelegate.window?.rootViewController = mainScreen
                 sceneDelegate.window?.makeKeyAndVisible()
             }

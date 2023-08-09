@@ -25,8 +25,9 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     private var uploadButtonsStack: UIStackView!
     
     var itemNameTextField: ConsciousCartTextField!
-    var itemPriceTextField: CurrencyTextField!
     var itemReasonNeededTextField: ConsciousCartTextField!
+    var itemURLTextField: ConsciousCartTextField!
+    var itemPriceTextField: CurrencyTextField!
     private var activeTextField: UITextField?
     
     //    private var categoryPicker: UIPickerView! = nil
@@ -127,6 +128,7 @@ extension AddToConsciousCartViewController {
         let imageName = saveImpulseImage()
         var itemName = ""
         var itemReason = ""
+        var itemURL = ""
         
         if let name = itemNameTextField.text {
             if name.stringInputIsValid() {
@@ -144,11 +146,16 @@ extension AddToConsciousCartViewController {
             }
         }
         
+        if let url = itemURLTextField.text {
+            itemURL = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        
         let impulse = impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
                                                       name: itemName,
                                                       price: itemPrice,
                                                       imageName: imageName,
-                                                      reasonNeeded: itemReason)
+                                                      reasonNeeded: itemReason,
+                                                      url: itemURL)
         
         impulsesStateManager.setupNotification(for: impulse)
         
@@ -258,10 +265,15 @@ extension AddToConsciousCartViewController {
         itemReasonNeededTextField.tag = 2
         itemReasonNeededTextField.delegate = self
         
+        itemURLTextField = ConsciousCartTextField()
+        itemURLTextField.placeholder = "URL"
+        itemURLTextField.tag = 3
+        itemURLTextField.delegate = self
+        
         itemPriceTextField = CurrencyTextField()
         itemPriceTextField.placeholder = "0".asCurrency(locale: Locale.current)
         itemPriceTextField.delegate = self
-        itemPriceTextField.tag = 3
+        itemPriceTextField.tag = 4
         itemPriceTextField.keyboardType = .decimalPad
         
         //        categoryPicker = UIPickerView()
@@ -283,7 +295,7 @@ extension AddToConsciousCartViewController {
         itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
         
-        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemPriceTextField, itemRemindLabel, itemRemindDate])
+        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemURLTextField, itemPriceTextField, itemRemindLabel, itemRemindDate])
         inputItemsStack.spacing = 15
         inputItemsStack.axis = .vertical
         inputItemsStack.alignment = .center
@@ -319,6 +331,9 @@ extension AddToConsciousCartViewController {
             
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            
+            itemURLTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            itemURLTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),

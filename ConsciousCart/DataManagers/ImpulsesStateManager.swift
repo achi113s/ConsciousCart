@@ -38,10 +38,11 @@ final class ImpulsesStateManager {
     
     private func loadUserStats(with request: NSFetchRequest<UserStats> = UserStats.fetchRequest()) {
         do {
-            let listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
+            var listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
             
             if let user = listOfUsers.first {
                 self.userStats = user
+                print("user info placed into user var")
             } else {
                 print("No user was found so we are creating one.")
                 let newUser = UserStats(context: coreDataManager.mainManagedObjectContext)
@@ -50,6 +51,13 @@ final class ImpulsesStateManager {
                 newUser.totalAmountSaved = 0.0
                 newUser.dateCreated = Date.now
                 coreDataManager.saveChanges()
+                
+                // try reloading
+                listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
+                
+                if let user = listOfUsers.first {
+                    self.userStats = user
+                }
             }
         } catch {
             print("Error fetching UserStats from main context: \(error.localizedDescription)")
@@ -60,7 +68,8 @@ final class ImpulsesStateManager {
                            name: String = "Unknown Name",
                            price: Double = 0.0,
                            imageName: String? = nil,
-                           reasonNeeded: String = "Unknown Reason") -> Impulse {
+                           reasonNeeded: String = "Unknown Reason",
+                           url: String = "None") -> Impulse {
         
         let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
         newImpulse.id = UUID()
@@ -71,6 +80,7 @@ final class ImpulsesStateManager {
         newImpulse.price = price
         newImpulse.imageName = imageName
         newImpulse.reasonNeeded = reasonNeeded
+        newImpulse.url = url
         newImpulse.completed = false
         
         coreDataManager.saveChanges()
@@ -261,10 +271,14 @@ final class ImpulsesStateManager {
     }
     
     public func updateUserName(to newName: String) {
-        guard let userStats = userStats else { return }
+        guard let userStats = userStats else {
+            fatalError("The userStats object could not be unwrapped.")
+        }
         
         userStats.userName = newName
         coreDataManager.saveChanges()
+        print("saved changes")
         loadUserStats()
+        print("loaded Userstats")
     }
 }

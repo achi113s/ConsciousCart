@@ -124,11 +124,7 @@ class CoreDataManager {
         mainManagedObjectContext.performAndWait {
             self.mainManagedObjectContext.delete(object)
         }
-        
-//        privateManagedObjectContext.perform {
-//            self.privateManagedObjectContext.delete(object)
-//        }
-        
+
         saveChanges()
     }
 }

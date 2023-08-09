@@ -27,6 +27,7 @@ extension Impulse {
     @NSManaged public var dateCompleted: Date?
     @NSManaged public var amountSaved: Double
     @NSManaged public var category: String?
+    @NSManaged public var url: String?
     
     public var unwrappedCreationDate: Date {
         dateCreated ?? Date.now
@@ -50,6 +51,10 @@ extension Impulse {
     
     public var unwrappedCompletedDate: Date {
         dateCompleted ?? Date.now
+    }
+    
+    public var unwrappedURLString: String {
+        url ?? ""
     }
     
     public var daysSinceCreation: Int {

@@ -30,7 +30,7 @@ final class ConsciousCartTextField: UITextField {
         return rect.inset(by: textPadding)
     }
     
-    func configureTextField() {
+    private func configureTextField() {
         translatesAutoresizingMaskIntoConstraints = false
         
         backgroundColor = .secondarySystemBackground
@@ -44,7 +44,7 @@ final class ConsciousCartTextField: UITextField {
         self.inputAccessoryView = toolBar()
     }
     
-    func toolBar() -> UIToolbar{
+    private func toolBar() -> UIToolbar{
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
         toolBar.translatesAutoresizingMaskIntoConstraints = false

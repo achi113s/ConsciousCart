@@ -7,8 +7,10 @@
 
 import UIKit
 
-class LaunchScreenViewController: UIPageViewController {
+class LaunchScreenViewController: UIViewController {
+    
     var impulsesStateManager: ImpulsesStateManager! = nil
+    var showOnboardingFirst: Bool = false
     
     private var imageView: UIImageView! = nil
     
@@ -48,13 +50,26 @@ class LaunchScreenViewController: UIPageViewController {
     
     private func navigateAway() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                let onboardingScreen = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-                onboardingScreen.impulsesStateManager = self?.impulsesStateManager
-                sceneDelegate.window?.rootViewController = onboardingScreen
+                
+                if self.showOnboardingFirst {
+                    let onboardingScreen = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+                    onboardingScreen.impulsesStateManager = self.impulsesStateManager
+                    sceneDelegate.window?.rootViewController = onboardingScreen
+                } else {
+                    let mainUICreator = CreateMainUI()
+                    mainUICreator.impulsesStateManager = self.impulsesStateManager
+                    
+                    let mainScreen = mainUICreator.createUI()
+                    sceneDelegate.window?.rootViewController = mainScreen
+                }
                 sceneDelegate.window?.makeKeyAndVisible()
             }
         }
     }
+    
+    
     
 }

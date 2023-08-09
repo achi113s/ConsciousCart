@@ -42,6 +42,7 @@
 		446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */; };
 		446F9DDF2A7C9D5900997D48 /* ImpulseCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */; };
 		447162C82A82A8C0001D7721 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162C72A82A8C0001D7721 /* MailView.swift */; };
+		447162FB2A83E435001D7721 /* CreateMainUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162FA2A83E435001D7721 /* CreateMainUI.swift */; };
 		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
 		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
@@ -128,6 +129,7 @@
 		446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronFromScratch.swift; sourceTree = "<group>"; };
 		446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellStyle.swift; sourceTree = "<group>"; };
 		447162C72A82A8C0001D7721 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		447162FA2A83E435001D7721 /* CreateMainUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMainUI.swift; sourceTree = "<group>"; };
 		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
 		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				448807A92A6A0705005377DE /* ImpulseExpiredView */,
 				4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */,
 				442B54EB2A7DA0EF00383B54 /* SettingsView */,
+				447162FA2A83E435001D7721 /* CreateMainUI.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
 				4445FFB029FA31510067FD1F /* OldProfileViewController.swift in Sources */,
+				447162FB2A83E435001D7721 /* CreateMainUI.swift in Sources */,
 				448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,

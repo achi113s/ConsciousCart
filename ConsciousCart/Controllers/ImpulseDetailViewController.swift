@@ -8,8 +8,8 @@
 import UIKit
 
 class ImpulseDetailViewController: UIViewController {
-    var impulsesStateManager: ImpulsesStateManager?
-    var impulse: Impulse?
+    var impulsesStateManager: ImpulsesStateManager! = nil
+    var impulse: Impulse! = nil
     
     private var scrollView: UIScrollView! = nil
     private var contentView: UIView! = nil
@@ -20,13 +20,15 @@ class ImpulseDetailViewController: UIViewController {
     private var imageView: UIImageView! = nil
     
     private var itemNameLabel: UILabel! = nil
-    private var itemPriceLabel: UILabel! = nil
     private var itemReasonNeededLabel: UILabel! = nil
+    private var itemURLLabel: UILabel! = nil
+    private var itemPriceLabel: UILabel! = nil
     private var itemReminderDateLabel: UILabel! = nil
     
     private var itemNameTextField: ConsciousCartTextView! = nil
-    private var itemPriceTextField: CurrencyTextField! = nil
     private var itemReasonNeededTextField: ConsciousCartTextView! = nil
+    private var itemURLTextField: ConsciousCartTextView! = nil
+    private var itemPriceTextField: CurrencyTextField! = nil
     private var itemRemindDate: UIDatePicker! = nil
     
     private var canEditText: Bool = false
@@ -84,7 +86,7 @@ extension ImpulseDetailViewController {
         impulsePropertiesStack.alignment = .leading
         impulsePropertiesStack.distribution = .equalSpacing
         
-        if let imageName = impulse?.imageName {
+        if let imageName = impulse.imageName {
             let imagePath = FileManager.documentsDirectory.appendingPathComponent(imageName, conformingTo: .png)
             image = UIImage(contentsOfFile: imagePath.path())
         } else {
@@ -104,7 +106,7 @@ extension ImpulseDetailViewController {
         itemNameLabel.textAlignment = .left
         
         itemNameTextField = ConsciousCartTextView()
-        itemNameTextField.text = impulse?.unwrappedName
+        itemNameTextField.text = impulse.unwrappedName
         itemNameTextField.isEditable = false
         itemNameTextField.isSelectable = false
         itemNameTextField.tag = 1
@@ -117,10 +119,27 @@ extension ImpulseDetailViewController {
         itemReasonNeededLabel.textAlignment = .left
         
         itemReasonNeededTextField = ConsciousCartTextView()
-        itemReasonNeededTextField.text = impulse?.unwrappedReasonNeeded
+        itemReasonNeededTextField.text = impulse.unwrappedReasonNeeded
         itemReasonNeededTextField.isEditable = false
         itemReasonNeededTextField.isSelectable = false
         itemReasonNeededTextField.tag = 2
+        
+        itemURLLabel = UILabel()
+        itemURLLabel.translatesAutoresizingMaskIntoConstraints = false
+        itemURLLabel.text = "URL"
+        itemURLLabel.font = UIFont.ccFont(textStyle: .footnote)
+        itemURLLabel.textColor = .secondaryLabel
+        itemURLLabel.textAlignment = .left
+        
+        itemURLTextField = ConsciousCartTextView()
+//        itemURLTextField.text = impulse?.unwrappedReasonNeeded
+        let attrString = NSMutableAttributedString(string: impulse.unwrappedURLString)
+        attrString.addAttribute(.link, value: impulse.unwrappedURLString, range: NSRange(location: 0, length: attrString.length))
+        attrString.addAttribute(.font, value: UIFont.ccFont(textStyle: .body), range: NSRange(location: 0, length: attrString.length))
+        itemURLTextField.attributedText = attrString
+        itemURLTextField.isEditable = false
+        itemURLTextField.isSelectable = true
+        itemURLTextField.tag = 2
         
         itemPriceLabel = UILabel()
         itemPriceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -162,6 +181,8 @@ extension ImpulseDetailViewController {
         impulsePropertiesStack.addArrangedSubview(itemNameTextField)
         impulsePropertiesStack.addArrangedSubview(itemReasonNeededLabel)
         impulsePropertiesStack.addArrangedSubview(itemReasonNeededTextField)
+        impulsePropertiesStack.addArrangedSubview(itemURLLabel)
+        impulsePropertiesStack.addArrangedSubview(itemURLTextField)
         impulsePropertiesStack.addArrangedSubview(itemPriceLabel)
         impulsePropertiesStack.addArrangedSubview(itemPriceTextField)
         impulsePropertiesStack.addArrangedSubview(itemReminderDateLabel)
@@ -201,6 +222,9 @@ extension ImpulseDetailViewController {
             
             itemReasonNeededTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 62),
+            
+            itemURLTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemURLTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             
             itemPriceTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
