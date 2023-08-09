@@ -47,7 +47,6 @@ class MainCollectionViewController: UIViewController {
         addToCCButton.setColor()
         
         collectionView.reloadData()
-        print("view will appear called")
     }
 }
 

@@ -228,7 +228,7 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
             
             
-            content.secondaryText = "⌛️ \(impulse.daysSinceExpiry) Overdue"
+            content.secondaryText = "⌛️ \(impulse.daysSinceExpiry) Days Overdue"
             content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
             
             cell.accessories = [.disclosureIndicator()]
@@ -279,6 +279,7 @@ extension ImpulsesCollectionViewController: UICollectionViewDelegate {
             detailVC.impulse = impulsesStateManager.impulses[indexPath.row]
         case .pending:
             detailVC.impulse = impulsesStateManager.pendingImpulses[indexPath.row]
+            detailVC.viewShowsPendingImpulses = true
         case .completed:
             detailVC.impulse = impulsesStateManager.completedImpulses[indexPath.row]
         default:

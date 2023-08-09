@@ -125,7 +125,7 @@ extension ProfileViewController {
         activeImpulsesButton.addTarget(self, action: #selector(goToImpulses), for: .touchUpInside)
         
         pendingImpulsesButton = ImpulseOptionButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .pending)
-        pendingImpulsesButton.setLabelText("⏱️  Pending Impulses")
+        pendingImpulsesButton.setLabelText("⏱️  Pending Impulses, \(impulsesStateManager.pendingImpulses.count)")
         pendingImpulsesButton.addTarget(self, action: #selector(goToImpulses), for: .touchUpInside)
         
         completedImpulsesButton = ImpulseOptionButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10), filterType: .completed)
@@ -212,6 +212,15 @@ extension ProfileViewController {
         userLevel = impulsesStateManager.getUserLevel()
         messageLabel.textColor = redOrGreen(for: score)
         scoreLabel.textColor = redOrGreen(for: score)
+        scoreLabel.text = String("\(score)").asCurrency(locale: Locale.current)
+        
+        if impulsesStateManager.pendingImpulses.count > 0 {
+            self.tabBarItem.badgeValue = "\(impulsesStateManager.pendingImpulses.count)"
+            pendingImpulsesButton.setLabelText("⏱️  Pending Impulses, \(impulsesStateManager.pendingImpulses.count)")
+        } else {
+            self.tabBarItem.badgeValue = nil
+            pendingImpulsesButton.setLabelText("⏱️  Pending Impulses")
+        }
     }
 }
 

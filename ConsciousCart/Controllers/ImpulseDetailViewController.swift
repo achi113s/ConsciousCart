@@ -10,6 +10,7 @@ import UIKit
 class ImpulseDetailViewController: UIViewController {
     var impulsesStateManager: ImpulsesStateManager! = nil
     var impulse: Impulse! = nil
+    var viewShowsPendingImpulses: Bool = false
     
     private var scrollView: UIScrollView! = nil
     private var contentView: UIView! = nil
@@ -31,6 +32,8 @@ class ImpulseDetailViewController: UIViewController {
     private var itemPriceTextField: CurrencyTextField! = nil
     private var itemRemindDate: UIDatePicker! = nil
     
+    private var finishImpulseButton: ConsciousCartButton! = nil
+    
     private var canEditText: Bool = false
     private var activeView: UIView?
     
@@ -48,6 +51,11 @@ class ImpulseDetailViewController: UIViewController {
         configureScrollView()
         configureSubviewProperties()
         configureLayoutConstraints()
+        
+        if viewShowsPendingImpulses {
+            print("viewshowspending")
+            configuredFinishImpulseButton()
+        }
         
         view.keyboardLayoutGuide.followsUndockedKeyboard = true
         
@@ -132,14 +140,12 @@ extension ImpulseDetailViewController {
         itemURLLabel.textAlignment = .left
         
         itemURLTextField = ConsciousCartTextView()
-//        itemURLTextField.text = impulse?.unwrappedReasonNeeded
-        let attrString = NSMutableAttributedString(string: impulse.unwrappedURLString)
-        attrString.addAttribute(.link, value: impulse.unwrappedURLString, range: NSRange(location: 0, length: attrString.length))
-        attrString.addAttribute(.font, value: UIFont.ccFont(textStyle: .body), range: NSRange(location: 0, length: attrString.length))
-        itemURLTextField.attributedText = attrString
+        itemURLTextField.attributedText = createAttrURL(with: impulse.unwrappedURLString)
         itemURLTextField.isEditable = false
         itemURLTextField.isSelectable = true
         itemURLTextField.tag = 2
+        itemURLTextField.autocorrectionType = .no
+        itemURLTextField.autocapitalizationType = .none
         
         itemPriceLabel = UILabel()
         itemPriceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -214,7 +220,7 @@ extension ImpulseDetailViewController {
             imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
             impulsePropertiesStack.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            impulsePropertiesStack.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
+            impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             impulsePropertiesStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemNameTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
@@ -232,6 +238,41 @@ extension ImpulseDetailViewController {
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
         ])
+    }
+    
+    private func configuredFinishImpulseButton() {
+        finishImpulseButton = ConsciousCartButton()
+        finishImpulseButton.setTitle("Finish this Impulse", for: .normal)
+        finishImpulseButton.addTarget(self, action: #selector(finishImpulsePressed), for: .touchUpInside)
+        
+        contentView.addSubview(finishImpulseButton)
+        
+        NSLayoutConstraint.activate([
+            finishImpulseButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            finishImpulseButton.heightAnchor.constraint(equalToConstant: 50),
+            finishImpulseButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            finishImpulseButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
+    }
+    
+    @objc private func finishImpulsePressed() {
+        let impulseExpiredVC = ImpulseExpiredViewController()
+        impulseExpiredVC.impulse = impulse
+        impulseExpiredVC.impulsesStateManager = impulsesStateManager
+        // this type of modal presentation forces the presentingViewController to call
+        // viewWillAppear when the new one is dismissed.
+        impulseExpiredVC.modalPresentationStyle = .fullScreen
+        
+        let modalController = UINavigationController(rootViewController: impulseExpiredVC)
+        
+        navigationController?.present(modalController, animated: true)
+    }
+    
+    private func createAttrURL(with url: String) -> NSMutableAttributedString {
+        let attrString = NSMutableAttributedString(string: url)
+        attrString.addAttribute(.link, value: url, range: NSRange(location: 0, length: attrString.length))
+        attrString.addAttribute(.font, value: UIFont.ccFont(textStyle: .body), range: NSRange(location: 0, length: attrString.length))
+        return attrString
     }
 }
 
@@ -258,6 +299,8 @@ extension ImpulseDetailViewController {
         itemReasonNeededTextField.isSelectable = canEditText ? true : false
         
         itemRemindDate.isEnabled = canEditText ? true : false
+        
+        itemURLTextField.isEditable.toggle()
         
         navigationItem.rightBarButtonItem?.title = canEditText ? "Done Editing" : "Edit"
     }
@@ -313,6 +356,7 @@ extension ImpulseDetailViewController {
         if itemPriceTextField.text?.asDoubleFromCurrency(locale: Locale.current) != impulse?.price { return true }
         if itemReasonNeededTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != impulse?.unwrappedReasonNeeded { return true }
         if itemRemindDate.date != impulse?.unwrappedRemindDate { return true }
+        if itemURLTextField.text.trimmingCharacters(in: .whitespacesAndNewlines) != impulse?.unwrappedURLString { return true }
         
         return false
     }
@@ -324,6 +368,11 @@ extension ImpulseDetailViewController {
         impulse.price = itemPriceTextField.text?.asDoubleFromCurrency(locale: Locale.current) ?? 0
         impulse.reasonNeeded = itemReasonNeededTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         impulse.remindDate = itemRemindDate.date
+        
+        if let url = itemURLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            impulse.url = url
+            itemURLTextField.attributedText = createAttrURL(with: url)
+        }
     }
 }
 

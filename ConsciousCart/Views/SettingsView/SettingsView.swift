@@ -19,6 +19,7 @@ struct SettingsView: View {
     @State private var selectedAccentColor: String = UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment"
     
     @State private var userNameField: String = ""
+    @FocusState private var userNameFieldFocused: Bool
     @State private var showUserNameMessage: Bool = false
     @State private var userNameMessage: String = ""
     @State private var userNameError: Bool = false
@@ -144,9 +145,11 @@ struct SettingsView: View {
                                         .fill(Color.init(white: 0.9))
                                 )
                                 .font(Font.custom("Nunito-Semibold", size: 17))
+                                .focused($userNameFieldFocused)
                             
                             Button {
                                 checkUserNameInput(userNameField)
+                                userNameFieldFocused = false
                             } label: {
                                 HStack {
                                     Text("Save")
@@ -196,6 +199,9 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .onTapGesture {
+                userNameFieldFocused = false
+            }
         }
         .scrollContentBackground(.hidden)
         .tint(.black)
