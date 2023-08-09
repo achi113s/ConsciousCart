@@ -41,6 +41,7 @@
 		446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */; };
 		446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */; };
 		446F9DDF2A7C9D5900997D48 /* ImpulseCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */; };
+		447162C82A82A8C0001D7721 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162C72A82A8C0001D7721 /* MailView.swift */; };
 		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
 		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
@@ -126,6 +127,7 @@
 		446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronFromScratch.swift; sourceTree = "<group>"; };
 		446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellStyle.swift; sourceTree = "<group>"; };
+		447162C72A82A8C0001D7721 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
 		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				44C9AFDB2A5A444200B03846 /* SettingsView.swift */,
 				44C9AFDD2A5A53EA00B03846 /* AboutView.swift */,
+				447162C72A82A8C0001D7721 /* MailView.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */,
 				445B0FC72A80486F0075657C /* SubmitUsernameButton.swift in Sources */,
 				44AACCDD2A0357240053334C /* ConsciousCartTextField.swift in Sources */,
+				447162C82A82A8C0001D7721 /* MailView.swift in Sources */,
 				442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */,
 				4497E39B29F358BC0029451E /* AppDelegate.swift in Sources */,
 				44AB96EA2A47E74E00112B5D /* SavingsChart.swift in Sources */,

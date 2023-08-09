@@ -5,6 +5,7 @@
 //  Created by Giorgio Latour on 7/8/23.
 //
 
+import MessageUI
 import SwiftUI
 
 struct SettingsView: View {
@@ -13,14 +14,19 @@ struct SettingsView: View {
     @State private var showingDeleteAlert = false
     @State private var showingAccentResetAlert = false
     //    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
-//    @State private var selectedAccentColor: Color = Color(
-//        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
+    //    @State private var selectedAccentColor: Color = Color(
+    //        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
     @State private var selectedAccentColor: String = UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment"
     
     @State private var userNameField: String = ""
     @State private var showUserNameMessage: Bool = false
     @State private var userNameMessage: String = ""
     @State private var userNameError: Bool = false
+    
+    // Send Email
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    @State var isShowingMailView = false
+    @State var showingMailError = false
     
     let spacingToSectionLabel: CGFloat = 8
     let interButtonSpacing: CGFloat = 12
@@ -53,7 +59,11 @@ struct SettingsView: View {
                         }
                         
                         Button {
-                            
+                            if MFMailComposeViewController.canSendMail() {
+                                isShowingMailView.toggle()
+                            } else {
+                                showingMailError.toggle()
+                            }
                         } label: {
                             HStack {
                                 Text("📧  Share Feedback")
@@ -65,7 +75,15 @@ struct SettingsView: View {
                             .frame(height: 30)
                         }
                         .buttonStyle(CCButtonStyle())
-                        
+                        .sheet(isPresented: $isShowingMailView) {
+                            MailView(result: self.$result)
+                        }
+                        .alert("Cannot send mail.", isPresented: $showingMailError) {
+                            Button("OK") { }
+                        } message: {
+                            Text("Unable to send email from this device. It may be that you are not using the default Mail app.")
+                        }
+
                         Button {
                             
                         } label: {
@@ -94,7 +112,7 @@ struct SettingsView: View {
                                               colorShapeSize: CGSize(width: 20, height: 20)
                             )
                             .onChange(of: selectedAccentColor, perform: { newColor in
-//                                let uiColor = UIColor(named: newColor)
+                                //                                let uiColor = UIColor(named: newColor)
                                 
                                 UserDefaults.standard.set(newColor, forKey: UserDefaultsKeys.accentColor.rawValue)
                             })
