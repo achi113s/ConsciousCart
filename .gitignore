@@ -50,3 +50,5 @@ playground.xcworkspace
 Secrets.swift
 Config.xcconfig
 .DS_Store
+StoreKitTestCertificate.cer
+InAppPurchases.storekit
