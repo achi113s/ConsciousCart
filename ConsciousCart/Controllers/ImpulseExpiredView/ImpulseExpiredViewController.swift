@@ -14,7 +14,6 @@ class ImpulseExpiredViewController: UIViewController {
     
     var impulsesStateManager: ImpulsesStateManager! = nil
     var impulse: Impulse! = nil
-    var mainCVC: MainCollectionViewController? = nil
     
     private var scoreLabel: UILabel! = nil
     
@@ -187,8 +186,6 @@ extension ImpulseExpiredViewController {
         case .failedButton:
             impulsesStateManager.completeImpulseWithOption(.failed, for: impulse)
         }
-        
-        mainCVC?.collectionView.reloadData()
         
         exitView()
     }

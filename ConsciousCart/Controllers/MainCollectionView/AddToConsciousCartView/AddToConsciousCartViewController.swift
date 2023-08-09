@@ -11,7 +11,6 @@ import UserNotifications
 
 class AddToConsciousCartViewController: UIViewController, UINavigationControllerDelegate {
     var impulsesStateManager: ImpulsesStateManager?
-    var mainCVC: MainCollectionViewController?
     
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
     
@@ -67,7 +66,16 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.tintColor = .black
+        print(modalPresentationStyle.self)
     }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        
+////        if modalPresentationStyle == . {
+////            presentingViewController?.beginAppearanceTransition(true, animated: true)
+////        }
+//    }
 }
 
 //MARK: - Selectors
@@ -118,7 +126,6 @@ extension AddToConsciousCartViewController {
             print("impulsesStateManager not unwrapped successfully.")
             return
         }
-        guard let mainCVC = mainCVC else { return }
         
         guard let itemPriceString = itemPriceTextField.text else { return }
         let itemPrice = itemPriceString.asDoubleFromCurrency(locale: Locale.current)
@@ -158,8 +165,6 @@ extension AddToConsciousCartViewController {
                                                       url: itemURL)
         
         impulsesStateManager.setupNotification(for: impulse)
-        
-        mainCVC.collectionView.reloadData()
         
         dismiss(animated: true)
     }

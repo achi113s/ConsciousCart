@@ -70,8 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let impulseExpiredVC = ImpulseExpiredViewController()
             impulseExpiredVC.impulse = impulse
             impulseExpiredVC.impulsesStateManager = sceneDelegate.impulsesStateManager
-            impulseExpiredVC.mainCVC = mainCVNavController.viewControllers.first as? MainCollectionViewController
-
+            // this type of modal presentation forces the presentingViewController to call
+            // viewWillAppear when the new one is dismissed.
+            impulseExpiredVC.modalPresentationStyle = .fullScreen
+                
             let modalController = UINavigationController(rootViewController: impulseExpiredVC)
 
             mainCVNavController.present(modalController, animated: true)

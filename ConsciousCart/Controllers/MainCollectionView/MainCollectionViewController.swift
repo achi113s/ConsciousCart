@@ -47,6 +47,7 @@ class MainCollectionViewController: UIViewController {
         addToCCButton.setColor()
         
         collectionView.reloadData()
+        print("view will appear called")
     }
 }
 
@@ -194,12 +195,10 @@ extension MainCollectionViewController {
 
         addToCartVC.impulsesStateManager = impulsesStateManager
 
-        // A reference back to this view is required in order to
-        // reload the table data because viewWillAppear is not
-        // called when a modal is dismissed.
-        addToCartVC.mainCVC = self
-
         let modalController = UINavigationController(rootViewController: addToCartVC)
+        // this type of modal presentation forces the presentingViewController to call
+        // viewWillAppear when the new one is dismissed.
+        modalController.modalPresentationStyle = .fullScreen
         navigationController?.present(modalController, animated: true)
     }
     
@@ -221,8 +220,12 @@ extension MainCollectionViewController {
             impulseExpiredVC.impulse = impulse
         }
         impulseExpiredVC.impulsesStateManager = impulsesStateManager
-        impulseExpiredVC.mainCVC = self
+        // this type of modal presentation forces the presentingViewController to call
+        // viewWillAppear when the new one is dismissed.
+        impulseExpiredVC.modalPresentationStyle = .fullScreen
+        
         let modalController = UINavigationController(rootViewController: impulseExpiredVC)
+        
         navigationController?.present(modalController, animated: true)
     }
 }
