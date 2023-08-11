@@ -15,12 +15,42 @@ enum ChartTimeDomain: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-enum ImpulseCategory: String, CaseIterable {
-    case clothing = "clothing"
-    case electronics = "electronics"
-    case general = "general"
-    case restaurants = "restaurants"
-    case videoGames = "videoGames"
+enum ImpulseCategory: CaseIterable {
+    case clothing
+    case electronics
+    case entertainment
+    case restaurants
+    case shoes
+    
+    var categoryEmoji: String {
+        switch self {
+        case .clothing:
+            return "👕"
+        case .electronics:
+            return "💻"
+        case .entertainment:
+            return "🍿"
+        case .restaurants:
+            return "🍽️"
+        case .shoes:
+            return "👟"
+        }
+    }
+    
+    var categoryName: String {
+        switch self {
+        case .clothing:
+            return "Clothing"
+        case .electronics:
+            return "Electronics"
+        case .entertainment:
+            return "Entertainment"
+        case .restaurants:
+            return "Restaurants"
+        case .shoes:
+            return "Shoes"
+        }
+    }
 }
 
 enum ImpulseEndedOptions {

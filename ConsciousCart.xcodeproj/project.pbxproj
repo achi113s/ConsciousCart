@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4403BAF62A85D0780058617D /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAF52A85D0780058617D /* CategoriesViewController.swift */; };
+		4403BAF82A85D0D20058617D /* CategoriesGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */; };
+		4403BAFA2A85D0EF0058617D /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAF92A85D0EF0058617D /* CategoryCell.swift */; };
+		4403BAFC2A85D1060058617D /* CategoriesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */; };
 		4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */; };
 		4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */; };
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
@@ -93,6 +97,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4403BAF52A85D0780058617D /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesGridLayout.swift; sourceTree = "<group>"; };
+		4403BAF92A85D0EF0058617D /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewControllerDelegate.swift; sourceTree = "<group>"; };
 		4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewListCell.swift; sourceTree = "<group>"; };
 		4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoImpulsesFooter.swift; sourceTree = "<group>"; };
@@ -190,6 +198,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4403BAF42A85D0510058617D /* CategoriesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4403BAF52A85D0780058617D /* CategoriesViewController.swift */,
+				4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */,
+				4403BAF92A85D0EF0058617D /* CategoryCell.swift */,
+				4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */,
+			);
+			path = CategoriesViewController;
+			sourceTree = "<group>";
+		};
 		442B54E22A7D6FA300383B54 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,7 +400,9 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4403BAF42A85D0510058617D /* CategoriesViewController */,
 				445B0FBB2A7EEEC20075657C /* Onboarding */,
+				447162FA2A83E435001D7721 /* CreateMainUI.swift */,
 				44F1EC6B2A4E569A00091BD1 /* MainCollectionView */,
 				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
 				442B54E22A7D6FA300383B54 /* ProfileView */,
@@ -389,7 +410,6 @@
 				448807A92A6A0705005377DE /* ImpulseExpiredView */,
 				4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */,
 				442B54EB2A7DA0EF00383B54 /* SettingsView */,
-				447162FA2A83E435001D7721 /* CreateMainUI.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -562,6 +582,7 @@
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
 				445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */,
 				44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */,
+				4403BAFC2A85D1060058617D /* CategoriesViewControllerDelegate.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */,
 				446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */,
@@ -598,6 +619,7 @@
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
+				4403BAF82A85D0D20058617D /* CategoriesGridLayout.swift in Sources */,
 				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
@@ -606,7 +628,9 @@
 				445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */,
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
+				4403BAF62A85D0780058617D /* CategoriesViewController.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
+				4403BAFA2A85D0EF0058617D /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
