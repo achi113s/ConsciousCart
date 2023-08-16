@@ -5,9 +5,10 @@
 //  Created by Giorgio Latour on 5/19/23.
 //
 
+import PhotosUI
 import UIKit
 
-class ImpulseDetailViewController: UIViewController {
+class ImpulseDetailViewController: UIViewController, UINavigationControllerDelegate {
     var impulsesStateManager: ImpulsesStateManager! = nil
     var impulse: Impulse! = nil
     var viewShowsPendingImpulses: Bool = false
@@ -19,18 +20,30 @@ class ImpulseDetailViewController: UIViewController {
     
     private var image: UIImage! = nil
     private var imageView: UIImageView! = nil
+    private var imageContainerView: UIView!
+    private var changeImageButton: UIButton!
     
     private var itemNameLabel: UILabel! = nil
     private var itemReasonNeededLabel: UILabel! = nil
     private var itemURLLabel: UILabel! = nil
     private var itemPriceLabel: UILabel! = nil
-    private var itemReminderDateLabel: UILabel! = nil
+
     
     private var itemNameTextField: ConsciousCartTextView! = nil
     private var itemReasonNeededTextField: ConsciousCartTextView! = nil
     private var itemURLTextField: ConsciousCartTextView! = nil
     private var itemPriceTextField: CurrencyTextField! = nil
+    
     private var itemRemindDate: UIDatePicker! = nil
+    private var itemReminderDateLabel: UILabel! = nil
+    private var reminderDateStack: UIStackView! = nil
+    
+    private var categoryLabel: UILabel! = nil
+    private var categoriesButton: ImpulseCategoryButton! = nil
+    private var categoryStack: UIStackView! = nil
+    private var selectedCategory: ImpulseCategory? = nil
+    
+    private var itemReminderCategoryStack: UIStackView! = nil
     
     private var finishImpulseButton: ConsciousCartButton! = nil
     
@@ -99,12 +112,42 @@ extension ImpulseDetailViewController {
             image = UIImage(contentsOfFile: imagePath.path())
         } else {
             let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
-            image = UIImage(systemName: "cart.circle", withConfiguration: largeConfig)
+            image = UIImage(systemName: "cart.circle", withConfiguration: largeConfig)?.withTintColor(.black, renderingMode: .alwaysOriginal)
         }
+        
+//        imageView = UIImageView(image: image)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.contentMode = .scaleAspectFit
+        
+        imageContainerView = UIView()
+        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
+        imageContainerView.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
+        imageContainerView.layer.borderWidth = 1
+        imageContainerView.layer.borderColor = UIColor.black.cgColor
         
         imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.masksToBounds = true
+        
+        changeImageButton = UIButton()
+        changeImageButton.translatesAutoresizingMaskIntoConstraints = false
+        changeImageButton.setTitle("Change Image", for: .normal)
+        changeImageButton.titleLabel?.font = UIFont(name: "Nunito-Regular", size: 17)
+        changeImageButton.tintColor = .white
+        changeImageButton.backgroundColor = UIColor(white: 0.05, alpha: 0.8)
+        changeImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
+        changeImageButton.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
+        changeImageButton.layer.borderWidth = 1
+        changeImageButton.layer.borderColor = UIColor.black.cgColor
+        changeImageButton.layer.masksToBounds = true
+        changeImageButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        imageContainerView.addSubview(imageView)
+        imageContainerView.addSubview(changeImageButton)
         
         itemNameLabel = UILabel()
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +209,7 @@ extension ImpulseDetailViewController {
         itemReminderDateLabel.text = "Reminder Date"
         itemReminderDateLabel.font = UIFont.ccFont(textStyle: .footnote)
         itemReminderDateLabel.textColor = .secondaryLabel
-        itemReminderDateLabel.textAlignment = .left
+        itemReminderDateLabel.textAlignment = .center
         
         itemRemindDate = UIDatePicker()
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
@@ -175,13 +218,53 @@ extension ImpulseDetailViewController {
         itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.isEnabled = false
         
+        reminderDateStack = UIStackView(arrangedSubviews: [itemReminderDateLabel, itemRemindDate])
+        reminderDateStack.translatesAutoresizingMaskIntoConstraints = false
+        reminderDateStack.axis = .vertical
+        reminderDateStack.spacing = 5
+        reminderDateStack.distribution = .equalSpacing
+        reminderDateStack.alignment = .center
+        
+        categoryLabel = UILabel()
+        categoryLabel.text = "Category"
+        categoryLabel.font = UIFont.ccFont(textStyle: .footnote)
+        categoryLabel.textColor = .secondaryLabel
+        categoryLabel.textAlignment = .center
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+            selectedCategory = category
+        }
+        
+        categoriesButton = ImpulseCategoryButton()
+        categoriesButton.translatesAutoresizingMaskIntoConstraints = false
+        if let category = selectedCategory {
+            categoriesButton.setCategoryNameTo(category.categoryName)
+            categoriesButton.setEmojiTo(category.categoryEmoji)
+        }
+        categoriesButton.addTarget(self, action: #selector(showCategoryPicker), for: .touchUpInside)
+        categoriesButton.isEnabled = false
+        
+        categoryStack = UIStackView(arrangedSubviews: [categoryLabel, categoriesButton])
+        categoryStack.translatesAutoresizingMaskIntoConstraints = false
+        categoryStack.axis = .vertical
+        categoryStack.spacing = 5
+        categoryStack.distribution = .equalSpacing
+        
+        itemReminderCategoryStack = UIStackView(arrangedSubviews: [reminderDateStack, categoryStack])
+        itemReminderCategoryStack.translatesAutoresizingMaskIntoConstraints = false
+        itemReminderCategoryStack.axis = .horizontal
+        itemReminderCategoryStack.distribution = .equalSpacing
+        itemReminderCategoryStack.spacing = 5
+        itemReminderCategoryStack.alignment = .center
+        
         addSubViewsToView()
     }
     
     private func addSubViewsToView() {
         view.addSubview(scrollView)
         
-        contentView.addSubview(imageView)
+        contentView.addSubview(imageContainerView)
         
         impulsePropertiesStack.addArrangedSubview(itemNameLabel)
         impulsePropertiesStack.addArrangedSubview(itemNameTextField)
@@ -191,8 +274,7 @@ extension ImpulseDetailViewController {
         impulsePropertiesStack.addArrangedSubview(itemURLTextField)
         impulsePropertiesStack.addArrangedSubview(itemPriceLabel)
         impulsePropertiesStack.addArrangedSubview(itemPriceTextField)
-        impulsePropertiesStack.addArrangedSubview(itemReminderDateLabel)
-        impulsePropertiesStack.addArrangedSubview(itemRemindDate)
+        impulsePropertiesStack.addArrangedSubview(itemReminderCategoryStack)
         
         contentView.addSubview(impulsePropertiesStack)
         
@@ -214,10 +296,15 @@ extension ImpulseDetailViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            imageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
-            imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            imageContainerView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+            imageContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            imageContainerView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            imageContainerView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            
+            changeImageButton.heightAnchor.constraint(equalTo: imageContainerView.heightAnchor, multiplier: 0.3),
+            changeImageButton.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor),
+            changeImageButton.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor),
+            changeImageButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             
             impulsePropertiesStack.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
@@ -235,8 +322,19 @@ extension ImpulseDetailViewController {
             itemPriceTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             
+//            itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+//            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
+            itemReminderDateLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            itemReminderDateLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+            
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
+            
+            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            categoryLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+            
+            categoriesButton.heightAnchor.constraint(equalToConstant: 100),
+            
+            itemReminderCategoryStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
         ])
     }
     
@@ -274,9 +372,22 @@ extension ImpulseDetailViewController {
         attrString.addAttribute(.font, value: UIFont.ccFont(textStyle: .body), range: NSRange(location: 0, length: attrString.length))
         return attrString
     }
+    
+    @objc private func showCategoryPicker() {
+        let vc = CategoriesViewController()
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        vc.categoryChangedDelegate = self
+        vc.previouslySelectedCategory = selectedCategory
+        
+        present(vc, animated: true)
+    }
 }
 
-//MARK: - Configure View Functions
+//MARK: - Configure View Selectors
 extension ImpulseDetailViewController {
     @objc private func enableImpulseEditing() {
         if canEditText == true {
@@ -301,6 +412,8 @@ extension ImpulseDetailViewController {
         itemRemindDate.isEnabled = canEditText ? true : false
         
         itemURLTextField.isEditable.toggle()
+        
+        categoriesButton.isEnabled.toggle()
         
         navigationItem.rightBarButtonItem?.title = canEditText ? "Done Editing" : "Edit"
     }
@@ -357,6 +470,7 @@ extension ImpulseDetailViewController {
         if itemReasonNeededTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != impulse?.unwrappedReasonNeeded { return true }
         if itemRemindDate.date != impulse?.unwrappedRemindDate { return true }
         if itemURLTextField.text.trimmingCharacters(in: .whitespacesAndNewlines) != impulse?.unwrappedURLString { return true }
+        if categoriesButton.getCategoryName() != impulse.unwrappedCategory { return true }
         
         return false
     }
@@ -369,10 +483,50 @@ extension ImpulseDetailViewController {
         impulse.reasonNeeded = itemReasonNeededTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         impulse.remindDate = itemRemindDate.date
         
+        if let category = selectedCategory {
+            impulse.category = category.categoryName
+        }
+        
         if let url = itemURLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
             impulse.url = url
             itemURLTextField.attributedText = createAttrURL(with: url)
         }
+    }
+    
+    @objc private func uploadImage() {
+        let alert = UIAlertController(title: "Upload an Image", message: nil, preferredStyle: .actionSheet)
+        
+        let selectImageFromLibrary = UIAlertAction(title: "Choose from Library", style: .default) { [weak self] action in
+            var pickerConfig = PHPickerConfiguration()
+            
+            // Setting selectionLimit to 1 forces auto dismissal of the view immediately
+            // upon image selection, so we'll set it
+            // to 2 and then only import the first image later.
+            pickerConfig.selectionLimit = 2
+            pickerConfig.filter = .images
+            pickerConfig.selection = .ordered
+            
+            let phPickerController = PHPickerViewController(configuration: pickerConfig)
+            phPickerController.delegate = self
+            
+            self?.present(phPickerController, animated: true)
+        }
+        
+        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [weak self] action in
+            let pickerVC = UIImagePickerController()
+            pickerVC.sourceType = .camera
+            pickerVC.allowsEditing = true
+            pickerVC.delegate = self
+            self?.present(pickerVC, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(selectImageFromLibrary)
+        alert.addAction(takePhoto)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
 }
 
@@ -412,5 +566,47 @@ extension ImpulseDetailViewController: UITextViewDelegate {
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         activeView = nil
         return true
+    }
+}
+
+//MARK: - CategoriesViewControllerDelegate
+extension ImpulseDetailViewController: CategoriesViewControllerDelegate {
+    func categoryDidChangeTo(_ category: ImpulseCategory) {
+        print("category changed to: \(category.categoryName)")
+        
+        selectedCategory = category
+        categoriesButton.setEmojiTo(category.categoryEmoji)
+        categoriesButton.setCategoryNameTo(category.categoryName)
+    }
+}
+
+//MARK: - UIImagePickerController Delegate
+extension ImpulseDetailViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        dismiss(animated: true)
+        
+        guard let image = info[.editedImage] as? UIImage else { return }
+        
+        DispatchQueue.main.async {
+            self.imageView.image = image
+        }
+    }
+}
+
+//MARK: - PHPickerViewController Delegate
+extension ImpulseDetailViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        
+        // Add the selected image to the view.
+        guard let provider = results.first?.itemProvider else { return }
+        
+        if provider.canLoadObject(ofClass: UIImage.self) {
+            provider.loadObject(ofClass: UIImage.self) { image, _ in
+                DispatchQueue.main.async {
+                    self.imageView.image = image as? UIImage
+                }
+            }
+        }
     }
 }

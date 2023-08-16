@@ -8,8 +8,6 @@
 import CoreData
 import UserNotifications
 
-// should make thread safe?
-
 final class ImpulsesStateManager {
     public let coreDataManager = CoreDataManager(modelName: "ConsciousCart")
     
@@ -64,31 +62,6 @@ final class ImpulsesStateManager {
         }
     }
     
-    public func addImpulse(remindDate: Date = Date(),
-                           name: String = "Unknown Name",
-                           price: Double = 0.0,
-                           imageName: String? = nil,
-                           reasonNeeded: String = "Unknown Reason",
-                           url: String = "None") -> Impulse {
-        
-        let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
-        newImpulse.id = UUID()
-        newImpulse.userID = userStats?.id
-        newImpulse.dateCreated = Date.now
-        newImpulse.remindDate = remindDate
-        newImpulse.name = name
-        newImpulse.price = price
-        newImpulse.imageName = imageName
-        newImpulse.reasonNeeded = reasonNeeded
-        newImpulse.url = url
-        newImpulse.completed = false
-        
-        coreDataManager.saveChanges()
-        loadImpulses()
-        
-        return newImpulse
-    }
-    
     public func updateImpulse() {
         coreDataManager.saveChanges()
         loadImpulses()
@@ -124,6 +97,8 @@ final class ImpulsesStateManager {
     public func deleteImpulse(impulse: Impulse) {
         if let index = impulses.firstIndex(of: impulse) {
             impulses.remove(at: index)
+            
+            updateUserAmountSaved(amount: -impulse.price)
             
             coreDataManager.deleteObject(object: impulse)
             
@@ -281,4 +256,39 @@ final class ImpulsesStateManager {
         loadUserStats()
         print("loaded Userstats")
     }
+}
+
+//MARK: - Methods for Creating, Updating, Deleting, Impulses
+extension ImpulsesStateManager {
+    public func addImpulse(remindDate: Date = Date(),
+                           name: String = "Unknown Name",
+                           price: Double = 0.0,
+                           imageName: String? = nil,
+                           reasonNeeded: String = "Unknown Reason",
+                           url: String = "None",
+                           category: String = "") -> Impulse {
+        
+        let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
+        newImpulse.id = UUID()
+        newImpulse.userID = userStats?.id
+        newImpulse.dateCreated = Date.now
+        newImpulse.remindDate = remindDate
+        newImpulse.name = name
+        newImpulse.price = price
+        newImpulse.imageName = imageName
+        newImpulse.reasonNeeded = reasonNeeded
+        newImpulse.url = url
+        newImpulse.category = category
+        newImpulse.completed = false
+        
+        coreDataManager.saveChanges()
+        loadImpulses()
+        
+        return newImpulse
+    }
+}
+
+//MARK: - Methods for Creating, Updating, Deleting User Stats
+extension ImpulsesStateManager {
+    
 }

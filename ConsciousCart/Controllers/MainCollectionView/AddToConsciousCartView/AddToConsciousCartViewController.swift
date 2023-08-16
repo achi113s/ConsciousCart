@@ -12,9 +12,10 @@ import UserNotifications
 class AddToConsciousCartViewController: UIViewController, UINavigationControllerDelegate {
     var impulsesStateManager: ImpulsesStateManager?
     
-    let largeConfig = UIImage.SymbolConfiguration(pointSize: 72, weight: .regular, scale: .default)
+    private var scrollView: UIScrollView! = nil
+    private var contentView: UIView! = nil
     
-    private var uploadImageButton: ConsciousCartButton!
+    private var uploadImageButton: ConsciousCartButton! = nil
     
     private var containerView: UIView!
     private var imageView: UIImageView!
@@ -29,12 +30,16 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     var itemPriceTextField: CurrencyTextField!
     private var activeTextField: UITextField?
     
-    //    private var categoryPicker: UIPickerView! = nil
-    //    private var categoryPickerDataSource: CategoryPickerDataSource! = nil
-    //    private var categoryPickerDelegate: CategoryPickerDelegate! = nil
-    
     private var itemRemindLabel: UILabel!
     private var itemRemindDate: UIDatePicker!
+    private var reminderDateStack: UIStackView! = nil
+    
+    private var categoryLabel: UILabel! = nil
+    private var categoriesButton: ImpulseCategoryButton! = nil
+    private var categoryStack: UIStackView! = nil
+    private var selectedCategory: ImpulseCategory? = nil
+    
+    private var itemReminderCategoryStack: UIStackView! = nil
     
     private var inputItemsStack: UIStackView!
     
@@ -50,6 +55,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitAddView))
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        configureScrollView()
         configureSubviewProperties()
         addSubviewsToView()
         configureLayoutConstraints()
@@ -68,14 +74,6 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
         navigationController?.navigationBar.tintColor = .black
         print(modalPresentationStyle.self)
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        
-////        if modalPresentationStyle == . {
-////            presentingViewController?.beginAppearanceTransition(true, animated: true)
-////        }
-//    }
 }
 
 //MARK: - Selectors
@@ -127,8 +125,19 @@ extension AddToConsciousCartViewController {
             return
         }
         
-        guard let itemPriceString = itemPriceTextField.text else { return }
+        // Impulse must have a name and price at least.
+        guard let itemPriceString = itemPriceTextField.text else {
+            saveButton.shakeAnimation()
+            return
+        }
+        
+        
         let itemPrice = itemPriceString.asDoubleFromCurrency(locale: Locale.current)
+        
+        guard let itemCategory = selectedCategory?.categoryName else {
+            saveButton.shakeAnimation()
+            return
+        }
         
         // Save the image with a UUID as its name if the user selected an image.
         // The function returns nil if there is no image to save.
@@ -136,6 +145,7 @@ extension AddToConsciousCartViewController {
         var itemName = ""
         var itemReason = ""
         var itemURL = ""
+        
         
         if let name = itemNameTextField.text {
             if name.stringInputIsValid() {
@@ -162,7 +172,8 @@ extension AddToConsciousCartViewController {
                                                       price: itemPrice,
                                                       imageName: imageName,
                                                       reasonNeeded: itemReason,
-                                                      url: itemURL)
+                                                      url: itemURL,
+                                                      category: itemCategory)
         
         impulsesStateManager.setupNotification(for: impulse)
         
@@ -207,14 +218,39 @@ extension AddToConsciousCartViewController {
         
         return imageName
     }
+    
+    @objc private func showCategoryPicker() {
+        let vc = CategoriesViewController()
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        vc.categoryChangedDelegate = self
+        vc.previouslySelectedCategory = selectedCategory
+        
+        present(vc, animated: true)
+    }
 }
 
 //MARK: - Configure Subviews
 extension AddToConsciousCartViewController {
+    private func configureScrollView() {
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.bounces = true
+        scrollView.alwaysBounceVertical = true
+    }
+    
     private func configureSubviewProperties() {
+        contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         saveButton = ConsciousCartButton()
         saveButton.setTitle("Save", for: .normal)
         saveButton.addTarget(self, action: #selector(saveItem), for: .touchUpInside)
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 64, weight: .regular, scale: .default)
         
         uploadImageButton = ConsciousCartButton()
         uploadImageButton.setImage(UIImage(systemName: "photo.circle", withConfiguration: largeConfig), for: .normal)
@@ -281,15 +317,8 @@ extension AddToConsciousCartViewController {
         itemPriceTextField.tag = 4
         itemPriceTextField.keyboardType = .decimalPad
         
-        //        categoryPicker = UIPickerView()
-        //        categoryPicker.translatesAutoresizingMaskIntoConstraints = false
-        //        categoryPickerDataSource = CategoryPickerDataSource(impulsesStateManager: impulsesStateManager)
-        //        categoryPicker.dataSource = categoryPickerDataSource
-        //        categoryPickerDelegate = CategoryPickerDelegate()
-        //        categoryPicker.delegate = categoryPickerDelegate
-        
         itemRemindLabel = UILabel()
-        itemRemindLabel.text = "When should we remind you?"
+        itemRemindLabel.text = "Reminder Date"
         itemRemindLabel.font = UIFont.ccFont(textStyle: .headline)
         itemRemindLabel.textAlignment = .center
         itemRemindLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -300,7 +329,39 @@ extension AddToConsciousCartViewController {
         itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
         
-        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemURLTextField, itemPriceTextField, itemRemindLabel, itemRemindDate])
+        reminderDateStack = UIStackView(arrangedSubviews: [itemRemindLabel, itemRemindDate])
+        reminderDateStack.translatesAutoresizingMaskIntoConstraints = false
+        reminderDateStack.axis = .vertical
+        reminderDateStack.spacing = 5
+        reminderDateStack.distribution = .equalSpacing
+        reminderDateStack.alignment = .center
+        
+        categoryLabel = UILabel()
+        categoryLabel.text = "Category"
+        categoryLabel.font = UIFont.ccFont(textStyle: .headline)
+        categoryLabel.textAlignment = .center
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        categoriesButton = ImpulseCategoryButton()
+        categoriesButton.translatesAutoresizingMaskIntoConstraints = false
+        categoriesButton.setCategoryNameTo("Tap to Choose")
+        categoriesButton.setEmojiTo("☺️")
+        categoriesButton.addTarget(self, action: #selector(showCategoryPicker), for: .touchUpInside)
+        
+        categoryStack = UIStackView(arrangedSubviews: [categoryLabel, categoriesButton])
+        categoryStack.translatesAutoresizingMaskIntoConstraints = false
+        categoryStack.axis = .vertical
+        categoryStack.spacing = 5
+        categoryStack.distribution = .equalSpacing
+        
+        itemReminderCategoryStack = UIStackView(arrangedSubviews: [reminderDateStack, categoryStack])
+        itemReminderCategoryStack.translatesAutoresizingMaskIntoConstraints = false
+        itemReminderCategoryStack.axis = .horizontal
+        itemReminderCategoryStack.distribution = .equalSpacing
+        itemReminderCategoryStack.spacing = 5
+        itemReminderCategoryStack.alignment = .center
+        
+        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemURLTextField, itemPriceTextField, itemReminderCategoryStack])
         inputItemsStack.spacing = 15
         inputItemsStack.axis = .vertical
         inputItemsStack.alignment = .center
@@ -309,9 +370,13 @@ extension AddToConsciousCartViewController {
     }
     
     private func addSubviewsToView() {
-        view.addSubview(uploadButtonsStack)
-        view.addSubview(inputItemsStack)
-        view.addSubview(saveButton)
+        view.addSubview(scrollView)
+        
+        contentView.addSubview(uploadButtonsStack)
+        contentView.addSubview(inputItemsStack)
+        contentView.addSubview(saveButton)
+        
+        scrollView.addSubview(contentView)
     }
 }
 
@@ -319,10 +384,23 @@ extension AddToConsciousCartViewController {
 extension AddToConsciousCartViewController {
     func configureLayoutConstraints() {
         NSLayoutConstraint.activate([
-            uploadButtonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            uploadButtonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            uploadButtonsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
-            uploadButtonsStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.35),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            
+            uploadButtonsStack.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
+            uploadButtonsStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            uploadButtonsStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
+            uploadButtonsStack.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.35),
             
             changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
             changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
@@ -332,34 +410,37 @@ extension AddToConsciousCartViewController {
             imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             
             itemNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemNameTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemNameTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemReasonNeededTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemReasonNeededTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemReasonNeededTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemURLTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemURLTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemURLTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemPriceTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            
-            //            categoryPicker.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            //            categoryPicker.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemPriceTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            itemRemindLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            inputItemsStack.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            inputItemsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            categoryLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+            
+            categoriesButton.heightAnchor.constraint(equalToConstant: 100),
+            
+            itemReminderCategoryStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            
+            inputItemsStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            inputItemsStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             inputItemsStack.topAnchor.constraint(equalTo: uploadButtonsStack.bottomAnchor, constant: 30),
             
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            saveButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            saveButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 }
@@ -432,5 +513,16 @@ extension AddToConsciousCartViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+    }
+}
+
+//MARK: - CategoriesViewControllerDelegate
+extension AddToConsciousCartViewController: CategoriesViewControllerDelegate {
+    func categoryDidChangeTo(_ category: ImpulseCategory) {
+        print("category changed to: \(category.categoryName)")
+        
+        selectedCategory = category
+        categoriesButton.setEmojiTo(category.categoryEmoji)
+        categoriesButton.setCategoryNameTo(category.categoryName)
     }
 }

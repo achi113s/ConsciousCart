@@ -17,6 +17,10 @@ class ImpulsesCollectionViewController: UIViewController {
     
     private var nothingToShow: UILabel! = nil
     
+    private var searchController = UISearchController()
+    private var userIsSearching: Bool = false
+    private var filteredImpulses: [Impulse] = []
+    
     lazy private var viewTitle: String = {
         switch impulseOption {
         case .active:
@@ -42,6 +46,11 @@ class ImpulsesCollectionViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
         title = viewTitle
+        
+        // search support
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        navigationItem.searchController = searchController
         
         configureCollectionView()
         configureSubviews()
@@ -190,15 +199,19 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch impulseOption {
-        case .active:
-            return impulsesStateManager.impulses.count
-        case .pending:
-            return impulsesStateManager.pendingImpulses.count
-        case .completed:
-            return impulsesStateManager.completedImpulses.count
-        default:
-            return 0
+        if !userIsSearching {
+            switch impulseOption {
+            case .active:
+                return impulsesStateManager.impulses.count
+            case .pending:
+                return impulsesStateManager.pendingImpulses.count
+            case .completed:
+                return impulsesStateManager.completedImpulses.count
+            default:
+                return 0
+            }
+        } else {
+            return filteredImpulses.count
         }
     }
     
@@ -209,9 +222,18 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
         
         var content = UIListContentConfiguration.subtitleCell()
         
+        
+        
         switch impulseOption {
         case .active:
-            let impulse: Impulse = impulsesStateManager.impulses[index]
+            var impulse: Impulse! = nil
+            
+            if !userIsSearching {
+                impulse = impulsesStateManager.impulses[index]
+            } else {
+                impulse = filteredImpulses[index]
+            }
+            
             let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
             content.text = "\(impulse.unwrappedName), \(itemPrice)"
             content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
@@ -220,9 +242,26 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             content.secondaryText = remainingTime.0
             content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
             
-            cell.accessories = [.disclosureIndicator()]
+            var categoryLabel: UILabel! = nil
+            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+                categoryLabel = UILabel()
+                categoryLabel.text = category.categoryEmoji
+            }
+            
+            if categoryLabel != nil {
+                cell.accessories = [.customView(configuration: .init(customView: categoryLabel, placement: .trailing())), .disclosureIndicator()]
+            } else {
+                cell.accessories = [.disclosureIndicator()]
+            }
         case .pending:
-            let impulse: Impulse = impulsesStateManager.pendingImpulses[index]
+            var impulse: Impulse! = nil
+            
+            if !userIsSearching {
+                impulse = impulsesStateManager.pendingImpulses[index]
+            } else {
+                impulse = filteredImpulses[index]
+            }
+            
             let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
             content.text = "\(impulse.unwrappedName), \(itemPrice)"
             content.textProperties.font = UIFont.ccFont(textStyle: .bold, fontSize: 20)
@@ -231,9 +270,26 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             content.secondaryText = "⌛️ \(impulse.daysSinceExpiry) Days Overdue"
             content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
             
-            cell.accessories = [.disclosureIndicator()]
+            var categoryLabel: UILabel! = nil
+            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+                categoryLabel = UILabel()
+                categoryLabel.text = category.categoryEmoji
+            }
+            
+            if categoryLabel != nil {
+                cell.accessories = [.customView(configuration: .init(customView: categoryLabel, placement: .trailing())), .disclosureIndicator()]
+            } else {
+                cell.accessories = [.disclosureIndicator()]
+            }
         case .completed:
-            let impulse: Impulse = impulsesStateManager.completedImpulses[index]
+            var impulse: Impulse! = nil
+            
+            if !userIsSearching {
+                impulse = impulsesStateManager.completedImpulses[index]
+            } else {
+                impulse = filteredImpulses[index]
+            }
+            
             let itemPrice = String(impulse.price).asCurrency(locale: Locale.current) ?? "$0.00"
             
             var savedMessage: String = ""
@@ -258,7 +314,20 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             let seal = UIImage(systemName: "checkmark.seal")?.withTintColor(sealColor, renderingMode: .alwaysOriginal)
             let sealView = UIImageView(image: seal)
             
-            cell.accessories = [.customView(configuration: .init(customView: sealView, placement: .trailing())), .disclosureIndicator()]
+            var categoryLabel: UILabel! = nil
+            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+                categoryLabel = UILabel()
+                categoryLabel.text = category.categoryEmoji
+            }
+            
+            if categoryLabel != nil {
+                cell.accessories = [.customView(configuration: .init(customView: categoryLabel, placement: .trailing())),
+                                    .customView(configuration: .init(customView: sealView, placement: .trailing())),
+                                    .disclosureIndicator()]
+            } else {
+                cell.accessories = [.customView(configuration: .init(customView: sealView, placement: .trailing())),
+                                    .disclosureIndicator()]
+            }
         default:
             print("No case matched.")
         }
@@ -288,5 +357,41 @@ extension ImpulsesCollectionViewController: UICollectionViewDelegate {
         
         detailVC.impulsesStateManager = impulsesStateManager
         self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+//MARK: - Search Results Controller
+extension ImpulsesCollectionViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        userIsSearching = true
+        
+        if text.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            userIsSearching = false
+            collectionView.reloadData()
+            return
+        }
+        
+        switch impulseOption {
+        case .active:
+            filteredImpulses = impulsesStateManager.impulses.filter( { $0.unwrappedName.localizedCaseInsensitiveContains(text) })
+        case .pending:
+            filteredImpulses = impulsesStateManager.pendingImpulses.filter( { $0.unwrappedName.localizedCaseInsensitiveContains(text) })
+        case .completed:
+            filteredImpulses = impulsesStateManager.completedImpulses.filter( { $0.unwrappedName.localizedCaseInsensitiveContains(text) })
+        default:
+            return
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    
+}
+
+extension ImpulsesCollectionViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        userIsSearching = false
+        collectionView.reloadData()
     }
 }

@@ -66,7 +66,17 @@ extension MainCollectionViewController {
                 
                 cell.contentConfiguration = content
                 
-                cell.accessories = [.disclosureIndicator()]
+                var categoryLabel: UILabel! = nil
+                if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+                    categoryLabel = UILabel()
+                    categoryLabel.text = category.categoryEmoji
+                }
+                
+                if categoryLabel != nil {
+                    cell.accessories = [.customView(configuration: .init(customView: categoryLabel, placement: .trailing())), .disclosureIndicator()]
+                } else {
+                    cell.accessories = [.disclosureIndicator()]
+                }
                 
                 return cell
             } else {

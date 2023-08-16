@@ -10,9 +10,45 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     static let identifier = "categoryCell"
     
+    static let scaleWhenCellIsSelected: CGFloat = 0.95
+    static let springDamping: CGFloat = 0.3
+    static let springVelocity: CGFloat = 10.0
+    
     private var categoryLabel: UILabel! = nil
     private var emojiLabel: UILabel! = nil
     private var containerView: UIStackView! = nil
+    
+    override var isSelected: Bool {
+        didSet {
+            if self.isSelected {
+                super.isSelected = true
+                
+                UIView.animate(
+                    withDuration: 1,
+                    delay: 0,
+                    usingSpringWithDamping: CategoryCell.springDamping,
+                    initialSpringVelocity: CategoryCell.springVelocity,
+                    options: .allowUserInteraction) {
+                    self.transform = CGAffineTransform(scaleX: CategoryCell.scaleWhenCellIsSelected, y: CategoryCell.scaleWhenCellIsSelected)
+                }
+                
+                self.backgroundColor = UIColor(white: 0.90, alpha: 1.0)
+            } else {
+                super.isSelected = false
+                
+                UIView.animate(
+                    withDuration: 0.5,
+                    delay: 0,
+                    usingSpringWithDamping: CategoryCell.springDamping,
+                    initialSpringVelocity: CategoryCell.springVelocity,
+                    options: .allowUserInteraction) {
+                    self.transform = CGAffineTransform.identity
+                }
+                
+                self.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +78,7 @@ class CategoryCell: UICollectionViewCell {
     private func configureView() {
         categoryLabel = UILabel()
         categoryLabel.text = "Category"
+        categoryLabel.font = UIFont.ccFont(textStyle: .semibold, fontSize: 15)
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryLabel.adjustsFontSizeToFitWidth = true
         categoryLabel.minimumScaleFactor = 0.7
@@ -75,15 +112,15 @@ class CategoryCell: UICollectionViewCell {
         ])
     }
     
-    func setCategoryNameTo(_ categoryName: String) {
+    public func setCategoryNameTo(_ categoryName: String) {
         categoryLabel.text = categoryName
     }
     
-    func getCategoryName() -> String {
+    public func getCategoryName() -> String {
         return categoryLabel.text ?? ""
     }
     
-    func setEmojiTo(_ emoji: String) {
+    public func setEmojiTo(_ emoji: String) {
         emojiLabel.text = emoji
     }
 }

@@ -11,6 +11,7 @@
 		4403BAF82A85D0D20058617D /* CategoriesGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */; };
 		4403BAFA2A85D0EF0058617D /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAF92A85D0EF0058617D /* CategoryCell.swift */; };
 		4403BAFC2A85D1060058617D /* CategoriesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */; };
+		4403BAFE2A8977810058617D /* ImpulseCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */; };
 		4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */; };
 		4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */; };
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
@@ -34,8 +35,6 @@
 		445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC22A8023C20075657C /* SecondOnboardingView.swift */; };
 		445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */; };
 		445B0FC72A80486F0075657C /* SubmitUsernameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */; };
-		445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */; };
-		445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */; };
 		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
 		445E50452A745C1400DAFCDF /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50442A745C1400DAFCDF /* CoinView.swift */; };
 		445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50692A74AF9900DAFCDF /* MotionManager.swift */; };
@@ -101,6 +100,7 @@
 		4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesGridLayout.swift; sourceTree = "<group>"; };
 		4403BAF92A85D0EF0058617D /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewControllerDelegate.swift; sourceTree = "<group>"; };
+		4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCategoryButton.swift; sourceTree = "<group>"; };
 		4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewListCell.swift; sourceTree = "<group>"; };
 		4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoImpulsesFooter.swift; sourceTree = "<group>"; };
@@ -125,8 +125,6 @@
 		445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameOnboardingViewController.swift; sourceTree = "<group>"; };
 		445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitUsernameButton.swift; sourceTree = "<group>"; };
 		445B0FC82A8171A00075657C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDataSource.swift; sourceTree = "<group>"; };
-		445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDelegate.swift; sourceTree = "<group>"; };
 		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		445E50442A745C1400DAFCDF /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		445E50692A74AF9900DAFCDF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
@@ -205,6 +203,7 @@
 				4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */,
 				4403BAF92A85D0EF0058617D /* CategoryCell.swift */,
 				4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */,
+				4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */,
 			);
 			path = CategoriesViewController;
 			sourceTree = "<group>";
@@ -231,8 +230,6 @@
 			children = (
 				442AB11E29F8C0940061389A /* AddToConsciousCartViewController.swift */,
 				4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */,
-				445DD50A2A75B6F500DC56C8 /* CategoryPickerDataSource.swift */,
-				445DD50C2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift */,
 			);
 			path = AddToConsciousCartView;
 			sourceTree = "<group>";
@@ -591,7 +588,6 @@
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
 				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
 				448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */,
-				445DD50D2A75B7EA00DC56C8 /* CategoryPickerDelegate.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
 				445B0FC12A7F34E50075657C /* LaunchScreenViewController.swift in Sources */,
@@ -604,7 +600,6 @@
 				448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
-				445DD50B2A75B6F500DC56C8 /* CategoryPickerDataSource.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
@@ -629,6 +624,7 @@
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
 				4403BAF62A85D0780058617D /* CategoriesViewController.swift in Sources */,
+				4403BAFE2A8977810058617D /* ImpulseCategoryButton.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
 				4403BAFA2A85D0EF0058617D /* CategoryCell.swift in Sources */,
 			);

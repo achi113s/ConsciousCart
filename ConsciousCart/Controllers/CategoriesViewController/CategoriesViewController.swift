@@ -12,10 +12,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     private var collectionView: UICollectionView! = nil
     private var flowLayout = CategoriesGridLayout(cellsPerRow: 3, minimumInteritemSpacing: 5, minimumLineSpacing: 10)
     
-    private let springDamping: CGFloat = 0.3
-    private let springVelocity: CGFloat = 10.0
-    
     public var categoryChangedDelegate: CategoriesViewControllerDelegate? = nil
+    public var previouslySelectedCategory: ImpulseCategory? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +55,23 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
-            preconditionFailure("Failed to load collection view cell")
+            fatalError("Failed to load collection view cell")
         }
         
         let index = indexPath.row
         
-        cell.setEmojiTo(ImpulseCategory.allCases[index].categoryEmoji)
-        cell.setCategoryNameTo(ImpulseCategory.allCases[index].categoryName)
+        let categoryEmoji = ImpulseCategory.allCases[index].categoryEmoji
+        let categoryName = ImpulseCategory.allCases[index].categoryName
+        
+        cell.setEmojiTo(categoryEmoji)
+        cell.setCategoryNameTo(categoryName)
+        
+        if let previouslySelectedCategory = previouslySelectedCategory {
+            if previouslySelectedCategory.categoryName == categoryName {
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+                cell.isSelected = true
+            }
+        }
         
         return cell
     }
@@ -71,22 +79,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: springDamping, initialSpringVelocity: springVelocity,
-                       options: .allowUserInteraction) {
-            cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }
-        
         if let selectedCategory = ImpulseCategory.allCases.first(where: { $0.categoryName == cell.getCategoryName() }) {
             categoryChangedDelegate?.categoryDidChangeTo(selectedCategory)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: springDamping, initialSpringVelocity: springVelocity,
-                       options: .allowUserInteraction) {
-            cell.transform = CGAffineTransform.identity
         }
     }
 }
