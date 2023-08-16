@@ -52,7 +52,7 @@ struct SettingsView: View {
                                 HStack {
                                     Text("📒  About ConsciousCart")
                                     Spacer()
-                                    ChevronFromScratch()
+                                    CustomChevron()
                                 }
                                 .frame(height: 30)
                             }
@@ -185,6 +185,10 @@ struct SettingsView: View {
                             Button("Cancel", role: .cancel) { }
                             Button("Delete", role: .destructive) {
                                 impulsesStateManager?.deleteAllImpulses()
+                                impulsesStateManager?.deleteUser()
+                                impulsesStateManager?.saveImpulses()
+                                impulsesStateManager?.saveUserStats()
+                                
                                 //                                impulsesStateManager?.deleteUser()
                                 Utils.resetUserDefaults()
                             }
@@ -250,6 +254,7 @@ struct SettingsView: View {
         guard let impulsesStateManager = impulsesStateManager else { return }
         
         impulsesStateManager.updateUserName(to: newUserName)
+        impulsesStateManager.saveUserStats()
         
         showUserNameMessage = true
         userNameError = false

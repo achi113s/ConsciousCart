@@ -168,6 +168,7 @@ extension ImpulsesCollectionViewController {
                 }
                 
                 collectionView.deleteItems(at: [indexPath])
+                impulsesStateManager.saveImpulses()
                 
                 completion(true)
             })
@@ -191,7 +192,6 @@ extension ImpulsesCollectionViewController {
 }
 
 // MARK: UICollectionViewDataSource
-
 extension ImpulsesCollectionViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

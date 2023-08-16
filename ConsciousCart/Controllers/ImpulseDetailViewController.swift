@@ -448,7 +448,7 @@ extension ImpulseDetailViewController {
                 
             self?.stageUpdatesForImpulse()
             // this needs to be updated. should not modify impulses from a view controller
-            impulsesStateManager.updateImpulse()
+            impulsesStateManager.saveImpulses()
             impulsesStateManager.updateNotification(for: impulse)
             
             let impulseUpdatedAlert = UIAlertController(title: "Impulse Updated", message: "The Impulse was updated successfully!", preferredStyle: .alert)

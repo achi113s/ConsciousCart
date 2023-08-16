@@ -21,10 +21,10 @@
 		442B54E82A7D82F600383B54 /* ImpulseOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */; };
 		442B54EA2A7D9F5700383B54 /* SectionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E92A7D9F5700383B54 /* SectionUILabel.swift */; };
 		442B54F92A7DCE9100383B54 /* ImpulsesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */; };
+		442F1AA92A8C785E00EDB939 /* CustomChevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F1AA82A8C785E00EDB939 /* CustomChevron.swift */; };
 		444222112A11B19000753F8D /* ChangeImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444222102A11B19000753F8D /* ChangeImageContainerView.swift */; };
 		444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */; };
 		4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */; };
-		4445FFB029FA31510067FD1F /* OldProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */; };
 		444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */; };
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
@@ -35,19 +35,14 @@
 		445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC22A8023C20075657C /* SecondOnboardingView.swift */; };
 		445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */; };
 		445B0FC72A80486F0075657C /* SubmitUsernameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */; };
-		445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50422A72D8BC00DAFCDF /* ProfileView.swift */; };
 		445E50452A745C1400DAFCDF /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50442A745C1400DAFCDF /* CoinView.swift */; };
 		445E506A2A74AF9900DAFCDF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E50692A74AF9900DAFCDF /* MotionManager.swift */; };
 		445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E506D2A74B57300DAFCDF /* SparkleShape.swift */; };
 		445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */; };
 		445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EF7B42A187B140013ACB1 /* SettingsViewController.swift */; };
 		446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */; };
-		446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */; };
-		446F9DDF2A7C9D5900997D48 /* ImpulseCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */; };
 		447162C82A82A8C0001D7721 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162C72A82A8C0001D7721 /* MailView.swift */; };
 		447162FB2A83E435001D7721 /* CreateMainUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162FA2A83E435001D7721 /* CreateMainUI.swift */; };
-		448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */; };
-		448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F12A76089B006CBE69 /* ImpulsesView.swift */; };
 		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
 		448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */; };
 		448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */; };
@@ -77,7 +72,6 @@
 		44D5F8E02A1BE16000B215E4 /* TextViewAnimatableCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */; };
 		44D7291D2A0A9E710031A9EE /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */; };
 		44D7291F2A0A9EF60031A9EE /* OFL_Righteous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */; };
-		44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */; };
 		44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */; };
 		44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */; };
 		44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */; };
@@ -110,10 +104,10 @@
 		442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseOptionButton.swift; sourceTree = "<group>"; };
 		442B54E92A7D9F5700383B54 /* SectionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUILabel.swift; sourceTree = "<group>"; };
 		442B54F82A7DCE9100383B54 /* ImpulsesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCollectionViewController.swift; sourceTree = "<group>"; };
+		442F1AA82A8C785E00EDB939 /* CustomChevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChevron.swift; sourceTree = "<group>"; };
 		444222102A11B19000753F8D /* ChangeImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageContainerView.swift; sourceTree = "<group>"; };
 		444222152A11C3E000753F8D /* ConsciousCart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConsciousCart.xcdatamodel; sourceTree = "<group>"; };
 		4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
-		4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldProfileViewController.swift; sourceTree = "<group>"; };
 		444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -125,19 +119,14 @@
 		445B0FC42A802F5A0075657C /* UsernameOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameOnboardingViewController.swift; sourceTree = "<group>"; };
 		445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitUsernameButton.swift; sourceTree = "<group>"; };
 		445B0FC82A8171A00075657C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		445E50422A72D8BC00DAFCDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		445E50442A745C1400DAFCDF /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		445E50692A74AF9900DAFCDF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		445E506D2A74B57300DAFCDF /* SparkleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleShape.swift; sourceTree = "<group>"; };
 		445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewController.swift; sourceTree = "<group>"; };
 		445EF7B42A187B140013ACB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
-		446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronFromScratch.swift; sourceTree = "<group>"; };
-		446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellStyle.swift; sourceTree = "<group>"; };
 		447162C72A82A8C0001D7721 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		447162FA2A83E435001D7721 /* CreateMainUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMainUI.swift; sourceTree = "<group>"; };
-		448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCellView.swift; sourceTree = "<group>"; };
-		448533F12A76089B006CBE69 /* ImpulsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesView.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataClass.swift"; sourceTree = "<group>"; };
 		448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -169,7 +158,6 @@
 		44D5F8DF2A1BE16000B215E4 /* TextViewAnimatableCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAnimatableCurrency.swift; sourceTree = "<group>"; };
 		44D7291C2A0A9E710031A9EE /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		44D7291E2A0A9EF60031A9EE /* OFL_Righteous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL_Righteous.txt; sourceTree = "<group>"; };
-		44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseDetailViewSwiftUI.swift; sourceTree = "<group>"; };
 		44EA21FC2A7AB75700ECC74C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
 		44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
@@ -201,9 +189,7 @@
 			children = (
 				4403BAF52A85D0780058617D /* CategoriesViewController.swift */,
 				4403BAF72A85D0D20058617D /* CategoriesGridLayout.swift */,
-				4403BAF92A85D0EF0058617D /* CategoryCell.swift */,
 				4403BAFB2A85D1050058617D /* CategoriesViewControllerDelegate.swift */,
-				4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */,
 			);
 			path = CategoriesViewController;
 			sourceTree = "<group>";
@@ -234,7 +220,16 @@
 			path = AddToConsciousCartView;
 			sourceTree = "<group>";
 		};
-		443DC34F2A59F50600A9DCF0 /* SupportViews */ = {
+		442F1AAA2A8C797A00EDB939 /* CategoriesViews */ = {
+			isa = PBXGroup;
+			children = (
+				4403BAF92A85D0EF0058617D /* CategoryCell.swift */,
+				4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */,
+			);
+			path = CategoriesViews;
+			sourceTree = "<group>";
+		};
+		443DC34F2A59F50600A9DCF0 /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
 				442B54E72A7D82F600383B54 /* ImpulseOptionButton.swift */,
@@ -248,8 +243,9 @@
 				44EA21FE2A7AB78600ECC74C /* SectionLabel.swift */,
 				44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */,
 				442B54E92A7D9F5700383B54 /* SectionUILabel.swift */,
+				442F1AA82A8C785E00EDB939 /* CustomChevron.swift */,
 			);
-			path = SupportViews;
+			path = OtherViews;
 			sourceTree = "<group>";
 		};
 		444A58E72A4FC353006FC02B /* CollectionView */ = {
@@ -283,19 +279,6 @@
 				445B0FC62A80486F0075657C /* SubmitUsernameButton.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		445DD50E2A75BFBB00DC56C8 /* OldProfileView */ = {
-			isa = PBXGroup;
-			children = (
-				445E50422A72D8BC00DAFCDF /* ProfileView.swift */,
-				448533EF2A75FF46006CBE69 /* ImpulseCellView.swift */,
-				448533F12A76089B006CBE69 /* ImpulsesView.swift */,
-				44EA21F82A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift */,
-				446F9DDC2A7C8B1400997D48 /* ChevronFromScratch.swift */,
-				446F9DDE2A7C9D5900997D48 /* ImpulseCellStyle.swift */,
-			);
-			path = OldProfileView;
 			sourceTree = "<group>";
 		};
 		445E50682A74AF8800DAFCDF /* CoinView */ = {
@@ -387,9 +370,9 @@
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
 				444A58E72A4FC353006FC02B /* CollectionView */,
-				445DD50E2A75BFBB00DC56C8 /* OldProfileView */,
+				442F1AAA2A8C797A00EDB939 /* CategoriesViews */,
 				448807A82A69CD2C005377DE /* SettingsView */,
-				443DC34F2A59F50600A9DCF0 /* SupportViews */,
+				443DC34F2A59F50600A9DCF0 /* OtherViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -397,15 +380,14 @@
 		4497E3DB29F35B150029451E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4403BAF42A85D0510058617D /* CategoriesViewController */,
+				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
 				445B0FBB2A7EEEC20075657C /* Onboarding */,
 				447162FA2A83E435001D7721 /* CreateMainUI.swift */,
 				44F1EC6B2A4E569A00091BD1 /* MainCollectionView */,
-				445B0FC02A7F34E50075657C /* LaunchScreenViewController.swift */,
+				4403BAF42A85D0510058617D /* CategoriesViewController */,
 				442B54E22A7D6FA300383B54 /* ProfileView */,
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
 				448807A92A6A0705005377DE /* ImpulseExpiredView */,
-				4445FFAF29FA31510067FD1F /* OldProfileViewController.swift */,
 				442B54EB2A7DA0EF00383B54 /* SettingsView */,
 			);
 			path = Controllers;
@@ -572,8 +554,6 @@
 				4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */,
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
-				448533F22A76089B006CBE69 /* ImpulsesView.swift in Sources */,
-				446F9DDF2A7C9D5900997D48 /* ImpulseCellStyle.swift in Sources */,
 				445B0FBF2A7F2FFB0075657C /* WelcomeViewController.swift in Sources */,
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
@@ -582,11 +562,9 @@
 				4403BAFC2A85D1060058617D /* CategoriesViewControllerDelegate.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
 				445B0FC52A802F5A0075657C /* UsernameOnboardingViewController.swift in Sources */,
-				446F9DDD2A7C8B1400997D48 /* ChevronFromScratch.swift in Sources */,
 				445EF7B52A187B140013ACB1 /* SettingsViewController.swift in Sources */,
 				44EA21FD2A7AB75700ECC74C /* ButtonStyles.swift in Sources */,
 				44C749E82A58FE57000AAE63 /* Enums.swift in Sources */,
-				445E50432A72D8BC00DAFCDF /* ProfileView.swift in Sources */,
 				448534042A774E40006CBE69 /* UserStats+CoreDataProperties.swift in Sources */,
 				44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */,
 				44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */,
@@ -607,15 +585,12 @@
 				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,
 				442AB11F29F8C0940061389A /* AddToConsciousCartViewController.swift in Sources */,
 				444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */,
-				4445FFB029FA31510067FD1F /* OldProfileViewController.swift in Sources */,
 				447162FB2A83E435001D7721 /* CreateMainUI.swift in Sources */,
-				448533F02A75FF46006CBE69 /* ImpulseCellView.swift in Sources */,
 				44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */,
 				4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */,
 				446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */,
 				4497D8C02A3583E900713730 /* Impulse+CoreDataClass.swift in Sources */,
 				4403BAF82A85D0D20058617D /* CategoriesGridLayout.swift in Sources */,
-				44EA21F92A79677C00ECC74C /* ImpulseDetailViewSwiftUI.swift in Sources */,
 				445E506E2A74B57300DAFCDF /* SparkleShape.swift in Sources */,
 				44C749E22A58F007000AAE63 /* CurrencyTextField.swift in Sources */,
 				444222162A11C3E000753F8D /* ConsciousCart.xcdatamodeld in Sources */,
@@ -627,6 +602,7 @@
 				4403BAFE2A8977810058617D /* ImpulseCategoryButton.swift in Sources */,
 				4445B89D2A00BD4A0022F281 /* BarcodeScannerViewController.swift in Sources */,
 				4403BAFA2A85D0EF0058617D /* CategoryCell.swift in Sources */,
+				442F1AA92A8C785E00EDB939 /* CustomChevron.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

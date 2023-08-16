@@ -30,8 +30,17 @@ class UsernameOnboardingViewController: UIViewController {
         
         initializeHideKeyboardOnTap()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(AddToConsciousCartViewController.keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(AddToConsciousCartViewController.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     private func setupViews() {
@@ -174,6 +183,7 @@ class UsernameOnboardingViewController: UIViewController {
         guard let impulsesStateManager = impulsesStateManager else { return }
         
         impulsesStateManager.updateUserName(to: newUserName)
+        impulsesStateManager.saveUserStats()
     }
     
     private func navigateToMainScreen() {

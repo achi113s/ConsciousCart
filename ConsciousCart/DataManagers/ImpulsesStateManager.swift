@@ -43,14 +43,9 @@ final class ImpulsesStateManager {
                 print("user info placed into user var")
             } else {
                 print("No user was found so we are creating one.")
-                let newUser = UserStats(context: coreDataManager.mainManagedObjectContext)
-                newUser.id = UUID()
-                newUser.level = Int16(UserLevel.beginner.rawValue)
-                newUser.totalAmountSaved = 0.0
-                newUser.dateCreated = Date.now
-                coreDataManager.saveChanges()
+                createUserStats()
                 
-                // try reloading
+                // reload
                 listOfUsers = try coreDataManager.mainManagedObjectContext.fetch(request)
                 
                 if let user = listOfUsers.first {
@@ -61,10 +56,91 @@ final class ImpulsesStateManager {
             print("Error fetching UserStats from main context: \(error.localizedDescription)")
         }
     }
-    
-    public func updateImpulse() {
+}
+
+//MARK: - Impulses CRUD
+extension ImpulsesStateManager {
+    public func saveImpulses() {
         coreDataManager.saveChanges()
         loadImpulses()
+    }
+    
+    // Creating
+    public func addImpulse(remindDate: Date = Date(),
+                           name: String = "Unknown Name",
+                           price: Double = 0.0,
+                           imageName: String? = nil,
+                           reasonNeeded: String = "Unknown Reason",
+                           url: String = "None",
+                           category: String = "") -> Impulse {
+        
+        let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
+        newImpulse.id = UUID()
+        newImpulse.userID = userStats?.id
+        newImpulse.dateCreated = Date.now
+        newImpulse.remindDate = remindDate
+        newImpulse.name = name
+        newImpulse.price = price
+        newImpulse.imageName = imageName
+        newImpulse.reasonNeeded = reasonNeeded
+        newImpulse.url = url
+        newImpulse.category = category
+        newImpulse.completed = false
+
+        return newImpulse
+    }
+    
+    // Updating
+    public func completeImpulseWithOption(_ option: ImpulseEndedOptions, for impulse: Impulse) {
+        impulse.dateCompleted = Date.now
+        impulse.completed = true
+        
+        switch option {
+        case .waited:
+            impulse.amountSaved = impulse.price
+            updateUserAmountSaved(amount: impulse.price)
+        case .waitedAndWillBuy:
+            impulse.amountSaved = Double(0)
+            // The user doesn't save any money here, so we don't need to update userStats.
+        case .failed:
+            impulse.amountSaved = -impulse.price
+            updateUserAmountSaved(amount: -impulse.price)
+        }
+        
+        // If for whatever reason the notification is still in the NotificationCenter,
+        // remove it.
+        removePendingNotification(for: impulse)
+    }
+    
+    // Deleting
+    public func deleteImpulse(impulse: Impulse) {
+        if let index = impulses.firstIndex(of: impulse) {
+            impulses.remove(at: index)
+            
+            updateUserAmountSaved(amount: -impulse.price)
+            
+            removePendingNotification(for: impulse)
+            
+            coreDataManager.deleteObject(object: impulse)
+        }
+    }
+    
+    public func deletePendingImpulse(impulse: Impulse) {
+        if let index = pendingImpulses.firstIndex(of: impulse) {
+            pendingImpulses.remove(at: index)
+            
+            coreDataManager.deleteObject(object: impulse)
+        }
+    }
+    
+    public func deleteCompletedImpulse(impulse: Impulse) {
+        if let index = completedImpulses.firstIndex(of: impulse) {
+            completedImpulses.remove(at: index)
+            
+            updateUserAmountSaved(amount: -impulse.price)
+            
+            coreDataManager.deleteObject(object: impulse)
+        }
     }
     
     public func deleteAllImpulses() {
@@ -82,71 +158,21 @@ final class ImpulsesStateManager {
                     }
                 }
                 
-                coreDataManager.mainManagedObjectContext.delete(impulse)
+                // Remove the notifications for the Impulse.
+                removePendingNotification(for: impulse)
+                
+                coreDataManager.deleteObject(object: impulse)
             }
             
             print("All impulses deleted!")
-            
-            coreDataManager.saveChanges()
-            loadImpulses()
         } catch {
             print("Error deleting data from context: \(error.localizedDescription)")
         }
     }
-    
-    public func deleteImpulse(impulse: Impulse) {
-        if let index = impulses.firstIndex(of: impulse) {
-            impulses.remove(at: index)
-            
-            updateUserAmountSaved(amount: -impulse.price)
-            
-            coreDataManager.deleteObject(object: impulse)
-            
-            loadImpulses()
-        }
-    }
-    
-    public func deletePendingImpulse(impulse: Impulse) {
-        if let index = pendingImpulses.firstIndex(of: impulse) {
-            pendingImpulses.remove(at: index)
-            
-            coreDataManager.deleteObject(object: impulse)
-            
-            loadImpulses()
-        }
-    }
-    
-    public func deleteCompletedImpulse(impulse: Impulse) {
-        if let index = completedImpulses.firstIndex(of: impulse) {
-            completedImpulses.remove(at: index)
-            
-            coreDataManager.deleteObject(object: impulse)
-            
-            loadImpulses()
-        }
-    }
-    
-    public func deleteUser(user: UserStats) {
-        // will have to delete user then go to an onboarding screen or something
-    }
-    
-    public func getUserLevel() -> UserLevel {
-        guard let userStats = userStats else { return .beginner }
-        
-        switch userStats.level {
-        case 0:
-            return UserLevel.beginner
-        case 1:
-            return UserLevel.saver
-        case 2:
-            return UserLevel.superSaver
-        case 3:
-            return UserLevel.ultimateSaver
-        default:
-            return UserLevel.beginner
-        }
-    }
-    
+}
+
+//MARK: - Notifications Handlers
+extension ImpulsesStateManager {
     public func setupNotification(for impulse: Impulse) {
         let center = UNUserNotificationCenter.current()
         
@@ -197,32 +223,25 @@ final class ImpulsesStateManager {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
     }
-    
-    public func completeImpulseWithOption(_ option: ImpulseEndedOptions, for impulse: Impulse) {
-        impulse.dateCompleted = Date.now
-        impulse.completed = true
-        
-        switch option {
-        case .waited:
-            impulse.amountSaved = impulse.price
-            updateUserAmountSaved(amount: impulse.price)
-        case .waitedAndWillBuy:
-            impulse.amountSaved = Double(0)
-            // The user doesn't save any money here, so we don't need to update userStats.
-        case .failed:
-            impulse.amountSaved = -impulse.price
-            updateUserAmountSaved(amount: -impulse.price)
-        }
-        
-        // If for whatever reason the notification is still in the NotificationCenter,
-        // remove it.
-        removePendingNotification(for: impulse)
-        print("the impulse was completed")
-        
+}
+
+//MARK: - User Stats CRUD
+extension ImpulsesStateManager {
+    public func saveUserStats() {
         coreDataManager.saveChanges()
-        loadImpulses()
+        loadUserStats()
     }
     
+    // Creating
+    private func createUserStats() {
+        let newUser = UserStats(context: coreDataManager.mainManagedObjectContext)
+        newUser.id = UUID()
+        newUser.level = Int16(UserLevel.beginner.rawValue)
+        newUser.totalAmountSaved = 0.0
+        newUser.dateCreated = Date.now
+    }
+    
+    // Updating
     public func updateUserAmountSaved(amount: Double) {
         guard let userStats = userStats else { return }
         
@@ -240,55 +259,36 @@ final class ImpulsesStateManager {
         default:
             userStats.level = Int16(UserLevel.beginner.rawValue)
         }
-        
-        coreDataManager.saveChanges()
-        loadUserStats()
     }
-    
+
     public func updateUserName(to newName: String) {
         guard let userStats = userStats else {
             fatalError("The userStats object could not be unwrapped.")
         }
         
         userStats.userName = newName
-        coreDataManager.saveChanges()
-        print("saved changes")
-        loadUserStats()
-        print("loaded Userstats")
     }
-}
 
-//MARK: - Methods for Creating, Updating, Deleting, Impulses
-extension ImpulsesStateManager {
-    public func addImpulse(remindDate: Date = Date(),
-                           name: String = "Unknown Name",
-                           price: Double = 0.0,
-                           imageName: String? = nil,
-                           reasonNeeded: String = "Unknown Reason",
-                           url: String = "None",
-                           category: String = "") -> Impulse {
-        
-        let newImpulse = Impulse(context: coreDataManager.mainManagedObjectContext)
-        newImpulse.id = UUID()
-        newImpulse.userID = userStats?.id
-        newImpulse.dateCreated = Date.now
-        newImpulse.remindDate = remindDate
-        newImpulse.name = name
-        newImpulse.price = price
-        newImpulse.imageName = imageName
-        newImpulse.reasonNeeded = reasonNeeded
-        newImpulse.url = url
-        newImpulse.category = category
-        newImpulse.completed = false
-        
-        coreDataManager.saveChanges()
-        loadImpulses()
-        
-        return newImpulse
+    // Deleting
+    public func deleteUser() {
+        guard let userStats = userStats else { return }
+        coreDataManager.deleteObject(object: userStats)
     }
-}
-
-//MARK: - Methods for Creating, Updating, Deleting User Stats
-extension ImpulsesStateManager {
     
+    public func getUserLevel() -> UserLevel {
+        guard let userStats = userStats else { return .beginner }
+        
+        switch userStats.level {
+        case 0:
+            return UserLevel.beginner
+        case 1:
+            return UserLevel.saver
+        case 2:
+            return UserLevel.superSaver
+        case 3:
+            return UserLevel.ultimateSaver
+        default:
+            return UserLevel.beginner
+        }
+    }
 }
