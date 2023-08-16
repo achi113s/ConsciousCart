@@ -155,20 +155,26 @@ extension ImpulsesCollectionViewController {
                 switch impulseOption {
                 case .active:
                     impulse = impulsesStateManager.impulses[indexPath.row]
-                    if let impulse = impulse { impulsesStateManager.deleteImpulse(impulse: impulse) }
+                    if let impulse = impulse {
+                        impulsesStateManager.removePendingNotification(for: impulse)
+                        impulsesStateManager.deleteImpulse(impulse: impulse)
+                    }
                 case .pending:
                     impulse = impulsesStateManager.pendingImpulses[indexPath.row]
                     if let impulse = impulse { impulsesStateManager.deletePendingImpulse(impulse: impulse) }
                 case .completed:
                     impulse = impulsesStateManager.completedImpulses[indexPath.row]
-                    if let impulse = impulse { impulsesStateManager.deleteCompletedImpulse(impulse: impulse) }
+                    if let impulse = impulse {
+                        impulsesStateManager.updateUserAmountSaved(amount: -impulse.price)
+                        impulsesStateManager.deleteCompletedImpulse(impulse: impulse)
+                    }
                 default:
                     completion(false)
                     return
                 }
                 
-                collectionView.deleteItems(at: [indexPath])
                 impulsesStateManager.saveImpulses()
+                collectionView.deleteItems(at: [indexPath])
                 
                 completion(true)
             })

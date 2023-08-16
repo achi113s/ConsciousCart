@@ -177,6 +177,8 @@ extension AddToConsciousCartViewController {
         
         impulsesStateManager.setupNotification(for: impulse)
         
+        impulsesStateManager.saveImpulses()
+        
         dismiss(animated: true)
     }
     

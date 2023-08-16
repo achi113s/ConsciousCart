@@ -123,7 +123,12 @@ extension MainCollectionViewController {
                 view.frame = .init(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: CGFloat(150))
 
                 let impulse = impulsesStateManager.impulses[indexPath.row]
+                
+                impulsesStateManager.removePendingNotification(for: impulse)
+                
                 impulsesStateManager.deleteImpulse(impulse: impulse)
+                
+                impulsesStateManager.saveImpulses()
 
                 collectionView.deleteItems(at: [indexPath])
 

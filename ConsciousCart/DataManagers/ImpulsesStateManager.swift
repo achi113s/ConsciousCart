@@ -98,29 +98,19 @@ extension ImpulsesStateManager {
         switch option {
         case .waited:
             impulse.amountSaved = impulse.price
-            updateUserAmountSaved(amount: impulse.price)
         case .waitedAndWillBuy:
             impulse.amountSaved = Double(0)
             // The user doesn't save any money here, so we don't need to update userStats.
         case .failed:
             impulse.amountSaved = -impulse.price
-            updateUserAmountSaved(amount: -impulse.price)
         }
-        
-        // If for whatever reason the notification is still in the NotificationCenter,
-        // remove it.
-        removePendingNotification(for: impulse)
     }
     
     // Deleting
     public func deleteImpulse(impulse: Impulse) {
         if let index = impulses.firstIndex(of: impulse) {
             impulses.remove(at: index)
-            
-            updateUserAmountSaved(amount: -impulse.price)
-            
-            removePendingNotification(for: impulse)
-            
+        
             coreDataManager.deleteObject(object: impulse)
         }
     }
@@ -136,8 +126,6 @@ extension ImpulsesStateManager {
     public func deleteCompletedImpulse(impulse: Impulse) {
         if let index = completedImpulses.firstIndex(of: impulse) {
             completedImpulses.remove(at: index)
-            
-            updateUserAmountSaved(amount: -impulse.price)
             
             coreDataManager.deleteObject(object: impulse)
         }
@@ -209,14 +197,6 @@ extension ImpulsesStateManager {
                 }
             }
         }
-    }
-    
-    public func updateNotification(for impulse: Impulse) {
-        let center = UNUserNotificationCenter.current()
-        
-        center.removePendingNotificationRequests(withIdentifiers: [impulse.id.uuidString])
-        
-        setupNotification(for: impulse)
     }
     
     public func removePendingNotification(for impulse: Impulse) {

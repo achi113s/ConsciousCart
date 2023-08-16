@@ -180,12 +180,19 @@ extension ImpulseExpiredViewController {
             saveButton.shakeAnimation()
         case .waitedButton:
             impulsesStateManager.completeImpulseWithOption(.waited, for: impulse)
+            impulsesStateManager.updateUserAmountSaved(amount: impulse.price)
             simpleSuccess()
         case .waitedAndWillBuyButton:
             impulsesStateManager.completeImpulseWithOption(.waitedAndWillBuy, for: impulse)
         case .failedButton:
             impulsesStateManager.completeImpulseWithOption(.failed, for: impulse)
+            impulsesStateManager.updateUserAmountSaved(amount: impulse.price)
         }
+        
+        impulsesStateManager.removePendingNotification(for: impulse)
+        
+        impulsesStateManager.saveImpulses()
+        impulsesStateManager.saveUserStats()
         
         exitView()
     }
