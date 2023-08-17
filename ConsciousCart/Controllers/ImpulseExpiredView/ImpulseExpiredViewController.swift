@@ -198,8 +198,10 @@ extension ImpulseExpiredViewController {
     }
     
     func simpleSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        }
         
         SPConfettiConfiguration.particlesConfig.velocity = CGFloat(500)
         SPConfetti.startAnimating(.centerWidthToDown, particles: [.arc], duration: 1)

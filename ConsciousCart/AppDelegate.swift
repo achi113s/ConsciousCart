@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-
+        
+        registerUserDefaultsDefaults()
+        
         return true
     }
     
@@ -29,22 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         completionHandler()
     }
-
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    func displayImpulseScreenFromNotification(for response: UNNotificationResponse) {
+    private func displayImpulseScreenFromNotification(for response: UNNotificationResponse) {
         guard let sceneDelegate = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate) else {
             print("Error: Could not get Scene Delegate.")
             return
@@ -57,14 +59,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Error: Could not get UITabBarController from window.")
             return
         }
-
+        
         let impulseID = response.notification.request.identifier
-
+        
         guard let impulse = sceneDelegate.impulsesStateManager.impulses.first(where: { $0.id.uuidString == impulseID }) else {
             print("Error: Could not find Impulse.")
             return
         }
-
+        
         tabBarController.selectedIndex = TabBarKeys.mainTab.rawValue
         if let mainCVNavController = tabBarController.selectedViewController as? UINavigationController {
             let impulseExpiredVC = ImpulseExpiredViewController()
@@ -73,16 +75,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // this type of modal presentation forces the presentingViewController to call
             // viewWillAppear when the new one is dismissed.
             impulseExpiredVC.modalPresentationStyle = .fullScreen
-                
+            
             let modalController = UINavigationController(rootViewController: impulseExpiredVC)
-
+            
             mainCVNavController.present(modalController, animated: true)
         } else {
             print("Error: Could not present a new view controller.")
         }
-
+        
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+    }
+    
+    private func registerUserDefaultsDefaults() {
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKeys.allowHaptics.rawValue: true,
+            UserDefaultsKeys.accentColor.rawValue: "ShyMoment"
+        ])
     }
 }
 

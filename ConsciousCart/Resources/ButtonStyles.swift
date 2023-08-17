@@ -21,3 +21,20 @@ struct CCButtonStyle: ButtonStyle {
             .font(Font.custom("Nunito-Semibold", size: 17))
     }
 }
+
+// Use this to apply the same style as above, but to non-button items.
+struct CCSettingModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+            .background(.white)
+            .cornerRadius(8)
+            .foregroundColor(.black)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: .init(lineWidth: 1))
+                    .fill(Color.init(white: 0.9))
+            )
+            .font(Font.custom("Nunito-Semibold", size: 17))
+    }
+}

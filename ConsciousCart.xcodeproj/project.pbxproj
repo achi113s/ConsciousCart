@@ -248,7 +248,7 @@
 			path = OtherViews;
 			sourceTree = "<group>";
 		};
-		444A58E72A4FC353006FC02B /* CollectionView */ = {
+		444A58E72A4FC353006FC02B /* MainCollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				44AB96E92A47E74E00112B5D /* SavingsChart.swift */,
@@ -256,7 +256,7 @@
 				444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */,
 				4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */,
 			);
-			path = CollectionView;
+			path = MainCollectionView;
 			sourceTree = "<group>";
 		};
 		4450EED12A088A6A00D8C680 /* DataManagers */ = {
@@ -369,7 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				4497E3A529F358BC0029451E /* LaunchScreen.storyboard */,
-				444A58E72A4FC353006FC02B /* CollectionView */,
+				444A58E72A4FC353006FC02B /* MainCollectionView */,
 				442F1AAA2A8C797A00EDB939 /* CategoriesViews */,
 				448807A82A69CD2C005377DE /* SettingsView */,
 				443DC34F2A59F50600A9DCF0 /* OtherViews */,
@@ -385,8 +385,8 @@
 				447162FA2A83E435001D7721 /* CreateMainUI.swift */,
 				44F1EC6B2A4E569A00091BD1 /* MainCollectionView */,
 				4403BAF42A85D0510058617D /* CategoriesViewController */,
-				442B54E22A7D6FA300383B54 /* ProfileView */,
 				445EF7B02A1879630013ACB1 /* ImpulseDetailViewController.swift */,
+				442B54E22A7D6FA300383B54 /* ProfileView */,
 				448807A92A6A0705005377DE /* ImpulseExpiredView */,
 				442B54EB2A7DA0EF00383B54 /* SettingsView */,
 			);

@@ -39,7 +39,7 @@ class AddToConsciousCartViewController: UIViewController, UINavigationController
     private var categoryStack: UIStackView! = nil
     private var selectedCategory: ImpulseCategory? = nil
     
-    private var itemReminderCategoryStack: UIStackView! = nil
+//    private var itemReminderCategoryStack: UIStackView! = nil
     
     private var inputItemsStack: UIStackView!
     
@@ -179,7 +179,16 @@ extension AddToConsciousCartViewController {
         
         impulsesStateManager.saveImpulses()
         
+        simpleSuccess()
+        
         dismiss(animated: true)
+    }
+    
+    func simpleSuccess() {
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        }
     }
     
     @objc func keyboardWillShow(_ notification: NSNotification) {
@@ -227,10 +236,10 @@ extension AddToConsciousCartViewController {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        
+
         vc.categoryChangedDelegate = self
         vc.previouslySelectedCategory = selectedCategory
-        
+
         present(vc, animated: true)
     }
 }
@@ -344,26 +353,25 @@ extension AddToConsciousCartViewController {
         categoryLabel.textAlignment = .center
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        categoriesButton = ImpulseCategoryButton()
-        categoriesButton.translatesAutoresizingMaskIntoConstraints = false
+        categoriesButton = ImpulseCategoryButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         categoriesButton.setCategoryNameTo("Tap to Choose")
         categoriesButton.setEmojiTo("☺️")
         categoriesButton.addTarget(self, action: #selector(showCategoryPicker), for: .touchUpInside)
         
-        categoryStack = UIStackView(arrangedSubviews: [categoryLabel, categoriesButton])
-        categoryStack.translatesAutoresizingMaskIntoConstraints = false
-        categoryStack.axis = .vertical
-        categoryStack.spacing = 5
-        categoryStack.distribution = .equalSpacing
+//        categoryStack = UIStackView(arrangedSubviews: [categoryLabel, categoriesButton])
+//        categoryStack.translatesAutoresizingMaskIntoConstraints = false
+//        categoryStack.axis = .vertical
+//        categoryStack.spacing = 5
+//        categoryStack.distribution = .equalSpacing
         
-        itemReminderCategoryStack = UIStackView(arrangedSubviews: [reminderDateStack, categoryStack])
-        itemReminderCategoryStack.translatesAutoresizingMaskIntoConstraints = false
-        itemReminderCategoryStack.axis = .horizontal
-        itemReminderCategoryStack.distribution = .equalSpacing
-        itemReminderCategoryStack.spacing = 5
-        itemReminderCategoryStack.alignment = .center
+//        itemReminderCategoryStack = UIStackView(arrangedSubviews: [reminderDateStack, categoryStack])
+//        itemReminderCategoryStack.translatesAutoresizingMaskIntoConstraints = false
+//        itemReminderCategoryStack.axis = .horizontal
+//        itemReminderCategoryStack.distribution = .equalSpacing
+//        itemReminderCategoryStack.spacing = 5
+//        itemReminderCategoryStack.alignment = .center
         
-        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemURLTextField, itemPriceTextField, itemReminderCategoryStack])
+        inputItemsStack = UIStackView(arrangedSubviews: [itemNameTextField, itemReasonNeededTextField, itemURLTextField, itemPriceTextField, itemRemindDate, categoriesButton])
         inputItemsStack.spacing = 15
         inputItemsStack.axis = .vertical
         inputItemsStack.alignment = .center
@@ -423,17 +431,19 @@ extension AddToConsciousCartViewController {
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemPriceTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            itemRemindLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+//            itemRemindLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+//            itemRemindLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
             itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+            itemRemindDate.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
             
-            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-            categoryLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+//            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
+//            categoryLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
             categoriesButton.heightAnchor.constraint(equalToConstant: 100),
+            categoriesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
             
-            itemReminderCategoryStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+//            itemReminderCategoryStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             inputItemsStack.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             inputItemsStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

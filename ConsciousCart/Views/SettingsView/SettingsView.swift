@@ -13,10 +13,9 @@ struct SettingsView: View {
     
     @State private var showingDeleteAlert = false
     @State private var showingAccentResetAlert = false
-    //    @State private var forceDarkModeSetting = UserDefaults.standard.bool(forKey: UserDefaultsKeys.forceDarkModeSetting.rawValue)
-    //    @State private var selectedAccentColor: Color = Color(
-    //        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
     @State private var selectedAccentColor: String = UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment"
+    
+    @State private var allowHaptics: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue)
     
     @State private var userNameField: String = ""
     @FocusState private var userNameFieldFocused: Bool
@@ -100,6 +99,22 @@ struct SettingsView: View {
                         .buttonStyle(CCButtonStyle())
                     }
                     
+                    VStack(alignment: .leading, spacing: interButtonSpacing) {
+                        VStack(alignment: .leading, spacing: spacingToSectionLabel) {
+                            SectionLabel(text: "Effects")
+                            
+                            Toggle("🫨  Allow Haptics", isOn: $allowHaptics)
+                                .tint(.green)
+                                .onChange(of: allowHaptics, perform: { newValue in
+                                    UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.allowHaptics.rawValue)
+                                    print("allowHaptics set to \(UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue))")
+                                })
+                                .frame(height: 30)
+                                .modifier(CCSettingModifier())
+                            
+                        }
+                    }
+                    
                     // Two VStacks for one element because there is currently only
                     // one element in this section now. So the first VStack is not
                     // necessary but there for consistency.
@@ -108,26 +123,15 @@ struct SettingsView: View {
                             SectionLabel(text: "Appearance")
                             
                             CustomColorPicker("🎨  Accent Color",
-                                              colors: ["ShyMoment", "Yriel", "Soil", "DarkMountainMeadow"],
+                                              colors: ["ShyMoment", "Yriel", "Soil", "DarkMountainMeadow", "ElectronBlue"],
                                               selectedColor: $selectedAccentColor,
                                               colorShapeSize: CGSize(width: 20, height: 20)
                             )
                             .onChange(of: selectedAccentColor, perform: { newColor in
-                                //                                let uiColor = UIColor(named: newColor)
-                                
                                 UserDefaults.standard.set(newColor, forKey: UserDefaultsKeys.accentColor.rawValue)
                             })
-                            .frame(height: 40)
-                            .padding(EdgeInsets(top: 3, leading: 10, bottom: 3, trailing: 25))
-                            .background(.white)
-                            .cornerRadius(8)
-                            .foregroundColor(.black)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(style: .init(lineWidth: 1))
-                                    .fill(Color.init(white: 0.9))
-                            )
-                            .font(Font.custom("Nunito-Semibold", size: 17))
+                            .frame(height: 30)
+                            .modifier(CCSettingModifier())
                         }
                     }
                     

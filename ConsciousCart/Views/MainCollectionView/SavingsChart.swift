@@ -16,9 +16,7 @@ struct SavingsChart: View {
     
     @State private var selectedItemOnChart: Item? = nil
     
-    
-    private var chartColor: Color = Color(
-        uiColor: UserDefaults.standard.color(forKey: UserDefaultsKeys.accentColor.rawValue) ?? UIColor(named: "ShyMoment")!)
+    private var chartColor: Color = Color(UserDefaults.standard.string(forKey: UserDefaultsKeys.accentColor.rawValue) ?? "ShyMoment")
     
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     

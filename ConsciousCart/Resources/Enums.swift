@@ -98,6 +98,7 @@ enum TabBarKeys: Int {
 enum UserDefaultsKeys: String {
     case forceDarkModeSetting = "forceDarkMode"
     case accentColor = "accentColor"
+    case allowHaptics = "allowHaptics"
 }
 
 enum UserLevel: Int {
