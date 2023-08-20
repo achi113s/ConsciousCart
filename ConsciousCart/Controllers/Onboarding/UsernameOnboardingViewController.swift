@@ -32,12 +32,12 @@ class UsernameOnboardingViewController: UIViewController {
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(AddToConsciousCartViewController.keyboardWillShow),
+            selector: #selector(AddToCCViewController.keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification, object: nil
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(AddToConsciousCartViewController.keyboardWillHide),
+            selector: #selector(AddToCCViewController.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )

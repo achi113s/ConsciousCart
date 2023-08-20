@@ -12,11 +12,31 @@ class ImpulseCategoryButton: UIControl {
     private var categoryLabel: UILabel! = nil
     private var emojiLabel: UILabel! = nil
     private var containerView: UIStackView! = nil
-
+    
     override var isHighlighted: Bool {
         didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.backgroundColor = self.isHighlighted ? UIColor(white: 0.90, alpha: 1.0) : UIColor(white: 0.95, alpha: 1.0)
+            if self.isHighlighted {
+                UIView.animate(
+                    withDuration: 1,
+                    delay: 0,
+                    usingSpringWithDamping: CategoryCell.springDamping,
+                    initialSpringVelocity: CategoryCell.springVelocity,
+                    options: .allowUserInteraction) {
+                    self.transform = CGAffineTransform(scaleX: CategoryCell.scaleWhenCellIsSelected, y: CategoryCell.scaleWhenCellIsSelected)
+                }
+                
+                self.backgroundColor = UIColor(white: 0.90, alpha: 1.0)
+            } else {
+                UIView.animate(
+                    withDuration: 0.5,
+                    delay: 0,
+                    usingSpringWithDamping: CategoryCell.springDamping,
+                    initialSpringVelocity: CategoryCell.springVelocity,
+                    options: .allowUserInteraction) {
+                    self.transform = CGAffineTransform.identity
+                }
+                
+                self.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
             }
         }
     }

@@ -195,8 +195,8 @@ extension MainCollectionViewController {
     }
     
     @objc private func addToConsciousCart() {
-        let addToCartVC = AddToConsciousCartViewController()
-
+//        let addToCartVC = AddToConsciousCartViewController()
+        let addToCartVC = AddToCCViewController()
         addToCartVC.impulsesStateManager = impulsesStateManager
 
         let modalController = UINavigationController(rootViewController: addToCartVC)

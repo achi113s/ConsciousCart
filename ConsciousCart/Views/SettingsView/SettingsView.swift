@@ -33,8 +33,8 @@ struct SettingsView: View {
     let interGroupSpacing: CGFloat = 25
     
     let deleteMessage: String = """
-        Are you sure you want to permanently delete all of
-        your Impulses and settings? This action cannot be undone.
+    Are you sure you want to permanently delete all of \
+    your data? This action cannot be undone.
     """
     
     var body: some View {
@@ -192,8 +192,7 @@ struct SettingsView: View {
                                 impulsesStateManager?.deleteUser()
                                 impulsesStateManager?.saveImpulses()
                                 impulsesStateManager?.saveUserStats()
-                                
-                                //                                impulsesStateManager?.deleteUser()
+
                                 Utils.resetUserDefaults()
                             }
                         } message: {

@@ -138,21 +138,6 @@ extension UILabel {
     }
 }
 
-//MARK: - Extension to Hide Keyboard on Tap
-extension UIViewController {
-    func initializeHideKeyboardOnTap(){
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissMyKeyboardOnTap))
-        
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissMyKeyboardOnTap(){
-        view.endEditing(true)
-    }
-}
-
 /// Color extension to UserDefaults by Andrew on StackOverflow.
 /// https://stackoverflow.com/a/30576832/21574991
 extension UserDefaults {

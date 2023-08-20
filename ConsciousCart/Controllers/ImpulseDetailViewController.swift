@@ -20,14 +20,13 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
     
     private var image: UIImage! = nil
     private var imageView: UIImageView! = nil
-    private var imageContainerView: UIView!
     private var changeImageButton: UIButton!
+    private var imageDidChange: Bool = false
     
     private var itemNameLabel: UILabel! = nil
     private var itemReasonNeededLabel: UILabel! = nil
     private var itemURLLabel: UILabel! = nil
     private var itemPriceLabel: UILabel! = nil
-
     
     private var itemNameTextField: ConsciousCartTextView! = nil
     private var itemReasonNeededTextField: ConsciousCartTextView! = nil
@@ -66,7 +65,6 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
         configureLayoutConstraints()
         
         if viewShowsPendingImpulses {
-            print("viewshowspending")
             configuredFinishImpulseButton()
         }
         
@@ -74,8 +72,8 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
         
         initializeHideKeyboardOnTap()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AddToConsciousCartViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddToCCViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddToCCViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +82,12 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
         if let parent = self.parent {
             parent.navigationItem.rightBarButtonItems = self.navigationItem.rightBarButtonItems
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentSize = contentView.frame.size
+        
     }
 }
 
@@ -115,20 +119,10 @@ extension ImpulseDetailViewController {
             image = UIImage(systemName: "cart.circle", withConfiguration: largeConfig)?.withTintColor(.black, renderingMode: .alwaysOriginal)
         }
         
-//        imageView = UIImageView(image: image)
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.contentMode = .scaleAspectFit
-        
-        imageContainerView = UIView()
-        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
-        imageContainerView.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
-        imageContainerView.layer.borderWidth = 1
-        imageContainerView.layer.borderColor = UIColor.black.cgColor
-        
         imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
+        imageView.layer.cornerRadius = view.bounds.width * 0.3 * 0.2
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.masksToBounds = true
@@ -137,17 +131,17 @@ extension ImpulseDetailViewController {
         changeImageButton.translatesAutoresizingMaskIntoConstraints = false
         changeImageButton.setTitle("Change Image", for: .normal)
         changeImageButton.titleLabel?.font = UIFont(name: "Nunito-Regular", size: 17)
+        changeImageButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        changeImageButton.titleLabel?.minimumScaleFactor = 0.5
         changeImageButton.tintColor = .white
         changeImageButton.backgroundColor = UIColor(white: 0.05, alpha: 0.8)
         changeImageButton.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
-        changeImageButton.layer.cornerRadius = view.bounds.width * 0.3 * 0.5
+        changeImageButton.layer.cornerRadius = view.bounds.width * 0.3 * 0.2
         changeImageButton.layer.borderWidth = 1
         changeImageButton.layer.borderColor = UIColor.black.cgColor
         changeImageButton.layer.masksToBounds = true
         changeImageButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        
-        imageContainerView.addSubview(imageView)
-        imageContainerView.addSubview(changeImageButton)
+        changeImageButton.isHidden = true
         
         itemNameLabel = UILabel()
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -264,7 +258,8 @@ extension ImpulseDetailViewController {
     private func addSubViewsToView() {
         view.addSubview(scrollView)
         
-        contentView.addSubview(imageContainerView)
+        contentView.addSubview(imageView)
+        contentView.addSubview(changeImageButton)
         
         impulsePropertiesStack.addArrangedSubview(itemNameLabel)
         impulsePropertiesStack.addArrangedSubview(itemNameTextField)
@@ -296,15 +291,15 @@ extension ImpulseDetailViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            imageContainerView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            imageContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            imageContainerView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
-            imageContainerView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            imageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
-            changeImageButton.heightAnchor.constraint(equalTo: imageContainerView.heightAnchor, multiplier: 0.3),
-            changeImageButton.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor),
-            changeImageButton.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor),
-            changeImageButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+            changeImageButton.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.3),
+            changeImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            changeImageButton.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+            changeImageButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             
             impulsePropertiesStack.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             impulsePropertiesStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
@@ -322,8 +317,6 @@ extension ImpulseDetailViewController {
             itemPriceTextField.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             itemPriceTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             
-//            itemRemindDate.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
-//            itemRemindDate.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
             itemReminderDateLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 31),
             itemReminderDateLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
@@ -348,7 +341,7 @@ extension ImpulseDetailViewController {
         NSLayoutConstraint.activate([
             finishImpulseButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             finishImpulseButton.heightAnchor.constraint(equalToConstant: 50),
-            finishImpulseButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            finishImpulseButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             finishImpulseButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
@@ -397,11 +390,13 @@ extension ImpulseDetailViewController {
             updateImpulse()
         }
         
-        toggleTextFieldsEditable()
+        toggleFieldsEditable()
     }
     
-    private func toggleTextFieldsEditable() {
+    private func toggleFieldsEditable() {
         canEditText.toggle()
+        
+        changeImageButton.isHidden.toggle()
         
         itemNameTextField.isEditable.toggle()
         itemNameTextField.isSelectable = canEditText ? true : false
@@ -445,7 +440,7 @@ extension ImpulseDetailViewController {
         let update = UIAlertAction(title: "Update", style: .default) { [weak self] _ in
             guard let impulse = self?.impulse else { return }
             guard let impulsesStateManager = self?.impulsesStateManager else { return }
-                
+            
             self?.stageUpdatesForImpulse()
             // this needs to be updated. should not modify impulses from a view controller
             impulsesStateManager.saveImpulses()
@@ -472,6 +467,7 @@ extension ImpulseDetailViewController {
         if itemRemindDate.date != impulse?.unwrappedRemindDate { return true }
         if itemURLTextField.text.trimmingCharacters(in: .whitespacesAndNewlines) != impulse?.unwrappedURLString { return true }
         if categoriesButton.getCategoryName() != impulse.unwrappedCategory { return true }
+        if imageDidChange { return true }
         
         return false
     }
@@ -491,6 +487,41 @@ extension ImpulseDetailViewController {
         if let url = itemURLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
             impulse.url = url
             itemURLTextField.attributedText = createAttrURL(with: url)
+        }
+        
+        if imageDidChange {
+            deleteOldImageFor(impulse)
+            
+            if let newImageName = saveNewImpulseImage() {
+                impulse.imageName = newImageName
+            }
+        }
+    }
+    
+    func saveNewImpulseImage() -> String? {
+        var imageName: String? = nil
+        if let image = imageView.image {
+            do {
+                if let imageData = image.pngData() {
+                    imageName = UUID().uuidString
+                    try imageData.write(to: FileManager.documentsDirectory.appendingPathComponent(imageName!, conformingTo: .png))
+                }
+            } catch {
+                print("Could not save image for Impulse.")
+            }
+        }
+        
+        return imageName
+    }
+    
+    func deleteOldImageFor(_ impulse: Impulse) {
+        if let oldImage = impulse.imageName {
+            let imagePathName = FileManager.documentsDirectory.appendingPathComponent(oldImage, conformingTo: .png)
+            do {
+                try FileManager.default.removeItem(at: imagePathName)
+            } catch {
+                print("Could not delete Impulse's image: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -590,6 +621,7 @@ extension ImpulseDetailViewController: UIImagePickerControllerDelegate {
         
         DispatchQueue.main.async {
             self.imageView.image = image
+            self.imageDidChange = true
         }
     }
 }
@@ -606,6 +638,7 @@ extension ImpulseDetailViewController: PHPickerViewControllerDelegate {
             provider.loadObject(ofClass: UIImage.self) { image, _ in
                 DispatchQueue.main.async {
                     self.imageView.image = image as? UIImage
+                    self.imageDidChange = true
                 }
             }
         }
