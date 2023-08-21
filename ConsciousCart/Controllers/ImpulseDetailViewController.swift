@@ -289,7 +289,7 @@ extension ImpulseDetailViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.1),
             
             imageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
@@ -341,7 +341,7 @@ extension ImpulseDetailViewController {
         NSLayoutConstraint.activate([
             finishImpulseButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             finishImpulseButton.heightAnchor.constraint(equalToConstant: 50),
-            finishImpulseButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            finishImpulseButton.topAnchor.constraint(equalTo: itemReminderCategoryStack.bottomAnchor, constant: 20),
             finishImpulseButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }

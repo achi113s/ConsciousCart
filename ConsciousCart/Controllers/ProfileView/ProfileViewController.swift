@@ -94,6 +94,11 @@ extension ProfileViewController {
         }
     }
     
+    private func refreshCoinView() {
+        coinHostView.layoutSubviews()
+//        setupCoinView()
+    }
+    
     private func configureSubviews() {
         contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -209,9 +214,11 @@ extension ProfileViewController {
     }
     
     private func updateOnAppear() {
+        refreshCoinView()
         userLevel = impulsesStateManager.getUserLevel()
         messageLabel.textColor = redOrGreen(for: score)
         messageLabel.text = scoreMessage
+        
         scoreLabel.textColor = redOrGreen(for: score)
         scoreLabel.text = String("\(score)").asCurrency(locale: Locale.current)
         
