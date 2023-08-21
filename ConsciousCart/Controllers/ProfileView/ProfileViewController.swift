@@ -211,6 +211,7 @@ extension ProfileViewController {
     private func updateOnAppear() {
         userLevel = impulsesStateManager.getUserLevel()
         messageLabel.textColor = redOrGreen(for: score)
+        messageLabel.text = scoreMessage
         scoreLabel.textColor = redOrGreen(for: score)
         scoreLabel.text = String("\(score)").asCurrency(locale: Locale.current)
         

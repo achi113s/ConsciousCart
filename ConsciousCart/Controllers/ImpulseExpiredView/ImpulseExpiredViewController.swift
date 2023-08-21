@@ -186,7 +186,7 @@ extension ImpulseExpiredViewController {
             impulsesStateManager.completeImpulseWithOption(.waitedAndWillBuy, for: impulse)
         case .failedButton:
             impulsesStateManager.completeImpulseWithOption(.failed, for: impulse)
-            impulsesStateManager.updateUserAmountSaved(amount: impulse.price)
+            impulsesStateManager.updateUserAmountSaved(amount: -impulse.price)
         }
         
         impulsesStateManager.removePendingNotification(for: impulse)
