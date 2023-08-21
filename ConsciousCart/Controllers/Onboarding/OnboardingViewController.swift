@@ -56,7 +56,7 @@ class OnboardingViewController: UIPageViewController {
         \nTap on the Add to Cart button\non the home page \
         to add a new one. \
         \nSet a reminder date and we'll ask you about it later! \
-        \nIf you buy it before then, you lose points. If you don't, you score big!
+        \nIf you buy it before then, you lose points. If you don't, you score!
         """
         let page2 = SecondOnboardingView(title: page2Title, subtitle: page2Subtitle, imageName: "impulseExample")
         
