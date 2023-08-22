@@ -172,9 +172,9 @@ extension ImpulsesStateManager {
             content.categoryIdentifier = NotificationCategory.impulseExpired.rawValue
             
             let calendar = Calendar.current
-            let dateComponents = calendar.dateComponents(in: .current, from: impulse.unwrappedRemindDate)
+            let dateComponents = calendar.dateComponents([.year, .day, .month, .hour, .minute, .second], from: impulse.unwrappedRemindDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+//                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             
             let request = UNNotificationRequest(identifier: impulse.id.uuidString, content: content, trigger: trigger)
             center.add(request)

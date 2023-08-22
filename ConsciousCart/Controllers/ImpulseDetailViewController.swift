@@ -209,7 +209,6 @@ extension ImpulseDetailViewController {
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
         itemRemindDate.contentHorizontalAlignment = .center
         itemRemindDate.date = impulse?.unwrappedRemindDate ?? Date.now
-        itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
         itemRemindDate.isEnabled = false
         
         reminderDateStack = UIStackView(arrangedSubviews: [itemReminderDateLabel, itemRemindDate])
@@ -525,31 +524,26 @@ extension ImpulseDetailViewController {
         }
     }
     
-    @objc private func uploadImage() {
+    @objc func uploadImage() {
         let alert = UIAlertController(title: "Upload an Image", message: nil, preferredStyle: .actionSheet)
         
         let selectImageFromLibrary = UIAlertAction(title: "Choose from Library", style: .default) { [weak self] action in
-            var pickerConfig = PHPickerConfiguration()
-            
-            // Setting selectionLimit to 1 forces auto dismissal of the view immediately
-            // upon image selection, so we'll set it
-            // to 2 and then only import the first image later.
-            pickerConfig.selectionLimit = 2
-            pickerConfig.filter = .images
-            pickerConfig.selection = .ordered
-            
-            let phPickerController = PHPickerViewController(configuration: pickerConfig)
-            phPickerController.delegate = self
-            
-            self?.present(phPickerController, animated: true)
+            self?.presentPhotosPicker()
         }
         
-        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [weak self] action in
-            let pickerVC = UIImagePickerController()
-            pickerVC.sourceType = .camera
-            pickerVC.allowsEditing = true
-            pickerVC.delegate = self
-            self?.present(pickerVC, animated: true)
+        let takePhoto = UIAlertAction(title: "Take a Picture", style: .default) { [weak self] action in
+            let authorizedForCamera = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authorizedForCamera {
+            case .notDetermined:
+                self?.requestCameraPermission()
+            case .denied, .restricted:
+                self?.alertCameraAccessNeeded()
+            case .authorized:
+                self?.presentCamera()
+            default:
+                self?.presentUnknownErrorOccured()
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -559,6 +553,67 @@ extension ImpulseDetailViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
+    }
+    
+    private func presentCamera() {
+        let pickerVC = UIImagePickerController()
+        pickerVC.sourceType = .camera
+        pickerVC.allowsEditing = true
+        pickerVC.delegate = self
+        present(pickerVC, animated: true)
+    }
+    
+    private func presentPhotosPicker() {
+        var pickerConfig = PHPickerConfiguration()
+        
+        // Setting selectionLimit to 1 forces auto dismissal of the view immediately
+        // upon image selection, so we'll set it
+        // to 2 and then only import the first image later.
+        pickerConfig.selectionLimit = 2
+        pickerConfig.filter = .images
+        pickerConfig.selection = .ordered
+        
+        let phPickerController = PHPickerViewController(configuration: pickerConfig)
+        phPickerController.delegate = self
+        
+        present(phPickerController, animated: true)
+    }
+    
+    private func alertCameraAccessNeeded() {
+        let settingsAppURL = URL(string: UIApplication.openSettingsURLString)!
+        
+        let alert = UIAlertController(
+            title: "Camera Access Denied",
+            message: "Camera access is required to take pictures for your Impulse and use the barcode scanning feature.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -> Void in
+            UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func requestCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: { accessGranted in
+            guard accessGranted == true else { return }
+            self.presentCamera()
+        })
+    }
+    
+    private func presentUnknownErrorOccured() {
+        let alert = UIAlertController(
+            title: "Unknown Error",
+            message: "An unknown error occurred while trying to open the camera.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 

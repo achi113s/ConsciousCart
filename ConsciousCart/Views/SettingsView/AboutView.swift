@@ -13,16 +13,28 @@ struct AboutView: View {
     I'm a self-taught iOS Engineer who has a background in physics. The idea for \
     this app came from my own experience practicing delayed \
     gratification to curb regretful spending. \n
-    I want to thank my friends and family for their unwavering support. \
-    Without them this wouldn't be possible.
+    I want to thank my friends and family for their unwavering support, \
+    without whom this app wouldn't exist.
+    """
+    
+    let madeWithLove: String = """
+    Made with ❤️‍🔥 by
     """
     var body: some View {
-        VStack(alignment: .center, spacing: 50) {
+        VStack(alignment: .center, spacing: 10) {
+            HStack(spacing: 4) {
+                Text(madeWithLove)
+                    .multilineTextAlignment(.center)
+                    .font(Font.custom("Nunito-Semibold", size: 17))
+                Link("@giorgio_latour", destination: URL(string: "https://twitter.com/giorgio_latour")!)
+                    .font(Font.custom("Nunito-Semibold", size: 17))
+                    .foregroundColor(.blue)
+            }
+            
             Text(aboutText)
                 .multilineTextAlignment(.center)
                 .font(Font.custom("Nunito-Semibold", size: 17))
-            Text("💡")
-                .font(.system(size: 50))
+                .padding()
         }
         .padding()
         .navigationTitle("About")

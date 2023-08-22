@@ -15,7 +15,7 @@
 		4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */; };
 		4413DCC62A5264B800C39D55 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */; };
 		4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */; };
-		442854162A913910009100B4 /* NewAddToCCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442854152A913910009100B4 /* NewAddToCCViewController.swift */; };
+		442854162A913910009100B4 /* AddToCCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442854152A913910009100B4 /* AddToCCViewController.swift */; };
 		442854192A916DF7009100B4 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442854182A916DF7009100B4 /* UIViewControllerExtensions.swift */; };
 		44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */; };
 		442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B54E32A7D6FC400383B54 /* ProfileViewController.swift */; };
@@ -99,7 +99,7 @@
 		4413DCC12A52268C00C39D55 /* ImpulseCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCollectionViewListCell.swift; sourceTree = "<group>"; };
 		4413DCC52A5264B800C39D55 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoImpulsesFooter.swift; sourceTree = "<group>"; };
-		442854152A913910009100B4 /* NewAddToCCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddToCCViewController.swift; sourceTree = "<group>"; };
+		442854152A913910009100B4 /* AddToCCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCCViewController.swift; sourceTree = "<group>"; };
 		442854182A916DF7009100B4 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		44296B4F29F62A8A0030FF3D /* ConsciousCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartButton.swift; sourceTree = "<group>"; };
 		442B54E32A7D6FC400383B54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				4445B89C2A00BD4A0022F281 /* BarcodeScannerViewController.swift */,
-				442854152A913910009100B4 /* NewAddToCCViewController.swift */,
+				442854152A913910009100B4 /* AddToCCViewController.swift */,
 			);
 			path = AddToConsciousCartView;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */,
-				442854162A913910009100B4 /* NewAddToCCViewController.swift in Sources */,
+				442854162A913910009100B4 /* AddToCCViewController.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
 				445EF7B12A1879630013ACB1 /* ImpulseDetailViewController.swift in Sources */,
 				448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */,
@@ -778,13 +778,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E24P6RF94S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConsciousCart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConsciousCart;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSCameraUsageDescription = "The app uses the camera to capture photos which are shown alongside your Impulse description. It also uses the camera to scan barcodes to retrieve product information from the internet.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app uses the camera to capture photos to enhance your Impulse descriptions. It also uses the camera to scan barcodes to retrieve product information from the internet.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app will show your selected photo alongside your Impulse description.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -795,7 +795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -813,13 +813,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E24P6RF94S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConsciousCart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConsciousCart;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSCameraUsageDescription = "The app uses the camera to capture photos which are shown alongside your Impulse description. It also uses the camera to scan barcodes to retrieve product information from the internet.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app uses the camera to capture photos to enhance your Impulse descriptions. It also uses the camera to scan barcodes to retrieve product information from the internet.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app will show your selected photo alongside your Impulse description.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -830,7 +830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -39,6 +39,7 @@ struct SettingsView: View {
     """
     
     @Environment(\.requestReview) var requestReview
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         NavigationView {
@@ -69,7 +70,7 @@ struct SettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Text("📧  Share Feedback or Report a Bug")
+                                Text("📧  Share Feedback")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
                                     .foregroundColor(Color.init(white: 0.7))
@@ -91,7 +92,21 @@ struct SettingsView: View {
                             requestReview()
                         } label: {
                             HStack {
-                                Text("💫  Rate ConsciousCart!")
+                                Text("💫  Rate ConsciousCart")
+                                Spacer()
+                                Image(systemName: "arrow.up.forward")
+                                    .foregroundColor(Color.init(white: 0.7))
+                                    .font(.system(size: 12, weight: .bold))
+                            }
+                            .frame(height: 30)
+                        }
+                        .buttonStyle(CCButtonStyle())
+                        
+                        Button {
+                            openURL(URL(string: "https://sites.google.com/view/consciouscart")!)
+                        } label: {
+                            HStack {
+                                Text("👨‍🔧  Support Website")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
                                     .foregroundColor(Color.init(white: 0.7))

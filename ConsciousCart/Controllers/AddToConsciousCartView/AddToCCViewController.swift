@@ -5,6 +5,7 @@
 //  Created by Giorgio Latour on 8/19/23.
 //
 
+import AVFoundation
 import PhotosUI
 import UIKit
 import UserNotifications
@@ -179,7 +180,7 @@ extension AddToCCViewController {
         itemRemindDate = UIDatePicker()
         itemRemindDate.contentHorizontalAlignment = .center
         itemRemindDate.date = Date.now.addingTimeInterval(TimeInterval(1209600))
-        itemRemindDate.minimumDate = Date.now.addingTimeInterval(TimeInterval(86400))
+        itemRemindDate.minimumDate = Date.now
         itemRemindDate.translatesAutoresizingMaskIntoConstraints = false
         
         reminderDateStack = UIStackView(arrangedSubviews: [itemRemindLabel, itemRemindDate])
@@ -407,29 +408,29 @@ extension AddToCCViewController {
             print("impulsesStateManager not unwrapped successfully.")
             return
         }
-
+        
         // Impulse must have a name and price at least.
         guard let itemPriceString = itemPriceTextField.text else {
             saveButton.shakeAnimation()
             return
         }
-
-
+        
+        
         let itemPrice = itemPriceString.asDoubleFromCurrency(locale: Locale.current)
-
+        
         guard let itemCategory = selectedCategory?.categoryName else {
             saveButton.shakeAnimation()
             return
         }
-
+        
         // Save the image with a UUID as its name if the user selected an image.
         // The function returns nil if there is no image to save.
         let imageName = saveImpulseImage()
         var itemName = ""
         var itemReason = ""
         var itemURL = ""
-
-
+        
+        
         if let name = itemNameTextField.text {
             if name.stringInputIsValid() {
                 itemName = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -437,7 +438,7 @@ extension AddToCCViewController {
                 itemName = "Unknown"
             }
         }
-
+        
         if let reason = itemReasonNeededTextField.text {
             if reason.stringInputIsValid() {
                 itemReason = reason.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -445,11 +446,11 @@ extension AddToCCViewController {
                 itemReason = "Unknown"
             }
         }
-
+        
         if let url = itemURLTextField.text {
             itemURL = url.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-
+        
         let impulse = impulsesStateManager.addImpulse(remindDate: itemRemindDate.date,
                                                       name: itemName,
                                                       price: itemPrice,
@@ -457,13 +458,13 @@ extension AddToCCViewController {
                                                       reasonNeeded: itemReason,
                                                       url: itemURL,
                                                       category: itemCategory)
-
+        
         impulsesStateManager.setupNotification(for: impulse)
-
+        
         impulsesStateManager.saveImpulses()
-
+        
         simpleSuccess()
-
+        
         dismiss(animated: true)
     }
     
@@ -491,6 +492,21 @@ extension AddToCCViewController {
     }
     
     @objc func scanBarcode() {
+        let authorizedForCamera = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch authorizedForCamera {
+        case .notDetermined:
+            requestCameraPermission()
+        case .denied, .restricted:
+            alertCameraAccessNeeded()
+        case .authorized:
+            presentBarcodeScanner()
+        default:
+            presentUnknownErrorOccured()
+        }
+    }
+    
+    private func presentBarcodeScanner() {
         let scanBarcodeVC = BarcodeScannerViewController()
         navigationController?.pushViewController(scanBarcodeVC, animated: true)
     }
@@ -512,27 +528,22 @@ extension AddToCCViewController {
         let alert = UIAlertController(title: "Upload an Image", message: nil, preferredStyle: .actionSheet)
         
         let selectImageFromLibrary = UIAlertAction(title: "Choose from Library", style: .default) { [weak self] action in
-            var pickerConfig = PHPickerConfiguration()
-            
-            // Setting selectionLimit to 1 forces auto dismissal of the view immediately
-            // upon image selection, so we'll set it
-            // to 2 and then only import the first image later.
-            pickerConfig.selectionLimit = 2
-            pickerConfig.filter = .images
-            pickerConfig.selection = .ordered
-            
-            let phPickerController = PHPickerViewController(configuration: pickerConfig)
-            phPickerController.delegate = self
-            
-            self?.present(phPickerController, animated: true)
+            self?.presentPhotosPicker()
         }
         
-        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [weak self] action in
-            let pickerVC = UIImagePickerController()
-            pickerVC.sourceType = .camera
-            pickerVC.allowsEditing = true
-            pickerVC.delegate = self
-            self?.present(pickerVC, animated: true)
+        let takePhoto = UIAlertAction(title: "Take a Picture", style: .default) { [weak self] action in
+            let authorizedForCamera = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authorizedForCamera {
+            case .notDetermined:
+                self?.requestCameraPermission()
+            case .denied, .restricted:
+                self?.alertCameraAccessNeeded()
+            case .authorized:
+                self?.presentCamera()
+            default:
+                self?.presentUnknownErrorOccured()
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -542,6 +553,67 @@ extension AddToCCViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
+    }
+    
+    private func presentCamera() {
+        let pickerVC = UIImagePickerController()
+        pickerVC.sourceType = .camera
+        pickerVC.allowsEditing = true
+        pickerVC.delegate = self
+        present(pickerVC, animated: true)
+    }
+    
+    private func presentPhotosPicker() {
+        var pickerConfig = PHPickerConfiguration()
+        
+        // Setting selectionLimit to 1 forces auto dismissal of the view immediately
+        // upon image selection, so we'll set it
+        // to 2 and then only import the first image later.
+        pickerConfig.selectionLimit = 2
+        pickerConfig.filter = .images
+        pickerConfig.selection = .ordered
+        
+        let phPickerController = PHPickerViewController(configuration: pickerConfig)
+        phPickerController.delegate = self
+        
+        present(phPickerController, animated: true)
+    }
+    
+    private func alertCameraAccessNeeded() {
+        let settingsAppURL = URL(string: UIApplication.openSettingsURLString)!
+        
+        let alert = UIAlertController(
+            title: "Camera Access Denied",
+            message: "Camera access is required to take pictures for your Impulse and use the barcode scanning feature.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -> Void in
+            UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func requestCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: { accessGranted in
+            guard accessGranted == true else { return }
+            self.presentCamera()
+        })
+    }
+    
+    private func presentUnknownErrorOccured() {
+        let alert = UIAlertController(
+            title: "Unknown Error",
+            message: "An unknown error occurred while trying to open the camera.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
