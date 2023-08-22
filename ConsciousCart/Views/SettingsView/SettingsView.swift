@@ -6,6 +6,7 @@
 //
 
 import MessageUI
+import StoreKit
 import SwiftUI
 
 struct SettingsView: View {
@@ -37,6 +38,8 @@ struct SettingsView: View {
     your data? This action cannot be undone.
     """
     
+    @Environment(\.requestReview) var requestReview
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -66,7 +69,7 @@ struct SettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Text("📧  Share Feedback")
+                                Text("📧  Share Feedback or Report a Bug")
                                 Spacer()
                                 Image(systemName: "arrow.up.forward")
                                     .foregroundColor(Color.init(white: 0.7))
@@ -85,7 +88,7 @@ struct SettingsView: View {
                         }
 
                         Button {
-                            
+                            requestReview()
                         } label: {
                             HStack {
                                 Text("💫  Rate ConsciousCart!")
