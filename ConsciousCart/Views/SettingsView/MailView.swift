@@ -51,7 +51,7 @@ struct MailView: UIViewControllerRepresentable {
         vc.mailComposeDelegate = context.coordinator
         
         vc.setSubject("Feedback for ConsciousCart")
-        vc.setToRecipients(["giorgiolatour19@gmail.com"])
+        vc.setToRecipients(["consciouscart12@gmail.com"])
         
         return vc
     }

@@ -556,11 +556,13 @@ extension ImpulseDetailViewController {
     }
     
     private func presentCamera() {
-        let pickerVC = UIImagePickerController()
-        pickerVC.sourceType = .camera
-        pickerVC.allowsEditing = true
-        pickerVC.delegate = self
-        present(pickerVC, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let pickerVC = UIImagePickerController()
+            pickerVC.sourceType = .camera
+            pickerVC.allowsEditing = true
+            pickerVC.delegate = self
+            self?.present(pickerVC, animated: true)
+        }
     }
     
     private func presentPhotosPicker() {
@@ -593,14 +595,13 @@ extension ImpulseDetailViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         
-        
         present(alert, animated: true, completion: nil)
     }
     
     private func requestCameraPermission() {
-        AVCaptureDevice.requestAccess(for: .video, completionHandler: { accessGranted in
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] accessGranted in
             guard accessGranted == true else { return }
-            self.presentCamera()
+            self?.presentCamera()
         })
     }
     
