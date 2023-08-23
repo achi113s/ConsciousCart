@@ -148,9 +148,9 @@ extension OnboardingViewController: UIPageViewControllerDataSource {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         
         if currentIndex == 0 {
-            return pages.last               // wrap to last
+            return nil               // dont allow scrolling left on first page
         } else {
-            return pages[currentIndex - 1]  // go previous
+            return pages[currentIndex - 1]  // go to previous
         }
     }
     

@@ -507,8 +507,10 @@ extension AddToCCViewController {
     }
     
     private func presentBarcodeScanner() {
-        let scanBarcodeVC = BarcodeScannerViewController()
-        navigationController?.pushViewController(scanBarcodeVC, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let scanBarcodeVC = BarcodeScannerViewController()
+            self?.navigationController?.pushViewController(scanBarcodeVC, animated: true)
+        }
     }
     
     @objc private func showCategoryPicker() {
@@ -556,11 +558,13 @@ extension AddToCCViewController {
     }
     
     private func presentCamera() {
-        let pickerVC = UIImagePickerController()
-        pickerVC.sourceType = .camera
-        pickerVC.allowsEditing = true
-        pickerVC.delegate = self
-        present(pickerVC, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let pickerVC = UIImagePickerController()
+            pickerVC.sourceType = .camera
+            pickerVC.allowsEditing = true
+            pickerVC.delegate = self
+            self?.present(pickerVC, animated: true)
+        }
     }
     
     private func presentPhotosPicker() {
@@ -593,14 +597,13 @@ extension AddToCCViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         
-        
         present(alert, animated: true, completion: nil)
     }
     
     private func requestCameraPermission() {
-        AVCaptureDevice.requestAccess(for: .video, completionHandler: { accessGranted in
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] accessGranted in
             guard accessGranted == true else { return }
-            self.presentCamera()
+            self?.presentCamera()
         })
     }
     
@@ -616,4 +619,3 @@ extension AddToCCViewController {
         present(alert, animated: true, completion: nil)
     }
 }
-
