@@ -12,6 +12,11 @@ struct CoinView: View {
     @State private var coinSize: CGFloat = 100
     // diameter in points, all dimensions based on this
     // so everything scales correctly if you want to make the coin bigger.
+    @ObservedObject var userLevel: UserLevel
+    // maybe can make a small view model with userLevel that conforms to ObservableObject
+    // have a public method which allows for changing the userLevel in viewWillAppear of the
+    // ProfileViewController
+    
     let dollarSignSize: CGFloat = 0.75
     let edgeWidth: CGFloat = 0.1
     let sparkleSize: CGFloat = 0.15
@@ -19,8 +24,8 @@ struct CoinView: View {
     let shine2Offset: CGFloat = 0.0
     let shineWidth: CGFloat = 0.1
     
-    @State private var baseColor: Color
-    @State private var secondaryColor: Color
+    private var baseColor: Color
+    private var secondaryColor: Color
     
     @StateObject private var motionManager = MotionManager()
     let motionStrength: CGFloat = 0.05
@@ -102,6 +107,7 @@ struct CoinView: View {
     
     init(coinSize: CGFloat, userLevel: UserLevel) {
         self.coinSize = coinSize
+        self.userLevel = userLevel
         
         switch userLevel {
         case .beginner:

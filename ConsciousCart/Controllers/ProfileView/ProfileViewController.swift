@@ -10,12 +10,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private var impulsesStateManager: ImpulsesStateManager! = nil
-    private var userLevel: UserLevel! = nil
+    @Published private var userLevel: UserLevel! = nil
     
     private var scrollView: UIScrollView! = nil
     private var contentView: UIView! = nil
     
     private var coinHostView: UIView! = nil
+    private var coinHostingController: UIHostingController<CoinView>!
     private let coinViewSize: CGFloat = 125
     
     private var messageLabel: UILabel! = nil
@@ -82,12 +83,12 @@ extension ProfileViewController {
     
     private func setupCoinView() {
         let coinView = CoinView(coinSize: coinViewSize, userLevel: userLevel)
-        let hostingViewController = UIHostingController(rootView: coinView)
+        coinHostingController = UIHostingController(rootView: coinView)
         
-        self.addChild(hostingViewController)
+        self.addChild(coinHostingController)
         
-        if hostingViewController.view != nil {
-            coinHostView = hostingViewController.view
+        if coinHostingController.view != nil {
+            coinHostView = coinHostingController.view
             coinHostView.frame = CGRect(x: 0, y: 0, width: coinViewSize, height: coinViewSize)
             coinHostView.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(coinHostView)
@@ -95,8 +96,15 @@ extension ProfileViewController {
     }
     
     private func refreshCoinView() {
-        coinHostView.layoutSubviews()
-//        setupCoinView()
+        let coinView = CoinView(coinSize: coinViewSize, userLevel: userLevel)
+        coinHostingController = UIHostingController(rootView: coinView)
+        
+        if coinHostingController.view != nil {
+            coinHostView = coinHostingController.view
+            coinHostView.frame = CGRect(x: 0, y: 0, width: coinViewSize, height: coinViewSize)
+            coinHostView.translatesAutoresizingMaskIntoConstraints = false
+        }
+        print("coin refreshed")
     }
     
     private func configureSubviews() {
@@ -216,6 +224,7 @@ extension ProfileViewController {
     private func updateOnAppear() {
         refreshCoinView()
         userLevel = impulsesStateManager.getUserLevel()
+        print(userLevel)
         messageLabel.textColor = redOrGreen(for: score)
         messageLabel.text = scoreMessage
         
