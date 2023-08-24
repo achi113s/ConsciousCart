@@ -9,10 +9,10 @@ import CoreMotion
 import SwiftUI
 
 struct CoinView: View {
-    @State private var coinSize: CGFloat = 100
+    @ObservedObject var coinViewModel: CoinViewModel
+    private var coinSize: CGFloat = 100
     // diameter in points, all dimensions based on this
     // so everything scales correctly if you want to make the coin bigger.
-    @ObservedObject var userLevel: UserLevel
     // maybe can make a small view model with userLevel that conforms to ObservableObject
     // have a public method which allows for changing the userLevel in viewWillAppear of the
     // ProfileViewController
@@ -24,25 +24,22 @@ struct CoinView: View {
     let shine2Offset: CGFloat = 0.0
     let shineWidth: CGFloat = 0.1
     
-    private var baseColor: Color
-    private var secondaryColor: Color
-    
     @StateObject private var motionManager = MotionManager()
     let motionStrength: CGFloat = 0.05
     
     var body: some View {
         ZStack {
             Circle()
-                .foregroundColor(baseColor)
+                .foregroundColor(coinViewModel.userLevel.baseColor)
                 .frame(width: coinSize)
             
             Circle()
-                .foregroundColor(secondaryColor)
+                .foregroundColor(coinViewModel.userLevel.secondaryColor)
                 .frame(width: coinSize - (coinSize * edgeWidth))
             
             Text("$")
                 .font(.custom("Nunito-Bold", size: dollarSignSize * coinSize))
-                .foregroundColor(baseColor)
+                .foregroundColor(coinViewModel.userLevel.baseColor)
             
             Rectangle()
                 .frame(width: shineWidth * coinSize, height: coinSize * 1.1)
@@ -53,7 +50,7 @@ struct CoinView: View {
                 )
                 .mask {
                     Circle()
-                        .foregroundColor(secondaryColor)
+                        .foregroundColor(coinViewModel.userLevel.secondaryColor)
                         .frame(width: coinSize)
                 }
                 .foregroundColor(Color.init(white: 0.9, opacity: 0.3))
@@ -105,32 +102,18 @@ struct CoinView: View {
         }
     }
     
-    init(coinSize: CGFloat, userLevel: UserLevel) {
+    init(coinSize: CGFloat, coinViewModel: CoinViewModel) {
         self.coinSize = coinSize
-        self.userLevel = userLevel
-        
-        switch userLevel {
-        case .beginner:
-            self.baseColor = Color("Soil")  // Soil
-            self.secondaryColor = Color("SpoiledChocolate")  // Spoiled Chocolate
-        case .saver:
-            self.baseColor = Color("LondonSquare")  // London Square
-            self.secondaryColor = Color("HintOfElusiveBlue") // Hint of Elusive Blue
-        case .superSaver:
-            self.baseColor = Color("NYCTaxi")  // NYC Taxi
-            self.secondaryColor = Color("Yriel")  // Yriel Yellow
-        case .ultimateSaver:
-            self.baseColor = Color("HintOfIce")  // Hint of Ice
-            self.secondaryColor = Color("Spray")  // Spray
-        }
+        self.coinViewModel = coinViewModel
     }
 }
 
 struct CoinView_Previews: PreviewProvider {
+    static let coinViewModel: CoinViewModel = CoinViewModel(userLevel: .ultimateSaver)
     static let coinSize: CGFloat = 300
     
     static var previews: some View {
-        CoinView(coinSize: coinSize, userLevel: .ultimateSaver)
+        CoinView(coinSize: coinSize, coinViewModel: coinViewModel)
     }
 }
 

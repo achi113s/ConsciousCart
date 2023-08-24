@@ -162,6 +162,7 @@ extension ImpulseExpiredViewController {
         case waitedAndWillBuyButton = 1
         case failedButton = 2
     }
+    
     @objc func waitedButtonPressed() {
         changeActiveOption(pressedButton: .waitedButton)
     }

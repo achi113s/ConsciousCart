@@ -5,7 +5,8 @@
 //  Created by Giorgio Latour on 7/7/23.
 //
 
-import Foundation
+import UIKit
+import SwiftUI
 
 enum ChartTimeDomain: String, CaseIterable, Identifiable {
     case threeMonths = "3M"
@@ -111,9 +112,35 @@ enum UserDefaultsKeys: String {
     case allowHaptics = "allowHaptics"
 }
 
-enum UserLevel: Int {
+enum UserLevel: Int, CaseIterable {
     case beginner = 0
     case saver = 1
     case superSaver = 2
     case ultimateSaver = 3
+    
+    var baseColor: Color {
+        switch self {
+        case .beginner:
+            return Color("Soil")  // Soil
+        case .saver:
+            return Color("LondonSquare")  // London Square
+        case .superSaver:
+            return Color("NYCTaxi")  // NYC Taxi
+        case .ultimateSaver:
+            return Color("HintOfIce")  // Hint of Ice
+        }
+    }
+    
+    var secondaryColor: Color {
+        switch self {
+        case .beginner:
+            return Color("SpoiledChocolate")  // Spoiled Chocolate
+        case .saver:
+            return Color("HintOfElusiveBlue") // Hint of Elusive Blue
+        case .superSaver:
+            return Color("Yriel")  // Yriel Yellow
+        case .ultimateSaver:
+            return Color("Spray")  // Spray
+        }
+    }
 }
