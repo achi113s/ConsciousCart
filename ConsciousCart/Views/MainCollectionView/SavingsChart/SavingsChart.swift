@@ -238,7 +238,7 @@ extension SavingsChart {
     private func oldestDateToShow(_ timeSpan: ChartTimeDomain) -> Date {
         switch timeSpan {
         case .oneWeek:
-            return Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date.now)!
+            return Calendar.current.date(byAdding: .day, value: -7, to: Date.now)!
         case .oneMonth:
             return Calendar.current.date(byAdding: .month, value: -1, to: Date.now)!
         case .threeMonths:

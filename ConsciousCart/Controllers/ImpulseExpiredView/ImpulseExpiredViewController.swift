@@ -182,7 +182,11 @@ extension ImpulseExpiredViewController {
         case .waitedButton:
             impulsesStateManager.completeImpulseWithOption(.waited, for: impulse)
             impulsesStateManager.updateUserAmountSaved(amount: impulse.price)
-            simpleSuccess()
+            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
+                let hapticsPlayer = CCHapticsPlayer()
+                hapticsPlayer.playSimpleSuccess()
+            }
+            playConfetti()
         case .waitedAndWillBuyButton:
             impulsesStateManager.completeImpulseWithOption(.waitedAndWillBuy, for: impulse)
         case .failedButton:
@@ -198,12 +202,7 @@ extension ImpulseExpiredViewController {
         exitView()
     }
     
-    func simpleSuccess() {
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-        }
-        
+    func playConfetti() {
         SPConfettiConfiguration.particlesConfig.velocity = CGFloat(500)
         SPConfetti.startAnimating(.centerWidthToDown, particles: [.arc], duration: 1)
     }

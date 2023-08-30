@@ -5,6 +5,7 @@
 //  Created by Giorgio Latour on 8/10/23.
 //
 
+import CoreHaptics
 import UIKit
 import UniformTypeIdentifiers
 
@@ -16,6 +17,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     public var categoryChangedDelegate: CategoriesViewControllerDelegate? = nil
     public var previouslySelectedCategory: ImpulseCategory? = nil
+    
+    private var hapticEngine: CHHapticEngine? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +44,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         collectionView.register(AddCategoryCell.self, forCellWithReuseIdentifier: AddCategoryCell.identifier)
         
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
-        collectionView.addGestureRecognizer(gesture)
+        prepareLongPressToDeleteGesture()
         
         view.addSubview(collectionView)
         
@@ -85,7 +87,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
             fatalError("Failed to load collection view cell")
         }
-
+        
         let categoryEmoji = impulsesStateManager.impulseCategories[index].unwrappedCategoryEmoji
         let categoryName = impulsesStateManager.impulseCategories[index].unwrappedCategoryName
         
@@ -119,12 +121,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             
             let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
-                let emoji = ac.textFields![0].text ?? "😁"
-                let categoryName = ac.textFields![1].text ?? "None"
+                let emoji = ac.textFields![0].text ?? ""
+                let categoryName = ac.textFields![1].text ?? ""
                 
-                self?.impulsesStateManager.addNewCategory(categoryEmoji: emoji, categoryName: categoryName)
-                self?.impulsesStateManager.saveImpulseCategory()
-                self?.collectionView.reloadData()
+                if categoryName.trimmingCharacters(in: .whitespacesAndNewlines) != "" && emoji.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                    self?.impulsesStateManager.addNewCategory(categoryEmoji: emoji, categoryName: categoryName)
+                    self?.impulsesStateManager.saveImpulseCategory()
+                    
+                    self?.collectionView.deselectItem(at: indexPath, animated: true)
+                    self?.collectionView.insertItems(at: [indexPath])
+//                    self?.collectionView.reloadData()
+                }
             }
             
             ac.addAction(action)
@@ -145,8 +152,58 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 
 extension CategoriesViewController {
-    @objc private func handleLongPressGesture() {
+    private func prepareLongPressToDeleteGesture() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
         
+        collectionView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func handleLongPressGesture(_ gesture: UIGestureRecognizer) {
+        guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
         
+        switch gesture.state {
+        case .began:
+            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
+                var hapticsPlayer = CCHapticsPlayer()
+                hapticsPlayer.prepareForHaptics()
+                hapticsPlayer.playSinglePointHaptic()
+            }
+            
+            showDeleteCategoryAlertMenu(for: indexPath)
+        case .possible:
+            print("df")
+        case .changed:
+            print("df")
+        case .ended:
+            print("ended")
+            showDeleteCategoryAlertMenu(for: indexPath)
+        case .cancelled:
+            print("df")
+        case .failed:
+            print("df")
+        @unknown default:
+            print("df")
+        }
+    }
+    
+    private func showDeleteCategoryAlertMenu(for indexPath: IndexPath) {
+        let categoryToDelete = self.impulsesStateManager.impulseCategories[indexPath.item]
+        
+        let ac = UIAlertController(title: "Delete Category", message: "Are you sure you want to delete the \(categoryToDelete.unwrappedCategoryName) category?", preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            self?.impulsesStateManager.deleteImpulseCategory(categoryToDelete)
+            self?.impulsesStateManager.saveCategories()
+            
+            self?.collectionView.deleteItems(at: [indexPath])
+            self?.collectionView.reloadData()
+        }
+        
+        ac.addAction(cancelAction)
+        ac.addAction(deleteAction)
+        
+        present(ac, animated: true)
     }
 }

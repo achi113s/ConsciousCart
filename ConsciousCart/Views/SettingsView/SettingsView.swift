@@ -208,8 +208,10 @@ struct SettingsView: View {
                             Button("Delete", role: .destructive) {
                                 impulsesStateManager?.deleteAllImpulses()
                                 impulsesStateManager?.deleteUser()
+                                impulsesStateManager?.deleteAllCategories()
                                 impulsesStateManager?.saveImpulses()
                                 impulsesStateManager?.saveUserStats()
+                                impulsesStateManager?.saveCategories()
 
                                 Utils.resetUserDefaults()
                             }

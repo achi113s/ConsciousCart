@@ -320,4 +320,31 @@ extension ImpulsesStateManager {
         newCategory.categoryEmoji = categoryEmoji
         newCategory.categoryName = categoryName
     }
+    
+    public func deleteImpulseCategory(_ category: ImpulseCategory) {
+        if let index = impulseCategories.firstIndex(of: category) {
+            impulseCategories.remove(at: index)
+            
+            coreDataManager.deleteObject(object: category)
+        }
+    }
+    
+    public func saveCategories() {
+        coreDataManager.saveChanges()
+        loadCategories()
+    }
+    
+    public func deleteAllCategories() {
+        do {
+            let allCategories = try coreDataManager.mainManagedObjectContext.fetch(ImpulseCategory.fetchRequest())
+            
+            for category in allCategories {
+                coreDataManager.deleteObject(object: category)
+            }
+            
+            print("All categories deleted!")
+        } catch {
+            print("Error deleting data from context: \(error.localizedDescription)")
+        }
+    }
 }

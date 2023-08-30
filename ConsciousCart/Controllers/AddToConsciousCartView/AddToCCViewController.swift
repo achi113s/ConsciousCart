@@ -463,7 +463,10 @@ extension AddToCCViewController {
         
         impulsesStateManager.saveImpulses()
         
-        simpleSuccess()
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
+            let hapticsPlayer = CCHapticsPlayer()
+            hapticsPlayer.playSimpleSuccess()
+        }
         
         dismiss(animated: true)
     }
@@ -482,13 +485,6 @@ extension AddToCCViewController {
         }
         
         return imageName
-    }
-    
-    func simpleSuccess() {
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.allowHaptics.rawValue) {
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-        }
     }
     
     @objc func scanBarcode() {
