@@ -16,18 +16,29 @@ extension FileManager {
         return paths[0]
     }
     
-    func decode<T: Decodable>(_ file: String, encodingType: UTType) -> T {
+    func decode<T: Decodable>(_ file: String, encodingType: UTType) -> T? {
         guard let data = try? Data(contentsOf: FileManager.documentsDirectory.appendingPathComponent(file, conformingTo: encodingType)) else {
-            fatalError("Failed to load \(file) from Documents.")
+            return nil
+            //            fatalError("Failed to load \(file) from Documents.")
         }
         
         let decoder = JSONDecoder()
         
         guard let loaded = try? decoder.decode(T.self, from: data) else {
-            fatalError("Failed to decode \(file) from Documents.")
+            return nil
+            //            fatalError("Failed to decode \(file) from Documents.")
         }
         
         return loaded
+    }
+    
+    func encode<T: Encodable>(_ data: T, fileName: String, encodingType: UTType) {
+        let encoder = JSONEncoder()
+        guard let encoded = try? encoder.encode(data) else {
+            fatalError("Failed to encode data.")
+        }
+        
+        try? encoded.write(to: FileManager.documentsDirectory.appendingPathComponent(fileName, conformingTo: encodingType), options: [.atomic])
     }
 }
 

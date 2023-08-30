@@ -13,6 +13,8 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
     var impulse: Impulse! = nil
     var viewShowsPendingImpulses: Bool = false
     
+    private var categoriesModel: ImpulseCategories = ImpulseCategories()
+    
     private var scrollView: UIScrollView! = nil
     private var contentView: UIView! = nil
     
@@ -225,7 +227,7 @@ extension ImpulseDetailViewController {
         categoryLabel.textAlignment = .center
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+        if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
             selectedCategory = category
         }
         

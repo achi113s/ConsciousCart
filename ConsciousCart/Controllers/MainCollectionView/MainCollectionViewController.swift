@@ -57,7 +57,7 @@ extension MainCollectionViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleHeight]
         collectionView.contentInset = UIEdgeInsets(top: CGFloat(0), left: CGFloat(0), bottom: CGFloat(10), right: CGFloat(0))
-        collectionView.backgroundColor = UIColor(named: "DefaultBackground")
+//        collectionView.backgroundColor = UIColor(named: AppColors.mainBackground.name)
         
         collectionViewDataSource = MainCollectionViewDataSource(impulsesStateManager: impulsesStateManager)
         collectionView.dataSource = collectionViewDataSource
@@ -110,7 +110,7 @@ extension MainCollectionViewController {
     private func impulseListSection(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         guard let impulsesStateManager = impulsesStateManager else { fatalError("No data manager for impulseListSection.")}
         var listConfig = UICollectionLayoutListConfiguration(appearance: .plain)
-        listConfig.backgroundColor = UIColor(named: "DefaultBackground")
+        listConfig.backgroundColor = .systemBackground
         listConfig.showsSeparators = false
         
         listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in

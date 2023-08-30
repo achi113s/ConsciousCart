@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UniformTypeIdentifiers
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -15,12 +16,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     public var categoryChangedDelegate: CategoriesViewControllerDelegate? = nil
     public var previouslySelectedCategory: ImpulseCategory? = nil
     
+    private var categoriesModel: ImpulseCategories! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
         title = "Categories"
+        
+        loadCategories()
         
         prepareCollectionView()
     }
@@ -37,6 +42,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+        collectionView.register(AddCategoryCell.self, forCellWithReuseIdentifier: AddCategoryCell.identifier)
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
+        collectionView.addGestureRecognizer(gesture)
         
         view.addSubview(collectionView)
         
@@ -48,20 +57,44 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         ])
     }
     
+    private func loadCategories() {
+        self.categoriesModel = ImpulseCategories()
+    }
+    
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ImpulseCategory.allCases.count
+        let numberOfCategories = categoriesModel.getCategories().count
+        let extraOneForCategoryAddButton = 1
+        
+        let total = numberOfCategories + extraOneForCategoryAddButton
+        
+        return total
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let index = indexPath.row
+        
+        let numberOfCategories = categoriesModel.getCategories().count
+        let extraOneForCategoryAddButton = 1
+        
+        let total = numberOfCategories + extraOneForCategoryAddButton
+        
+        // If index is the last one, use the AddCategoryCell.
+        if index == total - 1 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCategoryCell.identifier, for: indexPath) as? AddCategoryCell else {
+                fatalError("Failed to load collection view cell.")
+            }
+            
+            return cell
+        }
+        
+        // Else use the normal CategoryCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
             fatalError("Failed to load collection view cell")
         }
-        
-        let index = indexPath.row
-        
-        let categoryEmoji = ImpulseCategory.allCases[index].categoryEmoji
-        let categoryName = ImpulseCategory.allCases[index].categoryName
+
+        let categoryEmoji = categoriesModel.getCategories()[index].categoryEmoji
+        let categoryName = categoriesModel.getCategories()[index].categoryName
         
         cell.setEmojiTo(categoryEmoji)
         cell.setCategoryNameTo(categoryName)
@@ -77,11 +110,50 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
+        if let cell = collectionView.cellForItem(at: indexPath) as? AddCategoryCell {
+            let ac = UIAlertController(title: "Add Custom Category", message: "You must specify a unique category name.", preferredStyle: .alert)
+            
+            ac.addTextField { textField in
+                textField.placeholder = "e.g. 😁"
+            }
+            
+            ac.addTextField { textField in
+                textField.placeholder = "e.g. Coffee"
+            }
+            
+            let action = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                cell.isSelected = false
+            }
+            
+            let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+                let emoji = ac.textFields![0].text ?? "😁"
+                let categoryName = ac.textFields![1].text ?? "None"
+                
+                self?.categoriesModel.addCustomCategory(emoji: emoji, name: categoryName)
+                self?.loadCategories()
+                self?.collectionView.reloadData()
+            }
+            
+            ac.addAction(action)
+            ac.addAction(saveAction)
+            
+            present(ac, animated: true)
+            
+            return
+        }
         
-        if let selectedCategory = ImpulseCategory.allCases.first(where: { $0.categoryName == cell.getCategoryName() }) {
-            categoryChangedDelegate?.categoryDidChangeTo(selectedCategory)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
+            if let selectedCategory = categoriesModel.getCategories().first(where: { $0.categoryName == cell.getCategoryName() }) {
+                categoryChangedDelegate?.categoryDidChangeTo(selectedCategory)
+                return
+            }
         }
     }
 }
 
+extension CategoriesViewController {
+    @objc private func handleLongPressGesture() {
+        
+        
+    }
+}

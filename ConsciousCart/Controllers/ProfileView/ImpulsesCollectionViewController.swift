@@ -11,6 +11,8 @@ class ImpulsesCollectionViewController: UIViewController {
     private var impulsesStateManager: ImpulsesStateManager! = nil
     private var impulseOption: ImpulseOption! = nil
     
+    private var categoriesModel: ImpulseCategories! = nil
+    
     private var collectionView: UICollectionView! = nil
     
     private let impulseCellReuse = "activeCell"
@@ -51,6 +53,8 @@ class ImpulsesCollectionViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         navigationItem.searchController = searchController
+        
+        loadCategories()
         
         configureCollectionView()
         configureSubviews()
@@ -135,6 +139,10 @@ extension ImpulsesCollectionViewController {
             nothingToShow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nothingToShow.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    private func loadCategories() {
+        categoriesModel = ImpulseCategories()
     }
     
     private func impulseListSection(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -228,8 +236,6 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
         
         var content = UIListContentConfiguration.subtitleCell()
         
-        
-        
         switch impulseOption {
         case .active:
             var impulse: Impulse! = nil
@@ -249,7 +255,7 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
             
             var categoryLabel: UILabel! = nil
-            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+            if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
                 categoryLabel = UILabel()
                 categoryLabel.text = category.categoryEmoji
             }
@@ -277,7 +283,7 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             content.secondaryTextProperties.font = UIFont.ccFont(textStyle: .regular, fontSize: 12)
             
             var categoryLabel: UILabel! = nil
-            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+            if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
                 categoryLabel = UILabel()
                 categoryLabel.text = category.categoryEmoji
             }
@@ -321,7 +327,7 @@ extension ImpulsesCollectionViewController: UICollectionViewDataSource {
             let sealView = UIImageView(image: seal)
             
             var categoryLabel: UILabel! = nil
-            if let category = ImpulseCategory.allCases.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+            if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
                 categoryLabel = UILabel()
                 categoryLabel.text = category.categoryEmoji
             }

@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "DefaultBackground")
+        view.backgroundColor = .systemBackground
         
         configureScrollView()
         configureSubviews()

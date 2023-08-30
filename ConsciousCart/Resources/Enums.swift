@@ -9,6 +9,8 @@ import UIKit
 import SwiftUI
 
 enum ChartTimeDomain: String, CaseIterable, Identifiable {
+    case oneWeek = "1W"
+    case oneMonth = "1M"
     case threeMonths = "3M"
     case sixMonths = "6M"
     case oneYear = "1Y"
@@ -16,53 +18,53 @@ enum ChartTimeDomain: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-enum ImpulseCategory: CaseIterable {
-    case books
-    case clothing
-    case electronics
-    case entertainment
-    case home
-    case restaurants
-    case shoes
-    
-    var categoryEmoji: String {
-        switch self {
-        case .books:
-            return "📚"
-        case .clothing:
-            return "👕"
-        case .electronics:
-            return "💻"
-        case .entertainment:
-            return "🍿"
-        case .home:
-            return "🏡"
-        case .restaurants:
-            return "🍽️"
-        case .shoes:
-            return "👟"
-        }
-    }
-    
-    var categoryName: String {
-        switch self {
-        case .books:
-            return "Books"
-        case .clothing:
-            return "Clothing"
-        case .electronics:
-            return "Electronics"
-        case .entertainment:
-            return "Entertainment"
-        case .home:
-            return "Home"
-        case .restaurants:
-            return "Restaurants"
-        case .shoes:
-            return "Shoes"
-        }
-    }
-}
+//enum ImpulseCategory: CaseIterable {
+//    case books
+//    case clothing
+//    case electronics
+//    case entertainment
+//    case home
+//    case restaurants
+//    case shoes
+//
+//    var categoryEmoji: String {
+//        switch self {
+//        case .books:
+//            return "📚"
+//        case .clothing:
+//            return "👕"
+//        case .electronics:
+//            return "💻"
+//        case .entertainment:
+//            return "🍿"
+//        case .home:
+//            return "🏡"
+//        case .restaurants:
+//            return "🍽️"
+//        case .shoes:
+//            return "👟"
+//        }
+//    }
+//
+//    var categoryName: String {
+//        switch self {
+//        case .books:
+//            return "Books"
+//        case .clothing:
+//            return "Clothing"
+//        case .electronics:
+//            return "Electronics"
+//        case .entertainment:
+//            return "Entertainment"
+//        case .home:
+//            return "Home"
+//        case .restaurants:
+//            return "Restaurants"
+//        case .shoes:
+//            return "Shoes"
+//        }
+//    }
+//}
 
 enum ImpulseEndedOptions {
     case waited
@@ -141,6 +143,17 @@ enum UserLevel: Int, CaseIterable {
             return Color("Yriel")  // Yriel Yellow
         case .ultimateSaver:
             return Color("Spray")  // Spray
+        }
+    }
+}
+
+enum AppColors {
+    case mainBackground
+    
+    var name: String {
+        switch self {
+        case .mainBackground:
+            return "MainBackground"
         }
     }
 }

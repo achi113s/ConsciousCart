@@ -29,6 +29,7 @@
 		444A58E22A4FB800006FC02B /* MainCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */; };
 		444A58E42A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */; };
 		444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */; };
+		444FB1892A997AEB00651975 /* ImpulseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FB1882A997AEB00651975 /* ImpulseCategory.swift */; };
 		4452AD172A4A34BF004C2E7E /* ImpulsesStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */; };
 		445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */; };
 		445B0FBF2A7F2FFB0075657C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */; };
@@ -61,6 +62,7 @@
 		4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4497E39C29F358BC0029451E /* SceneDelegate.swift */; };
 		4497E3A429F358BC0029451E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A329F358BC0029451E /* Assets.xcassets */; };
 		4497E3A729F358BC0029451E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4497E3A529F358BC0029451E /* LaunchScreen.storyboard */; };
+		449923FF2A9867BF0022B9D0 /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449923FE2A9867BF0022B9D0 /* AddCategoryCell.swift */; };
 		44AA7C1B2A6E13480089412A /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 44AA7C1A2A6E13480089412A /* SPConfetti */; };
 		44AACCD72A0344AF0053334C /* BarcodeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */; };
 		44AACCDB2A0346260053334C /* BarcodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AACCDA2A0346260053334C /* BarcodeInfo.swift */; };
@@ -113,6 +115,7 @@
 		444A58E12A4FB800006FC02B /* MainCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		444A58E32A4FBCE1006FC02B /* ImpulsesCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesCategoryHeader.swift; sourceTree = "<group>"; };
 		444A58E52A4FBE68006FC02B /* MainCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		444FB1882A997AEB00651975 /* ImpulseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseCategory.swift; sourceTree = "<group>"; };
 		4452AD162A4A34BF004C2E7E /* ImpulsesStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulsesStateManager.swift; sourceTree = "<group>"; };
 		445B0FBC2A7F2FB30075657C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		445B0FBE2A7F2FFB0075657C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 		4497E3A629F358BC0029451E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4497E3A829F358BC0029451E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4497E3AD29F358BD0029451E /* ConsciousCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsciousCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		449923FE2A9867BF0022B9D0 /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
 		44AACCD62A0344AF0053334C /* BarcodeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeAPIManager.swift; sourceTree = "<group>"; };
 		44AACCDA2A0346260053334C /* BarcodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeInfo.swift; sourceTree = "<group>"; };
 		44AACCDC2A0357240053334C /* ConsciousCartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextField.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 			children = (
 				4403BAF92A85D0EF0058617D /* CategoryCell.swift */,
 				4403BAFD2A8977810058617D /* ImpulseCategoryButton.swift */,
+				449923FE2A9867BF0022B9D0 /* AddCategoryCell.swift */,
 			);
 			path = CategoriesViews;
 			sourceTree = "<group>";
@@ -268,6 +273,32 @@
 				4413DCC72A52778E00C39D55 /* NoImpulsesFooter.swift */,
 			);
 			path = MainCollectionView;
+			sourceTree = "<group>";
+		};
+		444FB1852A997AC900651975 /* UserStats */ = {
+			isa = PBXGroup;
+			children = (
+				448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */,
+				448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */,
+			);
+			path = UserStats;
+			sourceTree = "<group>";
+		};
+		444FB1862A997AD100651975 /* Impulse */ = {
+			isa = PBXGroup;
+			children = (
+				4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */,
+				4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */,
+			);
+			path = Impulse;
+			sourceTree = "<group>";
+		};
+		444FB1872A997ADB00651975 /* ImpulseCategory */ = {
+			isa = PBXGroup;
+			children = (
+				444FB1882A997AEB00651975 /* ImpulseCategory.swift */,
+			);
+			path = ImpulseCategory;
 			sourceTree = "<group>";
 		};
 		4450EED12A088A6A00D8C680 /* DataManagers */ = {
@@ -374,10 +405,9 @@
 		4497E3D929F35B040029451E /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */,
-				448534022A774E40006CBE69 /* UserStats+CoreDataProperties.swift */,
-				4497D8BE2A3583E900713730 /* Impulse+CoreDataClass.swift */,
-				4497D8BF2A3583E900713730 /* Impulse+CoreDataProperties.swift */,
+				444FB1872A997ADB00651975 /* ImpulseCategory */,
+				444FB1852A997AC900651975 /* UserStats */,
+				444FB1862A997AD100651975 /* Impulse */,
 				444222142A11C3E000753F8D /* ConsciousCart.xcdatamodeld */,
 				44AACCDA2A0346260053334C /* BarcodeInfo.swift */,
 			);
@@ -573,6 +603,7 @@
 				4497D8C12A3583E900713730 /* Impulse+CoreDataProperties.swift in Sources */,
 				4496A05A2A170F3E004C1349 /* Utils.swift in Sources */,
 				445B0FBF2A7F2FFB0075657C /* WelcomeViewController.swift in Sources */,
+				449923FF2A9867BF0022B9D0 /* AddCategoryCell.swift in Sources */,
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
 				445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */,
@@ -597,6 +628,7 @@
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
+				444FB1892A997AEB00651975 /* ImpulseCategory.swift in Sources */,
 				442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */,
 				442854162A913910009100B4 /* AddToCCViewController.swift in Sources */,
 				444A58E62A4FBE68006FC02B /* MainCollectionViewDelegate.swift in Sources */,
