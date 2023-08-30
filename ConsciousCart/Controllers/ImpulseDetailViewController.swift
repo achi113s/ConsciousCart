@@ -13,8 +13,6 @@ class ImpulseDetailViewController: UIViewController, UINavigationControllerDeleg
     var impulse: Impulse! = nil
     var viewShowsPendingImpulses: Bool = false
     
-    private var categoriesModel: ImpulseCategories = ImpulseCategories()
-    
     private var scrollView: UIScrollView! = nil
     private var contentView: UIView! = nil
     
@@ -227,15 +225,15 @@ extension ImpulseDetailViewController {
         categoryLabel.textAlignment = .center
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+        if let category = impulsesStateManager.impulseCategories.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
             selectedCategory = category
         }
         
         categoriesButton = ImpulseCategoryButton()
         categoriesButton.translatesAutoresizingMaskIntoConstraints = false
         if let category = selectedCategory {
-            categoriesButton.setCategoryNameTo(category.categoryName)
-            categoriesButton.setEmojiTo(category.categoryEmoji)
+            categoriesButton.setCategoryNameTo(category.unwrappedCategoryName)
+            categoriesButton.setEmojiTo(category.unwrappedCategoryEmoji)
         }
         categoriesButton.addTarget(self, action: #selector(showCategoryPicker), for: .touchUpInside)
         categoriesButton.isEnabled = false
@@ -662,11 +660,11 @@ extension ImpulseDetailViewController: UITextViewDelegate {
 //MARK: - CategoriesViewControllerDelegate
 extension ImpulseDetailViewController: CategoriesViewControllerDelegate {
     func categoryDidChangeTo(_ category: ImpulseCategory) {
-        print("category changed to: \(category.categoryName)")
+        print("category changed to: \(category.unwrappedCategoryName)")
         
         selectedCategory = category
-        categoriesButton.setEmojiTo(category.categoryEmoji)
-        categoriesButton.setCategoryNameTo(category.categoryName)
+        categoriesButton.setEmojiTo(category.unwrappedCategoryEmoji)
+        categoriesButton.setCategoryNameTo(category.unwrappedCategoryName)
     }
 }
 

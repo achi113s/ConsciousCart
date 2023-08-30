@@ -80,6 +80,8 @@
 		44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */; };
 		44EC75152A6CBF9700B5B15D /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */; };
 		44F2EDC82A6F5D2B002D714D /* ConsciousCartTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */; };
+		44FE2F1D2A9ED9BA00CD002B /* ImpulseCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE2F1B2A9ED9BA00CD002B /* ImpulseCategory+CoreDataClass.swift */; };
+		44FE2F1E2A9ED9BA00CD002B /* ImpulseCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE2F1C2A9ED9BA00CD002B /* ImpulseCategory+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		44EA22002A7AE52F00ECC74C /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		44EC75142A6CBF9700B5B15D /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		44F2EDC72A6F5D2B002D714D /* ConsciousCartTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousCartTextView.swift; sourceTree = "<group>"; };
+		44FE2F1B2A9ED9BA00CD002B /* ImpulseCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImpulseCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44FE2F1C2A9ED9BA00CD002B /* ImpulseCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImpulseCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +300,8 @@
 		444FB1872A997ADB00651975 /* ImpulseCategory */ = {
 			isa = PBXGroup;
 			children = (
+				44FE2F1B2A9ED9BA00CD002B /* ImpulseCategory+CoreDataClass.swift */,
+				44FE2F1C2A9ED9BA00CD002B /* ImpulseCategory+CoreDataProperties.swift */,
 				444FB1882A997AEB00651975 /* ImpulseCategory.swift */,
 			);
 			path = ImpulseCategory;
@@ -607,6 +613,7 @@
 				44C9AFDC2A5A444200B03846 /* SettingsView.swift in Sources */,
 				448807AB2A6A073A005377DE /* ImpulseExpiredViewController.swift in Sources */,
 				445B0FBD2A7F2FB30075657C /* OnboardingViewController.swift in Sources */,
+				44FE2F1E2A9ED9BA00CD002B /* ImpulseCategory+CoreDataProperties.swift in Sources */,
 				44EA21FF2A7AB78600ECC74C /* SectionLabel.swift in Sources */,
 				4403BAFC2A85D1060058617D /* CategoriesViewControllerDelegate.swift in Sources */,
 				4413DCC22A52268C00C39D55 /* ImpulseCollectionViewListCell.swift in Sources */,
@@ -647,6 +654,7 @@
 				442854192A916DF7009100B4 /* UIViewControllerExtensions.swift in Sources */,
 				44296B5029F62A8A0030FF3D /* ConsciousCartButton.swift in Sources */,
 				445B0FC32A8023C20075657C /* SecondOnboardingView.swift in Sources */,
+				44FE2F1D2A9ED9BA00CD002B /* ImpulseCategory+CoreDataClass.swift in Sources */,
 				44EA22012A7AE52F00ECC74C /* CustomColorPicker.swift in Sources */,
 				44C749E62A58FC70000AAE63 /* Extensions.swift in Sources */,
 				4403BAF62A85D0780058617D /* CategoriesViewController.swift in Sources */,

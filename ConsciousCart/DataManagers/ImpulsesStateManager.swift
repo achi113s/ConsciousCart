@@ -16,7 +16,10 @@ final class ImpulsesStateManager {
     private(set) var completedImpulses: [Impulse] = [Impulse]()
     private(set) var pendingImpulses: [Impulse] = [Impulse]()
     
+    private(set) var impulseCategories: [ImpulseCategory] = [ImpulseCategory]()
+    
     init() {
+        loadCategories()
         loadImpulses()
         loadUserStats()
     }
@@ -54,6 +57,20 @@ final class ImpulsesStateManager {
             }
         } catch {
             print("Error fetching UserStats from main context: \(error.localizedDescription)")
+        }
+    }
+    
+    private func loadCategories(with request: NSFetchRequest<ImpulseCategory> = ImpulseCategory.fetchRequest()) {
+        do {
+            self.impulseCategories = try coreDataManager.mainManagedObjectContext.fetch(request)
+            
+            if self.impulseCategories.isEmpty {
+                createDefaultCategories()
+                
+                self.impulseCategories = try coreDataManager.mainManagedObjectContext.fetch(request)
+            }
+        } catch {
+            print("Error fetching Categories from main context: \(error.localizedDescription)")
         }
     }
 }
@@ -270,5 +287,37 @@ extension ImpulsesStateManager {
         default:
             return UserLevel.beginner
         }
+    }
+}
+
+//MARK: - Categories CRUD
+extension ImpulsesStateManager {
+    private func createDefaultCategories() {
+        let defaultCategories = [
+            ("📚", "Books"),
+            ("👕", "Clothing"),
+            ("💻", "Electronics"),
+            ("🍿", "Entertainment"),
+            ("🏡", "Home"),
+            ("🍽️", "Restaurants"),
+            ("👟", "Shoes")
+        ]
+        
+        for category in defaultCategories {
+            let newCategory = ImpulseCategory(context: coreDataManager.mainManagedObjectContext)
+            newCategory.categoryEmoji = category.0
+            newCategory.categoryName = category.1
+        }
+    }
+    
+    public func saveImpulseCategory() {
+        coreDataManager.saveChanges()
+        loadCategories()
+    }
+    
+    public func addNewCategory(categoryEmoji: String, categoryName: String) {
+        let newCategory = ImpulseCategory(context: coreDataManager.mainManagedObjectContext)
+        newCategory.categoryEmoji = categoryEmoji
+        newCategory.categoryName = categoryName
     }
 }

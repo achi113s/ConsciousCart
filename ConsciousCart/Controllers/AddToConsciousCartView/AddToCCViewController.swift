@@ -78,11 +78,11 @@ class AddToCCViewController: UIViewController, UINavigationControllerDelegate {
 //MARK: - CategoriesViewControllerDelegate
 extension AddToCCViewController: CategoriesViewControllerDelegate {
     func categoryDidChangeTo(_ category: ImpulseCategory) {
-        print("category changed to: \(category.categoryName)")
+        print("category changed to: \(category.unwrappedCategoryName)")
         
         selectedCategory = category
-        categoriesButton.setEmojiTo(category.categoryEmoji)
-        categoriesButton.setCategoryNameTo(category.categoryName)
+        categoriesButton.setEmojiTo(category.unwrappedCategoryEmoji)
+        categoriesButton.setCategoryNameTo(category.unwrappedCategoryName)
     }
 }
 
@@ -515,6 +515,7 @@ extension AddToCCViewController {
     
     @objc private func showCategoryPicker() {
         let vc = CategoriesViewController()
+        vc.impulsesStateManager = impulsesStateManager
         
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium()]

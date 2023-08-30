@@ -14,12 +14,18 @@
         <attribute name="remindDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="userID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="impulseCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImpulseCategory" inverseName="impulses" inverseEntity="ImpulseCategory"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserStats" inverseName="impulses" inverseEntity="UserStats"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="ImpulseCategory" representedClassName="ImpulseCategory" syncable="YES">
+        <attribute name="categoryEmoji" optional="YES" attributeType="String"/>
+        <attribute name="categoryName" optional="YES" attributeType="String"/>
+        <relationship name="impulses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Impulse" inverseName="impulseCategory" inverseEntity="Impulse"/>
     </entity>
     <entity name="UserStats" representedClassName="UserStats" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

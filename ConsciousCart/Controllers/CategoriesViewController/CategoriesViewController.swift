@@ -9,6 +9,7 @@ import UIKit
 import UniformTypeIdentifiers
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    var impulsesStateManager: ImpulsesStateManager! = nil
     
     private var collectionView: UICollectionView! = nil
     private var flowLayout = CategoriesGridLayout(cellsPerRow: 3, minimumInteritemSpacing: 5, minimumLineSpacing: 10)
@@ -16,16 +17,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     public var categoryChangedDelegate: CategoriesViewControllerDelegate? = nil
     public var previouslySelectedCategory: ImpulseCategory? = nil
     
-    private var categoriesModel: ImpulseCategories! = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
         title = "Categories"
-        
-        loadCategories()
         
         prepareCollectionView()
     }
@@ -57,13 +54,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         ])
     }
     
-    private func loadCategories() {
-        self.categoriesModel = ImpulseCategories()
-    }
-    
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfCategories = categoriesModel.getCategories().count
+        let numberOfCategories = impulsesStateManager.impulseCategories.count
         let extraOneForCategoryAddButton = 1
         
         let total = numberOfCategories + extraOneForCategoryAddButton
@@ -74,7 +67,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let index = indexPath.row
         
-        let numberOfCategories = categoriesModel.getCategories().count
+        let numberOfCategories = impulsesStateManager.impulseCategories.count
         let extraOneForCategoryAddButton = 1
         
         let total = numberOfCategories + extraOneForCategoryAddButton
@@ -93,8 +86,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             fatalError("Failed to load collection view cell")
         }
 
-        let categoryEmoji = categoriesModel.getCategories()[index].categoryEmoji
-        let categoryName = categoriesModel.getCategories()[index].categoryName
+        let categoryEmoji = impulsesStateManager.impulseCategories[index].unwrappedCategoryEmoji
+        let categoryName = impulsesStateManager.impulseCategories[index].unwrappedCategoryName
         
         cell.setEmojiTo(categoryEmoji)
         cell.setCategoryNameTo(categoryName)
@@ -129,8 +122,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 let emoji = ac.textFields![0].text ?? "😁"
                 let categoryName = ac.textFields![1].text ?? "None"
                 
-                self?.categoriesModel.addCustomCategory(emoji: emoji, name: categoryName)
-                self?.loadCategories()
+                self?.impulsesStateManager.addNewCategory(categoryEmoji: emoji, categoryName: categoryName)
+                self?.impulsesStateManager.saveImpulseCategory()
                 self?.collectionView.reloadData()
             }
             
@@ -143,7 +136,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
-            if let selectedCategory = categoriesModel.getCategories().first(where: { $0.categoryName == cell.getCategoryName() }) {
+            if let selectedCategory = impulsesStateManager.impulseCategories.first(where: { $0.categoryName == cell.getCategoryName() }) {
                 categoryChangedDelegate?.categoryDidChangeTo(selectedCategory)
                 return
             }

@@ -13,8 +13,6 @@ extension MainCollectionViewController {
     class MainCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         var impulsesStateManager: ImpulsesStateManager! = nil
         
-        private var categoriesModel: ImpulseCategories = ImpulseCategories()
-        
         init(impulsesStateManager: ImpulsesStateManager) {
             self.impulsesStateManager = impulsesStateManager
         }
@@ -69,7 +67,7 @@ extension MainCollectionViewController {
                 cell.contentConfiguration = content
                 
                 var categoryLabel: UILabel! = nil
-                if let category = categoriesModel.getCategories().first(where: { $0.categoryName == impulse.unwrappedCategory }) {
+                if let category = impulsesStateManager.impulseCategories.first(where: { $0.categoryName == impulse.unwrappedCategory }) {
                     categoryLabel = UILabel()
                     categoryLabel.text = category.categoryEmoji
                 }
