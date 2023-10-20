@@ -5,6 +5,7 @@
 //  Created by Giorgio Latour on 8/10/23.
 //
 
+import Combine
 import CoreHaptics
 import UIKit
 import UniformTypeIdentifiers
@@ -19,6 +20,22 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     public var previouslySelectedCategory: ImpulseCategory? = nil
     
     private var hapticEngine: CHHapticEngine? = nil
+    
+    // Check new category input.
+    @Published var customCategoryEmoji: String = ""
+    @Published var customCategoryName: String = ""
+    
+    // Combine the publishers into a single stream.
+    private var validatedCustomCategory: AnyPublisher<(String, String)?, Never> {
+        return Publishers.CombineLatest($customCategoryEmoji, $customCategoryName)
+            .map { emoji, name in
+                guard emoji.containsOnlyEmojis() && name != "" else { return nil }
+                return (emoji, name)
+            }.eraseToAnyPublisher()
+    }
+    
+    // Define the subscriber.
+    private var buttonSubscriber: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +56,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.indicatorStyle = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         collectionView.register(AddCategoryCell.self, forCellWithReuseIdentifier: AddCategoryCell.identifier)
@@ -106,14 +122,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? AddCategoryCell {
-            let ac = UIAlertController(title: "Add Custom Category", message: "You must specify a unique category name.", preferredStyle: .alert)
+            let ac = UIAlertController(title: "Add Custom Category", message: "You must specify an emoji and a unique category name.", preferredStyle: .alert)
             
             ac.addTextField { textField in
                 textField.placeholder = "e.g. 😁"
+                textField.tag = 0
+                textField.delegate = self
             }
             
             ac.addTextField { textField in
                 textField.placeholder = "e.g. Coffee"
+                textField.tag = 1
+                textField.delegate = self
             }
             
             let action = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -130,12 +150,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                     
                     self?.collectionView.deselectItem(at: indexPath, animated: true)
                     self?.collectionView.insertItems(at: [indexPath])
-//                    self?.collectionView.reloadData()
                 }
             }
             
             ac.addAction(action)
             ac.addAction(saveAction)
+            
+            // Hook up the subscriber to the publisher.
+            buttonSubscriber = validatedCustomCategory
+                .map { $0 != nil }
+                .receive(on: RunLoop.main)
+                .assign(to: \.isEnabled, on: saveAction)
             
             present(ac, animated: true)
             
@@ -205,5 +230,17 @@ extension CategoriesViewController {
         ac.addAction(deleteAction)
         
         present(ac, animated: true)
+    }
+}
+
+extension CategoriesViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let textFieldText = textField.text ?? ""
+        let text = (textFieldText as NSString).replacingCharacters(in: range, with: string)
+        
+        if textField.tag == 0 { customCategoryEmoji = text.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if textField.tag == 1 { customCategoryName = text.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+        return true
     }
 }

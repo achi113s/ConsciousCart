@@ -52,49 +52,6 @@ extension Formatter {
     }()
 }
 
-extension String {
-    func asCurrency(locale: Locale) -> String? {
-        Formatter.currency.locale = locale
-        if self.isEmpty {
-            return Formatter.currency.string(from: NSNumber(value: 0))
-        } else {
-            return Formatter.currency.string(from: NSNumber(value: Double(self) ?? 0))
-        }
-    }
-    
-    // This function by me.
-    func asDoubleFromCurrency(locale: Locale) -> Double {
-        Formatter.currency.locale = locale
-        let number = Formatter.currency.number(from: self)
-        
-        if let number {
-            return number.doubleValue
-        } else {
-            return 0.0
-        }
-    }
-    
-    // By gavanon on StackOverflow
-    // https://stackoverflow.com/a/46859176/21574991
-    func isAlphanumeric() -> Bool {
-        return self.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil && self != ""
-    }
-    
-    func isAlphanumeric(ignoreDiacritics: Bool = false) -> Bool {
-        if ignoreDiacritics {
-            return self.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil && self != ""
-        }
-        else {
-            return self.isAlphanumeric()
-        }
-    }
-    
-    func stringInputIsValid() -> Bool {
-        if self.trimmingCharacters(in: .whitespacesAndNewlines) == "" { return false }
-        return true
-    }
-}
-
 extension UIColor {
     /**
      Create a lighter color

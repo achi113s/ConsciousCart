@@ -45,6 +45,7 @@
 		446F9DD92A7B415100997D48 /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */; };
 		447162C82A82A8C0001D7721 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162C72A82A8C0001D7721 /* MailView.swift */; };
 		447162FB2A83E435001D7721 /* CreateMainUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447162FA2A83E435001D7721 /* CreateMainUI.swift */; };
+		4478A2752AA11E23001CD2F9 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4478A2742AA11E23001CD2F9 /* StringExtensions.swift */; };
 		44846ED92A92ADD300FB741F /* SavingsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44846ED82A92ADD300FB741F /* SavingsChart.swift */; };
 		448533F42A76C47C006CBE69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448533F32A76C47C006CBE69 /* CoreDataManager.swift */; };
 		448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */; };
@@ -135,6 +136,7 @@
 		446F9DD82A7B415100997D48 /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		447162C72A82A8C0001D7721 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		447162FA2A83E435001D7721 /* CreateMainUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMainUI.swift; sourceTree = "<group>"; };
+		4478A2742AA11E23001CD2F9 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		44846ED82A92ADD300FB741F /* SavingsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsChart.swift; sourceTree = "<group>"; };
 		448533F32A76C47C006CBE69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		448534012A774E40006CBE69 /* UserStats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserStats+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				44C749E52A58FC70000AAE63 /* Extensions.swift */,
 				442854182A916DF7009100B4 /* UIViewControllerExtensions.swift */,
+				4478A2742AA11E23001CD2F9 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				448534032A774E40006CBE69 /* UserStats+CoreDataClass.swift in Sources */,
 				4413DCC82A52778E00C39D55 /* NoImpulsesFooter.swift in Sources */,
 				4497E39D29F358BC0029451E /* SceneDelegate.swift in Sources */,
+				4478A2752AA11E23001CD2F9 /* StringExtensions.swift in Sources */,
 				445E50452A745C1400DAFCDF /* CoinView.swift in Sources */,
 				444FB1892A997AEB00651975 /* ImpulseCategory.swift in Sources */,
 				442B54E42A7D6FC400383B54 /* ProfileViewController.swift in Sources */,
@@ -839,7 +843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -874,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.giorgio.ConsciousCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
