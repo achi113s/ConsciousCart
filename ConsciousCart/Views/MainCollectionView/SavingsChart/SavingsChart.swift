@@ -74,7 +74,7 @@ struct SavingsChart: View {
                 }
             }
         }
-        .chartXScale(domain: oldestDateToShow(selectedChartTimeDomain)...maxDate)
+        .chartXScale(domain: oldestDateToShow(selectedChartTimeDomain)...getMaxDate())
         .chartOverlay { chart in
             GeometryReader { geometry in
                 Rectangle()
@@ -161,7 +161,7 @@ extension SavingsChart {
         return userStats.unwrappedDateCreated
     }
     
-    private var maxDate: Date {
+    private func getMaxDate() -> Date {
         if impulsesStateManager.completedImpulses.isEmpty {
             return Date.now
         }
@@ -173,7 +173,6 @@ extension SavingsChart {
                 date = impulse.unwrappedCompletedDate
             }
         }
-        
         return date ?? Date.now
     }
     
@@ -236,17 +235,19 @@ extension SavingsChart {
     }
     
     private func oldestDateToShow(_ timeSpan: ChartTimeDomain) -> Date {
+        let maxDate = getMaxDate()
+        
         switch timeSpan {
         case .oneWeek:
-            return Calendar.current.date(byAdding: .day, value: -7, to: Date.now)!
+            return Calendar.current.date(byAdding: .day, value: -7, to: maxDate)!
         case .oneMonth:
-            return Calendar.current.date(byAdding: .month, value: -1, to: Date.now)!
+            return Calendar.current.date(byAdding: .month, value: -1, to: maxDate)!
         case .threeMonths:
-            return Calendar.current.date(byAdding: .month, value: -3, to: Date.now)!
+            return Calendar.current.date(byAdding: .month, value: -3, to: maxDate)!
         case .sixMonths:
-            return Calendar.current.date(byAdding: .month, value: -6, to: Date.now)!
+            return Calendar.current.date(byAdding: .month, value: -6, to: maxDate)!
         case .oneYear:
-            return Calendar.current.date(byAdding: .year, value: -1, to: Date.now)!
+            return Calendar.current.date(byAdding: .year, value: -1, to: maxDate)!
         case .allTime:
             return defaultMinDate
         }

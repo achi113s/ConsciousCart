@@ -13,13 +13,14 @@ class OnboardingViewController: UIPageViewController {
     private var pages = [UIViewController]()
     private let initialPage = 0
     
-    private let skipButton = UIButton()
+//    private let skipButton = UIButton()
     private let nextButton = UIButton()
     private let pageControl = UIPageControl()
     
     private var pageControlBottomAnchor: NSLayoutConstraint?
     private var skipButtonTopAnchor: NSLayoutConstraint?
     private var nextButtonTopAnchor: NSLayoutConstraint?
+    private var nextButtonBottomAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,13 +77,13 @@ class OnboardingViewController: UIPageViewController {
         pageControl.pageIndicatorTintColor = .systemGray2
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = initialPage
-        
-        skipButton.translatesAutoresizingMaskIntoConstraints = false
-        skipButton.setTitleColor(UIColor(named: "ExodusFruit")?.darker(), for: .highlighted)
-        skipButton.setTitleColor(UIColor(named: "ExodusFruit"), for: .normal)
-        skipButton.setTitle("Skip", for: .normal)
-        skipButton.titleLabel?.font = UIFont.ccFont(textStyle: .bold, fontSize: 17)
-        skipButton.addTarget(self, action: #selector(skipTapped), for: .primaryActionTriggered)
+//        
+//        skipButton.translatesAutoresizingMaskIntoConstraints = false
+//        skipButton.setTitleColor(UIColor(named: "ExodusFruit")?.darker(), for: .highlighted)
+//        skipButton.setTitleColor(UIColor(named: "ExodusFruit"), for: .normal)
+//        skipButton.setTitle("Skip", for: .normal)
+//        skipButton.titleLabel?.font = UIFont.ccFont(textStyle: .bold, fontSize: 17)
+//        skipButton.addTarget(self, action: #selector(skipTapped), for: .primaryActionTriggered)
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.setTitleColor(UIColor(named: "ExodusFruit")?.darker(), for: .highlighted)
@@ -93,50 +94,52 @@ class OnboardingViewController: UIPageViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(pageControl)
-        view.addSubview(skipButton)
+//        view.addSubview(pageControl)
+//        view.addSubview(skipButton)
         view.addSubview(nextButton)
     }
     
     private func configureLayoutConstraints() {
         NSLayoutConstraint.activate([
-            pageControl.widthAnchor.constraint(equalTo: view.widthAnchor),
-            pageControl.heightAnchor.constraint(equalToConstant: 20),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            pageControl.widthAnchor.constraint(equalTo: view.widthAnchor),
+//            pageControl.heightAnchor.constraint(equalToConstant: 20),
+//            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            
+//            skipButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
-            skipButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
-            
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+//            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // Activate these outside of the block above so we have a reference to them to animate.
-        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 2)
-        skipButtonTopAnchor = skipButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
-        nextButtonTopAnchor = nextButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
-        
-        pageControlBottomAnchor?.isActive = true
-        skipButtonTopAnchor?.isActive = true
-        nextButtonTopAnchor?.isActive = true
+//        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 2)
+//        skipButtonTopAnchor = skipButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+//        nextButtonTopAnchor = nextButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+        nextButtonBottomAnchor = nextButton.centerYAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: -2)
+//        pageControlBottomAnchor?.isActive = true
+//        skipButtonTopAnchor?.isActive = true
+//        nextButtonTopAnchor?.isActive = true
+        nextButtonBottomAnchor?.isActive = true
     }
     
-    @objc private func pageControlTapped(_ sender: UIPageControl) {
-        setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
-        animateControlsIfNeeded()
-    }
+//    @objc private func pageControlTapped(_ sender: UIPageControl) {
+//        setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
+//        animateControlsIfNeeded()
+//    }
     
-    @objc private func skipTapped(_ sender: UIButton) {
-        let lastPage = pages.count - 1
-        pageControl.currentPage = lastPage
-        
-        goToSpecificPage(index: lastPage, ofViewControllers: pages)
-        animateControlsIfNeeded()
-    }
+//    @objc private func skipTapped(_ sender: UIButton) {
+//        let lastPage = pages.count - 1
+//        pageControl.currentPage = lastPage
+//        
+//        goToSpecificPage(index: lastPage, ofViewControllers: pages)
+//        animateControlsIfNeeded()
+//    }
     
     @objc private func nextTapped(_ sender: UIButton) {
         pageControl.currentPage += 1
         goToNextPage()
-        animateControlsIfNeeded()
+//        animateControlsIfNeeded()
     }
 }
 
@@ -175,34 +178,34 @@ extension OnboardingViewController: UIPageViewControllerDelegate {
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
         
         pageControl.currentPage = currentIndex
-        animateControlsIfNeeded()
+//        animateControlsIfNeeded()
     }
     
-    private func animateControlsIfNeeded() {
-        let lastPage = pageControl.currentPage == pages.count - 1
-        
-        if lastPage {
-            hideControls()
-        } else {
-            showControls()
-        }
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
+//    private func animateControlsIfNeeded() {
+//        let lastPage = pageControl.currentPage == pages.count - 1
+//        
+//        if lastPage {
+//            hideControls()
+//        } else {
+//            showControls()
+//        }
+//        
+//        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
+//            self.view.layoutIfNeeded()
+//        }, completion: nil)
+//    }
     
-    private func hideControls() {
-        pageControlBottomAnchor?.constant = -150
-        skipButtonTopAnchor?.constant = -150
-        nextButtonTopAnchor?.constant = -150
-    }
+//    private func hideControls() {
+//        pageControlBottomAnchor?.constant = -150
+//        skipButtonTopAnchor?.constant = -150
+//        nextButtonTopAnchor?.constant = -150
+//    }
     
-    private func showControls() {
-        pageControlBottomAnchor?.constant = 16
-        skipButtonTopAnchor?.constant = 16
-        nextButtonTopAnchor?.constant = 16
-    }
+//    private func showControls() {
+//        pageControlBottomAnchor?.constant = 16
+//        skipButtonTopAnchor?.constant = 16
+//        nextButtonTopAnchor?.constant = 16
+//    }
 }
 
 //MARK: - Extensions
