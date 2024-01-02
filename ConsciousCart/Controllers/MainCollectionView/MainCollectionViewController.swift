@@ -58,7 +58,7 @@ extension MainCollectionViewController {
         collectionView.autoresizingMask = [.flexibleHeight]
         collectionView.contentInset = UIEdgeInsets(top: CGFloat(0), left: CGFloat(0), bottom: CGFloat(10), right: CGFloat(0))
 //        collectionView.backgroundColor = UIColor(named: AppColors.mainBackground.name)
-        
+
         collectionViewDataSource = MainCollectionViewDataSource(impulsesStateManager: impulsesStateManager)
         collectionView.dataSource = collectionViewDataSource
         
@@ -71,7 +71,7 @@ extension MainCollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionNumber, layoutEnvironment in
+        var layout = UICollectionViewCompositionalLayout { [weak self] sectionNumber, layoutEnvironment in
             guard let self = self else { fatalError("MainCollectionViewController could not be unwrapped.") }
             
             // Section for the Savings Chart SwiftUI View.
@@ -81,8 +81,8 @@ extension MainCollectionViewController {
                 // Only other case is the section for the Impulses.
                 return impulseListSection(layoutEnvironment)
             }
-            
         }
+        return layout
     }
     
     private func savingsChartSection() -> NSCollectionLayoutSection {
@@ -112,7 +112,7 @@ extension MainCollectionViewController {
         var listConfig = UICollectionLayoutListConfiguration(appearance: .plain)
         listConfig.backgroundColor = .systemBackground
         listConfig.showsSeparators = false
-        
+
         listConfig.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] action, view, completion in
                 guard let self = self else {
