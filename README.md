@@ -1,7 +1,7 @@
 # ConsciousCart :shopping_cart: :brain:
 
 *Technologies Used*
-- UIKit, SwiftUI
+- UIKit (95%), SwiftUI (5%)
 - BarcodeSpider API
 - Delegate, MVC Patterns
 
